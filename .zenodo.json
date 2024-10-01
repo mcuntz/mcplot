@@ -1,29 +1,29 @@
 {
     "language": "eng",
     "license": "MIT",
-    "title": "pyjams: A general Python package with a wide variety of miscellaneous utility functions.",
+    "title": "mcplot: A Python package with a plotting class and routines for publication-ready graphics.",
     "related_identifiers": [
         {
         "scheme": "url",
-        "identifier": "https://github.com/mcuntz/pyjams/",
+        "identifier": "https://github.com/mcuntz/mcplot/",
         "relation": "isDerivedFrom",
         "resource_type": "software"
     },
         {
         "scheme": "url",
-        "identifier": "https://mcuntz.github.io/pyjams/",
+        "identifier": "https://mcuntz.github.io/mcplot/",
         "relation": "isDocumentedBy",
         "resource_type": "publication-softwaredocumentation"
     },
         {
         "scheme": "url",
-        "identifier": "https://pypi.org/project/pyjams/",
+        "identifier": "https://pypi.org/project/mcplot/",
         "relation": "isIdenticalTo",
         "resource_type": "software"
     },
         {
         "scheme": "url",
-        "identifier": "https://anaconda.org/conda-forge/pyjams",
+        "identifier": "https://anaconda.org/conda-forge/mcplot",
         "relation": "isIdenticalTo",
         "resource_type": "software"
     }
@@ -31,13 +31,8 @@
     "upload_type": "software",
     "keywords": [
         "Python utilities",
-        "ASCII files",
-        "Data Processing",
-        "Grids and Polygons",
-        "Date/Time",
-        "Isotopes",
-        "Meteorology",
-        "JAMS",
+        "Plotting",
+        "Matplotlib",
         "Python"
     ],
     "creators": [
@@ -45,22 +40,8 @@
         "orcid": "0000-0002-5966-1829",
         "affiliation": "Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement - INRAE, Nancy, France",
         "name": "Matthias Cuntz"
-    },
-        {
-        "orcid": "0000-0002-1132-2342",
-        "affiliation": "University of Waterloo, ON, Canada",
-        "name": "Juliane Mai"
-    },
-        {
-        "orcid": "0000-0003-3939-1523",
-        "affiliation": "Helmholtz Centre for Environmental Research - UFZ, Leipzig, Germany",
-        "name": "Stephan Thober"
-    },
-        {
-        "affiliation": "Johann Heinrich von Th\u00fcnen Institute, Braunschweig, Germany",
-        "name": "Arndt Piayda"
     }
     ],
     "access_right": "open",
-    "description": "<p><strong>pyjams</strong> is a general Python package offering a wide variety of miscellaneous functions in different categories, such as reading different file formats, date conversion routines, or calculating Elementary Effects. It has several subpackages offering constants, special functions, or objective functions to be used with scipy.optimize.</p>\n\n<p>The package modernises and makes available routines of the <a href=\"https://github.com/mcuntz/jams_python\">JAMS Python library</a>, which was created 2009 by Matthias Cuntz while at the Department of Computational Hydrosystems, Helmholtz Centre for Environmental Research - UFZ, Leipzig, Germany, and continued while at Institut National de Recherche pour l&#39;Agriculture, l&#39;Alimentation et l&#39;Environnement (INRAE), Nancy, France.</p>\n\n<p>The complete documentation of pyjams is available at: <a href=\"https://mcuntz.github.io/pyjams/\">https://mcuntz.github.io/pyjams/</a></p>"
+    "description": "<p><strong>mcplot</strong> provides a class that combines methods to easily produce publication-ready graphics on light or black background. It includes a large number of colormaps collected from different sources. And there are a number of functions that help to position plots, number plot panels, or generally write text on a graph.</p>\n\n<p>The complete documentation of mcplot is available at: <a href=\"https://mcuntz.github.io/mcplot/\">https://mcuntz.github.io/mcplot/</a></p>"
 }
