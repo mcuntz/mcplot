@@ -1,0 +1,806 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mcplot.argsort &#8212; mcplot</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=628480d8" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=62837afe"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/mcplot/argsort';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../contents.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">mcplot</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">mcplot</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../argsort.html">argmax/argmin/argsort</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../color.html">Color module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../color.color.html">Color functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../color.brewer_palettes.html">Brewer palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../color.ipcc_palettes.html">IPCC WG1 palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../color.mathematica_palettes.html">Mathematica palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../color.ncl_palettes.html">NCL palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../color.oregon_palettes.html">Oregon palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../color.mcplot_palettes.html">mcplot palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../color.sron2012_palettes.html">SRON2012 palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../color.sron_palettes.html">SRON palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../color.ufz_palettes.html">UFZ colors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../mcplot.html">mcPlot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../position.html">position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../romanliterals.html">Roman literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../str2tex.html">str2tex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../text2plot.html">text2plot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mcuntz/mcplot" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mcuntz/mcplot/issues/new?title=Issue%20on%20page%20%2F_modules/mcplot/argsort.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for mcplot.argsort</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">argmax, argmin and argsort for array_like and Python iterables.</span>
+
+<span class="sd">This module was written by Matthias Cuntz while at Department of</span>
+<span class="sd">Computational Hydrosystems, Helmholtz Centre for Environmental</span>
+<span class="sd">Research - UFZ, Leipzig, Germany, and continued while at Institut</span>
+<span class="sd">National de Recherche pour l&#39;Agriculture, l&#39;Alimentation et</span>
+<span class="sd">l&#39;Environnement (INRAE), Nancy, France.</span>
+
+<span class="sd">:copyright: Copyright 2014-2022 Matthias Cuntz, see AUTHORS.rst for details.</span>
+<span class="sd">:license: MIT License, see LICENSE for details.</span>
+
+<span class="sd">.. moduleauthor:: Matthias Cuntz</span>
+
+<span class="sd">The following functions are provided</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   argmax</span>
+<span class="sd">   argmin</span>
+<span class="sd">   argsort</span>
+
+<span class="sd">History</span>
+<span class="sd">    * Written Dec 2014 by Matthias Cuntz (mc (at) macu (dot) de)</span>
+<span class="sd">    * Added argmin, argmax, Jul 2019, Matthias Cuntz</span>
+<span class="sd">    * Using numpy docstring format, extending examples from numpy docstrings,</span>
+<span class="sd">      May 2020, Matthias Cuntz</span>
+<span class="sd">    * More consistent docstrings, Jan 2022, Matthias Cuntz</span>
+<span class="sd">    * Support pandas.Series, Jun 2023, Matthias Cuntz</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;argmax&#39;</span><span class="p">,</span> <span class="s1">&#39;argmin&#39;</span><span class="p">,</span> <span class="s1">&#39;argsort&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="argmax">
+<a class="viewcode-back" href="../../argsort.html#mcplot.argsort.argmax">[docs]</a>
+<span class="k">def</span> <span class="nf">argmax</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper for numpy.argmax, numpy.ma.argmax, and max for Python iterables</span>
+
+<span class="sd">    Passes all keywords directly to the individual routines, i.e.</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       numpy.argmax(a, axis=None, out=None)</span>
+<span class="sd">       numpy.ma.argmax(self, axis=None, fill_value=None, out=None)</span>
+
+<span class="sd">    No keyword will be passed to the max routine for Python iterables.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : array_like</span>
+<span class="sd">        input array, masked array, or Python iterable</span>
+<span class="sd">    *args : optional</span>
+<span class="sd">        all arguments of numpy.argmax or numpy.ma.argmax</span>
+<span class="sd">    **kwargs : optional</span>
+<span class="sd">        all keyword arguments of numpy.argmax or numpy.ma.argmax</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    index_array : ndarray, int</span>
+<span class="sd">        Array of indices of the largest element in input array `a`. It has the</span>
+<span class="sd">        same shape as `a.shape` with the dimension along `axis` removed.</span>
+<span class="sd">        `a[np.unravel_index(argmax(a), a.shape)]` is the maximum value of `a`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    argmax for iterables was taken from</span>
+<span class="sd">    https://stackoverflow.com/questions/16945518/finding-the-index-of-the-value-which-is-the-min-or-max-in-python</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    One-dimensional array</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; a = np.array([0,4,6,2,1,5,3,5])</span>
+<span class="sd">    &gt;&gt;&gt; ii = argmax(a)</span>
+<span class="sd">    &gt;&gt;&gt; print(ii)</span>
+<span class="sd">    2</span>
+<span class="sd">    &gt;&gt;&gt; print(a[ii])</span>
+<span class="sd">    6</span>
+
+<span class="sd">    One-dimensional masked array</span>
+
+<span class="sd">    &gt;&gt;&gt; a = np.ma.array([0,4,6,2,1,5,3,5], mask=[0,0,1,1,0,0,0,0])</span>
+<span class="sd">    &gt;&gt;&gt; ii = argmax(a)</span>
+<span class="sd">    &gt;&gt;&gt; print(ii)</span>
+<span class="sd">    5</span>
+<span class="sd">    &gt;&gt;&gt; print(a[ii])</span>
+<span class="sd">    5</span>
+<span class="sd">    &gt;&gt;&gt; ii = argmax(a, fill_value=6)</span>
+<span class="sd">    &gt;&gt;&gt; print(ii)</span>
+<span class="sd">    2</span>
+
+<span class="sd">    List</span>
+
+<span class="sd">    &gt;&gt;&gt; a = [0,4,6,2,1,5,3,5]</span>
+<span class="sd">    &gt;&gt;&gt; ii = argmax(a)</span>
+<span class="sd">    &gt;&gt;&gt; print(ii)</span>
+<span class="sd">    2</span>
+<span class="sd">    &gt;&gt;&gt; print(a[ii])</span>
+<span class="sd">    6</span>
+
+<span class="sd">    Examples from numpy.argmax docstring</span>
+
+<span class="sd">    &gt;&gt;&gt; a = np.arange(6).reshape(2,3) + 10</span>
+<span class="sd">    &gt;&gt;&gt; a</span>
+<span class="sd">    array([[10, 11, 12],</span>
+<span class="sd">           [13, 14, 15]])</span>
+<span class="sd">    &gt;&gt;&gt; argmax(a)</span>
+<span class="sd">    5</span>
+<span class="sd">    &gt;&gt;&gt; argmax(a, axis=0)</span>
+<span class="sd">    array([1, 1, 1])</span>
+<span class="sd">    &gt;&gt;&gt; argmax(a, axis=1)</span>
+<span class="sd">    array([2, 2])</span>
+
+<span class="sd">    &gt;&gt;&gt; # Indexes of the maximal elements of a N-dimensional array:</span>
+<span class="sd">    &gt;&gt;&gt; ind = np.unravel_index(np.argmax(a, axis=None), a.shape)</span>
+<span class="sd">    &gt;&gt;&gt; ind</span>
+<span class="sd">    (1, 2)</span>
+<span class="sd">    &gt;&gt;&gt; a[ind]</span>
+<span class="sd">    15</span>
+
+<span class="sd">    &gt;&gt;&gt; b = np.arange(6)</span>
+<span class="sd">    &gt;&gt;&gt; b[1] = 5</span>
+<span class="sd">    &gt;&gt;&gt; b</span>
+<span class="sd">    array([0, 5, 2, 3, 4, 5])</span>
+<span class="sd">    &gt;&gt;&gt; argmax(b)  # Only the first occurrence is returned.</span>
+<span class="sd">    1</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">MaskedArray</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_argmax</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="argmin">
+<a class="viewcode-back" href="../../argsort.html#mcplot.argsort.argmin">[docs]</a>
+<span class="k">def</span> <span class="nf">argmin</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper for numpy.argmin, numpy.ma.argmin, and min for Python iterables</span>
+
+<span class="sd">    Passes all keywords directly to the individual routines, i.e.</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       numpy.argmin(a, axis=None, out=None)</span>
+<span class="sd">       numpy.ma.argmin(self, axis=None, fill_value=None, out=None)</span>
+
+<span class="sd">    No keyword will be passed to the min routine for Python iterables.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : array_like</span>
+<span class="sd">        input array, masked array, or Python iterable</span>
+<span class="sd">    *args : optional</span>
+<span class="sd">        all arguments of numpy.argmin or numpy.ma.argmin</span>
+<span class="sd">    **kwargs : optional</span>
+<span class="sd">        all keyword arguments of numpy.argmin or numpy.ma.argmin</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    index_array : ndarray, int</span>
+<span class="sd">        Array of indices of the largest element in input array `a`. It has the</span>
+<span class="sd">        same shape as `a.shape` with the dimension along `axis` removed.</span>
+<span class="sd">        `a[np.unravel_index(argmin(a), a.shape)]` is the minimum value of `a`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    argmin for iterables was taken from</span>
+<span class="sd">    https://stackoverflow.com/questions/16945518/finding-the-index-of-the-value-which-is-the-min-or-max-in-python</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    One-dimensional array</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; a = np.array([0,4,6,2,1,5,3,5])</span>
+<span class="sd">    &gt;&gt;&gt; ii = argmin(a)</span>
+<span class="sd">    &gt;&gt;&gt; print(ii)</span>
+<span class="sd">    0</span>
+<span class="sd">    &gt;&gt;&gt; print(a[ii])</span>
+<span class="sd">    0</span>
+
+<span class="sd">    One-dimensional masked array</span>
+
+<span class="sd">    &gt;&gt;&gt; a = np.ma.array([0,4,6,2,1,5,3,5], mask=[1,0,1,1,0,0,0,0])</span>
+<span class="sd">    &gt;&gt;&gt; ii = argmin(a)</span>
+<span class="sd">    &gt;&gt;&gt; print(ii)</span>
+<span class="sd">    4</span>
+<span class="sd">    &gt;&gt;&gt; print(a[ii])</span>
+<span class="sd">    1</span>
+<span class="sd">    &gt;&gt;&gt; ii = argmin(a, fill_value=1)</span>
+<span class="sd">    &gt;&gt;&gt; print(ii)</span>
+<span class="sd">    0</span>
+
+<span class="sd">    List</span>
+
+<span class="sd">    &gt;&gt;&gt; a = [0,4,6,2,1,5,3,5]</span>
+<span class="sd">    &gt;&gt;&gt; ii = argmin(a)</span>
+<span class="sd">    &gt;&gt;&gt; print(ii)</span>
+<span class="sd">    0</span>
+<span class="sd">    &gt;&gt;&gt; print(a[ii])</span>
+<span class="sd">    0</span>
+
+<span class="sd">    Examples from numpy.argmin docstring</span>
+
+<span class="sd">    &gt;&gt;&gt; a = np.arange(6).reshape(2,3) + 10</span>
+<span class="sd">    &gt;&gt;&gt; a</span>
+<span class="sd">    array([[10, 11, 12],</span>
+<span class="sd">           [13, 14, 15]])</span>
+<span class="sd">    &gt;&gt;&gt; argmin(a)</span>
+<span class="sd">    0</span>
+<span class="sd">    &gt;&gt;&gt; argmin(a, axis=0)</span>
+<span class="sd">    array([0, 0, 0])</span>
+<span class="sd">    &gt;&gt;&gt; argmin(a, axis=1)</span>
+<span class="sd">    array([0, 0])</span>
+
+<span class="sd">    &gt;&gt;&gt; # Indices of the minimum elements of a N-dimensional array:</span>
+<span class="sd">    &gt;&gt;&gt; ind = np.unravel_index(argmin(a, axis=None), a.shape)</span>
+<span class="sd">    &gt;&gt;&gt; ind</span>
+<span class="sd">    (0, 0)</span>
+<span class="sd">    &gt;&gt;&gt; a[ind]</span>
+<span class="sd">    10</span>
+
+<span class="sd">    &gt;&gt;&gt; b = np.arange(6) + 10</span>
+<span class="sd">    &gt;&gt;&gt; b[4] = 10</span>
+<span class="sd">    &gt;&gt;&gt; b</span>
+<span class="sd">    array([10, 11, 12, 13, 10, 15])</span>
+<span class="sd">    &gt;&gt;&gt; argmin(b)  # Only the first occurrence is returned.</span>
+<span class="sd">    0</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">MaskedArray</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_argmin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="argsort">
+<a class="viewcode-back" href="../../argsort.html#mcplot.argsort.argsort">[docs]</a>
+<span class="k">def</span> <span class="nf">argsort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper for numpy.argsort, numpy.ma.argsort, and sorted for Python</span>
+<span class="sd">    iterables</span>
+
+<span class="sd">    Passes all keywords directly to the individual routines, i.e.</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       numpy.argsort(a, axis=-1, kind=&#39;quicksort&#39;, order=None)</span>
+<span class="sd">       numpy.ma.argsort(a, axis=None, kind=&#39;quicksort&#39;, order=None,</span>
+<span class="sd">                        fill_value=None)</span>
+<span class="sd">       sorted(iterable[, cmp[, key[, reverse]]])</span>
+
+<span class="sd">    Only key cannot be given for Python iterables because the input array is</span>
+<span class="sd">    used as key in the sorted function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : array_like</span>
+<span class="sd">        input array, masked array, or Python iterable</span>
+<span class="sd">    *args : optional</span>
+<span class="sd">        all arguments of numpy.argsort, numpy.ma.argsort, and sorted (except</span>
+<span class="sd">        key argument)</span>
+<span class="sd">    **kwargs : optional</span>
+<span class="sd">        all keyword arguments of numpy.argsort, numpy.ma.argsort, and sorted</span>
+<span class="sd">        (except key argument)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    index_array : ndarray, int</span>
+<span class="sd">        Array of indices that sort `a` along the specified `axis`.</span>
+<span class="sd">        If `a` is one-dimensional, `a[index_array]` yields a sorted `a`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    argsort for iterables was taken from</span>
+<span class="sd">    http://stackoverflow.com/questions/3382352/equivalent-of-numpy-argsort-in-basic-python</span>
+<span class="sd">    http://stackoverflow.com/questions/3071415/efficient-method-to-calculate-the-rank-vector-of-a-list-in-python</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    1D array</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; a = np.array([0,4,6,2,1,5,3,5])</span>
+<span class="sd">    &gt;&gt;&gt; ii = argsort(a)</span>
+<span class="sd">    &gt;&gt;&gt; print(a[ii])</span>
+<span class="sd">    [0 1 2 3 4 5 5 6]</span>
+
+<span class="sd">    &gt;&gt;&gt; ii = argsort(a, kind=&#39;quicksort&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; print(a[ii])</span>
+<span class="sd">    [0 1 2 3 4 5 5 6]</span>
+
+<span class="sd">    1D masked array</span>
+
+<span class="sd">    &gt;&gt;&gt; a = np.ma.array([0,4,6,2,1,5,3,5], mask=[0,0,1,1,0,0,0,0])</span>
+<span class="sd">    &gt;&gt;&gt; ii = argsort(a)</span>
+<span class="sd">    &gt;&gt;&gt; print(a[ii])</span>
+<span class="sd">    [0 1 3 4 5 5 -- --]</span>
+
+<span class="sd">    &gt;&gt;&gt; ii = argsort(a, fill_value=1)</span>
+<span class="sd">    &gt;&gt;&gt; print(a[ii])</span>
+<span class="sd">    [0 -- -- 1 3 4 5 5]</span>
+
+<span class="sd">    list</span>
+
+<span class="sd">    &gt;&gt;&gt; a = [0,4,6,2,1,5,3,5]</span>
+<span class="sd">    &gt;&gt;&gt; ii = argsort(a)</span>
+<span class="sd">    &gt;&gt;&gt; b = [ a[i] for i in ii ]</span>
+<span class="sd">    &gt;&gt;&gt; print(b)</span>
+<span class="sd">    [0, 1, 2, 3, 4, 5, 5, 6]</span>
+
+<span class="sd">    &gt;&gt;&gt; a = [0,4,6,2,1,5,3,5]</span>
+<span class="sd">    &gt;&gt;&gt; ii = argsort(a, reverse=True)</span>
+<span class="sd">    &gt;&gt;&gt; b = [ a[i] for i in ii ]</span>
+<span class="sd">    &gt;&gt;&gt; print(b)</span>
+<span class="sd">    [6, 5, 5, 4, 3, 2, 1, 0]</span>
+
+
+<span class="sd">    Examples from numpy.argsort docstring</span>
+
+<span class="sd">    &gt;&gt;&gt; # One-dimensional array:</span>
+<span class="sd">    &gt;&gt;&gt; x = np.array([3, 1, 2])</span>
+<span class="sd">    &gt;&gt;&gt; argsort(x)</span>
+<span class="sd">    array([1, 2, 0])</span>
+
+<span class="sd">    &gt;&gt;&gt; # Two-dimensional array:</span>
+<span class="sd">    &gt;&gt;&gt; x = np.array([[0, 3], [2, 2]])</span>
+<span class="sd">    &gt;&gt;&gt; x</span>
+<span class="sd">    array([[0, 3],</span>
+<span class="sd">           [2, 2]])</span>
+<span class="sd">    &gt;&gt;&gt; ind = argsort(x, axis=0)  # sorts along first axis (down)</span>
+<span class="sd">    &gt;&gt;&gt; ind</span>
+<span class="sd">    array([[0, 1],</span>
+<span class="sd">           [1, 0]])</span>
+<span class="sd">    &gt;&gt;&gt; np.take_along_axis(x, ind, axis=0)  # same as np.sort(x, axis=0)</span>
+<span class="sd">    array([[0, 2],</span>
+<span class="sd">           [2, 3]])</span>
+<span class="sd">    &gt;&gt;&gt; ind = argsort(x, axis=1)  # sorts along last axis (across)</span>
+<span class="sd">    &gt;&gt;&gt; ind</span>
+<span class="sd">    array([[0, 1],</span>
+<span class="sd">           [0, 1]])</span>
+<span class="sd">    &gt;&gt;&gt; np.take_along_axis(x, ind, axis=1)  # same as np.sort(x, axis=1)</span>
+<span class="sd">    array([[0, 3],</span>
+<span class="sd">           [2, 2]])</span>
+
+<span class="sd">    &gt;&gt;&gt; # Indices of the sorted elements of a N-dimensional array:</span>
+<span class="sd">    &gt;&gt;&gt; ind = np.unravel_index(argsort(x, axis=None), x.shape)</span>
+<span class="sd">    &gt;&gt;&gt; ind</span>
+<span class="sd">    (array([0, 1, 1, 0]), array([0, 0, 1, 1]))</span>
+<span class="sd">    &gt;&gt;&gt; x[ind]  # same as np.sort(x, axis=None)</span>
+<span class="sd">    array([0, 2, 2, 3])</span>
+
+<span class="sd">    &gt;&gt;&gt; # Sorting with keys:</span>
+<span class="sd">    &gt;&gt;&gt; x = np.array([(1, 0), (0, 1)], dtype=[(&#39;x&#39;, &#39;&lt;i4&#39;), (&#39;y&#39;, &#39;&lt;i4&#39;)])</span>
+<span class="sd">    &gt;&gt;&gt; x</span>
+<span class="sd">    array([(1, 0), (0, 1)],</span>
+<span class="sd">          dtype=[(&#39;x&#39;, &#39;&lt;i4&#39;), (&#39;y&#39;, &#39;&lt;i4&#39;)])</span>
+<span class="sd">    &gt;&gt;&gt; argsort(x, order=(&#39;x&#39;,&#39;y&#39;))</span>
+<span class="sd">    array([1, 0])</span>
+<span class="sd">    &gt;&gt;&gt; argsort(x, order=(&#39;y&#39;,&#39;x&#39;))</span>
+<span class="sd">    array([0, 1])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">MaskedArray</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_argsort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># same as numpy.argmax but for python iterables</span>
+<span class="k">def</span> <span class="nf">_argmax</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">iterable</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="c1"># same as numpy.argmin but for python iterables</span>
+<span class="k">def</span> <span class="nf">_argmin</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">iterable</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="c1"># same as numpy.argsort but for python iterables</span>
+<span class="k">def</span> <span class="nf">_argsort</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;key&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;keyword key cannot be given to argsort.&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)),</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">optionflags</span><span class="o">=</span><span class="n">doctest</span><span class="o">.</span><span class="n">NORMALIZE_WHITESPACE</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Matthias Cuntz
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-2024, Matthias Cuntz.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

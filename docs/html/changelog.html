@@ -1,0 +1,611 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Changelog &#8212; mcplot</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=628480d8" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=62837afe"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'changelog';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Authors" href="authors.html" />
+    <link rel="prev" title="text2plot" href="text2plot.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="contents.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">mcplot</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="index.html">mcplot</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="argsort.html">argmax/argmin/argsort</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="color.html">Color module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="color.color.html">Color functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.brewer_palettes.html">Brewer palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.ipcc_palettes.html">IPCC WG1 palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.mathematica_palettes.html">Mathematica palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.ncl_palettes.html">NCL palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.oregon_palettes.html">Oregon palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.mcplot_palettes.html">mcplot palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.sron2012_palettes.html">SRON2012 palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.sron_palettes.html">SRON palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.ufz_palettes.html">UFZ colors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mcplot.html">mcPlot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="position.html">position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="romanliterals.html">Roman literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="str2tex.html">str2tex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text2plot.html">text2plot</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mcuntz/mcplot" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mcuntz/mcplot/edit/main/docs/changelog.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mcuntz/mcplot/issues/new?title=Issue%20on%20page%20%2Fchangelog.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/changelog.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Changelog</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="changelog">
+<span id="id1"></span><h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">#</a></h1>
+<dl class="simple">
+<dt>v0.19 (Oct 2024)</dt><dd><ul class="simple">
+<li><p>First standalone release of <code class="docutils literal notranslate"><span class="pre">mplot</span></code>, extracting all plotting
+routines from <code class="docutils literal notranslate"><span class="pre">pyjams</span></code>.</p></li>
+</ul>
+</dd>
+<dt>v0.18 (Aug 2024)</dt><dd><ul class="simple">
+<li><p>Argument ‘parents’ to <cite>mcPlot</cite> to pass extra command line
+arguments.</p></li>
+<li><p>Added upper keyword in <cite>abc2plot</cite>.</p></li>
+<li><p>Use DejaVuSans and DejaVueSerif as standard fonts if not LaTeX
+in <cite>mcPlot</cite>.</p></li>
+<li><p>Add <cite>mcPlot</cite> method <cite>print_layout_options</cite>.</p></li>
+<li><p>Added IPCC WG1 colours.</p></li>
+<li><p>Set default options for <cite>mcPlot</cite> if not given on command line.</p></li>
+</ul>
+</dd>
+<dt>v0.17 (Jun 2023)</dt><dd><ul class="simple">
+<li><p>Set filename without suffix as default plot name in <cite>mcPlot</cite>.</p></li>
+<li><p>Allow ncol=1 in <cite>color.get_cmap</cite>.</p></li>
+</ul>
+</dd>
+<dt>v0.16 (May 2023)</dt><dd><ul class="simple">
+<li><p>Replace plotly with hvplot in <cite>mcPlot</cite>.</p></li>
+<li><p>Add unicode symbol degree u00B0, which gets replaced by ^circ
+if usetex==True in str2tex.</p></li>
+<li><p>Do not escape % if not usetex in str2tex.</p></li>
+</ul>
+</dd>
+<dt>v0.15 (Jan 2023)</dt><dd><ul class="simple">
+<li><p>Do not set color for missing data; only existed for sron palettes.</p></li>
+<li><p>Add –dpi as a standard option in <cite>mcPlot</cite>.</p></li>
+<li><p>Use mpl.colormaps[name] instead of mpl.colormaps.get_cmap(name)
+to replace mpl.cm.get_cmap(name) to work with matplotlib &lt; v3.6.</p></li>
+</ul>
+</dd>
+<dt>v0.14 (Dec 2022)</dt><dd><ul class="simple">
+<li><p>Changed matplotlib.cm.get_cmap to matplotlib.colormaps.get_cmap in
+color module and tests.</p></li>
+</ul>
+</dd>
+<dt>v0.13 (Jul 2022)</dt><dd><ul class="simple">
+<li><p>Add left, bottom, top to standard layout options in <cite>mcPlot</cite>.</p></li>
+<li><p>Documented as_cmap keyword of <cite>get_cmap</cite>.</p></li>
+</ul>
+</dd>
+<dt>v0.12 (Jun 2022)</dt><dd><ul class="simple">
+<li><p>Use I/O type helpers in <cite>str2tex</cite>.</p></li>
+<li><p>Add kwargs mechanism to <cite>plot_save</cite> in <cite>mcPlot</cite> to pass arguments
+to save_file.</p></li>
+<li><p>Add –transparent as a standard option in <cite>mcPlot</cite>.</p></li>
+</ul>
+</dd>
+<dt>v0.11 (May 2022)</dt><dd><ul class="simple">
+<li><p>Change from NCL amwg to pyjams amwg as the default color palette in
+<cite>mcPlot</cite>.</p></li>
+</ul>
+</dd>
+<dt>v0.10 (Apr 2022)</dt><dd><ul class="simple">
+<li><p>Added <cite>pyjams_amwg</cite> color map.</p></li>
+<li><p><cite>get_color</cite> can get list of colors and not only single colors.</p></li>
+<li><p>Register ufz colors only once with <cite>get_color</cite>.</p></li>
+<li><p>Add <cite>print_colors</cite> to print known named colors to console.</p></li>
+</ul>
+</dd>
+<dt>v0.9 (Mar 2022)</dt><dd><ul class="simple">
+<li><p>Add <cite>get_color</cite> to get value of named colors known to Matplotlib.</p></li>
+<li><p>Added named colors of the guidelines of the Helmholtz Centre for
+Environmental Research - UFZ, Leipzig, Germany.</p></li>
+</ul>
+</dd>
+<dt>v0.8 (Mar 2022)</dt><dd><ul class="simple">
+<li><p>Added ‘order’ keyword to <cite>get_cmap</cite>.</p></li>
+</ul>
+</dd>
+<dt>v0.7 (Dec 2021)</dt><dd><ul class="simple">
+<li><p>Changed order of color maps in printing and plotting.</p></li>
+<li><p>Edited docstrings of color module to follow closer numpydoc.</p></li>
+</ul>
+</dd>
+<dt>v0.6 (Nov 2021)</dt><dd><ul class="simple">
+<li><p>Use <cite>text2plot</cite> in <cite>abc2plot</cite> and <cite>signature2plot</cite>.</p></li>
+<li><p>Better handling of linebreaks in Matplotlib and LaTeX mode in <cite>str2tex</cite>.</p></li>
+<li><p>Added <cite>text2plot</cite>, adding text onto a plot.</p></li>
+<li><p>Added <cite>int2roman</cite> and <cite>roman2int</cite>, converting integer to and from
+Roman literals.</p></li>
+<li><p>Combine <cite>abc2plot</cite> and <cite>signature2plot</cite> in one file <cite>text2plot.py</cite>.</p></li>
+<li><p>Added <cite>abc2plot</cite>, adding a, B, iii), etc. onto a plot.</p></li>
+<li><p>Added <cite>signature2plot</cite>, adding a copyright notice onto a plot.</p></li>
+<li><p>Added ‘pyjams_color.pdf’ as reference to available colormaps.</p></li>
+</ul>
+</dd>
+<dt>v0.5 (Nov 2021)</dt><dd><ul class="simple">
+<li><p>Added tests for <cite>color</cite>.</p></li>
+<li><p>Added ‘pragma: no cover’ to plot and MPI sections of codes so that they
+are not included in coverage report.</p></li>
+<li><p>Cleaned mcPlot docstrings.</p></li>
+<li><p>Added current colors of Paul Tol, i.e. sron color palettes.</p></li>
+</ul>
+</dd>
+<dt>v0.4 (Nov 2021)</dt><dd><ul class="simple">
+<li><p>Add <cite>position</cite>, which positions arrays of subplots to be used with
+Matplotlib’s add_axes.</p></li>
+</ul>
+</dd>
+<dt>v0.3 (Nov 2021)</dt><dd><ul class="simple">
+<li><p>Write standard output file of mcPlot into current folder.</p></li>
+<li><p>Add <cite>str2tex</cite>, converting strings to LaTeX strings</p></li>
+<li><p>Added <cite>color</cite>, a collection of color palettes and continuous color maps.</p></li>
+</ul>
+</dd>
+<dt>v0.2 (Nov 2021)</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Add <cite>mcPlot</cite>, the standard plotting class of Matthias Cuntz.</dt><dd><ul>
+<li><p>It currently assumes that MyriadPro is installed for LaTeX if one
+wants to typeset with latex (-u, –usetex). For installing MyriadPro
+on macOS see <a class="github reference external" href="https://github.com/mcuntz/setup_mac#myriad-pro">mcuntz/setup_mac</a> This
+should be similar on Linux.</p></li>
+<li><p>There are no tests for mcPlot yet.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>v0.1 (Oct 2021)</dt><dd><ul class="simple">
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">pyjams</span></code> from routines of JAMS package
+<a class="github reference external" href="https://github.com/mcuntz/jams_python">mcuntz/jams_python</a></p></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="text2plot.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">text2plot</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="authors.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Authors</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Matthias Cuntz
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-2024, Matthias Cuntz.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
