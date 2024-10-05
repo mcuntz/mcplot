@@ -13,7 +13,7 @@ About mcplot
 
 ``mcplot`` provides a class that combines methods to easily produce
 publication-ready graphics on light or black background. It includes a
-large number of colormaps collected from different sources. And there are
+large number of colormaps collected from different sources. There are
 a number of functions that help to position plots, number plot panels,
 or generally write text on a graph.
 
@@ -214,8 +214,8 @@ for details.
 
 Copyright (c) 2021- Matthias Cuntz
 
-.. |DOI| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.13851994.svg
-   :target: https://doi.org/10.5281/zenodo.13851994
+.. |DOI| image:: https://zenodo.org/badge/866240152.svg
+   :target: https://doi.org/10.5281/zenodo.13893825
 .. |PyPI version| image:: https://badge.fury.io/py/mcplot.svg
    :target: https://badge.fury.io/py/mcplot
 .. |Conda version| image:: https://anaconda.org/conda-forge/mcplot/badges/version.svg
