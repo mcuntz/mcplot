@@ -1,9 +1,10 @@
 Changelog
 ---------
 
-v0.19 (Oct 2024)
+v1.0 (Oct 2024)
     * First standalone release of ``mplot``, extracting all plotting
       routines from ``pyjams``.
+    * Rudimentary documentation with README.rst.
 
 v0.18 (Aug 2024)
     * Argument 'parents' to `mcPlot` to pass extra command line
