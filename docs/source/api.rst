@@ -15,7 +15,7 @@ API Reference
 
    argsort.rst
    color.rst
-   mcplot.rst
+   class_mcplot.rst
    position.rst
    romanliterals.rst
    str2tex.rst

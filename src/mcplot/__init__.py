@@ -17,7 +17,7 @@ Subpackages
 .. autosummary::
    argsort
    color
-   mcplot
+   class_mcplot
    position
    romanliterals
    str2tex
@@ -43,7 +43,7 @@ from . import color
 # argmax, argmin and argsort for array_like and Python iterables
 from .argsort import argmax, argmin, argsort
 # Matthias Cuntz' standard plotting class.
-from .mcplot import mcPlot
+from .class_mcplot import mcPlot
 # positions of subplots, used with add_axes
 from .position import position
 # Convert integer to and from Roman numerals

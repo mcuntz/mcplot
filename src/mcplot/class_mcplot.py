@@ -1,74 +1,13 @@
 #!/usr/bin/env python
 """
-Standard plotting class of Matthias Cuntz.
+Standard plotting class of Matthias Cuntz
 
-It has the same functionality as the old mc_template.py by Matthias Cuntz but
-uses the object-oriented approach of st_template.py of Stephan Thober.
-
-It allows plotting on screen, into PDF and PNG files, as well as in HTML
-files as a wrapper for PNG images or using hvplot.
-
-It is optimised for publication ready plots, either on white or black
-background.
-
-
-The simplest way to use mcPlot is to extend the class:
-
-.. code-block:: python
-
-   import numpy as np
-   from mcplot import mcPlot
-
-   class PlotIt(mcPlot):
-       def __init__(self, *args, **kwargs):
-           super().__init__(*args, **kwargs)
-           # change e.g. colors
-           self.lcol1 = 'cyan'
-           # reset global values after colour changes, etc.
-           self.set_matplotlib_rcparams()
-
-       def read_data(self):
-           # do something
-           self.dat = np.arange(10)
-
-       def plot_fig_1(self):
-           import matplotlib.pyplot as plt
-
-           self.ifig += 1
-           fig = plt.figure(self.ifig)
-
-           sub = fig.add_axes([0.125, 0.667, 0.3375, 0.233])
-
-           larr = sub.plot(self.dat)
-           plt.setp(larr[-1], linestyle='-', linewidth=self.lwidth,
-                    marker='', color=self.lcol1)
-
-           self.plot_save(fig)
-
-       def plot_fig_2(self):
-           import matplotlib.pyplot as plt
-
-           self.ifig += 1
-           fig = plt.figure(self.ifig)
-
-           sub = fig.add_axes([0.125, 0.667, 0.3375, 0.233])
-
-           larr = sub.plot(2*self.dat)
-           plt.setp(larr[-1], linestyle='-', linewidth=self.lwidth,
-                    marker='', color=self.lcols[-1])
-
-           self.plot_save(fig)
-
-   if __name__ == '__main__':
-       iplot = PlotIt(desc='Test mcPlot',
-                      argstr='No argument wanted')
-       iplot.read_data()
-       iplot.plot_fig_1()
-       iplot.plot_fig_2()
-       iplot.close()
-
-Then call the script with -h to see the command line options.
-
+The class has the same functionality as the old mc_template.py by
+Matthias Cuntz but uses the object-oriented approach of st_template.py
+of Stephan Thober. It allows plotting on screen, into PDF and PNG
+files, as well as in HTML files as a wrapper for PNG images or using
+hvplot. It is optimised for publication ready plots, either on white
+or black background.
 
 This module was written by Matthias Cuntz while at Institut National de
 Recherche pour l'Agriculture, l'Alimentation et l'Environnement (INRAE), Nancy,
@@ -106,6 +45,7 @@ History
     * Use DejaVuSans and DejaVueSerif as standard fonts if not LaTeX
       because they come with matplotlib, May 2024, Matthias Cuntz
     * parents argument to ArgumentParser, Jul 2024, Matthias Cuntz
+    * Rename to class_mcplot.py, Oct 2024, Matthias Cuntz
 
 """
 import numpy as np

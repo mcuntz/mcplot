@@ -37,14 +37,14 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="_static/documentation_options.js?v=15105bb8"></script>
+    <script src="_static/documentation_options.js?v=3bf95b74"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'contents';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="mcplot" href="index.html" />
+    <link rel="next" title="mcplot guide" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -148,7 +148,7 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="index.html">mcplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">mcplot guide</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="argsort.html">argmax/argmin/argsort</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="color.html">Color module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -164,7 +164,7 @@
 <li class="toctree-l3"><a class="reference internal" href="color.ufz_palettes.html">UFZ colors</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="mcplot.html">mcPlot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="class_mcplot.html">mcPlot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="position.html">position</a></li>
 <li class="toctree-l2"><a class="reference internal" href="romanliterals.html">Roman literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="str2tex.html">str2tex</a></li>
@@ -391,10 +391,11 @@ document.write(`
 <h1>Contents<a class="headerlink" href="#contents" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">mcplot</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">mcplot guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#about-mcplot">About mcplot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#calling-a-plotting-script-from-the-command-line">Calling a plotting script from the command line</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#enhancing-the-plotting-class">Enhancing the plotting class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#calling-plotting-scripts-from-the-command-line">Calling plotting scripts from the command line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#extending-the-plotting-class">Extending the plotting class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#more-command-line-options">More command line options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#license">License</a></li>
 </ul>
@@ -426,8 +427,8 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="color.ufz_palettes.html">UFZ colors</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="mcplot.html">mcPlot</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="mcplot.html#mcplot.mcplot.mcPlot"><code class="docutils literal notranslate"><span class="pre">mcPlot</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="class_mcplot.html">mcPlot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_mcplot.html#mcplot.class_mcplot.mcPlot"><code class="docutils literal notranslate"><span class="pre">mcPlot</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="position.html">position</a><ul>
@@ -474,7 +475,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">mcplot</p>
+        <p class="prev-next-title">mcplot guide</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

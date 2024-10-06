@@ -1,7 +1,7 @@
 mcPlot
 ------
 
-.. automodule:: mcplot.mcplot
+.. automodule:: mcplot.class_mcplot
    :members:
    :undoc-members:
    :inherited-members:
