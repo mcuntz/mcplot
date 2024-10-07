@@ -46,6 +46,10 @@ History
       because they come with matplotlib, May 2024, Matthias Cuntz
     * parents argument to ArgumentParser, Jul 2024, Matthias Cuntz
     * Rename to class_mcplot.py, Oct 2024, Matthias Cuntz
+    * Reorder ldashes from little to more dots between dashes,
+      Oct 2024, Matthias Cuntz
+    * set dxabc and dyabc to upper left corner of plot,
+      Oct 2024, Matthias Cuntz
 
 """
 import numpy as np
@@ -492,9 +496,9 @@ class mcPlot(object):
         self.hspace   = 0.1   # x-space between subplots
         self.vspace   = 0.1   # y-space between subplots
         self.textsize = 12    # standard text size
-        self.dxabc    = 0.90  # % of (max-min) shift to the right
+        self.dxabc    = 0.05  # % of (max-min) shift to the right
                               # of left y-axis for a,b,c,... labels
-        self.dyabc    = 0.05  # % of (max-min) shift up from lower x-axis
+        self.dyabc    = 0.90  # % of (max-min) shift up from lower x-axis
                               # for a,b,c,... labels
         # lines, markers and colours
         self.lwidth  = 1.5  # linewidth
@@ -535,16 +539,16 @@ class mcPlot(object):
         self.lcol4 = self.mcol4
         self.lcol5 = self.mcol5
         self.lcols = self.mcols
-        # ldashes     = [(5, 2, 2, 2, 2, 2, 2, 2), (2, 2), (10, 3), (5, 3),
-        #                (3, 5), (5, 0)]
-        self.ldashes = [(5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2),
-                        (5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2),
-                        (5, 0),
+        # ldashes = [(5, 2, 2, 2, 2, 2, 2, 2), (2, 2), (10, 3), (5, 3),
+        #            (3, 5), (5, 0)]
+        self.ldashes = [(5, 0),
                         (5, 2),
                         (5, 2, 2, 2),
                         (5, 2, 2, 2, 2, 2),
                         (5, 2, 2, 2, 2, 2, 2, 2),
-                        (5, 2, 2, 2, 2, 2, 2, 2, 2, 2)]
+                        (5, 2, 2, 2, 2, 2, 2, 2, 2, 2)
+                        (5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2),
+                        (5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)]
         # legend
         self.llxbbox    = 1.0    # x-anchor legend bounding box
         self.llybbox    = 1.0    # y-anchor legend bounding box

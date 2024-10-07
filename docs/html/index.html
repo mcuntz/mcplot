@@ -387,6 +387,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-mcplot">About mcplot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-plotting-scripts-from-the-command-line">Calling plotting scripts from the command line</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-the-plotting-class">Extending the plotting class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-variables">Class variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-command-line-options">More command line options</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
@@ -425,15 +426,18 @@ sinusoidal curves as an example. A file <strong>mcplot_test.py</strong> could be
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">mcPlot</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># make instance of mcPlot</span>
     <span class="n">iplot</span> <span class="o">=</span> <span class="n">mcPlot</span><span class="p">(</span><span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Test mcPlot&#39;</span><span class="p">,</span>
                    <span class="n">argstr</span><span class="o">=</span><span class="s1">&#39;No argument wanted&#39;</span><span class="p">)</span>
+    <span class="c1"># simple test plot with two sinusoidals</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">plot_test</span><span class="p">()</span>
+    <span class="c1"># finish</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This script <strong>mcplot_test.py</strong> can be called on the command line.</p>
-<p>Just calling the script opens a standard <a class="reference external" href="https://matplotlib.org/">Matplotlib</a> plotting window
-with the test plot.</p>
+<p>This script <strong>mcplot_test.py</strong> can be called on the command line. Just
+calling the script opens a standard <a class="reference external" href="https://matplotlib.org/">Matplotlib</a> plotting window with
+the test plot.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_test.py
 </pre></div>
 </div>
@@ -470,16 +474,17 @@ with the test plot.</p>
 </pre></div>
 </div>
 <p>Thus, the command line option <strong>-t pdf</strong> would write the plot into a
-PDF file. The option ‘-p test1.pdf’ would write it into the file named
+PDF file. The option <strong>-p test1.pdf</strong> would write it into the file named
 <strong>test1.pdf</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_test.py<span class="w"> </span>-t<span class="w"> </span>pdf<span class="w"> </span>-p<span class="w"> </span>test1.pdf
 </pre></div>
 </div>
-<p>This uses the sans-serif font <strong>DejaVuSans</strong> that comes with
-<a class="reference external" href="https://matplotlib.org/">Matplotlib</a>. It will use the serif font <strong>DejaVueSerif</strong> with the
-command line option <strong>-s</strong>. It will use LaTeX to render text with the
-<strong>-u</strong> option. <strong>-u -s</strong> uses LaTeX standard Computer Modern font. It
-uses <strong>MyriadPro</strong> as sans-serif font in LaTeX, which must be
+<p>This uses the sans-serif font <strong>DejaVu Sans</strong>, which the standard font
+of <a class="reference external" href="https://matplotlib.org/">Matplotlib</a>. <a class="reference internal" href="class_mcplot.html#mcplot.class_mcplot.mcPlot" title="mcplot.class_mcplot.mcPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">mcPlot</span></code></a> will use the
+serif font <strong>DejaVue Serif</strong> with the command line option <strong>-s</strong>. It
+will use LaTeX to render text with the <strong>-u</strong> option (see <a class="reference external" href="https://matplotlib.org/stable/users/explain/text/usetex.html#usetex">Text
+rendering with LaTeX</a>). <strong>-u -s</strong> uses LaTeX standard Computer Modern
+font. It uses <strong>MyriadPro</strong> as sans-serif font in LaTeX, which must be
 installed (see section <a class="reference external" href="https://github.com/mcuntz/setup_mac?tab=readme-ov-file#myriad-pro">Myriad Pro</a>).</p>
 <p>By default, <code class="docutils literal notranslate"><span class="pre">mcPlot</span></code> plots onto a DIN A4 page, which facilitates
 choices of font sizes, etc. The output can be cropped with the utility
@@ -505,7 +510,8 @@ presentations (options <strong>-t</strong>, <strong>-p</strong>, <strong>-u</str
 <h2>Extending the plotting class<a class="headerlink" href="#extending-the-plotting-class" title="Link to this heading">#</a></h2>
 <p>The class <a class="reference internal" href="class_mcplot.html#mcplot.class_mcplot.mcPlot" title="mcplot.class_mcplot.mcPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">mcPlot</span></code></a> shall be extended. One
 would normally have a method to read data from a file, and a routine
-that produces a plot. This could give a script <strong>mcplot_basic.py</strong>:</p>
+that produces a plot. This could give a script like
+<strong>mcplot_basic.py</strong>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">mcPlot</span>
 
@@ -553,7 +559,7 @@ that produces a plot. This could give a script <strong>mcplot_basic.py</strong>:
                    <span class="n">argstr</span><span class="o">=</span><span class="s1">&#39;input_file&#39;</span><span class="p">)</span>
     <span class="c1"># read data</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
-    <span class="c1"># plot data</span>
+    <span class="c1"># plot two figures</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">plot_fig_1</span><span class="p">()</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">plot_fig_2</span><span class="p">()</span>
     <span class="c1"># close plot and possible output file</span>
@@ -567,18 +573,91 @@ class <code class="xref py py-class docutils literal notranslate"><span class="p
 backend such as a Matplotlib window or a PDF file. The data is read
 with the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">read_data()</span></code>. Two figures are created in the
 methods <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_fig_1()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_fig_2()</span></code>, which write the
-figures to the backend with the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_save()</span></code>. Any open
-backend such as a PDF file will be closed with the method
+figures to the backend with the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_save(fig)()</span></code>. Any
+open backend such as a PDF file will be closed with the method
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code>.</p>
-<p>The plotting methods <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_fig_1()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_fig_2()</span></code> use the
-defined variables <strong>self.lcol1</strong> for line color number 1,
+</section>
+<section id="class-variables">
+<h2>Class variables<a class="headerlink" href="#class-variables" title="Link to this heading">#</a></h2>
+<p>The plotting methods <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_fig_1()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_fig_2()</span></code> above
+use the defined variables <strong>self.lcol1</strong> for line color number 1,
 <strong>self.lcol2</strong> for line color number 2, and <strong>self.lwidth</strong> for the
 width of the plotted line.</p>
+<p>The are a large number of useful class variables defined, see
+<a class="reference internal" href="class_mcplot.html#id5" title="mcplot.class_mcplot.mcPlot.set_layout_options"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_layout_options()</span></code></a>:</p>
+<p><strong>Lines and markers</strong></p>
+<ul class="simple">
+<li><p>There are five line colors defined: <strong>lcol1</strong> to <strong>lcol5</strong> (dark
+blue, dark red, light blue, orange, dark green), the same for
+markers: <strong>mcol1</strong> to <strong>mcol5</strong>.</p></li>
+<li><p>The are two lists <strong>lcols</strong> and <strong>mcols</strong> with 13 colors (dark blue,
+medium blue, light blue, cyan, turquoise, light green, dark green,
+sand, beige, yellow, orange, light red, dark red), which uses
+<a class="reference internal" href="api.html#module-mcplot" title="mcplot"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mcplot</span></code></a>’s own colormap, which is a toned down version of
+<cite>amwg</cite> from <a class="reference external" href="https://ncar.ucar.edu">NCAR</a>’s <a class="reference external" href="https://www.cesm.ucar.edu/working-groups/atmosphere">Atmosphere Model Working Group</a> available in
+<a class="reference external" href="https://www.ncl.ucar.edu">NCL</a>, for example.</p></li>
+<li><p>The foreground color (<strong>fgcolor</strong>) is set to black, and the
+background color (<strong>bgcolor</strong>) is set to white. This is inverted
+with the <strong>-w</strong> command line option.</p></li>
+<li><p>Linewidth of a plotting line (<strong>lwidth</strong>) is set to 1.5 while widths
+of axes (<strong>alwidth</strong>) and errorbars (<strong>elwidth</strong>) are set to 1.</p></li>
+<li><p>Marker size (<strong>msize</strong>) is set to 1.5 while the width of the marker
+edge (<strong>mwidth</strong>) is set to 1.</p></li>
+<li><p><strong>ldashes</strong> gives seven dash sequences (solid, dashed,
+dash-dot-dash, dash-dot-dot-dash, …).</p></li>
+</ul>
+<p><strong>Text</strong></p>
+<ul class="simple">
+<li><p>Textsize (<strong>textsize</strong>) is set to 12 pt.</p></li>
+<li><p><strong>dxabc</strong> and <strong>dyabc</strong> are used to place a), b), c), … on the
+plot using <a class="reference internal" href="text2plot.html#mcplot.text2plot.abc2plot" title="mcplot.text2plot.abc2plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">abc2plot()</span></code></a>. These are 0-1 between
+axis minimum and maximum. They are set to 0.05 and 0.9,
+resp., i.e. default is the upper left corner.</p></li>
+</ul>
+<p><strong>Plot layout</strong></p>
+<p>The module <a class="reference internal" href="api.html#module-mcplot" title="mcplot"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mcplot</span></code></a> includes a function
+<a class="reference internal" href="position.html#mcplot.position.position" title="mcplot.position.position"><code class="xref py py-func docutils literal notranslate"><span class="pre">position()</span></code></a> that can be used get the tuple
+<cite>(left, bottom, width, height)</cite> for subplots placed with
+<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.add_axes.html#matplotlib.figure.Figure.add_axes" title="(in Matplotlib v3.9.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">matplotlib.figure.Figure.add_axes()</span></code></a>.</p>
+<ul class="simple">
+<li><p><strong>nrow</strong> is set to 3 by default and <strong>ncol</strong> to 2, which gives six
+plotting panels on a DIN A4 page.</p></li>
+<li><p>The further class variables <strong>left</strong> (0.125), <strong>right</strong> (0.9),
+<strong>bottom</strong> (0.1), <strong>top</strong> (0.1), <strong>hspace</strong> (0.1), and <strong>vspace</strong>
+(0.1) are fractions of the figure width and height and the same as
+the older defaults in <a class="reference external" href="https://matplotlib.org/">Matplotlib</a>, except for hspace and vspace,
+which were halved. The latter are abbreviations for <cite>horizontal
+space</cite> and <cite>vertical space</cite> between subplots, which is more mnemonic
+for me than <cite>wspace</cite> for <cite>width reserved for space between subplots</cite>
+and <cite>hspace</cite> for <cite>height reserved for space between subplots</cite> as in
+<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.gridspec.GridSpec.html#matplotlib.gridspec.GridSpec" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.gridspec.GridSpec</span></code></a>.</p></li>
+</ul>
 <p>To be continued …</p>
-<p>There are <strong>self.lcol1</strong> to <strong>self.lcol5</strong> defined as well as
-the list of colours <strong>self.lcols</strong> with standard 13 colours. This can
-easily be changed using the <strong>mcplot.color</strong> sub-module. The above code
-uses also <strong>self.lwidth</strong> for linewidth of the plotted line.</p>
+<p>self.llxbbox
+x-anchor legend bounding box
+self.llybbox
+y-anchor legend bounding box
+self.llrspace
+spacing between rows in legend
+self.llcspace
+spacing between columns in legend
+self.llhtextpad
+pad between the legend handle and text
+self.llhlength
+length of the legend handles
+self.frameon
+if True: draw a frame around the legend. If None: use rc
+self.dpi
+DPI of non-vector figure output
+self.transparent
+True for transparent background in figure
+self.bbox_inches
+Bbox in inches. If ‘tight’, try to figure out the tight bbox of the figure
+self.pad_inches
+Amount of padding when bbox_inches is ‘tight’
+self.serif = False
+self.usetex = False
+self.ifig = 0</p>
 <p>After fiddling with colours, it is a good idea to call
 <strong>set_matplotlib_rcparams()</strong> again, which sets some defaults such as
 the colour of the boxplot whiskers of which one might not have thought
@@ -701,6 +780,7 @@ for details.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-mcplot">About mcplot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-plotting-scripts-from-the-command-line">Calling plotting scripts from the command line</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-the-plotting-class">Extending the plotting class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-variables">Class variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-command-line-options">More command line options</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>

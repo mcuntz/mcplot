@@ -471,13 +471,17 @@ Jan 2024, Matthias Cuntz</p></li>
 because they come with matplotlib, May 2024, Matthias Cuntz</p></li>
 <li><p>parents argument to ArgumentParser, Jul 2024, Matthias Cuntz</p></li>
 <li><p>Rename to class_mcplot.py, Oct 2024, Matthias Cuntz</p></li>
+<li><p>Reorder ldashes from little to more dits between dashes,
+Oct 2024, Matthias Cuntz</p></li>
+<li><p>set dxabc and dyabc to upper left corner of plot,
+Oct 2024, Matthias Cuntz</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="mcplot.class_mcplot.mcPlot">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mcPlot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argstr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/class_mcplot.html#mcPlot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.class_mcplot.mcPlot" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Standard plotting class of Matthias Cuntz</p>
 <p>Upon initialisation,
 the command line arguments are gathered (get_command_line_arguments),
@@ -518,7 +522,7 @@ Otherwise, the ArgumentParser will see two -h/–help options
 and raise an error.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ArgumentParser or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>, optional</p>
+<dd class="field-odd"><p>ArgumentParser or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -697,7 +701,7 @@ keeping the existing optional arguments.</p>
 <li><p><strong>desc</strong> (<em>string</em><em>, </em><em>optional</em>) – Description for command line parser, which will be shown when
 called with -h.</p></li>
 <li><p><strong>argstr</strong> (<em>string</em><em>, </em><em>optional</em>) – String given as description for the positional arguments.</p></li>
-<li><p><strong>parents</strong> (<em>ArgumentParser</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>, </em><em>optional</em>) – ArgumentParser or list of ArgumentParser objects whose arguments
+<li><p><strong>parents</strong> (<em>ArgumentParser</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>, </em><em>optional</em>) – ArgumentParser or list of ArgumentParser objects whose arguments
 should also be included.
 Note, these parsers should be initialised with <cite>add_help=False</cite>.
 Otherwise, the ArgumentParser will see two -h/–help options
@@ -768,7 +772,7 @@ optional<span class="w"> </span>arguments:
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fig</strong> (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.9.2)"><em>matplotlib.figure.Figure</em></a>) – Matplotlib figure object.    argstr : string, optional</p></li>
-<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>, </em><em>optional</em>) – Additional keywords will be passed to <em>savefig</em> for ‘pdf’,
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>, </em><em>optional</em>) – Additional keywords will be passed to <em>savefig</em> for ‘pdf’,
 ‘png’, and ‘html’; to <em>fig_to_html</em> for ‘d3’, and to
 <em>save</em> for ‘hvplot’. This overwrites <em>self.transparent</em>,
 <em>self.bbox_inches</em>, <em>self.pad_inches</em> for ‘pdf’, ‘png’, and ‘html’.</p></li>

@@ -32,15 +32,17 @@ sinusoidal curves as an example. A file **mcplot_test.py** could be:
    from mcplot import mcPlot
 
    if __name__ == '__main__':
+       # make instance of mcPlot
        iplot = mcPlot(desc='Test mcPlot',
                       argstr='No argument wanted')
+       # simple test plot with two sinusoidals
        iplot.plot_test()
+       # finish
        iplot.close()
 
-This script **mcplot_test.py** can be called on the command line.
-
-Just calling the script opens a standard `Matplotlib`_ plotting window
-with the test plot.
+This script **mcplot_test.py** can be called on the command line. Just
+calling the script opens a standard `Matplotlib`_ plotting window with
+the test plot.
 
 .. code-block:: bash
 
@@ -81,18 +83,19 @@ gives the help message::
                            (default: black or white).
 
 Thus, the command line option **-t pdf** would write the plot into a
-PDF file. The option '-p test1.pdf' would write it into the file named
+PDF file. The option **-p test1.pdf** would write it into the file named
 **test1.pdf**:
 
 .. code-block:: bash
 
    python mcplot_test.py -t pdf -p test1.pdf
 
-This uses the sans-serif font **DejaVuSans** that comes with
-`Matplotlib`_. It will use the serif font **DejaVueSerif** with the
-command line option **-s**. It will use LaTeX to render text with the
-**-u** option. **-u -s** uses LaTeX standard Computer Modern font. It
-uses **MyriadPro** as sans-serif font in LaTeX, which must be
+This uses the sans-serif font **DejaVu Sans**, which the standard font
+of `Matplotlib`_. :class:`~mcplot.class_mcplot.mcPlot` will use the
+serif font **DejaVue Serif** with the command line option **-s**. It
+will use LaTeX to render text with the **-u** option (see `Text
+rendering with LaTeX`_). **-u -s** uses LaTeX standard Computer Modern
+font. It uses **MyriadPro** as sans-serif font in LaTeX, which must be
 installed (see section `Myriad Pro`_).
 
 By default, ``mcPlot`` plots onto a DIN A4 page, which facilitates
@@ -125,7 +128,8 @@ Extending the plotting class
 
 The class :class:`~mcplot.class_mcplot.mcPlot` shall be extended. One
 would normally have a method to read data from a file, and a routine
-that produces a plot. This could give a script **mcplot_basic.py**:
+that produces a plot. This could give a script like
+**mcplot_basic.py**:
 
 .. code-block:: python
 
@@ -176,7 +180,7 @@ that produces a plot. This could give a script **mcplot_basic.py**:
                       argstr='input_file')
        # read data
        iplot.read_data()
-       # plot data
+       # plot two figures
        iplot.plot_fig_1()
        iplot.plot_fig_2()
        # close plot and possible output file
@@ -189,22 +193,100 @@ class :class:`myPlot` is created, which prepares also any plotting
 backend such as a Matplotlib window or a PDF file. The data is read
 with the method :meth:`read_data`. Two figures are created in the
 methods :meth:`plot_fig_1` and :meth:`plot_fig_2`, which write the
-figures to the backend with the method :meth:`plot_save`. Any open
-backend such as a PDF file will be closed with the method
+figures to the backend with the method :meth:`plot_save(fig)`. Any
+open backend such as a PDF file will be closed with the method
 :meth:`close`.
 
-The plotting methods :meth:`plot_fig_1` and :meth:`plot_fig_2` use the
-defined variables **self.lcol1** for line color number 1,
+
+Class variables
+---------------
+
+The plotting methods :meth:`plot_fig_1` and :meth:`plot_fig_2` above
+use the defined variables **self.lcol1** for line color number 1,
 **self.lcol2** for line color number 2, and **self.lwidth** for the
 width of the plotted line.
+
+The are a large number of useful class variables defined, see
+:meth:`~mcplot.class_mcplot.mcPlot.set_layout_options`:
+
+**Lines and markers**
+
+* There are five line colors defined: **lcol1** to **lcol5** (dark
+  blue, dark red, light blue, orange, dark green), the same for
+  markers: **mcol1** to **mcol5**.
+* The are two lists **lcols** and **mcols** with 13 colors (dark blue,
+  medium blue, light blue, cyan, turquoise, light green, dark green,
+  sand, beige, yellow, orange, light red, dark red), which uses
+  :mod:`mcplot`'s own colormap, which is a toned down version of
+  `amwg` from `NCAR`_'s `Atmosphere Model Working Group`_ available in
+  `NCL`_, for example.
+* The foreground color (**fgcolor**) is set to black, and the
+  background color (**bgcolor**) is set to white. This is inverted
+  with the **-w** command line option.
+* Linewidth of a plotting line (**lwidth**) is set to 1.5 while widths
+  of axes (**alwidth**) and errorbars (**elwidth**) are set to 1.
+* Marker size (**msize**) is set to 1.5 while the width of the marker
+  edge (**mwidth**) is set to 1.
+* **ldashes** gives seven dash sequences (solid, dashed,
+  dash-dot-dash, dash-dot-dot-dash, ...).
+
+**Text**
+
+* Textsize (**textsize**) is set to 12 pt.
+* **dxabc** and **dyabc** are used to place a), b), c), ... on the
+  plot using :func:`~mcplot.text2plot.abc2plot`. These are 0-1 between
+  axis minimum and maximum. They are set to 0.05 and 0.9,
+  resp., i.e. default is the upper left corner.
+
+**Plot layout**
+
+The module :mod:`mcplot` includes a function
+:func:`~mcplot.position.position` that can be used get the tuple
+`(left, bottom, width, height)` for subplots placed with
+:meth:`matplotlib.figure.Figure.add_axes`.
+
+* **nrow** is set to 3 by default and **ncol** to 2, which gives six
+  plotting panels on a DIN A4 page.
+* The further class variables **left** (0.125), **right** (0.9),
+  **bottom** (0.1), **top** (0.1), **hspace** (0.1), and **vspace**
+  (0.1) are fractions of the figure width and height and the same as
+  the older defaults in `Matplotlib`_, except for hspace and vspace,
+  which were halved. The latter are abbreviations for `horizontal
+  space` and `vertical space` between subplots, which is more mnemonic
+  for me than `wspace` for `width reserved for space between subplots`
+  and `hspace` for `height reserved for space between subplots` as in
+  :class:`matplotlib.gridspec.GridSpec`.
+
 
 To be continued ...
 
 
-There are **self.lcol1** to **self.lcol5** defined as well as
-the list of colours **self.lcols** with standard 13 colours. This can
-easily be changed using the **mcplot.color** sub-module. The above code
-uses also **self.lwidth** for linewidth of the plotted line.
+
+self.llxbbox
+x-anchor legend bounding box
+self.llybbox
+y-anchor legend bounding box
+self.llrspace
+spacing between rows in legend
+self.llcspace
+spacing between columns in legend
+self.llhtextpad
+pad between the legend handle and text
+self.llhlength
+length of the legend handles
+self.frameon
+if True: draw a frame around the legend. If None: use rc
+self.dpi
+DPI of non-vector figure output
+self.transparent
+True for transparent background in figure
+self.bbox_inches
+Bbox in inches. If ‘tight’, try to figure out the tight bbox of the figure
+self.pad_inches
+Amount of padding when bbox_inches is ‘tight’
+self.serif = False
+self.usetex = False
+self.ifig = 0
 
 After fiddling with colours, it is a good idea to call
 **set_matplotlib_rcparams()** again, which sets some defaults such as
@@ -304,10 +386,14 @@ Copyright (c) 2021- Matthias Cuntz
 .. |Coverage Status| image:: https://coveralls.io/repos/github/mcuntz/mcplot/badge.svg?branch=master
    :target: https://coveralls.io/github/mcuntz/mcplot?branch=master
 
+.. _Atmosphere Model Working Group: https://www.cesm.ucar.edu/working-groups/atmosphere
 .. _CTAN: https://www.ctan.org/pkg/pdfcrop
 .. _LICENSE: https://github.com/mcuntz/mcplot/blob/main/LICENSE
 .. _Matplotlib: https://matplotlib.org/
 .. _Myriad Pro: https://github.com/mcuntz/setup_mac?tab=readme-ov-file#myriad-pro
+.. _NCAR: https://ncar.ucar.edu
+.. _NCL: https://www.ncl.ucar.edu
+.. _Text rendering with LaTeX: https://matplotlib.org/stable/users/explain/text/usetex.html#usetex
 .. _matplotlib: https://matplotlib.org/
 .. _netCDF4: https://github.com/Unidata/netcdf4-python
 .. _numpy: https://numpy.org/

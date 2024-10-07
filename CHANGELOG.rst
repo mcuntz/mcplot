@@ -3,6 +3,10 @@ Changelog
 
 v1.1 (??? 2024)
     * Renamed file `mcplot.py` to `class_mcplot.py`.
+    * Reorder `ldashes` from little to more dots between dashes in
+      `mcPlot`.
+    * Set `dxabc` and `dyabc` to upper left corner of plot in
+      `mcPlot`.
 
 v1.0 (Oct 2024)
     * First standalone release of ``mplot``, extracting all plotting
