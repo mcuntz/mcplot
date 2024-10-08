@@ -50,6 +50,8 @@ History
       Oct 2024, Matthias Cuntz
     * set dxabc and dyabc to upper left corner of plot,
       Oct 2024, Matthias Cuntz
+    * Use same left, right, bottom, top as GridSpec of Matplotlib,
+      Oct 2024, Matthias Cuntz
 
 """
 import numpy as np
@@ -491,8 +493,8 @@ class mcPlot(object):
         self.ncol     = 2     # # of columns of subplots per figure
         self.left     = 0.125  # left space on page
         self.right    = 0.9   # right space on page
-        self.bottom   = 0.1   # lower space on page
-        self.top      = 0.9   # upper space on page
+        self.bottom   = 0.11  # lower space on page
+        self.top      = 0.88  # upper space on page
         self.hspace   = 0.1   # x-space between subplots
         self.vspace   = 0.1   # y-space between subplots
         self.textsize = 12    # standard text size
@@ -912,7 +914,10 @@ class mcPlot(object):
         self.ifig = 0
 
     def plot_start(self):
-        """Alias for plot_begin()"""
+        """
+        Alias for plot_begin()
+
+        """
         self.plot_begin()
 
     # -------------------------------------------------------------------------
@@ -1044,19 +1049,31 @@ class mcPlot(object):
             plt.show()
 
     def plot_stop(self):
-        """Alias for plot_end()"""
+        """
+        Alias for plot_end()
+
+        """
         self.plot_end()
 
     def plot_close(self):
-        """Alias for plot_end()"""
+        """
+        Alias for plot_end()
+
+        """
         self.plot_end()
 
     def close(self):
-        """Alias for plot_end()"""
+        """
+        Alias for plot_end()
+
+        """
         self.plot_end()
 
     def end(self):
-        """Alias for plot_end()"""
+        """
+        Alias for plot_end()
+
+        """
         self.plot_end()
 
     # -------------------------------------------------------------------------
@@ -1084,20 +1101,23 @@ class mcPlot(object):
                 'self.hspace': self.hspace, 'self.vspace': self.vspace,
                 'self.textsize': self.textsize,
                 'self.dxabc': self.dxabc, 'self.dyabc': self.dyabc,
-                'self.lwidth': self.lwidth, 'self.elwidth': self.elwidth,
-                'self.alwidth': self.alwidth, 'self.msize': self.msize,
-                'self.mwidth': self.mwidth,
-                'self.dowhite': self.dowhite, 'self.fgcolor': self.fgcolor,
-                'self.bgcolor': self.bgcolor, 'self.mcols': self.mcols,
+                'self.lwidth': self.lwidth,
+                'self.elwidth': self.elwidth,
+                'self.alwidth': self.alwidth,
+                'self.msize': self.msize, 'self.mwidth': self.mwidth,
+                'self.dowhite': self.dowhite,
+                'self.fgcolor': self.fgcolor, 'self.bgcolor': self.bgcolor,
+                'self.mcols': self.mcols,
                 'self.mcol1': self.mcol1, 'self.mcol2': self.mcol2,
                 'self.mcol3': self.mcol3, 'self.mcol4': self.mcol4,
-                'self.mcol5': self.mcol5, 'self.lcol1': self.lcol1,
-                'self.lcol2': self.lcol2, 'self.lcol3': self.lcol3,
-                'self.lcol4': self.lcol4, 'self.lcol5': self.lcol5,
-                'self.lcols': self.lcols, 'self.ldashes': self.ldashes,
-                'self.llxbbox': self.llxbbox,
-                'self.llybbox': self.llybbox, 'self.llrspace': self.llrspace,
-                'self.llcspace': self.llcspace,
+                'self.mcol5': self.mcol5,
+                'self.lcols': self.lcols,
+                'self.lcol1': self.lcol1, 'self.lcol2': self.lcol2,
+                'self.lcol3': self.lcol3, 'self.lcol4': self.lcol4,
+                'self.lcol5': self.lcol5,
+                'self.ldashes': self.ldashes,
+                'self.llxbbox': self.llxbbox, 'self.llybbox': self.llybbox,
+                'self.llrspace': self.llrspace, 'self.llcspace': self.llcspace,
                 'self.llhtextpad': self.llhtextpad,
                 'self.llhlength': self.llhlength,
                 'self.frameon': self.frameon,

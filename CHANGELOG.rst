@@ -7,6 +7,8 @@ v1.1 (??? 2024)
       `mcPlot`.
     * Set `dxabc` and `dyabc` to upper left corner of plot in
       `mcPlot`.
+    * Use same left, right, bottom, top as GridSpec of Matplotlib in
+      `mcPlot`.
 
 v1.0 (Oct 2024)
     * First standalone release of ``mplot``, extracting all plotting

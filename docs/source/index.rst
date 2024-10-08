@@ -197,6 +197,20 @@ figures to the backend with the method :meth:`plot_save(fig)`. Any
 open backend such as a PDF file will be closed with the method
 :meth:`close`.
 
+The script could be called giving the name of an input file **input.csv** on
+the command line, which is then accessible through **self.cargs**:
+
+.. code-block:: bash
+
+   python mcplot_basic.py -t png -p basic_ input.csv
+
+Everytime **self.plot_save(fig)** is called, a figure is written to
+the output file. A PDF file can have multiple pages. PNG files are
+individual plots. For PNG files, only the start of the output files is
+thus given and this will be extended as
+**f'{start}{self.ifig:04d}.png'**. The example would give the output
+file **basic_0001.png**.
+
 
 Class variables
 ---------------
@@ -207,7 +221,9 @@ use the defined variables **self.lcol1** for line color number 1,
 width of the plotted line.
 
 The are a large number of useful class variables defined, see
-:meth:`~mcplot.class_mcplot.mcPlot.set_layout_options`:
+:meth:`~mcplot.class_mcplot.mcPlot.set_layout_options`. They can be
+used in all plotting methods such as different plotting functions to
+make plots have the same appearance.
 
 **Lines and markers**
 
@@ -222,7 +238,8 @@ The are a large number of useful class variables defined, see
   `NCL`_, for example.
 * The foreground color (**fgcolor**) is set to black, and the
   background color (**bgcolor**) is set to white. This is inverted
-  with the **-w** command line option.
+  with the **-w** command line option, which sets the variable
+  **dowhite**.
 * Linewidth of a plotting line (**lwidth**) is set to 1.5 while widths
   of axes (**alwidth**) and errorbars (**elwidth**) are set to 1.
 * Marker size (**msize**) is set to 1.5 while the width of the marker
@@ -233,6 +250,12 @@ The are a large number of useful class variables defined, see
 **Text**
 
 * Textsize (**textsize**) is set to 12 pt.
+* The command line option **-s** sets the variable **serif** to True
+  and a serif ouput font is used.
+* The command line option **-u** sets the variable **usetex** to True,
+  which can be used with any text in Matplotlib. It then uses LaTeX
+  for all text handling.
+  
 * **dxabc** and **dyabc** are used to place a), b), c), ... on the
   plot using :func:`~mcplot.text2plot.abc2plot`. These are 0-1 between
   axis minimum and maximum. They are set to 0.05 and 0.9,
@@ -248,59 +271,49 @@ The module :mod:`mcplot` includes a function
 * **nrow** is set to 3 by default and **ncol** to 2, which gives six
   plotting panels on a DIN A4 page.
 * The further class variables **left** (0.125), **right** (0.9),
-  **bottom** (0.1), **top** (0.1), **hspace** (0.1), and **vspace**
+  **bottom** (0.11), **top** (0.88), **hspace** (0.1), and **vspace**
   (0.1) are fractions of the figure width and height and the same as
-  the older defaults in `Matplotlib`_, except for hspace and vspace,
-  which were halved. The latter are abbreviations for `horizontal
-  space` and `vertical space` between subplots, which is more mnemonic
-  for me than `wspace` for `width reserved for space between subplots`
-  and `hspace` for `height reserved for space between subplots` as in
-  :class:`matplotlib.gridspec.GridSpec`.
+  the current `Matplotlib`_ defaults for subplots, except for hspace
+  and vspace, which were halved. The latter are abbreviations for
+  `horizontal space` and `vertical space` between subplots, which is
+  more mnemonic for me than `wspace` for `width reserved for space
+  between subplots` and `hspace` for `height reserved for space
+  between subplots` as in :class:`matplotlib.gridspec.GridSpec`.
+* It is good practice to increase the figure counter **ifig** if
+  opening a new figure.
 
+**Legend**
 
-To be continued ...
+There are class variables for the main keywords of
+:meth:`matplotlib.axes.Axes.legend`. They normally start with **ll**
+and are somehow mnemonic to me:
 
+* The length of lines in the legend (**llhlength**) is set to 1.5, and
+  the padding to the text (**llhtextpad**) is set to 0.4.
+* The vertical space between label rows (**llrspace**) is set to 0.,
+  and the horizontal space between label columns (**llcspace**) is set
+  to 1.
+* **frameon** for the frame around the legend is set to False.
+* **llxbbox**, and **llybbox** can be given for the `bbox_to_anchor`
+  keyword, which together with `loc` allows arbitrary placement of the
+  legend.
 
+**Savefig**
 
-self.llxbbox
-x-anchor legend bounding box
-self.llybbox
-y-anchor legend bounding box
-self.llrspace
-spacing between rows in legend
-self.llcspace
-spacing between columns in legend
-self.llhtextpad
-pad between the legend handle and text
-self.llhlength
-length of the legend handles
-self.frameon
-if True: draw a frame around the legend. If None: use rc
-self.dpi
-DPI of non-vector figure output
-self.transparent
-True for transparent background in figure
-self.bbox_inches
-Bbox in inches. If ‘tight’, try to figure out the tight bbox of the figure
-self.pad_inches
-Amount of padding when bbox_inches is ‘tight’
-self.serif = False
-self.usetex = False
-self.ifig = 0
+Some keywords of :meth:`matplotlib.figure.Figure.savefig` are given as
+class variables.
 
-After fiddling with colours, it is a good idea to call
-**set_matplotlib_rcparams()** again, which sets some defaults such as
-the colour of the boxplot whiskers of which one might not have thought
-themselves.
+* The command line options **--dpi** and **--transparent** set the
+  equivalent keywords in
+  :meth:`~matplotlib.figure.Figure.savefig`. They are set by default
+  to 300 and False, respectively.
+* **bbox_inches** is set to 'tight' with a very small padding
+  **pad_inches** of 0.035.
 
-The script could be called giving the name of an input file **input.csv** on
-the command line, which is then accessible through **self.cargs**:
-
-.. code-block:: bash
-
-   python mcplot_basic.py -t png -p basic_ input.csv
-
-Everytime **self.plot_save(fig)** is called, a figure is written to the output file. A PDF file can have multiple pages. For PNG files, only the start of the output files is given and will be extended by **f'{start}{self.ifig:04d}.png'**. The example would give the outputfile **basic_0001.png**.
+After fiddling with any of the class variables, it is a good idea to
+call **set_matplotlib_rcparams()** again (see example below), which
+sets some defaults such as the color of the boxplot whiskers of which
+one might not have thought themselves.
 
 
 More command line options
@@ -311,7 +324,7 @@ You can replace the method
 :class:`~mcplot.class_mcplot.mcPlot` with your own method if you want
 completely different command line arguments. Or you can extend the
 existing arguments using the `parents`_ keyword to Python's
-:class:`argpase.ArgumentParser`. For the latter, you simply create an
+:class:`argpase.ArgumentParser`. For the latter, you create an
 :class:`~argpase.ArgumentParser` with the extra arguments you want and
 then parse it to :class:`~mcplot.class_mcplot.mcPlot` with the
 **parents** keyword:
@@ -342,6 +355,79 @@ then parse it to :class:`~mcplot.class_mcplot.mcPlot` with the
 You have to set **add_help=False** in the instance of
 :class:`argpase.ArgumentParser` because otherwise :class:`~argpase.ArgumentParser`
 will see two **-h/--help** options and raise an error.
+
+
+A commented extended example
+----------------------------
+
+ToDo
+
+.. code-block:: python
+
+   import numpy as np
+   from mcplot import mcPlot
+
+   class myPlot(mcPlot):
+
+       def read_data(self):
+           # reading one file would use self.cargs[0] such as
+           # self.dat = np.loadtxt(self.cargs[0])
+           self.dat = np.arange(100)
+
+       def plot_fig_1(self):
+           import matplotlib.pyplot as plt
+
+           # make axes
+           self.ifig += 1
+           fig = plt.figure(self.ifig)
+           ax = fig.add_axes([0.125, 0.667, 0.3375, 0.233])
+
+           # plot
+           xx = self.dat / float(self.dat.size) * 4. * np.pi
+           larr = ax.plot(xx, np.sin(xx))
+           plt.setp(larr[-1], linestyle='-', linewidth=self.lwidth,
+                    marker='', color=self.lcol1)
+
+           # show plot or write in file
+           self.plot_save(fig)
+
+       def plot_fig_2(self):
+           import matplotlib.pyplot as plt
+
+           self.ifig += 1
+           fig = plt.figure(self.ifig)
+           ax = fig.add_axes([0.125, 0.667, 0.3375, 0.233])
+
+           xx = self.dat / float(self.dat.size) * 4. * np.pi
+           larr = ax.plot(xx, np.cos(xx))
+           plt.setp(larr[-1], linestyle='-', linewidth=self.lwidth,
+                    marker='', color=self.lcol2)
+
+           self.plot_save(fig)
+
+
+   if __name__ == '__main__':
+       import argparse
+
+       desc = 'Example to add missing value command line argument'
+       argstr = 'input_file'
+
+       parser = argparse.ArgumentParser(
+           formatter_class=argparse.RawDescriptionHelpFormatter,
+           add_help=False)
+       miss = -9999.
+       parser.add_argument('-m', '--missing', action='store',
+                           default=miss, dest='miss', type=float,
+                           metavar='missing_value',
+                           help=(f'Data treated as missing value in
+                                 f'input file (default: {miss}).'))
+
+       iplot = PlotIt(desc, argstr, parents=parser)
+       iplot.read_data()
+       iplot.plot_fig_1()
+       iplot.close()
+
+
 
 
 Installation

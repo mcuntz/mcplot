@@ -389,6 +389,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-the-plotting-class">Extending the plotting class</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-variables">Class variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-command-line-options">More command line options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-commented-extended-example">A commented extended example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 </ul>
@@ -576,6 +577,17 @@ methods <code class="xref py py-meth docutils literal notranslate"><span class="
 figures to the backend with the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_save(fig)()</span></code>. Any
 open backend such as a PDF file will be closed with the method
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code>.</p>
+<p>The script could be called giving the name of an input file <strong>input.csv</strong> on
+the command line, which is then accessible through <strong>self.cargs</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_basic.py<span class="w"> </span>-t<span class="w"> </span>png<span class="w"> </span>-p<span class="w"> </span>basic_<span class="w"> </span>input.csv
+</pre></div>
+</div>
+<p>Everytime <strong>self.plot_save(fig)</strong> is called, a figure is written to
+the output file. A PDF file can have multiple pages. PNG files are
+individual plots. For PNG files, only the start of the output files is
+thus given and this will be extended as
+<strong>f’{start}{self.ifig:04d}.png’</strong>. The example would give the output
+file <strong>basic_0001.png</strong>.</p>
 </section>
 <section id="class-variables">
 <h2>Class variables<a class="headerlink" href="#class-variables" title="Link to this heading">#</a></h2>
@@ -584,7 +596,9 @@ use the defined variables <strong>self.lcol1</strong> for line color number 1,
 <strong>self.lcol2</strong> for line color number 2, and <strong>self.lwidth</strong> for the
 width of the plotted line.</p>
 <p>The are a large number of useful class variables defined, see
-<a class="reference internal" href="class_mcplot.html#id5" title="mcplot.class_mcplot.mcPlot.set_layout_options"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_layout_options()</span></code></a>:</p>
+<a class="reference internal" href="class_mcplot.html#id5" title="mcplot.class_mcplot.mcPlot.set_layout_options"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_layout_options()</span></code></a>. They can be
+used in all plotting methods such as different plotting functions to
+make plots have the same appearance.</p>
 <p><strong>Lines and markers</strong></p>
 <ul class="simple">
 <li><p>There are five line colors defined: <strong>lcol1</strong> to <strong>lcol5</strong> (dark
@@ -598,7 +612,8 @@ sand, beige, yellow, orange, light red, dark red), which uses
 <a class="reference external" href="https://www.ncl.ucar.edu">NCL</a>, for example.</p></li>
 <li><p>The foreground color (<strong>fgcolor</strong>) is set to black, and the
 background color (<strong>bgcolor</strong>) is set to white. This is inverted
-with the <strong>-w</strong> command line option.</p></li>
+with the <strong>-w</strong> command line option, which sets the variable
+<strong>dowhite</strong>.</p></li>
 <li><p>Linewidth of a plotting line (<strong>lwidth</strong>) is set to 1.5 while widths
 of axes (<strong>alwidth</strong>) and errorbars (<strong>elwidth</strong>) are set to 1.</p></li>
 <li><p>Marker size (<strong>msize</strong>) is set to 1.5 while the width of the marker
@@ -609,6 +624,11 @@ dash-dot-dash, dash-dot-dot-dash, …).</p></li>
 <p><strong>Text</strong></p>
 <ul class="simple">
 <li><p>Textsize (<strong>textsize</strong>) is set to 12 pt.</p></li>
+<li><p>The command line option <strong>-s</strong> sets the variable <strong>serif</strong> to True
+and a serif ouput font is used.</p></li>
+<li><p>The command line option <strong>-u</strong> sets the variable <strong>usetex</strong> to True,
+which can be used with any text in Matplotlib. It then uses LaTeX
+for all text handling.</p></li>
 <li><p><strong>dxabc</strong> and <strong>dyabc</strong> are used to place a), b), c), … on the
 plot using <a class="reference internal" href="text2plot.html#mcplot.text2plot.abc2plot" title="mcplot.text2plot.abc2plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">abc2plot()</span></code></a>. These are 0-1 between
 axis minimum and maximum. They are set to 0.05 and 0.9,
@@ -623,51 +643,47 @@ resp., i.e. default is the upper left corner.</p></li>
 <li><p><strong>nrow</strong> is set to 3 by default and <strong>ncol</strong> to 2, which gives six
 plotting panels on a DIN A4 page.</p></li>
 <li><p>The further class variables <strong>left</strong> (0.125), <strong>right</strong> (0.9),
-<strong>bottom</strong> (0.1), <strong>top</strong> (0.1), <strong>hspace</strong> (0.1), and <strong>vspace</strong>
+<strong>bottom</strong> (0.11), <strong>top</strong> (0.88), <strong>hspace</strong> (0.1), and <strong>vspace</strong>
 (0.1) are fractions of the figure width and height and the same as
-the older defaults in <a class="reference external" href="https://matplotlib.org/">Matplotlib</a>, except for hspace and vspace,
-which were halved. The latter are abbreviations for <cite>horizontal
-space</cite> and <cite>vertical space</cite> between subplots, which is more mnemonic
-for me than <cite>wspace</cite> for <cite>width reserved for space between subplots</cite>
-and <cite>hspace</cite> for <cite>height reserved for space between subplots</cite> as in
-<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.gridspec.GridSpec.html#matplotlib.gridspec.GridSpec" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.gridspec.GridSpec</span></code></a>.</p></li>
+the current <a class="reference external" href="https://matplotlib.org/">Matplotlib</a> defaults for subplots, except for hspace
+and vspace, which were halved. The latter are abbreviations for
+<cite>horizontal space</cite> and <cite>vertical space</cite> between subplots, which is
+more mnemonic for me than <cite>wspace</cite> for <cite>width reserved for space
+between subplots</cite> and <cite>hspace</cite> for <cite>height reserved for space
+between subplots</cite> as in <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.gridspec.GridSpec.html#matplotlib.gridspec.GridSpec" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.gridspec.GridSpec</span></code></a>.</p></li>
+<li><p>It is good practice to increase the figure counter <strong>ifig</strong> if
+opening a new figure.</p></li>
 </ul>
-<p>To be continued …</p>
-<p>self.llxbbox
-x-anchor legend bounding box
-self.llybbox
-y-anchor legend bounding box
-self.llrspace
-spacing between rows in legend
-self.llcspace
-spacing between columns in legend
-self.llhtextpad
-pad between the legend handle and text
-self.llhlength
-length of the legend handles
-self.frameon
-if True: draw a frame around the legend. If None: use rc
-self.dpi
-DPI of non-vector figure output
-self.transparent
-True for transparent background in figure
-self.bbox_inches
-Bbox in inches. If ‘tight’, try to figure out the tight bbox of the figure
-self.pad_inches
-Amount of padding when bbox_inches is ‘tight’
-self.serif = False
-self.usetex = False
-self.ifig = 0</p>
-<p>After fiddling with colours, it is a good idea to call
-<strong>set_matplotlib_rcparams()</strong> again, which sets some defaults such as
-the colour of the boxplot whiskers of which one might not have thought
-themselves.</p>
-<p>The script could be called giving the name of an input file <strong>input.csv</strong> on
-the command line, which is then accessible through <strong>self.cargs</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_basic.py<span class="w"> </span>-t<span class="w"> </span>png<span class="w"> </span>-p<span class="w"> </span>basic_<span class="w"> </span>input.csv
-</pre></div>
-</div>
-<p>Everytime <strong>self.plot_save(fig)</strong> is called, a figure is written to the output file. A PDF file can have multiple pages. For PNG files, only the start of the output files is given and will be extended by <strong>f’{start}{self.ifig:04d}.png’</strong>. The example would give the outputfile <strong>basic_0001.png</strong>.</p>
+<p><strong>Legend</strong></p>
+<p>There are class variables for the main keywords of
+<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.legend.html#matplotlib.axes.Axes.legend" title="(in Matplotlib v3.9.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">matplotlib.axes.Axes.legend()</span></code></a>. They normally start with <strong>ll</strong>
+and are somehow mnemonic to me:</p>
+<ul class="simple">
+<li><p>The length of lines in the legend (<strong>llhlength</strong>) is set to 1.5, and
+the padding to the text (<strong>llhtextpad</strong>) is set to 0.4.</p></li>
+<li><p>The vertical space between label rows (<strong>llrspace</strong>) is set to 0.,
+and the horizontal space between label columns (<strong>llcspace</strong>) is set
+to 1.</p></li>
+<li><p><strong>frameon</strong> for the frame around the legend is set to False.</p></li>
+<li><p><strong>llxbbox</strong>, and <strong>llybbox</strong> can be given for the <cite>bbox_to_anchor</cite>
+keyword, which together with <cite>loc</cite> allows arbitrary placement of the
+legend.</p></li>
+</ul>
+<p><strong>Savefig</strong></p>
+<p>Some keywords of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.savefig.html#matplotlib.figure.Figure.savefig" title="(in Matplotlib v3.9.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">matplotlib.figure.Figure.savefig()</span></code></a> are given as
+class variables.</p>
+<ul class="simple">
+<li><p>The command line options <strong>–dpi</strong> and <strong>–transparent</strong> set the
+equivalent keywords in
+<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.savefig.html#matplotlib.figure.Figure.savefig" title="(in Matplotlib v3.9.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">savefig()</span></code></a>. They are set by default
+to 300 and False, respectively.</p></li>
+<li><p><strong>bbox_inches</strong> is set to ‘tight’ with a very small padding
+<strong>pad_inches</strong> of 0.035.</p></li>
+</ul>
+<p>After fiddling with any of the class variables, it is a good idea to
+call <strong>set_matplotlib_rcparams()</strong> again (see example below), which
+sets some defaults such as the color of the boxplot whiskers of which
+one might not have thought themselves.</p>
 </section>
 <section id="more-command-line-options">
 <h2>More command line options<a class="headerlink" href="#more-command-line-options" title="Link to this heading">#</a></h2>
@@ -676,7 +692,7 @@ the command line, which is then accessible through <strong>self.cargs</strong>:<
 <a class="reference internal" href="class_mcplot.html#mcplot.class_mcplot.mcPlot" title="mcplot.class_mcplot.mcPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">mcPlot</span></code></a> with your own method if you want
 completely different command line arguments. Or you can extend the
 existing arguments using the <a class="reference external" href="https://docs.python.org/3/library/argparse.html#parents">parents</a> keyword to Python’s
-<code class="xref py py-class docutils literal notranslate"><span class="pre">argpase.ArgumentParser</span></code>. For the latter, you simply create an
+<code class="xref py py-class docutils literal notranslate"><span class="pre">argpase.ArgumentParser</span></code>. For the latter, you create an
 <code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code> with the extra arguments you want and
 then parse it to <a class="reference internal" href="class_mcplot.html#mcplot.class_mcplot.mcPlot" title="mcplot.class_mcplot.mcPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">mcPlot</span></code></a> with the
 <strong>parents</strong> keyword:</p>
@@ -705,6 +721,74 @@ then parse it to <a class="reference internal" href="class_mcplot.html#mcplot.cl
 <p>You have to set <strong>add_help=False</strong> in the instance of
 <code class="xref py py-class docutils literal notranslate"><span class="pre">argpase.ArgumentParser</span></code> because otherwise <code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code>
 will see two <strong>-h/–help</strong> options and raise an error.</p>
+</section>
+<section id="a-commented-extended-example">
+<h2>A commented extended example<a class="headerlink" href="#a-commented-extended-example" title="Link to this heading">#</a></h2>
+<p>ToDo</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">mcPlot</span>
+
+<span class="k">class</span> <span class="nc">myPlot</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># reading one file would use self.cargs[0] such as</span>
+        <span class="c1"># self.dat = np.loadtxt(self.cargs[0])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">plot_fig_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+        <span class="c1"># make axes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ifig</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.125</span><span class="p">,</span> <span class="mf">0.667</span><span class="p">,</span> <span class="mf">0.3375</span><span class="p">,</span> <span class="mf">0.233</span><span class="p">])</span>
+
+        <span class="c1"># plot</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="mf">4.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+        <span class="n">larr</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lwidth</span><span class="p">,</span>
+                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span><span class="p">)</span>
+
+        <span class="c1"># show plot or write in file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_save</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">plot_fig_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ifig</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.125</span><span class="p">,</span> <span class="mf">0.667</span><span class="p">,</span> <span class="mf">0.3375</span><span class="p">,</span> <span class="mf">0.233</span><span class="p">])</span>
+
+        <span class="n">xx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="mf">4.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+        <span class="n">larr</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lwidth</span><span class="p">,</span>
+                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcol2</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_save</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">argparse</span>
+
+    <span class="n">desc</span> <span class="o">=</span> <span class="s1">&#39;Example to add missing value command line argument&#39;</span>
+    <span class="n">argstr</span> <span class="o">=</span> <span class="s1">&#39;input_file&#39;</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
+        <span class="n">add_help</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">miss</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9999.</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-m&#39;</span><span class="p">,</span> <span class="s1">&#39;--missing&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="n">miss</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;miss&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+                        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;missing_value&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data treated as missing value in</span>
+                              <span class="sa">f</span><span class="s1">&#39;input file (default: </span><span class="si">{</span><span class="n">miss</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">))</span>
+
+    <span class="n">iplot</span> <span class="o">=</span> <span class="n">PlotIt</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">argstr</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">parser</span><span class="p">)</span>
+    <span class="n">iplot</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
+    <span class="n">iplot</span><span class="o">.</span><span class="n">plot_fig_1</span><span class="p">()</span>
+    <span class="n">iplot</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
 </section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
@@ -782,6 +866,7 @@ for details.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-the-plotting-class">Extending the plotting class</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-variables">Class variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-command-line-options">More command line options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-commented-extended-example">A commented extended example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 </ul>

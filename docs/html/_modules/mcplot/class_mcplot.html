@@ -369,9 +369,11 @@ document.write(`
 <span class="sd">      because they come with matplotlib, May 2024, Matthias Cuntz</span>
 <span class="sd">    * parents argument to ArgumentParser, Jul 2024, Matthias Cuntz</span>
 <span class="sd">    * Rename to class_mcplot.py, Oct 2024, Matthias Cuntz</span>
-<span class="sd">    * Reorder ldashes from little to more dits between dashes,</span>
+<span class="sd">    * Reorder ldashes from little to more dots between dashes,</span>
 <span class="sd">      Oct 2024, Matthias Cuntz</span>
 <span class="sd">    * set dxabc and dyabc to upper left corner of plot,</span>
+<span class="sd">      Oct 2024, Matthias Cuntz</span>
+<span class="sd">    * Use same left, right, bottom, top as GridSpec of Matplotlib,</span>
 <span class="sd">      Oct 2024, Matthias Cuntz</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
@@ -821,8 +823,8 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span>     <span class="o">=</span> <span class="mi">2</span>     <span class="c1"># # of columns of subplots per figure</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">left</span>     <span class="o">=</span> <span class="mf">0.125</span>  <span class="c1"># left space on page</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">right</span>    <span class="o">=</span> <span class="mf">0.9</span>   <span class="c1"># right space on page</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span>   <span class="o">=</span> <span class="mf">0.1</span>   <span class="c1"># lower space on page</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">top</span>      <span class="o">=</span> <span class="mf">0.9</span>   <span class="c1"># upper space on page</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span>   <span class="o">=</span> <span class="mf">0.11</span>  <span class="c1"># lower space on page</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top</span>      <span class="o">=</span> <span class="mf">0.88</span>  <span class="c1"># upper space on page</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hspace</span>   <span class="o">=</span> <span class="mf">0.1</span>   <span class="c1"># x-space between subplots</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vspace</span>   <span class="o">=</span> <span class="mf">0.1</span>   <span class="c1"># y-space between subplots</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">textsize</span> <span class="o">=</span> <span class="mi">12</span>    <span class="c1"># standard text size</span>
@@ -1257,7 +1259,10 @@ document.write(`
 <div class="viewcode-block" id="mcPlot.plot_start">
 <a class="viewcode-back" href="../../class_mcplot.html#mcplot.class_mcplot.mcPlot.plot_start">[docs]</a>
     <span class="k">def</span> <span class="nf">plot_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for plot_begin()&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Alias for plot_begin()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">plot_begin</span><span class="p">()</span></div>
 
 
@@ -1398,28 +1403,40 @@ document.write(`
 <div class="viewcode-block" id="mcPlot.plot_stop">
 <a class="viewcode-back" href="../../class_mcplot.html#mcplot.class_mcplot.mcPlot.plot_stop">[docs]</a>
     <span class="k">def</span> <span class="nf">plot_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for plot_end()&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Alias for plot_end()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">plot_end</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="mcPlot.plot_close">
 <a class="viewcode-back" href="../../class_mcplot.html#mcplot.class_mcplot.mcPlot.plot_close">[docs]</a>
     <span class="k">def</span> <span class="nf">plot_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for plot_end()&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Alias for plot_end()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">plot_end</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="mcPlot.close">
 <a class="viewcode-back" href="../../class_mcplot.html#mcplot.class_mcplot.mcPlot.close">[docs]</a>
     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for plot_end()&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Alias for plot_end()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">plot_end</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="mcPlot.end">
 <a class="viewcode-back" href="../../class_mcplot.html#mcplot.class_mcplot.mcPlot.end">[docs]</a>
     <span class="k">def</span> <span class="nf">end</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for plot_end()&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Alias for plot_end()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">plot_end</span><span class="p">()</span></div>
 
 
@@ -1450,20 +1467,23 @@ document.write(`
                 <span class="s1">&#39;self.hspace&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hspace</span><span class="p">,</span> <span class="s1">&#39;self.vspace&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vspace</span><span class="p">,</span>
                 <span class="s1">&#39;self.textsize&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">textsize</span><span class="p">,</span>
                 <span class="s1">&#39;self.dxabc&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="s1">&#39;self.dyabc&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span>
-                <span class="s1">&#39;self.lwidth&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lwidth</span><span class="p">,</span> <span class="s1">&#39;self.elwidth&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">elwidth</span><span class="p">,</span>
-                <span class="s1">&#39;self.alwidth&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">alwidth</span><span class="p">,</span> <span class="s1">&#39;self.msize&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">msize</span><span class="p">,</span>
-                <span class="s1">&#39;self.mwidth&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mwidth</span><span class="p">,</span>
-                <span class="s1">&#39;self.dowhite&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dowhite</span><span class="p">,</span> <span class="s1">&#39;self.fgcolor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fgcolor</span><span class="p">,</span>
-                <span class="s1">&#39;self.bgcolor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bgcolor</span><span class="p">,</span> <span class="s1">&#39;self.mcols&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span><span class="p">,</span>
+                <span class="s1">&#39;self.lwidth&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lwidth</span><span class="p">,</span>
+                <span class="s1">&#39;self.elwidth&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">elwidth</span><span class="p">,</span>
+                <span class="s1">&#39;self.alwidth&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">alwidth</span><span class="p">,</span>
+                <span class="s1">&#39;self.msize&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">msize</span><span class="p">,</span> <span class="s1">&#39;self.mwidth&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mwidth</span><span class="p">,</span>
+                <span class="s1">&#39;self.dowhite&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dowhite</span><span class="p">,</span>
+                <span class="s1">&#39;self.fgcolor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fgcolor</span><span class="p">,</span> <span class="s1">&#39;self.bgcolor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bgcolor</span><span class="p">,</span>
+                <span class="s1">&#39;self.mcols&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span><span class="p">,</span>
                 <span class="s1">&#39;self.mcol1&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol1</span><span class="p">,</span> <span class="s1">&#39;self.mcol2&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span><span class="p">,</span>
                 <span class="s1">&#39;self.mcol3&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol3</span><span class="p">,</span> <span class="s1">&#39;self.mcol4&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol4</span><span class="p">,</span>
-                <span class="s1">&#39;self.mcol5&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol5</span><span class="p">,</span> <span class="s1">&#39;self.lcol1&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span><span class="p">,</span>
-                <span class="s1">&#39;self.lcol2&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol2</span><span class="p">,</span> <span class="s1">&#39;self.lcol3&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol3</span><span class="p">,</span>
-                <span class="s1">&#39;self.lcol4&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol4</span><span class="p">,</span> <span class="s1">&#39;self.lcol5&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol5</span><span class="p">,</span>
-                <span class="s1">&#39;self.lcols&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcols</span><span class="p">,</span> <span class="s1">&#39;self.ldashes&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ldashes</span><span class="p">,</span>
-                <span class="s1">&#39;self.llxbbox&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">llxbbox</span><span class="p">,</span>
-                <span class="s1">&#39;self.llybbox&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">llybbox</span><span class="p">,</span> <span class="s1">&#39;self.llrspace&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">llrspace</span><span class="p">,</span>
-                <span class="s1">&#39;self.llcspace&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">llcspace</span><span class="p">,</span>
+                <span class="s1">&#39;self.mcol5&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol5</span><span class="p">,</span>
+                <span class="s1">&#39;self.lcols&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcols</span><span class="p">,</span>
+                <span class="s1">&#39;self.lcol1&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span><span class="p">,</span> <span class="s1">&#39;self.lcol2&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol2</span><span class="p">,</span>
+                <span class="s1">&#39;self.lcol3&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol3</span><span class="p">,</span> <span class="s1">&#39;self.lcol4&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol4</span><span class="p">,</span>
+                <span class="s1">&#39;self.lcol5&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol5</span><span class="p">,</span>
+                <span class="s1">&#39;self.ldashes&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ldashes</span><span class="p">,</span>
+                <span class="s1">&#39;self.llxbbox&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">llxbbox</span><span class="p">,</span> <span class="s1">&#39;self.llybbox&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">llybbox</span><span class="p">,</span>
+                <span class="s1">&#39;self.llrspace&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">llrspace</span><span class="p">,</span> <span class="s1">&#39;self.llcspace&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">llcspace</span><span class="p">,</span>
                 <span class="s1">&#39;self.llhtextpad&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">llhtextpad</span><span class="p">,</span>
                 <span class="s1">&#39;self.llhlength&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">llhlength</span><span class="p">,</span>
                 <span class="s1">&#39;self.frameon&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">frameon</span><span class="p">,</span>
