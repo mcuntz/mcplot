@@ -21,12 +21,12 @@ The following functions are provided
    argsort
 
 History
-    * Written Dec 2014 by Matthias Cuntz (mc (at) macu (dot) de)
-    * Added argmin, argmax, Jul 2019, Matthias Cuntz
-    * Using numpy docstring format, extending examples from numpy docstrings,
-      May 2020, Matthias Cuntz
-    * More consistent docstrings, Jan 2022, Matthias Cuntz
-    * Support pandas.Series, Jun 2023, Matthias Cuntz
+   * Written Dec 2014 by Matthias Cuntz (mc (at) macu (dot) de)
+   * Added argmin, argmax, Jul 2019, Matthias Cuntz
+   * Using numpy docstring format, extending examples from numpy docstrings,
+     May 2020, Matthias Cuntz
+   * More consistent docstrings, Jan 2022, Matthias Cuntz
+   * Support pandas.Series, Jun 2023, Matthias Cuntz
 
 """
 import numpy as np

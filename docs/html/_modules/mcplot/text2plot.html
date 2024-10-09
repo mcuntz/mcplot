@@ -146,7 +146,12 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../index.html">mcplot guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">mcplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../api.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../argsort.html">argmax/argmin/argsort</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../color.html">Color module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -169,8 +174,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../text2plot.html">text2plot</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
 </ul>
 
     </div>
@@ -330,7 +333,7 @@ document.write(`
 <span class="sd">Germany, and continued while at Institut National de Recherche pour</span>
 <span class="sd">l&#39;Agriculture, l&#39;Alimentation et l&#39;Environnement (INRAE), Nancy, France.</span>
 
-<span class="sd">:copyright: Copyright 2014-2022 Matthias Cuntz, see AUTHORS.rst for details.</span>
+<span class="sd">:copyright: Copyright 2014- Matthias Cuntz, see AUTHORS.rst for details.</span>
 <span class="sd">:license: MIT License, see LICENSE for details.</span>
 
 <span class="sd">.. moduleauthor:: Matthias Cuntz</span>
@@ -343,38 +346,39 @@ document.write(`
 <span class="sd">   signature2plot</span>
 
 <span class="sd">History</span>
-<span class="sd">    * Written Nov 2021 by Matthias Cuntz (mc (at) macu (dot) de)</span>
-<span class="sd">      combining abc2plot and signature2plot</span>
-<span class="sd">    * Written abc2plot, May 2012, Matthias Cuntz</span>
-<span class="sd">    * Added parenthesis option to abc2plot, Feb 2013, Arndt Piayda</span>
-<span class="sd">    * Ported to Python 3, Feb 2013, Matthias Cuntz</span>
-<span class="sd">    * Added opening and closing parentheses, brackets, braces,</span>
-<span class="sd">      Feb 2013, Matthias Cuntz</span>
-<span class="sd">    * Options usetex and mathrm, Feb 2013, Matthias Cuntz</span>
-<span class="sd">    * Options mathbf, large and making medium the default,</span>
-<span class="sd">      Feb 2013, Matthias Cuntz</span>
-<span class="sd">    * Added string option, Nov 2013, Matthias Cuntz</span>
-<span class="sd">    * Corrected bug in medium as default, Nov 2013, Matthias Cuntz</span>
-<span class="sd">    * Make usetex work with fontsize keyword of axis.text()</span>
-<span class="sd">      of matplotllib v1.1.0, Nov 2013, Matthias Cuntz</span>
-<span class="sd">    * Written signature2plot, Jan 2014, Matthias Cuntz</span>
-<span class="sd">    * Assert that small or large is set if medium is not None (abc2plot),</span>
-<span class="sd">      Feb 2014, Matthias Cuntz</span>
-<span class="sd">    * Replace horizontalalignment=&#39;left&#39; and verticalalignment=&#39;bottom&#39;</span>
-<span class="sd">      by kwargs mechanism (abc2plot), May 2014, Matthias Cuntz</span>
-<span class="sd">    * Added option italic (abc2plot), May 2014, Matthias Cuntz</span>
-<span class="sd">    * Added options xlarge, xxlarge, xsmall, xxsmall (abc2plot),</span>
-<span class="sd">      Oct 2015, Matthias Cuntz</span>
-<span class="sd">    * Make numpy docstring format (abc2plot), Nov 2020, Matthias Cuntz</span>
-<span class="sd">    * Ported into pyjams, Nov 2021, Matthias Cuntz</span>
-<span class="sd">    * dx, dy, and name mandatory parameters (signature2plot),</span>
-<span class="sd">      Nov 2020, Matthias Cuntz</span>
-<span class="sd">    * Change option name parenthesis -&gt; parentheses, Nov 2021, Matthias Cuntz</span>
-<span class="sd">    * Written text2plot, Nov 2021, Matthias Cuntz</span>
-<span class="sd">    * Use text2plot for signature2plot, Nov 2021, Matthias Cuntz</span>
-<span class="sd">    * Use text2plot for abc2plot, Nov 2021, Matthias Cuntz</span>
-<span class="sd">    * More consistent docstrings, Jan 2022, Matthias Cuntz</span>
-<span class="sd">    * Added upper keyword in abc2plot, Jun 2024, Matthias Cuntz</span>
+<span class="sd">   * Written Nov 2021 by Matthias Cuntz (mc (at) macu (dot) de)</span>
+<span class="sd">     combining abc2plot and signature2plot</span>
+<span class="sd">   * Written abc2plot, May 2012, Matthias Cuntz</span>
+<span class="sd">   * Added parenthesis option to abc2plot, Feb 2013, Arndt Piayda</span>
+<span class="sd">   * Ported to Python 3, Feb 2013, Matthias Cuntz</span>
+<span class="sd">   * Added opening and closing parentheses, brackets, braces,</span>
+<span class="sd">     Feb 2013, Matthias Cuntz</span>
+<span class="sd">   * Options usetex and mathrm, Feb 2013, Matthias Cuntz</span>
+<span class="sd">   * Options mathbf, large and making medium the default,</span>
+<span class="sd">     Feb 2013, Matthias Cuntz</span>
+<span class="sd">   * Added string option, Nov 2013, Matthias Cuntz</span>
+<span class="sd">   * Corrected bug in medium as default, Nov 2013, Matthias Cuntz</span>
+<span class="sd">   * Make usetex work with fontsize keyword of axis.text()</span>
+<span class="sd">     of matplotllib v1.1.0, Nov 2013, Matthias Cuntz</span>
+<span class="sd">   * Written signature2plot, Jan 2014, Matthias Cuntz</span>
+<span class="sd">   * Assert that small or large is set if medium is not None (abc2plot),</span>
+<span class="sd">     Feb 2014, Matthias Cuntz</span>
+<span class="sd">   * Replace horizontalalignment=&#39;left&#39; and verticalalignment=&#39;bottom&#39;</span>
+<span class="sd">     by kwargs mechanism (abc2plot), May 2014, Matthias Cuntz</span>
+<span class="sd">   * Added option italic (abc2plot), May 2014, Matthias Cuntz</span>
+<span class="sd">   * Added options xlarge, xxlarge, xsmall, xxsmall (abc2plot),</span>
+<span class="sd">     Oct 2015, Matthias Cuntz</span>
+<span class="sd">   * Make numpy docstring format (abc2plot), Nov 2020, Matthias Cuntz</span>
+<span class="sd">   * Ported into pyjams, Nov 2021, Matthias Cuntz</span>
+<span class="sd">   * dx, dy, and name mandatory parameters (signature2plot),</span>
+<span class="sd">     Nov 2020, Matthias Cuntz</span>
+<span class="sd">   * Change option name parenthesis -&gt; parentheses, Nov 2021, Matthias Cuntz</span>
+<span class="sd">   * Written text2plot, Nov 2021, Matthias Cuntz</span>
+<span class="sd">   * Use text2plot for signature2plot, Nov 2021, Matthias Cuntz</span>
+<span class="sd">   * Use text2plot for abc2plot, Nov 2021, Matthias Cuntz</span>
+<span class="sd">   * More consistent docstrings, Jan 2022, Matthias Cuntz</span>
+<span class="sd">   * Added upper keyword in abc2plot, Jun 2024, Matthias Cuntz</span>
+<span class="sd">   * Use f-strings and flake8 compliant, Oct 2024, Matthias Cuntz</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">time</span> <span class="k">as</span> <span class="nn">ptime</span>
@@ -659,11 +663,11 @@ document.write(`
     <span class="c1"># parentheses</span>
     <span class="k">if</span> <span class="n">iparentheses</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">parentheses</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;open&#39;</span><span class="p">:</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;(&#39;</span> <span class="o">+</span> <span class="n">t</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;(</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">&#39;</span>
         <span class="k">elif</span> <span class="n">parentheses</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;close&#39;</span><span class="p">:</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">)&#39;</span>
         <span class="k">elif</span> <span class="n">parentheses</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;both&#39;</span><span class="p">:</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;(&#39;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;(</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">)&#39;</span>
         <span class="k">elif</span> <span class="n">parentheses</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="k">else</span><span class="p">:</span>
@@ -672,11 +676,11 @@ document.write(`
 
     <span class="k">if</span> <span class="n">ibrackets</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">brackets</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;open&#39;</span><span class="p">:</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;[&#39;</span> <span class="o">+</span> <span class="n">t</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;[</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">t</span>
         <span class="k">elif</span> <span class="n">brackets</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;close&#39;</span><span class="p">:</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">]&#39;</span>
         <span class="k">elif</span> <span class="n">brackets</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;both&#39;</span><span class="p">:</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;[&#39;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;[</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">]&#39;</span>
         <span class="k">elif</span> <span class="n">brackets</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="k">else</span><span class="p">:</span>
@@ -713,7 +717,7 @@ document.write(`
                 <span class="n">t</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\mathit{&#39;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">t</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\mathrm{&#39;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$&#39;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;$&#39;</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="sa">fr</span><span class="s1">&#39;$</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">$&#39;</span>
 
     <span class="n">text2plot</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span>
               <span class="n">bold</span><span class="o">=</span><span class="n">bold</span><span class="p">,</span> <span class="n">italic</span><span class="o">=</span><span class="n">italic</span><span class="p">,</span>
@@ -764,9 +768,9 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">year</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ptime</span><span class="o">.</span><span class="n">localtime</span><span class="p">()</span><span class="o">.</span><span class="n">tm_year</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">itext</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
-        <span class="n">otext</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$\copyright$ &#39;</span> <span class="o">+</span> <span class="n">year</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">itext</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">otext</span> <span class="o">=</span> <span class="sa">fr</span><span class="s1">&#39;$\copyright$ </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">itext</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">otext</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$\copyright$ &#39;</span> <span class="o">+</span> <span class="n">year</span>
+        <span class="n">otext</span> <span class="o">=</span> <span class="sa">fr</span><span class="s1">&#39;$\copyright$ </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">&#39;</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;horizontalalignment&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;ha&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">):</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;horizontalalignment&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;right&#39;</span>
@@ -778,130 +782,6 @@ document.write(`
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">doctest</span>
     <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">optionflags</span><span class="o">=</span><span class="n">doctest</span><span class="o">.</span><span class="n">NORMALIZE_WHITESPACE</span><span class="p">)</span>
-
-    <span class="c1"># outtype = &#39;&#39;</span>
-    <span class="c1"># # outtype = &#39;pdf&#39;</span>
-    <span class="c1"># pdffile = &#39;text2plot.pdf&#39;</span>
-    <span class="c1"># usetex  = True</span>
-    <span class="c1"># textsize = 12</span>
-
-    <span class="c1"># import matplotlib as mpl</span>
-    <span class="c1"># if (outtype == &#39;pdf&#39;):</span>
-    <span class="c1">#     mpl.use(&#39;PDF&#39;)  # set directly after import matplotlib</span>
-    <span class="c1">#     import matplotlib.pyplot as plt</span>
-    <span class="c1">#     from matplotlib.backends.backend_pdf import PdfPages</span>
-    <span class="c1">#     # Customize: http://matplotlib.sourceforge.net/users/customizing.html</span>
-    <span class="c1">#     mpl.rc(&#39;ps&#39;, papersize=&#39;a4&#39;, usedistiller=&#39;xpdf&#39;)  # ps2pdf</span>
-    <span class="c1">#     mpl.rc(&#39;figure&#39;, figsize=(8.27, 11.69))  # a4 portrait</span>
-    <span class="c1">#     if usetex:</span>
-    <span class="c1">#         mpl.rc(&#39;text&#39;, usetex=True)</span>
-    <span class="c1"># else:</span>
-    <span class="c1">#     import matplotlib.pyplot as plt</span>
-    <span class="c1">#     mpl.rc(&#39;figure&#39;, figsize=(4./5.*8.27, 4./5.*11.69))  # a4 portrait</span>
-    <span class="c1"># mpl.rc(&#39;path&#39;, simplify=False)  # do not remove</span>
-
-    <span class="c1"># if (outtype == &#39;pdf&#39;):</span>
-    <span class="c1">#     print(&#39;Plot PDF &#39;, pdffile)</span>
-    <span class="c1">#     pdf_pages = PdfPages(pdffile)</span>
-    <span class="c1"># else:</span>
-    <span class="c1">#     print(&#39;Plot X&#39;)</span>
-    <span class="c1"># figsize = mpl.rcParams[&#39;figure.figsize&#39;]</span>
-
-    <span class="c1"># # --------------------------------------------------------------</span>
-    <span class="c1"># # text2plot</span>
-    <span class="c1"># fig = plt.figure()</span>
-    <span class="c1"># sub = fig.add_axes([0.05, 0.05, 0.4, 0.4])</span>
-    <span class="c1"># m = plt.plot(range(100), &#39;k:&#39;)</span>
-    <span class="c1"># text2plot(sub, 0.0, 0.0, r&#39;CO$_2$&#39;)</span>
-    <span class="c1"># text2plot(sub, 0.1, 0.1, &#39;CO2&#39;, usetex=usetex)</span>
-    <span class="c1"># text2plot(sub, 0.2, 0.2, r&#39;$\frac{CO_2}{O_2}$&#39;, xxsmall=True,</span>
-    <span class="c1">#           usetex=usetex, mathrm=False)</span>
-    <span class="c1"># text2plot(sub, 0.3, 0.3, r&#39;Units (m$^2$ s$^{-1}$)&#39;, xsmall=True,</span>
-    <span class="c1">#           usetex=usetex, mathrm=False)</span>
-    <span class="c1"># text2plot(sub, 0.4, 0.4, r&#39;Two \n lines&#39;, medium=True,</span>
-    <span class="c1">#           usetex=False, mathrm=False)</span>
-    <span class="c1"># text2plot(sub, 0.5, 0.5, r&#39;Units \newline (m$^2$ s$^{-1}$)&#39;, large=True,</span>
-    <span class="c1">#           usetex=usetex, mathrm=False)</span>
-    <span class="c1"># text2plot(sub, 0.6, 0.6, r&#39;CO$_2$&#39;, xlarge=True,</span>
-    <span class="c1">#           usetex=usetex, mathrm=False)</span>
-    <span class="c1"># text2plot(sub, 0.7, 0.7, r&#39;CO$_2$&#39;, xxlarge=True,</span>
-    <span class="c1">#           usetex=usetex, mathrm=False)</span>
-    <span class="c1"># text2plot(sub, 0.8, 0.8, r&#39;CO$_2$&#39;, medium=True, bold=True,</span>
-    <span class="c1">#           usetex=usetex, mathrm=True)</span>
-
-    <span class="c1"># # --------------------------------------------------------------</span>
-    <span class="c1"># # abc2plot</span>
-    <span class="c1"># fig = plt.figure()</span>
-    <span class="c1"># sub = fig.add_axes([0.05, 0.05, 0.4, 0.4])</span>
-    <span class="c1"># m = plt.plot(range(100), &#39;k:&#39;)</span>
-    <span class="c1"># abc2plot(sub, 0, 0, 2)</span>
-    <span class="c1"># abc2plot(sub, 0.1, 0.1, 2, parentheses=&#39;close&#39;)</span>
-    <span class="c1"># abc2plot(sub, 0.2, 0.2, 2, lower=True, parentheses=&#39;open&#39;)</span>
-    <span class="c1"># abc2plot(sub, 0.3, 0.3, 2, roman=True, parentheses=&#39;both&#39;)</span>
-    <span class="c1"># abc2plot(sub, 0.4, 0.4, 2, roman=True, lower=True, parentheses=&#39;none&#39;)</span>
-    <span class="c1"># abc2plot(sub, 0.5, 0.5, 2, integer=True, parentheses=&#39;both&#39;,</span>
-    <span class="c1">#          usetex=usetex)</span>
-    <span class="c1"># abc2plot(sub, 0.5, 0.6, 2, small=True, medium=False,</span>
-    <span class="c1">#          large=False, parentheses=&#39;both&#39;, usetex=usetex,</span>
-    <span class="c1">#          mathrm=False)</span>
-    <span class="c1"># abc2plot(sub, 0.6, 0.6, 2, small=False, medium=True,</span>
-    <span class="c1">#          large=False, parentheses=&#39;both&#39;, usetex=usetex,</span>
-    <span class="c1">#          mathrm=False)</span>
-    <span class="c1"># abc2plot(sub, 0.7, 0.6, 2, small=False, medium=False,</span>
-    <span class="c1">#          large=True, parentheses=&#39;both&#39;, usetex=usetex,</span>
-    <span class="c1">#          mathrm=False)</span>
-    <span class="c1"># abc2plot(sub, 0.7, 0.7, 2, medium=True, brackets=&#39;both&#39;,</span>
-    <span class="c1">#          usetex=usetex, mathrm=True)</span>
-    <span class="c1"># abc2plot(sub, 0.8, 0.8, 2, medium=True, bold=True,</span>
-    <span class="c1">#          braces=&#39;both&#39;, usetex=usetex, mathrm=True)</span>
-
-    <span class="c1"># sub = fig.add_axes([0.5, 0.5, 0.4, 0.4])</span>
-    <span class="c1"># m = plt.plot(range(100), &#39;k:&#39;)</span>
-    <span class="c1"># abc2plot(sub, 0.1, 0.1, 2, brackets=&#39;close&#39;)</span>
-    <span class="c1"># abc2plot(sub, 0.2, 0.2, 2, lower=True, brackets=&#39;open&#39;)</span>
-    <span class="c1"># abc2plot(sub, 0.3, 0.3, 2, roman=True, brackets=&#39;both&#39;,</span>
-    <span class="c1">#          usetex=usetex, mathrm=False)</span>
-    <span class="c1"># abc2plot(sub, 0.4, 0.4, 2, roman=True, lower=True,</span>
-    <span class="c1">#          brackets=&#39;none&#39;)</span>
-    <span class="c1"># abc2plot(sub, 0.5, 0.5, 2, integer=True, braces=&#39;close&#39;)</span>
-    <span class="c1"># abc2plot(sub, 0.6, 0.6, 2, small=True, braces=&#39;open&#39;,</span>
-    <span class="c1">#          usetex=usetex, mathrm=True)</span>
-    <span class="c1"># abc2plot(sub, 0.7, 0.7, 2, medium=True, braces=&#39;both&#39;,</span>
-    <span class="c1">#          horizontalalignment=&#39;left&#39;, verticalalignment=&#39;bottom&#39;)</span>
-    <span class="c1"># abc2plot(sub, 0.8, 0.8, 2, medium=True, bold=True, braces=&#39;none&#39;,</span>
-    <span class="c1">#          horizontalalignment=&#39;right&#39;, verticalalignment=&#39;top&#39;)</span>
-
-    <span class="c1"># # --------------------------------------------------------------</span>
-    <span class="c1"># # signature2plot</span>
-    <span class="c1"># import numpy as np</span>
-    <span class="c1"># fig = plt.figure()</span>
-    <span class="c1"># sub = fig.add_axes([0.05, 0.05, 0.4, 0.4])</span>
-    <span class="c1"># mulx = 1.</span>
-    <span class="c1"># muly = 1.</span>
-    <span class="c1"># m = plt.plot(mulx*np.arange(100)/99., muly*np.arange(100)/99., &#39;k:&#39;)</span>
-    <span class="c1"># signature2plot(sub, mulx*0.5, muly*0.5, &#39;Test1&#39;, usetex=usetex)</span>
-    <span class="c1"># signature2plot(sub, mulx*0.6, muly*0.6, &#39;MC1&#39;, small=True,</span>
-    <span class="c1">#                usetex=usetex)  # -</span>
-    <span class="c1"># signature2plot(sub, mulx*0.7, muly*0.7, &#39;Test2&#39;, large=True,</span>
-    <span class="c1">#                usetex=usetex, italic=True)</span>
-    <span class="c1"># signature2plot(sub, mulx*0.8, muly*0.8, &#39;MC2&#39;, bold=True, usetex=usetex,</span>
-    <span class="c1">#                ha=&#39;left&#39;, mathrm=True)</span>
-    <span class="c1"># signature2plot(sub, mulx*0.8, muly*0.8, &#39;MC2&#39;, bold=True)</span>
-    <span class="c1"># signature2plot(sub, mulx*0.9, muly*0.9, &#39;Test3&#39;, large=True,</span>
-    <span class="c1">#                usetex=usetex, italic=True, mathrm=True)</span>
-    <span class="c1"># signature2plot(sub, mulx*1.0, muly*1.0, &#39;MC3&#39;, usetex=usetex, bold=True,</span>
-    <span class="c1">#                horizontalalignment=&#39;left&#39;)</span>
-    <span class="c1"># signature2plot(sub, 0.9, 0.1, &#39;MM&#39;, transform=sub.transAxes,</span>
-    <span class="c1">#                usetex=usetex, bold=True, horizontalalignment=&#39;center&#39;)</span>
-
-    <span class="c1"># if (outtype == &#39;pdf&#39;):</span>
-    <span class="c1">#     pdf_pages.savefig(fig)</span>
-    <span class="c1">#     plt.close()</span>
-
-    <span class="c1"># if (outtype == &#39;pdf&#39;):</span>
-    <span class="c1">#     pdf_pages.close()</span>
-    <span class="c1"># else:</span>
-    <span class="c1">#     plt.show()</span>
 </pre></div>
 
                 </article>

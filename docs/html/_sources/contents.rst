@@ -7,6 +7,9 @@ Contents
    :maxdepth: 3
 
    index
-   api
+   userguide
+   installation
    changelog
    authors
+   license
+   api

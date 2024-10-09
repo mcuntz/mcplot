@@ -8,7 +8,7 @@ Hydrosystems, Helmholtz Centre for Environmental Research - UFZ, Leipzig,
 Germany, and continued while at Institut National de Recherche pour
 l'Agriculture, l'Alimentation et l'Environnement (INRAE), Nancy, France.
 
-:copyright: Copyright 2015-2022 Matthias Cuntz, see AUTHORS.rst for details.
+:copyright: Copyright 2015- Matthias Cuntz, see AUTHORS.rst for details.
 :license: MIT License, see LICENSE for details.
 
 .. moduleauthor:: Matthias Cuntz
@@ -19,20 +19,21 @@ The following functions are provided:
    str2tex
 
 History
-    * Written Oct 2015 by Matthias Cuntz (mc (at) macu (dot) de)
-    * Use raw strings for escaped characters, Nov 2021, Matthias Cuntz
-    * Bug in space2linebreak in complex strings with spaces;
-      do space2linebreak first, Nov 2021, Matthias Cuntz
-    * Bug in escaping %, Nov 2021, Matthias Cuntz
-    * Remove trailing $\\mathrm{}$, Nov 2021, Matthias Cuntz
-    * Ported into pyjams, Nov 2021, Matthias Cuntz
-    * Better handling of linebreaks in Matplotlib and LaTeX mode,
-      Nov 2021, Matthias Cuntz
-    * More consistent docstrings, Jan 2022, Matthias Cuntz
-    * Use input2array, array2input, Jun 2022, Matthias Cuntz
-    * Do not escape % if not usetex, Apr 2023, Matthias Cuntz
-    * Add unicode symbol degree \u00B0, which get replaced by ^\\circ
-      if usetex==True, Apr 2023, Matthias Cuntz
+   * Written Oct 2015 by Matthias Cuntz (mc (at) macu (dot) de)
+   * Use raw strings for escaped characters, Nov 2021, Matthias Cuntz
+   * Bug in space2linebreak in complex strings with spaces;
+     do space2linebreak first, Nov 2021, Matthias Cuntz
+   * Bug in escaping %, Nov 2021, Matthias Cuntz
+   * Remove trailing $\\mathrm{}$, Nov 2021, Matthias Cuntz
+   * Ported into pyjams, Nov 2021, Matthias Cuntz
+   * Better handling of linebreaks in Matplotlib and LaTeX mode,
+     Nov 2021, Matthias Cuntz
+   * More consistent docstrings, Jan 2022, Matthias Cuntz
+   * Use input2array, array2input, Jun 2022, Matthias Cuntz
+   * Do not escape % if not usetex, Apr 2023, Matthias Cuntz
+   * Add unicode symbol degree \u00B0, which get replaced by ^\\circ
+     if usetex==True, Apr 2023, Matthias Cuntz
+   * flake8 compliant, Oct 2024, Matthias Cuntz
 
 """
 from .helper import input2array, array2input
@@ -85,7 +86,7 @@ def str2tex(strin, space2linebreak=False,
     istrin = list(input2array(strin, undef='', default=''))
 
     # font style
-    if (bold+italic) > 1:
+    if (bold + italic) > 1:
         raise ValueError('bold and italic are mutually exclusive.')
     else:
         if bold:
@@ -106,30 +107,27 @@ def str2tex(strin, space2linebreak=False,
     # string replacements
     if usetex:
         # no '\n' in LaTeX, use '\newline'
-        rep_n       = lambda s: s.replace(r'\n', '}$' + a0 + r'\newline'
-                                          + a0 + mtex)
+        rep_n = lambda s: s.replace(r'\n', '}$' + a0 + r'\newline' + a0 + mtex)
         rep_newline = lambda s: s.replace(r'\newline', '}$' + a0 + r'\newline'
                                           + a0 + mtex)
     else:
         # '\n' has to be unicode string and not raw string in Matplotlib
-        rep_n       = lambda s: s.replace(r'\n', '' + a0 + '\n'
-                                          + a0 + '')
-        rep_newline = lambda s: s.replace(r'\newline', '' + a0 + '\n'
-                                          + a0 + '')
-    rep_down     = lambda s: s.replace('_', r'\_')
-    rep_up       = lambda s: s.replace('^', r'\^')
-    rep_hash     = lambda s: s.replace('#', r'\#')
-    rep_percent  = lambda s: s.replace('%', r'\%')
+        rep_n = lambda s: s.replace(r'\n', '' + a0 + '\n' + a0 + '')
+        rep_newline = lambda s: s.replace(r'\newline', '' + a0 + '\n' + a0 + '')
+    rep_down = lambda s: s.replace('_', r'\_')
+    rep_up = lambda s: s.replace('^', r'\^')
+    rep_hash = lambda s: s.replace('#', r'\#')
+    rep_percent = lambda s: s.replace('%', r'\%')
     rep_nopercent = lambda s: s.replace(r'\%', '%')
-    rep_space    = lambda s: s.replace(' ', r'\ ')
-    rep_minus    = lambda s: s.replace('-', '}$' + ttex + '-}$' + mtex)
-    rep_degree   = lambda s: s.replace(u'\u00B0', r'^\circ{}')
+    rep_space = lambda s: s.replace(' ', r'\ ')
+    rep_minus = lambda s: s.replace('-', '}$' + ttex + '-}$' + mtex)
+    rep_degree = lambda s: s.replace(u'\u00B0', r'^\circ{}')
     rep_a02empty = lambda s: s.replace(a0, '')
     if usetex or (plt.get_backend() == 'pdf'):
         rep_space2n = lambda s: s.replace(' ', '}$' + a0 + r'\newline'
                                           + a0 + mtex)
     else:
-        rep_space2n = lambda s: s.replace(' ', ''+'\n'+'')
+        rep_space2n = lambda s: s.replace(' ', '' + '\n' + '')
     rep_empty = lambda s: s.replace(empty, '')
 
     if usetex:
@@ -250,33 +248,3 @@ def str2tex(strin, space2linebreak=False,
 if __name__ == '__main__':
     import doctest
     doctest.testmod(optionflags=doctest.NORMALIZE_WHITESPACE)
-
-    # strin = ['One', 'One-', 'One-Two', 'One Two', 'One\nTwo', 'A $S_{Ti}$ is great\nbut use-less']
-    # print(str2tex(strin))
-    # # ['$\\mathrm{One}$', '$\\mathrm{One}$$\\textrm{-}$', '$\\mathrm{One}$$\\textrm{-}$$\\mathrm{Two}$', '$\\mathrm{One\\ Two}$', '$\\mathrm{One}$ \n $\\mathrm{Two}$', '$\\mathrm{A\\ }$$S_{Ti}$$\\mathrm{\\ is\\ great}$ \n $\\mathrm{but\\ use}$$\\textrm{-}$$\\mathrm{less}$']
-    # print(str2tex(strin, bold=True))
-    # # ['$\\mathbf{One}$', '$\\mathbf{One}$$\\textbf{-}$', '$\\mathbf{One}$$\\textbf{-}$$\\mathbf{Two}$', '$\\mathbf{One\\ Two}$', '$\\mathbf{One}$ \n $\\mathbf{Two}$', '$\\mathbf{A\\ }$$S_{Ti}$$\\mathbf{\\ is\\ great}$ \n $\\mathbf{but\\ use}$$\\textbf{-}$$\\mathbf{less}$']
-    # print(str2tex(strin, italic=True))
-    # # ['$\\mathit{One}$', '$\\mathit{One}$$\\textit{-}$', '$\\mathit{One}$$\\textit{-}$$\\mathit{Two}$', '$\\mathit{One\\ Two}$', '$\\mathit{One}$ \n $\\mathit{Two}$', '$\\mathit{A\\ }$$S_{Ti}$$\\mathit{\\ is\\ great}$ \n $\\mathit{but\\ use}$$\\textit{-}$$\\mathit{less}$']
-    # print(str2tex(strin, space2linebreak=True))
-    # # ['$\\mathrm{One}$', '$\\mathrm{One}$$\\textrm{-}$', '$\\mathrm{One}$$\\textrm{-}$$\\mathrm{Two}$', '$\\mathrm{One}$ \n $\\mathrm{Two}$', '$\\mathrm{One}$ \n $\\mathrm{Two}$', '$\\mathrm{A}$ \n $\\mathrm{}$$S_{Ti}$$\\mathrm{ \n $\\mathrm{is \n $\\mathrm{great}$ \n $\\mathrm{but \n $\\mathrm{use}$$\\textrm{-}$$\\mathrm{less}$']
-    # print(str2tex(strin, space2linebreak=True, bold=True))
-    # # ['$\\mathbf{One}$', '$\\mathbf{One}$$\\textbf{-}$', '$\\mathbf{One}$$\\textbf{-}$$\\mathbf{Two}$', '$\\mathbf{One}$ \n $\\mathbf{Two}$', '$\\mathbf{One}$ \n $\\mathbf{Two}$', '$\\mathbf{A}$ \n $\\mathbf{}$$S_{Ti}$$\\mathbf{ \n $\\mathbf{is \n $\\mathbf{great}$ \n $\\mathbf{but \n $\\mathbf{use}$$\\textbf{-}$$\\mathbf{less}$']
-    # print(str2tex(strin, usetex=False))
-    # # ['One', 'One-', 'One-Two', 'One Two', 'One\nTwo', 'A $S_{Ti}$ is great\nbut use-less']
-    # print(str2tex(strin, space2linebreak=True, usetex=False))
-    # # ['One', 'One-', 'One-Two', 'One\nTwo', 'One\nTwo', 'A\n$S_{Ti}$\nis\ngreat\nbut\nuse-less']
-
-    # strin = [r'A $S_{Ti}$ is great\nbut use-less-']
-    # outsp = [r'A\n$S_{Ti}$\nis\ngreat\nbut\nuse-less-']
-    # outsp = [ s.replace(r'\n', '' + '\n' + '') for s in outsp ]
-    # print(outsp)
-    # print(str2tex(strin, space2linebreak=True))
-
-    # strin = [r'A $S_{Ti}$ is great\nbut use-less-']
-    # outsp = [r'$\mathrm{A}$\newline$S_{Ti}$\newline$\mathrm{is}$'
-    #          r'\newline$\mathrm{great}$\newline$\mathrm{but}$'
-    #          r'\newline$\mathrm{use}$$\textrm{-}$$\mathrm{less}$'
-    #          r'$\textrm{-}$']
-    # print(outsp)
-    # print(str2tex(strin, space2linebreak=True, usetex=True))

@@ -7,7 +7,7 @@ Hydrosystems, Helmholtz Centre for Environmental Research - UFZ, Leipzig,
 Germany, and continued while at Institut National de Recherche pour
 l'Agriculture, l'Alimentation et l'Environnement (INRAE), Nancy, France.
 
-:copyright: Copyright 2014-2022 Matthias Cuntz, see AUTHORS.rst for details.
+:copyright: Copyright 2014- Matthias Cuntz, see AUTHORS.rst for details.
 :license: MIT License, see LICENSE for details.
 
 .. moduleauthor:: Matthias Cuntz
@@ -20,38 +20,39 @@ The following functions are provided:
    signature2plot
 
 History
-    * Written Nov 2021 by Matthias Cuntz (mc (at) macu (dot) de)
-      combining abc2plot and signature2plot
-    * Written abc2plot, May 2012, Matthias Cuntz
-    * Added parenthesis option to abc2plot, Feb 2013, Arndt Piayda
-    * Ported to Python 3, Feb 2013, Matthias Cuntz
-    * Added opening and closing parentheses, brackets, braces,
-      Feb 2013, Matthias Cuntz
-    * Options usetex and mathrm, Feb 2013, Matthias Cuntz
-    * Options mathbf, large and making medium the default,
-      Feb 2013, Matthias Cuntz
-    * Added string option, Nov 2013, Matthias Cuntz
-    * Corrected bug in medium as default, Nov 2013, Matthias Cuntz
-    * Make usetex work with fontsize keyword of axis.text()
-      of matplotllib v1.1.0, Nov 2013, Matthias Cuntz
-    * Written signature2plot, Jan 2014, Matthias Cuntz
-    * Assert that small or large is set if medium is not None (abc2plot),
-      Feb 2014, Matthias Cuntz
-    * Replace horizontalalignment='left' and verticalalignment='bottom'
-      by kwargs mechanism (abc2plot), May 2014, Matthias Cuntz
-    * Added option italic (abc2plot), May 2014, Matthias Cuntz
-    * Added options xlarge, xxlarge, xsmall, xxsmall (abc2plot),
-      Oct 2015, Matthias Cuntz
-    * Make numpy docstring format (abc2plot), Nov 2020, Matthias Cuntz
-    * Ported into pyjams, Nov 2021, Matthias Cuntz
-    * dx, dy, and name mandatory parameters (signature2plot),
-      Nov 2020, Matthias Cuntz
-    * Change option name parenthesis -> parentheses, Nov 2021, Matthias Cuntz
-    * Written text2plot, Nov 2021, Matthias Cuntz
-    * Use text2plot for signature2plot, Nov 2021, Matthias Cuntz
-    * Use text2plot for abc2plot, Nov 2021, Matthias Cuntz
-    * More consistent docstrings, Jan 2022, Matthias Cuntz
-    * Added upper keyword in abc2plot, Jun 2024, Matthias Cuntz
+   * Written Nov 2021 by Matthias Cuntz (mc (at) macu (dot) de)
+     combining abc2plot and signature2plot
+   * Written abc2plot, May 2012, Matthias Cuntz
+   * Added parenthesis option to abc2plot, Feb 2013, Arndt Piayda
+   * Ported to Python 3, Feb 2013, Matthias Cuntz
+   * Added opening and closing parentheses, brackets, braces,
+     Feb 2013, Matthias Cuntz
+   * Options usetex and mathrm, Feb 2013, Matthias Cuntz
+   * Options mathbf, large and making medium the default,
+     Feb 2013, Matthias Cuntz
+   * Added string option, Nov 2013, Matthias Cuntz
+   * Corrected bug in medium as default, Nov 2013, Matthias Cuntz
+   * Make usetex work with fontsize keyword of axis.text()
+     of matplotllib v1.1.0, Nov 2013, Matthias Cuntz
+   * Written signature2plot, Jan 2014, Matthias Cuntz
+   * Assert that small or large is set if medium is not None (abc2plot),
+     Feb 2014, Matthias Cuntz
+   * Replace horizontalalignment='left' and verticalalignment='bottom'
+     by kwargs mechanism (abc2plot), May 2014, Matthias Cuntz
+   * Added option italic (abc2plot), May 2014, Matthias Cuntz
+   * Added options xlarge, xxlarge, xsmall, xxsmall (abc2plot),
+     Oct 2015, Matthias Cuntz
+   * Make numpy docstring format (abc2plot), Nov 2020, Matthias Cuntz
+   * Ported into pyjams, Nov 2021, Matthias Cuntz
+   * dx, dy, and name mandatory parameters (signature2plot),
+     Nov 2020, Matthias Cuntz
+   * Change option name parenthesis -> parentheses, Nov 2021, Matthias Cuntz
+   * Written text2plot, Nov 2021, Matthias Cuntz
+   * Use text2plot for signature2plot, Nov 2021, Matthias Cuntz
+   * Use text2plot for abc2plot, Nov 2021, Matthias Cuntz
+   * More consistent docstrings, Jan 2022, Matthias Cuntz
+   * Added upper keyword in abc2plot, Jun 2024, Matthias Cuntz
+   * Use f-strings and flake8 compliant, Oct 2024, Matthias Cuntz
 
 """
 import time as ptime
@@ -331,11 +332,11 @@ def abc2plot(handle, dx, dy, iplot,
     # parentheses
     if iparentheses:
         if parentheses.lower() == 'open':
-            t = '(' + t
+            t = f'({t}'
         elif parentheses.lower() == 'close':
-            t = t + ')'
+            t = f'{t})'
         elif parentheses.lower() == 'both':
-            t = '(' + t + ')'
+            t = f'({t})'
         elif parentheses.lower() == 'none':
             pass
         else:
@@ -344,11 +345,11 @@ def abc2plot(handle, dx, dy, iplot,
 
     if ibrackets:
         if brackets.lower() == 'open':
-            t = '[' + t
+            t = f'[{t}' + t
         elif brackets.lower() == 'close':
-            t = t + ']'
+            t = f'{t}]'
         elif brackets.lower() == 'both':
-            t = '[' + t + ']'
+            t = f'[{t}]'
         elif brackets.lower() == 'none':
             pass
         else:
@@ -385,7 +386,7 @@ def abc2plot(handle, dx, dy, iplot,
                 t = r'\mathit{' + t + '}'
             else:
                 t = r'\mathrm{' + t + '}'
-        t = r'$' + t + r'$'
+        t = fr'${t}$'
 
     text2plot(handle, dx, dy, t,
               bold=bold, italic=italic,
@@ -433,9 +434,9 @@ def signature2plot(handle, dx, dy, itext,
     """
     year = str(ptime.localtime().tm_year)
     if itext.strip():
-        otext = r'$\copyright$ ' + year + ' ' + itext.strip()
+        otext = fr'$\copyright$ {year} {itext.strip()}'
     else:
-        otext = r'$\copyright$ ' + year
+        otext = fr'$\copyright$ {year}'
 
     if ('horizontalalignment' not in kwargs) and ('ha' not in kwargs):
         kwargs['horizontalalignment'] = 'right'
@@ -446,127 +447,3 @@ def signature2plot(handle, dx, dy, itext,
 if __name__ == '__main__':
     import doctest
     doctest.testmod(optionflags=doctest.NORMALIZE_WHITESPACE)
-
-    # outtype = ''
-    # # outtype = 'pdf'
-    # pdffile = 'text2plot.pdf'
-    # usetex  = True
-    # textsize = 12
-
-    # import matplotlib as mpl
-    # if (outtype == 'pdf'):
-    #     mpl.use('PDF')  # set directly after import matplotlib
-    #     import matplotlib.pyplot as plt
-    #     from matplotlib.backends.backend_pdf import PdfPages
-    #     # Customize: http://matplotlib.sourceforge.net/users/customizing.html
-    #     mpl.rc('ps', papersize='a4', usedistiller='xpdf')  # ps2pdf
-    #     mpl.rc('figure', figsize=(8.27, 11.69))  # a4 portrait
-    #     if usetex:
-    #         mpl.rc('text', usetex=True)
-    # else:
-    #     import matplotlib.pyplot as plt
-    #     mpl.rc('figure', figsize=(4./5.*8.27, 4./5.*11.69))  # a4 portrait
-    # mpl.rc('path', simplify=False)  # do not remove
-
-    # if (outtype == 'pdf'):
-    #     print('Plot PDF ', pdffile)
-    #     pdf_pages = PdfPages(pdffile)
-    # else:
-    #     print('Plot X')
-    # figsize = mpl.rcParams['figure.figsize']
-
-    # # --------------------------------------------------------------
-    # # text2plot
-    # fig = plt.figure()
-    # sub = fig.add_axes([0.05, 0.05, 0.4, 0.4])
-    # m = plt.plot(range(100), 'k:')
-    # text2plot(sub, 0.0, 0.0, r'CO$_2$')
-    # text2plot(sub, 0.1, 0.1, 'CO2', usetex=usetex)
-    # text2plot(sub, 0.2, 0.2, r'$\frac{CO_2}{O_2}$', xxsmall=True,
-    #           usetex=usetex, mathrm=False)
-    # text2plot(sub, 0.3, 0.3, r'Units (m$^2$ s$^{-1}$)', xsmall=True,
-    #           usetex=usetex, mathrm=False)
-    # text2plot(sub, 0.4, 0.4, r'Two \n lines', medium=True,
-    #           usetex=False, mathrm=False)
-    # text2plot(sub, 0.5, 0.5, r'Units \newline (m$^2$ s$^{-1}$)', large=True,
-    #           usetex=usetex, mathrm=False)
-    # text2plot(sub, 0.6, 0.6, r'CO$_2$', xlarge=True,
-    #           usetex=usetex, mathrm=False)
-    # text2plot(sub, 0.7, 0.7, r'CO$_2$', xxlarge=True,
-    #           usetex=usetex, mathrm=False)
-    # text2plot(sub, 0.8, 0.8, r'CO$_2$', medium=True, bold=True,
-    #           usetex=usetex, mathrm=True)
-
-    # # --------------------------------------------------------------
-    # # abc2plot
-    # fig = plt.figure()
-    # sub = fig.add_axes([0.05, 0.05, 0.4, 0.4])
-    # m = plt.plot(range(100), 'k:')
-    # abc2plot(sub, 0, 0, 2)
-    # abc2plot(sub, 0.1, 0.1, 2, parentheses='close')
-    # abc2plot(sub, 0.2, 0.2, 2, lower=True, parentheses='open')
-    # abc2plot(sub, 0.3, 0.3, 2, roman=True, parentheses='both')
-    # abc2plot(sub, 0.4, 0.4, 2, roman=True, lower=True, parentheses='none')
-    # abc2plot(sub, 0.5, 0.5, 2, integer=True, parentheses='both',
-    #          usetex=usetex)
-    # abc2plot(sub, 0.5, 0.6, 2, small=True, medium=False,
-    #          large=False, parentheses='both', usetex=usetex,
-    #          mathrm=False)
-    # abc2plot(sub, 0.6, 0.6, 2, small=False, medium=True,
-    #          large=False, parentheses='both', usetex=usetex,
-    #          mathrm=False)
-    # abc2plot(sub, 0.7, 0.6, 2, small=False, medium=False,
-    #          large=True, parentheses='both', usetex=usetex,
-    #          mathrm=False)
-    # abc2plot(sub, 0.7, 0.7, 2, medium=True, brackets='both',
-    #          usetex=usetex, mathrm=True)
-    # abc2plot(sub, 0.8, 0.8, 2, medium=True, bold=True,
-    #          braces='both', usetex=usetex, mathrm=True)
-
-    # sub = fig.add_axes([0.5, 0.5, 0.4, 0.4])
-    # m = plt.plot(range(100), 'k:')
-    # abc2plot(sub, 0.1, 0.1, 2, brackets='close')
-    # abc2plot(sub, 0.2, 0.2, 2, lower=True, brackets='open')
-    # abc2plot(sub, 0.3, 0.3, 2, roman=True, brackets='both',
-    #          usetex=usetex, mathrm=False)
-    # abc2plot(sub, 0.4, 0.4, 2, roman=True, lower=True,
-    #          brackets='none')
-    # abc2plot(sub, 0.5, 0.5, 2, integer=True, braces='close')
-    # abc2plot(sub, 0.6, 0.6, 2, small=True, braces='open',
-    #          usetex=usetex, mathrm=True)
-    # abc2plot(sub, 0.7, 0.7, 2, medium=True, braces='both',
-    #          horizontalalignment='left', verticalalignment='bottom')
-    # abc2plot(sub, 0.8, 0.8, 2, medium=True, bold=True, braces='none',
-    #          horizontalalignment='right', verticalalignment='top')
-
-    # # --------------------------------------------------------------
-    # # signature2plot
-    # import numpy as np
-    # fig = plt.figure()
-    # sub = fig.add_axes([0.05, 0.05, 0.4, 0.4])
-    # mulx = 1.
-    # muly = 1.
-    # m = plt.plot(mulx*np.arange(100)/99., muly*np.arange(100)/99., 'k:')
-    # signature2plot(sub, mulx*0.5, muly*0.5, 'Test1', usetex=usetex)
-    # signature2plot(sub, mulx*0.6, muly*0.6, 'MC1', small=True,
-    #                usetex=usetex)  # -
-    # signature2plot(sub, mulx*0.7, muly*0.7, 'Test2', large=True,
-    #                usetex=usetex, italic=True)
-    # signature2plot(sub, mulx*0.8, muly*0.8, 'MC2', bold=True, usetex=usetex,
-    #                ha='left', mathrm=True)
-    # signature2plot(sub, mulx*0.8, muly*0.8, 'MC2', bold=True)
-    # signature2plot(sub, mulx*0.9, muly*0.9, 'Test3', large=True,
-    #                usetex=usetex, italic=True, mathrm=True)
-    # signature2plot(sub, mulx*1.0, muly*1.0, 'MC3', usetex=usetex, bold=True,
-    #                horizontalalignment='left')
-    # signature2plot(sub, 0.9, 0.1, 'MM', transform=sub.transAxes,
-    #                usetex=usetex, bold=True, horizontalalignment='center')
-
-    # if (outtype == 'pdf'):
-    #     pdf_pages.savefig(fig)
-    #     plt.close()
-
-    # if (outtype == 'pdf'):
-    #     pdf_pages.close()
-    # else:
-    #     plt.show()

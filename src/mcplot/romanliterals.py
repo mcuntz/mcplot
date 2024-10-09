@@ -25,14 +25,13 @@ http://code.activestate.com/recipes/81611-roman-numerals
 
 
 History
--------
-    * Written May 2012 by Matthias Cuntz (mc (at) macu (dot) de)
-    * Option lower in int2roman, May 2012, Matthias Cuntz
-    * Ported to Python 3, Feb 2013, Matthias Cuntz
-    * Use assert mechanism, Apr 2014, Matthias Cuntz
-    * Make numpy docstring format, Nov 2021, Matthias Cuntz
-    * Ported into pyjams, Nov 2021, Matthias Cuntz
-    * More consistent docstrings, Jan 2022, Matthias Cuntz
+   * Written May 2012 by Matthias Cuntz (mc (at) macu (dot) de)
+   * Option lower in int2roman, May 2012, Matthias Cuntz
+   * Ported to Python 3, Feb 2013, Matthias Cuntz
+   * Use assert mechanism, Apr 2014, Matthias Cuntz
+   * Make numpy docstring format, Nov 2021, Matthias Cuntz
+   * Ported into pyjams, Nov 2021, Matthias Cuntz
+   * More consistent docstrings, Jan 2022, Matthias Cuntz
 
 """
 

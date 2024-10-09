@@ -7,7 +7,7 @@ Hydrosystems, Helmholtz Centre for Environmental Research - UFZ, Leipzig,
 Germany, and continued while at Institut National de Recherche pour
 l'Agriculture, l'Alimentation et l'Environnement (INRAE), Nancy, France.
 
-:copyright: Copyright 2009-2022 Matthias Cuntz, see AUTHORS.rst for details.
+:copyright: Copyright 2009- Matthias Cuntz, see AUTHORS.rst for details.
 :license: MIT License, see LICENSE for details.
 
 .. moduleauthor:: Matthias Cuntz
@@ -18,13 +18,16 @@ The following functions are provided:
    position
 
 History
-    * Written Aug 2009 by Matthias Cuntz (mc (at) macu (dot) de)
-    * Ported to Python 3, Feb 2013, Matthias Cuntz
-    * Add vspace instead of wspace, Jul 2013, Matthias Cuntz
-    * Use assert instead of raise Error, Apr 2014, Matthias Cuntz
-    * Added height and width, Feb 2016, Stephan Thober
-    * Ported to pyjams, Nov 2021, Matthias Cuntz
-    * More consistent docstrings, Jan 2022, Matthias Cuntz
+   * Written Aug 2009 by Matthias Cuntz (mc (at) macu (dot) de)
+   * Ported to Python 3, Feb 2013, Matthias Cuntz
+   * Add vspace instead of wspace, Jul 2013, Matthias Cuntz
+   * Use assert instead of raise Error, Apr 2014, Matthias Cuntz
+   * Added height and width, Feb 2016, Stephan Thober
+   * Ported to pyjams, Nov 2021, Matthias Cuntz
+   * More consistent docstrings, Jan 2022, Matthias Cuntz
+   * Use same left, right, bottom, top as GridSpec of Matplotlib,
+     Oct 2024, Matthias Cuntz
+   * Use f-strings and flake8 compliant, Oct 2024, Matthias Cuntz
 
 """
 
@@ -33,7 +36,7 @@ __all__ = ['position']
 
 
 def position(row=1, col=1, num=1,
-             left=0.125, right=0.9, bottom=0.1, top=0.9,
+             left=0.125, right=0.9, bottom=0.11, top=0.88,
              hspace=0.1, vspace=0.1,
              width=None, height=None,
              sortcol=False,
@@ -62,9 +65,9 @@ def position(row=1, col=1, num=1,
     right : float, optional
         Right border of plot (default: 0.9)
     bottom : float, optional
-        Bottom border of plot (default: 0.1)
+        Bottom border of plot (default: 0.11)
     top : float, optional
-        Top border of plot (default: 0.9)
+        Top border of plot (default: 0.88)
     hspace : float, optional
         Horizontal space between columns (default: 0.1)
     vspace : float, optional
@@ -168,10 +171,9 @@ def position(row=1, col=1, num=1,
     """
     # Check
     nplots = row * col
-    assert num <= nplots, ('num > number of plots: ' + str(num) + ' > '
-                           + str(nplots))
-    assert right-left > 0., 'right > left: ' + str(right) + ' > ' + str(left)
-    assert top-bottom > 0., 'top < bottom: ' + str(top) + ' < ' + str(bottom)
+    assert num <= nplots, f'num > number of plots: {num} > {nplots}'
+    assert right - left > 0., f'right > left: {right} > {left}'
+    assert top - bottom > 0., f'top < bottom: {top} < {bottom}'
 
     # Scaling to figsize
     scalex = figsize[1] / float(max(figsize))
@@ -179,11 +181,11 @@ def position(row=1, col=1, num=1,
 
     # width, height
     if width is None:
-        dx = (right - left - (col-1)*hspace) / col
+        dx = (right - left - (col - 1) * hspace) / col
     else:
         dx = width
     if height is None:
-        dy = (top - bottom - (row-1)*vspace) / row
+        dy = (top - bottom - (row - 1) * vspace) / row
     else:
         dy = height
 
@@ -192,21 +194,21 @@ def position(row=1, col=1, num=1,
     if golden:
         width  = dx
         height = dx / ratio
-        checkheight = (top - bottom - row*height) - (row-1)*vspace
+        checkheight = (top - bottom - row * height) - (row - 1) * vspace
         if checkheight < 0.:
             height = dy
             width  = dy * ratio
-            checkwidth = (right - left - col*width) - (col-1)*hspace
+            checkwidth = (right - left - col * width) - (col - 1) * hspace
             if checkwidth < 0.:
                 raise ValueError('golden ratio does not work. Have to recode.')
     elif inversegolden:
         height = dy
         width  = dy / ratio
-        checkwidth = (right - left - col*width) - (col-1)*hspace
+        checkwidth = (right - left - col * width) - (col - 1) * hspace
         if checkwidth < 0.:
             width  = dx
             height = dx * ratio
-            checkheight = (top - bottom - row*height) - (row-1)*vspace
+            checkheight = (top - bottom - row * height) - (row - 1) * vspace
             if checkheight < 0.:
                 raise ValueError('inverse golden ratio does not work.'
                                  ' Have to recode.')
@@ -216,16 +218,16 @@ def position(row=1, col=1, num=1,
 
     # order row/colmn, column/row
     if sortcol:
-        irow = (num-1) % row
-        icol = (num-1) // row
+        irow = (num - 1) % row
+        icol = (num - 1) // row
     else:
-        irow = (num-1) // col
-        icol = (num-1) % col
+        irow = (num - 1) // col
+        icol = (num - 1) % col
 
     # position
-    pos    = ['']*4
-    pos[0] = left   + icol * (width+hspace)          * scalex
-    pos[1] = bottom + (row-1-irow) * (height+vspace) * scaley
+    pos    = [''] * 4
+    pos[0] = left   + icol * (width + hspace) * scalex
+    pos[1] = bottom + (row - 1 - irow) * (height + vspace) * scaley
     pos[2] = width  * scalex
     pos[3] = height * scaley
 

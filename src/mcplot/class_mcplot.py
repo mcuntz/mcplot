@@ -24,34 +24,40 @@ The following classes are provided:
    mcPlot
 
 History
-    * Written Sep 2020 by Matthias Cuntz (mc (at) macu (dot) de)
-    * Write standard output file into current folder, Nov 2021, Matthias Cuntz
-    * Change from NCL amwg color palette to pyjams amwg,
-      May 2021, Matthias Cuntz
-    * Add **kwargs to plot_save, May 2022, Matthias Cuntz
-    * Add self.transparent to pdf output in plot_save, May 2022, Matthias Cuntz
-    * Add --transparent as a standard option, May 2022, Matthias Cuntz
-    * Add left, bottom, top to standard layout options,
-      Jul 2022, Matthias Cuntz
-    * Add --dpi as a standard option, Jan 2023, Matthias Cuntz
-    * Use helper.filebase, Mar 2023, Matthias Cuntz
-    * Replace plotly with hvplot, May 2023, Matthias Cuntz
-    * Set filename without suffix as default plot name,
-      Jun 2023, Matthias Cuntz
-    * Removed space from print of plot filename, Jun 2023, Matthias Cuntz
-    * Set default options if not given on command line,
-      Jan 2024, Matthias Cuntz
-    * Add method print_layout_options, Mar 2024, Matthias Cuntz
-    * Use DejaVuSans and DejaVueSerif as standard fonts if not LaTeX
-      because they come with matplotlib, May 2024, Matthias Cuntz
-    * parents argument to ArgumentParser, Jul 2024, Matthias Cuntz
-    * Rename to class_mcplot.py, Oct 2024, Matthias Cuntz
-    * Reorder ldashes from little to more dots between dashes,
-      Oct 2024, Matthias Cuntz
-    * set dxabc and dyabc to upper left corner of plot,
-      Oct 2024, Matthias Cuntz
-    * Use same left, right, bottom, top as GridSpec of Matplotlib,
-      Oct 2024, Matthias Cuntz
+   * Written Sep 2020 by Matthias Cuntz (mc (at) macu (dot) de)
+   * Write standard output file into current folder, Nov 2021, Matthias Cuntz
+   * Change from NCL amwg color palette to pyjams amwg,
+     May 2021, Matthias Cuntz
+   * Add **kwargs to plot_save, May 2022, Matthias Cuntz
+   * Add self.transparent to pdf output in plot_save, May 2022, Matthias Cuntz
+   * Add --transparent as a standard option, May 2022, Matthias Cuntz
+   * Add left, bottom, top to standard layout options,
+     Jul 2022, Matthias Cuntz
+   * Add --dpi as a standard option, Jan 2023, Matthias Cuntz
+   * Use helper.filebase, Mar 2023, Matthias Cuntz
+   * Replace plotly with hvplot, May 2023, Matthias Cuntz
+   * Set filename without suffix as default plot name,
+     Jun 2023, Matthias Cuntz
+   * Removed space from print of plot filename, Jun 2023, Matthias Cuntz
+   * Set default options if not given on command line,
+     Jan 2024, Matthias Cuntz
+   * Add method print_layout_options, Mar 2024, Matthias Cuntz
+   * Use DejaVuSans and DejaVueSerif as standard fonts if not LaTeX
+     because they come with matplotlib, May 2024, Matthias Cuntz
+   * parents argument to ArgumentParser, Jul 2024, Matthias Cuntz
+   * Rename to class_mcplot.py, Oct 2024, Matthias Cuntz
+   * Reorder ldashes from little to more dots between dashes,
+     Oct 2024, Matthias Cuntz
+   * Set dxabc and dyabc to upper left corner of plot,
+     Oct 2024, Matthias Cuntz
+   * Use same left, right, bottom, top as GridSpec of Matplotlib,
+     Oct 2024, Matthias Cuntz
+   * lwidth -> lw, alwidth -> alw, elwidth -> elw, msize -> ms, mwidth -> mew,
+     Oct 2024, Matthias Cuntz
+   * llxbbox -> xbbox, llybbox -> ybbox, llrspace -> labelspacing,
+     llcspace -> columnspacing, llhtextpad -> handletextpad,
+     llhlength -> handlelength, Oct 2024, Matthias Cuntz
+   * Added loc, Oct 2024, Matthias Cuntz
 
 """
 import numpy as np
@@ -157,7 +163,7 @@ class mcPlot(object):
                sub = fig.add_axes([0.125, 0.667, 0.3375, 0.233])
 
                larr = sub.plot(self.dat)
-               plt.setp(larr[-1], linestyle='-', linewidth=self.lwidth,
+               plt.setp(larr[-1], linestyle='-', linewidth=self.lw,
                         marker='', color=self.lcol1)
 
                self.plot_save(fig)
@@ -171,7 +177,7 @@ class mcPlot(object):
                sub = fig.add_axes([0.125, 0.667, 0.3375, 0.233])
 
                larr = sub.plot(2*self.dat)
-               plt.setp(larr[-1], linestyle='-', linewidth=self.lwidth,
+               plt.setp(larr[-1], linestyle='-', linewidth=self.lw,
                         marker='', color=self.lcols[-1])
 
                self.plot_save(fig)
@@ -206,7 +212,7 @@ class mcPlot(object):
         An extending class should initialise with something similar to
 
         .. code-block:: python
-           class UsemcPlot(mcPlot):
+           class myPlot(mcPlot):
                def __init__(self, *args, **kwargs):
                    super().__init__(*args, **kwargs)`
 
@@ -405,16 +411,18 @@ class mcPlot(object):
                labels
            * - self.dyabc
              - % of (max-min) shift up from lower x-axis for a,b,c,... labels
-           * - self.lwidth
+           * - self.lw
              - line width
-           * - self.elwidth
+           * - self.elw
              - errorbar line width
-           * - self.alwidth
+           * - self.alw
              - axis line width
-           * - self.msize
+           * - self.ms
              - marker size
-           * - self.mwidth
+           * - self.mew
              - marker edge width
+           * - self.ldashes
+             - list of line styles
            * - self.fgcolor
              - foreground colour
            * - self.bgcolor
@@ -443,32 +451,32 @@ class mcPlot(object):
              - line colour 4
            * - self.lcols
              - line colour 5
-           * - self.ldashes
-             - list of line styles
-           * - self.llxbbox
-             - x-anchor legend bounding box
-           * - self.llybbox
-             - y-anchor legend bounding box
-           * - self.llrspace
+           * - self.loc
+             - corner of legend specified by bbox_to_anchor=(xbbox, ybbox)
+           * - self.xbbox
+             - x of bbox_to_anchor for corner given by loc
+           * - self.ybbox
+             - y of bbox_to_anchor for corner given by loc
+           * - self.labelspacing
              - spacing between rows in legend
-           * - self.llcspace
+           * - self.columnspacing
              - spacing between columns in legend
-           * - self.llhtextpad
+           * - self.handletextpad
              - pad between the legend handle and text
-           * - self.llhlength
+           * - self.handlelength
              - length of the legend handles
            * - self.frameon
              - if True: draw a frame around the legend.
                If None: use rc
+           * - self.bbox_inches
+             - Figure bbox in inches. If 'tight', try to figure out the tight
+               bbox of the figure
+           * - self.pad_inches
+             - Amount of padding when bbox_inches is 'tight'
            * - self.dpi
              - DPI of non-vector figure output
            * - self.transparent
              - True for transparent background in figure
-           * - self.bbox_inches
-             - Bbox in inches. If 'tight', try to figure out the tight bbox of
-               the figure
-           * - self.pad_inches
-             - Amount of padding when bbox_inches is 'tight'
 
         Examples
         --------
@@ -476,7 +484,7 @@ class mcPlot(object):
 
         .. code-block:: python
 
-           class UsemcPlot(mcPlot):
+           class myPlot(mcPlot):
                def __init__(self, *args, **kwargs):
                    super().__init__(*args, **kwargs)
                    self.lcol1     = 'black'
@@ -488,29 +496,41 @@ class mcPlot(object):
         if not hasattr(self, 'dowhite'):
             self.dowhite = False
 
-        # layout and spaces
-        self.nrow     = 3     # # of rows of subplots per figure
-        self.ncol     = 2     # # of columns of subplots per figure
+        # layout
+        self.nrow     = 3      # # of rows of subplots per figure
+        self.ncol     = 2      # # of columns of subplots per figure
         self.left     = 0.125  # left space on page
-        self.right    = 0.9   # right space on page
-        self.bottom   = 0.11  # lower space on page
-        self.top      = 0.88  # upper space on page
-        self.hspace   = 0.1   # x-space between subplots
-        self.vspace   = 0.1   # y-space between subplots
-        self.textsize = 12    # standard text size
-        self.dxabc    = 0.05  # % of (max-min) shift to the right
-                              # of left y-axis for a,b,c,... labels
-        self.dyabc    = 0.90  # % of (max-min) shift up from lower x-axis
-                              # for a,b,c,... labels
-        # lines, markers and colours
-        self.lwidth  = 1.5  # linewidth
-        self.elwidth = 1.0  # errorbar line width
-        self.alwidth = 1.0  # axis line width
-        self.msize   = 1.5  # marker size
-        self.mwidth  = 1.0  # marker edge width
+        self.right    = 0.9    # right space on page
+        self.bottom   = 0.11   # lower space on page
+        self.top      = 0.88   # upper space on page
+        self.hspace   = 0.1    # x-space between subplots
+        self.vspace   = 0.1    # y-space between subplots
+
+        # a), b), c)
+        self.dxabc    = 0.05   # % of (max-min) shift to the right
+                               # of left y-axis for a,b,c,... labels
+        self.dyabc    = 0.90   # % of (max-min) shift up from lower x-axis
+                               # for a,b,c,... labels
+
+        # lines and markers
+        self.lw  = 1.5  # linewidth
+        self.elw = 1.0  # errorbar line width
+        self.alw = 1.0  # axis line width
+        self.ms  = 1.5  # marker size
+        self.mew = 1.0  # marker edge width
+        self.ldashes = [(5, 0),
+                        (5, 2),
+                        (5, 2, 2, 2),
+                        (5, 2, 2, 2, 2, 2),
+                        (5, 2, 2, 2, 2, 2, 2, 2),
+                        (5, 2, 2, 2, 2, 2, 2, 2, 2, 2),
+                        (5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2),
+                        (5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)]
+
+        # colors
         if self.dowhite:
-            self.fgcolor = 'white'
-            self.bgcolor = 'black'
+            self.fgcolor = 'white'  # foreground color
+            self.bgcolor = 'black'  # background color
         else:
             self.fgcolor = 'black'
             self.bgcolor = 'white'
@@ -541,27 +561,20 @@ class mcPlot(object):
         self.lcol4 = self.mcol4
         self.lcol5 = self.mcol5
         self.lcols = self.mcols
-        # ldashes = [(5, 2, 2, 2, 2, 2, 2, 2), (2, 2), (10, 3), (5, 3),
-        #            (3, 5), (5, 0)]
-        self.ldashes = [(5, 0),
-                        (5, 2),
-                        (5, 2, 2, 2),
-                        (5, 2, 2, 2, 2, 2),
-                        (5, 2, 2, 2, 2, 2, 2, 2),
-                        (5, 2, 2, 2, 2, 2, 2, 2, 2, 2)
-                        (5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2),
-                        (5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)]
+
         # legend
-        self.llxbbox    = 1.0    # x-anchor legend bounding box
-        self.llybbox    = 1.0    # y-anchor legend bounding box
-        self.llrspace   = 0.     # spacing between rows in legend
-        self.llcspace   = 1.0    # spacing between columns in legend
-        self.llhtextpad = 0.4    # pad between the legend handle and text
-        self.llhlength  = 1.5    # length of the legend handles
-        self.frameon    = False  # if True, draw a frame around the legend.
-                                 # If None, use rc
+        # bbox_to_anchor=(xbbox, ybbox) places the corner of the
+        # legend specified by loc at xbbox, ybbox.
+        self.loc   = 'upper right'
+        self.xbbox = 1.0
+        self.ybbox = 1.0
+        self.labelspacing  = 0.4  # spacing between rows in legend
+        self.columnspacing = 1.0  # spacing between columns in legend
+        self.handletextpad = 0.4  # pad between the legend handle and text
+        self.handlelength  = 1.5  # length of the legend handles
+        self.frameon = False      # if True, draw a frame around the legend.
+                                  # If None, use rc
         # png
-        # self.dpi         = 300
         self.bbox_inches = 'tight'
         self.pad_inches  = 0.035
         if not hasattr(self, 'dpi'):
@@ -569,7 +582,8 @@ class mcPlot(object):
         if not hasattr(self, 'transparent'):
             self.transparent = False
 
-        # misc
+        # text
+        self.textsize = 12  # standard text size
         if not hasattr(self, 'serif'):
             self.serif = False
         if not hasattr(self, 'usetex'):
@@ -606,12 +620,12 @@ class mcPlot(object):
 
         tarr = ['sin']
         larr = sub.plot(xx, yy1)
-        plt.setp(larr[-1], linestyle='-', linewidth=self.lwidth, marker='',
+        plt.setp(larr[-1], linestyle='-', linewidth=self.lw, marker='',
                  color=self.lcols[0])
 
         tarr += ['cos']
         larr += sub.plot(xx, yy2)
-        plt.setp(larr[-1], linestyle='-', linewidth=self.lwidth, marker='',
+        plt.setp(larr[-1], linestyle='-', linewidth=self.lw, marker='',
                  color=self.lcols[-3])
 
         if xlab != '':
@@ -629,11 +643,11 @@ class mcPlot(object):
             plt.setp(sub, ylim=ylim)
 
         ll = sub.legend(larr, tarr, frameon=self.frameon, ncol=1,
-                        labelspacing=self.llrspace,
-                        handletextpad=self.llhtextpad,
-                        handlelength=self.llhlength,
+                        labelspacing=self.labelspacing,
+                        handletextpad=self.handletextpad,
+                        handlelength=self.handlelength,
                         loc='upper left',
-                        bbox_to_anchor=(self.llxbbox, self.llybbox),
+                        bbox_to_anchor=(self.xbbox, self.ybbox),
                         scatterpoints=1, numpoints=1)
         plt.setp(ll.get_texts(), fontsize='small')
 
@@ -729,7 +743,7 @@ class mcPlot(object):
 
         .. code-block:: python
 
-           class UsemcPlot(mcPlot):
+           class myPlot(mcPlot):
                def __init__(self, *args, **kwargs):
                    import matplotlib as mpl
                    super().__init__(*args, **kwargs)
@@ -738,6 +752,7 @@ class mcPlot(object):
 
         """
         import matplotlib as mpl
+
         if (self.outtype == 'pdf'):
             mpl.use('PDF')  # set directly after import matplotlib
             from matplotlib.backends.backend_pdf import PdfPages
@@ -807,7 +822,7 @@ class mcPlot(object):
             # a4 portrait
             mpl.rc('figure', figsize=(4. / 5. * 8.27, 4. / 5. * 11.69))
         # print(mpl.rcParams)
-        mpl.rc('axes', linewidth=self.alwidth, edgecolor=self.fgcolor,
+        mpl.rc('axes', linewidth=self.alw, edgecolor=self.fgcolor,
                facecolor=self.bgcolor, labelcolor=self.fgcolor,
                prop_cycle=mpl.rcsetup.cycler('color',
                                              ['8dd3c7', 'feffb3', 'bfbbd9',
@@ -822,7 +837,7 @@ class mcPlot(object):
         mpl.rc('figure', edgecolor=self.bgcolor, facecolor=self.bgcolor)
         mpl.rc('font', size=self.textsize)
         mpl.rc('grid', color=self.fgcolor)
-        mpl.rc('lines', linewidth=self.lwidth, color=self.fgcolor)
+        mpl.rc('lines', linewidth=self.lw, color=self.fgcolor)
         mpl.rc('patch', edgecolor=self.fgcolor)
         mpl.rc('path', simplify=False)  # do not remove
         mpl.rc('savefig', edgecolor=self.bgcolor, facecolor=self.bgcolor)
@@ -1101,10 +1116,10 @@ class mcPlot(object):
                 'self.hspace': self.hspace, 'self.vspace': self.vspace,
                 'self.textsize': self.textsize,
                 'self.dxabc': self.dxabc, 'self.dyabc': self.dyabc,
-                'self.lwidth': self.lwidth,
-                'self.elwidth': self.elwidth,
-                'self.alwidth': self.alwidth,
-                'self.msize': self.msize, 'self.mwidth': self.mwidth,
+                'self.lw': self.lw,
+                'self.elw': self.elw,
+                'self.alw': self.alw,
+                'self.ms': self.ms, 'self.mew': self.mew,
                 'self.dowhite': self.dowhite,
                 'self.fgcolor': self.fgcolor, 'self.bgcolor': self.bgcolor,
                 'self.mcols': self.mcols,
@@ -1116,10 +1131,12 @@ class mcPlot(object):
                 'self.lcol3': self.lcol3, 'self.lcol4': self.lcol4,
                 'self.lcol5': self.lcol5,
                 'self.ldashes': self.ldashes,
-                'self.llxbbox': self.llxbbox, 'self.llybbox': self.llybbox,
-                'self.llrspace': self.llrspace, 'self.llcspace': self.llcspace,
-                'self.llhtextpad': self.llhtextpad,
-                'self.llhlength': self.llhlength,
+                'self.loc': self.loc,
+                'self.xbbox': self.xbbox, 'self.ybbox': self.ybbox,
+                'self.labelspacing': self.labelspacing,
+                'self.columnspacing': self.columnspacing,
+                'self.handletextpad': self.handletextpad,
+                'self.handlelength': self.handlelength,
                 'self.frameon': self.frameon,
                 'self.bbox_inches': self.bbox_inches,
                 'self.pad_inches': self.pad_inches,

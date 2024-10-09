@@ -147,7 +147,12 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="index.html">mcplot guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">mcplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="api.html">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="argsort.html">argmax/argmin/argsort</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="color.html">Color module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -170,8 +175,6 @@
 <li class="toctree-l2"><a class="reference internal" href="text2plot.html">text2plot</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
 </ul>
 
     </div>
@@ -473,10 +476,16 @@ because they come with matplotlib, May 2024, Matthias Cuntz</p></li>
 <li><p>Rename to class_mcplot.py, Oct 2024, Matthias Cuntz</p></li>
 <li><p>Reorder ldashes from little to more dots between dashes,
 Oct 2024, Matthias Cuntz</p></li>
-<li><p>set dxabc and dyabc to upper left corner of plot,
+<li><p>Set dxabc and dyabc to upper left corner of plot,
 Oct 2024, Matthias Cuntz</p></li>
 <li><p>Use same left, right, bottom, top as GridSpec of Matplotlib,
 Oct 2024, Matthias Cuntz</p></li>
+<li><p>lwidth -&gt; lw, alwidth -&gt; alw, elwidth -&gt; elw, msize -&gt; ms, mwidth -&gt; mew,
+Oct 2024, Matthias Cuntz</p></li>
+<li><p>llxbbox -&gt; xbbox, llybbox -&gt; ybbox, llrspace -&gt; labelspacing,
+llcspace -&gt; columnspacing, llhtextpad -&gt; handletextpad,
+llhlength -&gt; handlelength, Oct 2024, Matthias Cuntz</p></li>
+<li><p>Added loc, Oct 2024, Matthias Cuntz</p></li>
 </ul>
 </dd>
 </dl>
@@ -602,7 +611,7 @@ class.</p>
         <span class="n">sub</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.125</span><span class="p">,</span> <span class="mf">0.667</span><span class="p">,</span> <span class="mf">0.3375</span><span class="p">,</span> <span class="mf">0.233</span><span class="p">])</span>
 
         <span class="n">larr</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lwidth</span><span class="p">,</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lw</span><span class="p">,</span>
                  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">plot_save</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
@@ -616,7 +625,7 @@ class.</p>
         <span class="n">sub</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.125</span><span class="p">,</span> <span class="mf">0.667</span><span class="p">,</span> <span class="mf">0.3375</span><span class="p">,</span> <span class="mf">0.233</span><span class="p">])</span>
 
         <span class="n">larr</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lwidth</span><span class="p">,</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lw</span><span class="p">,</span>
                  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcols</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">plot_save</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
@@ -867,106 +876,109 @@ labels</p></td>
 <tr class="row-even"><td><p>self.dyabc</p></td>
 <td><p>% of (max-min) shift up from lower x-axis for a,b,c,… labels</p></td>
 </tr>
-<tr class="row-odd"><td><p>self.lwidth</p></td>
+<tr class="row-odd"><td><p>self.lw</p></td>
 <td><p>line width</p></td>
 </tr>
-<tr class="row-even"><td><p>self.elwidth</p></td>
+<tr class="row-even"><td><p>self.elw</p></td>
 <td><p>errorbar line width</p></td>
 </tr>
-<tr class="row-odd"><td><p>self.alwidth</p></td>
+<tr class="row-odd"><td><p>self.alw</p></td>
 <td><p>axis line width</p></td>
 </tr>
-<tr class="row-even"><td><p>self.msize</p></td>
+<tr class="row-even"><td><p>self.ms</p></td>
 <td><p>marker size</p></td>
 </tr>
-<tr class="row-odd"><td><p>self.mwidth</p></td>
+<tr class="row-odd"><td><p>self.mew</p></td>
 <td><p>marker edge width</p></td>
-</tr>
-<tr class="row-even"><td><p>self.fgcolor</p></td>
-<td><p>foreground colour</p></td>
-</tr>
-<tr class="row-odd"><td><p>self.bgcolor</p></td>
-<td><p>background colour</p></td>
-</tr>
-<tr class="row-even"><td><p>self.mcols</p></td>
-<td><p>list of marker colours</p></td>
-</tr>
-<tr class="row-odd"><td><p>self.mcol1</p></td>
-<td><p>marker colour 1</p></td>
-</tr>
-<tr class="row-even"><td><p>self.mcol2</p></td>
-<td><p>marker colour 2</p></td>
-</tr>
-<tr class="row-odd"><td><p>self.mcol3</p></td>
-<td><p>marker colour 3</p></td>
-</tr>
-<tr class="row-even"><td><p>self.mcol4</p></td>
-<td><p>marker colour 4</p></td>
-</tr>
-<tr class="row-odd"><td><p>self.mcol5</p></td>
-<td><p>marker colour 5</p></td>
-</tr>
-<tr class="row-even"><td><p>self.lcol1</p></td>
-<td><p>list of line colours</p></td>
-</tr>
-<tr class="row-odd"><td><p>self.lcol2</p></td>
-<td><p>line colour 1</p></td>
-</tr>
-<tr class="row-even"><td><p>self.lcol3</p></td>
-<td><p>line colour 2</p></td>
-</tr>
-<tr class="row-odd"><td><p>self.lcol4</p></td>
-<td><p>line colour 3</p></td>
-</tr>
-<tr class="row-even"><td><p>self.lcol5</p></td>
-<td><p>line colour 4</p></td>
-</tr>
-<tr class="row-odd"><td><p>self.lcols</p></td>
-<td><p>line colour 5</p></td>
 </tr>
 <tr class="row-even"><td><p>self.ldashes</p></td>
 <td><p>list of line styles</p></td>
 </tr>
-<tr class="row-odd"><td><p>self.llxbbox</p></td>
-<td><p>x-anchor legend bounding box</p></td>
+<tr class="row-odd"><td><p>self.fgcolor</p></td>
+<td><p>foreground colour</p></td>
 </tr>
-<tr class="row-even"><td><p>self.llybbox</p></td>
-<td><p>y-anchor legend bounding box</p></td>
+<tr class="row-even"><td><p>self.bgcolor</p></td>
+<td><p>background colour</p></td>
 </tr>
-<tr class="row-odd"><td><p>self.llrspace</p></td>
+<tr class="row-odd"><td><p>self.mcols</p></td>
+<td><p>list of marker colours</p></td>
+</tr>
+<tr class="row-even"><td><p>self.mcol1</p></td>
+<td><p>marker colour 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>self.mcol2</p></td>
+<td><p>marker colour 2</p></td>
+</tr>
+<tr class="row-even"><td><p>self.mcol3</p></td>
+<td><p>marker colour 3</p></td>
+</tr>
+<tr class="row-odd"><td><p>self.mcol4</p></td>
+<td><p>marker colour 4</p></td>
+</tr>
+<tr class="row-even"><td><p>self.mcol5</p></td>
+<td><p>marker colour 5</p></td>
+</tr>
+<tr class="row-odd"><td><p>self.lcol1</p></td>
+<td><p>list of line colours</p></td>
+</tr>
+<tr class="row-even"><td><p>self.lcol2</p></td>
+<td><p>line colour 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>self.lcol3</p></td>
+<td><p>line colour 2</p></td>
+</tr>
+<tr class="row-even"><td><p>self.lcol4</p></td>
+<td><p>line colour 3</p></td>
+</tr>
+<tr class="row-odd"><td><p>self.lcol5</p></td>
+<td><p>line colour 4</p></td>
+</tr>
+<tr class="row-even"><td><p>self.lcols</p></td>
+<td><p>line colour 5</p></td>
+</tr>
+<tr class="row-odd"><td><p>self.loc</p></td>
+<td><p>corner of legend specified by bbox_to_anchor=(xbbox, ybbox)</p></td>
+</tr>
+<tr class="row-even"><td><p>self.xbbox</p></td>
+<td><p>x of bbox_to_anchor for corner given by loc</p></td>
+</tr>
+<tr class="row-odd"><td><p>self.ybbox</p></td>
+<td><p>y of bbox_to_anchor for corner given by loc</p></td>
+</tr>
+<tr class="row-even"><td><p>self.labelspacing</p></td>
 <td><p>spacing between rows in legend</p></td>
 </tr>
-<tr class="row-even"><td><p>self.llcspace</p></td>
+<tr class="row-odd"><td><p>self.columnspacing</p></td>
 <td><p>spacing between columns in legend</p></td>
 </tr>
-<tr class="row-odd"><td><p>self.llhtextpad</p></td>
+<tr class="row-even"><td><p>self.handletextpad</p></td>
 <td><p>pad between the legend handle and text</p></td>
 </tr>
-<tr class="row-even"><td><p>self.llhlength</p></td>
+<tr class="row-odd"><td><p>self.handlelength</p></td>
 <td><p>length of the legend handles</p></td>
 </tr>
-<tr class="row-odd"><td><p>self.frameon</p></td>
+<tr class="row-even"><td><p>self.frameon</p></td>
 <td><p>if True: draw a frame around the legend.
 If None: use rc</p></td>
 </tr>
-<tr class="row-even"><td><p>self.dpi</p></td>
+<tr class="row-odd"><td><p>self.bbox_inches</p></td>
+<td><p>Figure bbox in inches. If ‘tight’, try to figure out the tight
+bbox of the figure</p></td>
+</tr>
+<tr class="row-even"><td><p>self.pad_inches</p></td>
+<td><p>Amount of padding when bbox_inches is ‘tight’</p></td>
+</tr>
+<tr class="row-odd"><td><p>self.dpi</p></td>
 <td><p>DPI of non-vector figure output</p></td>
 </tr>
-<tr class="row-odd"><td><p>self.transparent</p></td>
+<tr class="row-even"><td><p>self.transparent</p></td>
 <td><p>True for transparent background in figure</p></td>
-</tr>
-<tr class="row-even"><td><p>self.bbox_inches</p></td>
-<td><p>Bbox in inches. If ‘tight’, try to figure out the tight bbox of
-the figure</p></td>
-</tr>
-<tr class="row-odd"><td><p>self.pad_inches</p></td>
-<td><p>Amount of padding when bbox_inches is ‘tight’</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
 <p>Setting layout options in initialisation</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">UsemcPlot</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">myPlot</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span>     <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
@@ -1040,7 +1052,7 @@ flierprops.markeredgecolor, whiskerprops.color</p></td>
 </table>
 <p class="rubric">Examples</p>
 <p>Setting rcParams in initialisation</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">UsemcPlot</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">myPlot</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>

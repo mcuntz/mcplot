@@ -20,29 +20,29 @@ The following functions are provided:
    array2input
 
 History
-    * Written input2array and array2input, Jan 2022, Matthias Cuntz
-    * Added isundef, Mar 2022, Matthias Cuntz
-    * Second input to array2input, Mar 2022, Matthias Cuntz
-    * undef=np.nan by default, Apr 2022, Matthias Cuntz
-    * Array masked or set to undef only if shapes of array and input agree in
-      array2input, Apr 2022, Matthias Cuntz
-    * Allow string arrays, Jun 2022, Matthias Cuntz
-    * Allow undef=='' in isundef, Jun 2022, Matthias Cuntz
-    * Single string input as 1-element array, Jun 2022, Matthias Cuntz
-    * Allow undef=None, Jun 2022, Matthias Cuntz
-    * undef=None by default, Jun 2022, Matthias Cuntz
-    * Refine using undef=None with numpy.array and list,
-      Jun 2022, Matthias Cuntz
-    * Assure array is not 0d-array, Jun 2022, Matthias Cuntz
-    * Correct treating of undef if two arrays given, Jan 2023, Matthias Cuntz
-    * Add filebase, Mar 2023, Matthias Cuntz
-    * pandas.Series and pandas.DataFrame in input2array,
-      Jun 2023, Matthias Cuntz
-    * Reset undef in pandas.Series and pandas.DataFrame array2input,
-      Jun 2023, Matthias Cuntz
-    * Check that scalar is number in array2input, Oct 2023, Matthias Cuntz
-    * Check if outin is Iterable even if inp is not in array2input,
-      Nov 2023, Matthias Cuntz
+   * Written input2array and array2input, Jan 2022, Matthias Cuntz
+   * Added isundef, Mar 2022, Matthias Cuntz
+   * Second input to array2input, Mar 2022, Matthias Cuntz
+   * undef=np.nan by default, Apr 2022, Matthias Cuntz
+   * Array masked or set to undef only if shapes of array and input agree in
+     array2input, Apr 2022, Matthias Cuntz
+   * Allow string arrays, Jun 2022, Matthias Cuntz
+   * Allow undef=='' in isundef, Jun 2022, Matthias Cuntz
+   * Single string input as 1-element array, Jun 2022, Matthias Cuntz
+   * Allow undef=None, Jun 2022, Matthias Cuntz
+   * undef=None by default, Jun 2022, Matthias Cuntz
+   * Refine using undef=None with numpy.array and list,
+     Jun 2022, Matthias Cuntz
+   * Assure array is not 0d-array, Jun 2022, Matthias Cuntz
+   * Correct treating of undef if two arrays given, Jan 2023, Matthias Cuntz
+   * Add filebase, Mar 2023, Matthias Cuntz
+   * pandas.Series and pandas.DataFrame in input2array,
+     Jun 2023, Matthias Cuntz
+   * Reset undef in pandas.Series and pandas.DataFrame array2input,
+     Jun 2023, Matthias Cuntz
+   * Check that scalar is number in array2input, Oct 2023, Matthias Cuntz
+   * Check if outin is Iterable even if inp is not in array2input,
+     Nov 2023, Matthias Cuntz
 
 """
 from collections.abc import Iterable

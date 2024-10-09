@@ -146,7 +146,12 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../index.html">mcplot guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">mcplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../api.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../argsort.html">argmax/argmin/argsort</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../color.html">Color module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -169,8 +174,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../text2plot.html">text2plot</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
 </ul>
 
     </div>
@@ -331,7 +334,7 @@ document.write(`
 <span class="sd">Germany, and continued while at Institut National de Recherche pour</span>
 <span class="sd">l&#39;Agriculture, l&#39;Alimentation et l&#39;Environnement (INRAE), Nancy, France.</span>
 
-<span class="sd">:copyright: Copyright 2015-2022 Matthias Cuntz, see AUTHORS.rst for details.</span>
+<span class="sd">:copyright: Copyright 2015- Matthias Cuntz, see AUTHORS.rst for details.</span>
 <span class="sd">:license: MIT License, see LICENSE for details.</span>
 
 <span class="sd">.. moduleauthor:: Matthias Cuntz</span>
@@ -342,20 +345,21 @@ document.write(`
 <span class="sd">   str2tex</span>
 
 <span class="sd">History</span>
-<span class="sd">    * Written Oct 2015 by Matthias Cuntz (mc (at) macu (dot) de)</span>
-<span class="sd">    * Use raw strings for escaped characters, Nov 2021, Matthias Cuntz</span>
-<span class="sd">    * Bug in space2linebreak in complex strings with spaces;</span>
-<span class="sd">      do space2linebreak first, Nov 2021, Matthias Cuntz</span>
-<span class="sd">    * Bug in escaping %, Nov 2021, Matthias Cuntz</span>
-<span class="sd">    * Remove trailing $\\mathrm{}$, Nov 2021, Matthias Cuntz</span>
-<span class="sd">    * Ported into pyjams, Nov 2021, Matthias Cuntz</span>
-<span class="sd">    * Better handling of linebreaks in Matplotlib and LaTeX mode,</span>
-<span class="sd">      Nov 2021, Matthias Cuntz</span>
-<span class="sd">    * More consistent docstrings, Jan 2022, Matthias Cuntz</span>
-<span class="sd">    * Use input2array, array2input, Jun 2022, Matthias Cuntz</span>
-<span class="sd">    * Do not escape % if not usetex, Apr 2023, Matthias Cuntz</span>
-<span class="sd">    * Add unicode symbol degree \u00B0, which get replaced by ^\\circ</span>
-<span class="sd">      if usetex==True, Apr 2023, Matthias Cuntz</span>
+<span class="sd">   * Written Oct 2015 by Matthias Cuntz (mc (at) macu (dot) de)</span>
+<span class="sd">   * Use raw strings for escaped characters, Nov 2021, Matthias Cuntz</span>
+<span class="sd">   * Bug in space2linebreak in complex strings with spaces;</span>
+<span class="sd">     do space2linebreak first, Nov 2021, Matthias Cuntz</span>
+<span class="sd">   * Bug in escaping %, Nov 2021, Matthias Cuntz</span>
+<span class="sd">   * Remove trailing $\\mathrm{}$, Nov 2021, Matthias Cuntz</span>
+<span class="sd">   * Ported into pyjams, Nov 2021, Matthias Cuntz</span>
+<span class="sd">   * Better handling of linebreaks in Matplotlib and LaTeX mode,</span>
+<span class="sd">     Nov 2021, Matthias Cuntz</span>
+<span class="sd">   * More consistent docstrings, Jan 2022, Matthias Cuntz</span>
+<span class="sd">   * Use input2array, array2input, Jun 2022, Matthias Cuntz</span>
+<span class="sd">   * Do not escape % if not usetex, Apr 2023, Matthias Cuntz</span>
+<span class="sd">   * Add unicode symbol degree \u00B0, which get replaced by ^\\circ</span>
+<span class="sd">     if usetex==True, Apr 2023, Matthias Cuntz</span>
+<span class="sd">   * flake8 compliant, Oct 2024, Matthias Cuntz</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">.helper</span> <span class="kn">import</span> <span class="n">input2array</span><span class="p">,</span> <span class="n">array2input</span>
@@ -410,7 +414,7 @@ document.write(`
     <span class="n">istrin</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">input2array</span><span class="p">(</span><span class="n">strin</span><span class="p">,</span> <span class="n">undef</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
 
     <span class="c1"># font style</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">bold</span><span class="o">+</span><span class="n">italic</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">bold</span> <span class="o">+</span> <span class="n">italic</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;bold and italic are mutually exclusive.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">bold</span><span class="p">:</span>
@@ -431,30 +435,27 @@ document.write(`
     <span class="c1"># string replacements</span>
     <span class="k">if</span> <span class="n">usetex</span><span class="p">:</span>
         <span class="c1"># no &#39;\n&#39; in LaTeX, use &#39;\newline&#39;</span>
-        <span class="n">rep_n</span>       <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\n&#39;</span><span class="p">,</span> <span class="s1">&#39;}$&#39;</span> <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;\newline&#39;</span>
-                                          <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="n">mtex</span><span class="p">)</span>
+        <span class="n">rep_n</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\n&#39;</span><span class="p">,</span> <span class="s1">&#39;}$&#39;</span> <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;\newline&#39;</span> <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="n">mtex</span><span class="p">)</span>
         <span class="n">rep_newline</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\newline&#39;</span><span class="p">,</span> <span class="s1">&#39;}$&#39;</span> <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;\newline&#39;</span>
                                           <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="n">mtex</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># &#39;\n&#39; has to be unicode string and not raw string in Matplotlib</span>
-        <span class="n">rep_n</span>       <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\n&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span> <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-                                          <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-        <span class="n">rep_newline</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\newline&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span> <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-                                          <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-    <span class="n">rep_down</span>     <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\_&#39;</span><span class="p">)</span>
-    <span class="n">rep_up</span>       <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\^&#39;</span><span class="p">)</span>
-    <span class="n">rep_hash</span>     <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\#&#39;</span><span class="p">)</span>
-    <span class="n">rep_percent</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\%&#39;</span><span class="p">)</span>
+        <span class="n">rep_n</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\n&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span> <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">rep_newline</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\newline&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span> <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">rep_down</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\_&#39;</span><span class="p">)</span>
+    <span class="n">rep_up</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\^&#39;</span><span class="p">)</span>
+    <span class="n">rep_hash</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\#&#39;</span><span class="p">)</span>
+    <span class="n">rep_percent</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\%&#39;</span><span class="p">)</span>
     <span class="n">rep_nopercent</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\%&#39;</span><span class="p">,</span> <span class="s1">&#39;%&#39;</span><span class="p">)</span>
-    <span class="n">rep_space</span>    <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\ &#39;</span><span class="p">)</span>
-    <span class="n">rep_minus</span>    <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;}$&#39;</span> <span class="o">+</span> <span class="n">ttex</span> <span class="o">+</span> <span class="s1">&#39;-}$&#39;</span> <span class="o">+</span> <span class="n">mtex</span><span class="p">)</span>
-    <span class="n">rep_degree</span>   <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;</span><span class="se">\u00B0</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;^\circ</span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">rep_space</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\ &#39;</span><span class="p">)</span>
+    <span class="n">rep_minus</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;}$&#39;</span> <span class="o">+</span> <span class="n">ttex</span> <span class="o">+</span> <span class="s1">&#39;-}$&#39;</span> <span class="o">+</span> <span class="n">mtex</span><span class="p">)</span>
+    <span class="n">rep_degree</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;</span><span class="se">\u00B0</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;^\circ</span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">rep_a02empty</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">a0</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">usetex</span> <span class="ow">or</span> <span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">get_backend</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;pdf&#39;</span><span class="p">):</span>
         <span class="n">rep_space2n</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;}$&#39;</span> <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;\newline&#39;</span>
                                           <span class="o">+</span> <span class="n">a0</span> <span class="o">+</span> <span class="n">mtex</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">rep_space2n</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">rep_space2n</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="n">rep_empty</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">empty</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">usetex</span><span class="p">:</span>
@@ -576,36 +577,6 @@ document.write(`
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">doctest</span>
     <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">optionflags</span><span class="o">=</span><span class="n">doctest</span><span class="o">.</span><span class="n">NORMALIZE_WHITESPACE</span><span class="p">)</span>
-
-    <span class="c1"># strin = [&#39;One&#39;, &#39;One-&#39;, &#39;One-Two&#39;, &#39;One Two&#39;, &#39;One\nTwo&#39;, &#39;A $S_{Ti}$ is great\nbut use-less&#39;]</span>
-    <span class="c1"># print(str2tex(strin))</span>
-    <span class="c1"># # [&#39;$\\mathrm{One}$&#39;, &#39;$\\mathrm{One}$$\\textrm{-}$&#39;, &#39;$\\mathrm{One}$$\\textrm{-}$$\\mathrm{Two}$&#39;, &#39;$\\mathrm{One\\ Two}$&#39;, &#39;$\\mathrm{One}$ \n $\\mathrm{Two}$&#39;, &#39;$\\mathrm{A\\ }$$S_{Ti}$$\\mathrm{\\ is\\ great}$ \n $\\mathrm{but\\ use}$$\\textrm{-}$$\\mathrm{less}$&#39;]</span>
-    <span class="c1"># print(str2tex(strin, bold=True))</span>
-    <span class="c1"># # [&#39;$\\mathbf{One}$&#39;, &#39;$\\mathbf{One}$$\\textbf{-}$&#39;, &#39;$\\mathbf{One}$$\\textbf{-}$$\\mathbf{Two}$&#39;, &#39;$\\mathbf{One\\ Two}$&#39;, &#39;$\\mathbf{One}$ \n $\\mathbf{Two}$&#39;, &#39;$\\mathbf{A\\ }$$S_{Ti}$$\\mathbf{\\ is\\ great}$ \n $\\mathbf{but\\ use}$$\\textbf{-}$$\\mathbf{less}$&#39;]</span>
-    <span class="c1"># print(str2tex(strin, italic=True))</span>
-    <span class="c1"># # [&#39;$\\mathit{One}$&#39;, &#39;$\\mathit{One}$$\\textit{-}$&#39;, &#39;$\\mathit{One}$$\\textit{-}$$\\mathit{Two}$&#39;, &#39;$\\mathit{One\\ Two}$&#39;, &#39;$\\mathit{One}$ \n $\\mathit{Two}$&#39;, &#39;$\\mathit{A\\ }$$S_{Ti}$$\\mathit{\\ is\\ great}$ \n $\\mathit{but\\ use}$$\\textit{-}$$\\mathit{less}$&#39;]</span>
-    <span class="c1"># print(str2tex(strin, space2linebreak=True))</span>
-    <span class="c1"># # [&#39;$\\mathrm{One}$&#39;, &#39;$\\mathrm{One}$$\\textrm{-}$&#39;, &#39;$\\mathrm{One}$$\\textrm{-}$$\\mathrm{Two}$&#39;, &#39;$\\mathrm{One}$ \n $\\mathrm{Two}$&#39;, &#39;$\\mathrm{One}$ \n $\\mathrm{Two}$&#39;, &#39;$\\mathrm{A}$ \n $\\mathrm{}$$S_{Ti}$$\\mathrm{ \n $\\mathrm{is \n $\\mathrm{great}$ \n $\\mathrm{but \n $\\mathrm{use}$$\\textrm{-}$$\\mathrm{less}$&#39;]</span>
-    <span class="c1"># print(str2tex(strin, space2linebreak=True, bold=True))</span>
-    <span class="c1"># # [&#39;$\\mathbf{One}$&#39;, &#39;$\\mathbf{One}$$\\textbf{-}$&#39;, &#39;$\\mathbf{One}$$\\textbf{-}$$\\mathbf{Two}$&#39;, &#39;$\\mathbf{One}$ \n $\\mathbf{Two}$&#39;, &#39;$\\mathbf{One}$ \n $\\mathbf{Two}$&#39;, &#39;$\\mathbf{A}$ \n $\\mathbf{}$$S_{Ti}$$\\mathbf{ \n $\\mathbf{is \n $\\mathbf{great}$ \n $\\mathbf{but \n $\\mathbf{use}$$\\textbf{-}$$\\mathbf{less}$&#39;]</span>
-    <span class="c1"># print(str2tex(strin, usetex=False))</span>
-    <span class="c1"># # [&#39;One&#39;, &#39;One-&#39;, &#39;One-Two&#39;, &#39;One Two&#39;, &#39;One\nTwo&#39;, &#39;A $S_{Ti}$ is great\nbut use-less&#39;]</span>
-    <span class="c1"># print(str2tex(strin, space2linebreak=True, usetex=False))</span>
-    <span class="c1"># # [&#39;One&#39;, &#39;One-&#39;, &#39;One-Two&#39;, &#39;One\nTwo&#39;, &#39;One\nTwo&#39;, &#39;A\n$S_{Ti}$\nis\ngreat\nbut\nuse-less&#39;]</span>
-
-    <span class="c1"># strin = [r&#39;A $S_{Ti}$ is great\nbut use-less-&#39;]</span>
-    <span class="c1"># outsp = [r&#39;A\n$S_{Ti}$\nis\ngreat\nbut\nuse-less-&#39;]</span>
-    <span class="c1"># outsp = [ s.replace(r&#39;\n&#39;, &#39;&#39; + &#39;\n&#39; + &#39;&#39;) for s in outsp ]</span>
-    <span class="c1"># print(outsp)</span>
-    <span class="c1"># print(str2tex(strin, space2linebreak=True))</span>
-
-    <span class="c1"># strin = [r&#39;A $S_{Ti}$ is great\nbut use-less-&#39;]</span>
-    <span class="c1"># outsp = [r&#39;$\mathrm{A}$\newline$S_{Ti}$\newline$\mathrm{is}$&#39;</span>
-    <span class="c1">#          r&#39;\newline$\mathrm{great}$\newline$\mathrm{but}$&#39;</span>
-    <span class="c1">#          r&#39;\newline$\mathrm{use}$$\textrm{-}$$\mathrm{less}$&#39;</span>
-    <span class="c1">#          r&#39;$\textrm{-}$&#39;]</span>
-    <span class="c1"># print(outsp)</span>
-    <span class="c1"># print(str2tex(strin, space2linebreak=True, usetex=True))</span>
 </pre></div>
 
                 </article>
