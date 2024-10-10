@@ -78,47 +78,47 @@ class TestColor(unittest.TestCase):
         from mcplot.color import sron_colors, sron_colormaps, sron_functions
 
         # brewer
-        brewer_ylgn3 = brewer_sequential['brewer_ylgn3']
+        brewer_ylgn3 = brewer_sequential['brewer:ylgn3']
         brewer_ylgn3 = [ _rgb2rgb(i) for i in brewer_ylgn3 ]
 
         # mathematica
         mathematica_dark_rainbow_8 = (
-            mathematica_rainbow['mathematica_dark_rainbow_8'])
+            mathematica_rainbow['mathematica:dark_rainbow_8'])
 
         # ncl
-        ncl_amwg = ncl_small['ncl_amwg']
+        ncl_amwg = ncl_small['ncl:amwg']
 
         # mcplot
-        mcplot_amwg = mcplot_cmaps['mcplot_amwg']
+        mcplot_amwg = mcplot_cmaps['mcplot:amwg']
 
         # oregon
-        osu_bu7 = oregon_sequential['osu_bu7']
+        osu_bu7 = oregon_sequential['osu:bu7']
         osu_bu7 = [ _rgb2rgb(i) for i in osu_bu7 ]
 
         # sron2012
-        sron2012_light = sron2012_colors['sron2012_light']
+        sron2012_light = sron2012_colors['sron2012:light']
         sron2012_light = [ mpl.colors.colorConverter.to_rgb(i)
                            for i in sron2012_light ]
 
-        sron2012_ylorbr_3 = [ sron2012_functions['sron2012_ylorbr'](i/2.)
+        sron2012_ylorbr_3 = [ sron2012_functions['sron2012:ylorbr'](i/2.)
                               for i in range(3) ]
-        sron2012_buylrd_3 = [ sron2012_functions['sron2012_buylrd'](i/2.)
+        sron2012_buylrd_3 = [ sron2012_functions['sron2012:buylrd'](i/2.)
                               for i in range(3) ]
-        sron2012_rainbow_3 = [ sron2012_functions['sron2012_rainbow'](i/2.)
+        sron2012_rainbow_3 = [ sron2012_functions['sron2012:rainbow'](i/2.)
                                for i in range(3) ]
 
         # sron
-        sron_vibrant = sron_colors['sron_vibrant']
+        sron_vibrant = sron_colors['sron:vibrant']
         sron_vibrant = [ mpl.colors.colorConverter.to_rgb(i)
                          for i in sron_vibrant ]
 
-        sron_iridescent = sron_colormaps['sron_iridescent']
+        sron_iridescent = sron_colormaps['sron:iridescent']
         # sron_iridescent_miss = mpl.colors.colorConverter.to_rgba(
         #     sron_iridescent[1])
         sron_iridescent = [ mpl.colors.colorConverter.to_rgb(i)
                             for i in sron_iridescent[0] ]
 
-        sron_rainbow_discrete = sron_functions['sron_rainbow_discrete']
+        sron_rainbow_discrete = sron_functions['sron:rainbow_discrete']
 
         sron_rainbow_discrete_3 = sron_rainbow_discrete(3)
         # sron_rainbow_discrete_3_miss = mpl.colors.colorConverter.to_rgba(
@@ -133,7 +133,7 @@ class TestColor(unittest.TestCase):
                                      for i in sron_rainbow_discrete_23[0] ]
 
         # brewer
-        cmap = get_cmap('brewer_ylgn3')
+        cmap = get_cmap('brewer:ylgn3')
         target = brewer_ylgn3
         self.assertEqual(cmap, target)
 
@@ -143,7 +143,7 @@ class TestColor(unittest.TestCase):
         self.assertEqual(cmap, target)
 
         # color map
-        cmap = get_cmap('brewer_ylgn3', as_cmap=True)
+        cmap = get_cmap('brewer:ylgn3', as_cmap=True)
         assert isinstance(cmap, mpl.colors.ListedColormap)
 
         # reverse
@@ -151,7 +151,7 @@ class TestColor(unittest.TestCase):
         target = brewer_ylgn3[::-1]
         self.assertEqual(cmap, target)
 
-        cmap = get_cmap('brewer_ylgn3_r')
+        cmap = get_cmap('brewer:ylgn3_r')
         target = brewer_ylgn3[::-1]
         self.assertEqual(cmap, target)
 
@@ -161,7 +161,7 @@ class TestColor(unittest.TestCase):
         self.assertEqual(cmap, target)
 
         # order
-        cmap = get_cmap('brewer_ylgn3', order='HUE')
+        cmap = get_cmap('brewer:ylgn3', order='HUE')
         target = brewer_ylgn3
         self.assertEqual(cmap, target)
 
@@ -169,7 +169,7 @@ class TestColor(unittest.TestCase):
         target = brewer_ylgn3
         self.assertEqual(cmap, target)
 
-        cmap = get_cmap('brewer_ylgn3', order='value')
+        cmap = get_cmap('brewer:ylgn3', order='value')
         target = brewer_ylgn3[::-1]
         self.assertEqual(cmap, target)
 
@@ -178,17 +178,17 @@ class TestColor(unittest.TestCase):
         self.assertEqual(cmap, target)
 
         # mathematica
-        cmap = get_cmap('mathematica_dark_rainbow_8')
+        cmap = get_cmap('mathematica:dark_rainbow_8')
         target = mathematica_dark_rainbow_8
         self.assertEqual(cmap, target)
 
         # ncl
-        cmap = get_cmap('ncl_amwg')
+        cmap = get_cmap('ncl:amwg')
         target = ncl_amwg
         self.assertEqual(cmap, target)
 
         # mcplot
-        cmap = get_cmap('mcplot_amwg')
+        cmap = get_cmap('mcplot:amwg')
         target = mcplot_amwg
         self.assertEqual(cmap, target)
 
@@ -198,7 +198,7 @@ class TestColor(unittest.TestCase):
         self.assertEqual(cmap, target)
 
         # sron2012_colors
-        cmap = get_cmap('sron2012_light')
+        cmap = get_cmap('sron2012:light')
         target = sron2012_light
         self.assertEqual(cmap, target)
 
@@ -208,34 +208,34 @@ class TestColor(unittest.TestCase):
         self.assertEqual(cmap, target)
 
         # sron2012_functions
-        cmap = get_cmap('sron2012_buylrd', ncol=3)
+        cmap = get_cmap('sron2012:buylrd', ncol=3)
         target = sron2012_buylrd_3
         self.assertEqual(cmap, target)
 
         # sron2012_functions
-        cmap = get_cmap('sron2012_rainbow', 3)
+        cmap = get_cmap('sron2012:rainbow', 3)
         target = sron2012_rainbow_3
         self.assertEqual(cmap, target)
 
         # sron2012_functions - ncol=0
         cmap = get_cmap('sron2012_rainbow')
-        target = [ sron2012_functions['sron2012_rainbow'](i/255.)
+        target = [ sron2012_functions['sron2012:rainbow'](i/255.)
                    for i in range(256) ]
         self.assertEqual(cmap, target)
 
         # sron2012_functions - offset, upper
         cmap = get_cmap('sron2012_rainbow', ncol=3, offset=0.2, upper=0.9)
-        target = [ sron2012_functions['sron2012_rainbow'](0.2+i*0.7/2.)
+        target = [ sron2012_functions['sron2012:rainbow'](0.2+i*0.7/2.)
                    for i in range(3) ]
         self.assertEqual(cmap, target)
 
         # sron2012_functions - offset, upper, ncol=1
-        cmap = get_cmap('sron2012_rainbow', ncol=1, offset=0.2, upper=0.9)
-        target = [ sron2012_functions['sron2012_rainbow'](0.2) ]
+        cmap = get_cmap('sron2012:rainbow', ncol=1, offset=0.2, upper=0.9)
+        target = [ sron2012_functions['sron2012:rainbow'](0.2) ]
         self.assertEqual(cmap, target)
 
         # sron_colors
-        cmap = get_cmap('sron_vibrant')
+        cmap = get_cmap('sron:vibrant')
         target = sron_vibrant
         self.assertEqual(cmap, target)
 
@@ -245,7 +245,7 @@ class TestColor(unittest.TestCase):
         self.assertEqual(cmap, target)
 
         # sron_colormaps - as_cmap
-        cmap = get_cmap('sron_iridescent', as_cmap=True)
+        cmap = get_cmap('sron:iridescent', as_cmap=True)
         cols = cmap.colors
         target = sron_iridescent
         self.assertEqual(cols, target)
@@ -255,10 +255,10 @@ class TestColor(unittest.TestCase):
         #     self.assertEqual(miss, target)
 
         # sron_functions
-        cmap = get_cmap('sron_rainbow_discrete', 3)
+        cmap = get_cmap('sron:rainbow_discrete', 3)
         target = sron_rainbow_discrete_3
         self.assertEqual(cmap, target)
-        cmap = get_cmap('sron_rainbow_discrete', 23)
+        cmap = get_cmap('sron:rainbow_discrete', 23)
         target = sron_rainbow_discrete_23
         self.assertEqual(cmap, target)
 
@@ -271,7 +271,7 @@ class TestColor(unittest.TestCase):
         #     miss = tuple(cmap.get_bad())
         #     target = sron_rainbow_discrete_3_miss
         #     self.assertEqual(miss, target)
-        cmap = get_cmap('sron_rainbow_discrete', as_cmap=True)
+        cmap = get_cmap('sron:rainbow_discrete', as_cmap=True)
         cols = cmap.colors
         target = sron_rainbow_discrete_23
         self.assertEqual(cols, target)
@@ -306,7 +306,7 @@ class TestColor(unittest.TestCase):
         self.assertRaises(ValueError, get_cmap, 'NonSense')
 
         # unknown order
-        self.assertRaises(ValueError, get_cmap, 'brewer_ylgn3',
+        self.assertRaises(ValueError, get_cmap, 'brewer:ylgn3',
                           order='luminance')
 
     def test_print_palettes(self):
