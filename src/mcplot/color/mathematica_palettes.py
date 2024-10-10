@@ -5,12 +5,13 @@ Color palettes from Mathematica
 .. moduleauthor:: Juliane Mai and Matthias Cuntz
 
 History
-    * Written Sep 2014, Juliane Mai
-    * Made dictionaries with color palettes,
-      Mar 2015, Matthias Cuntz
-    * Ported to pyjams, Nov 2021, Matthias Cuntz
-    * flake8 compatible, Nov 2021, Matthias Cuntz
-    * Prepend mathematica to all palette names, Nov 2021, Matthias Cuntz
+   * Written Sep 2014, Juliane Mai
+   * Made dictionaries with color palettes,
+     Mar 2015, Matthias Cuntz
+   * Ported to pyjams, Nov 2021, Matthias Cuntz
+   * flake8 compatible, Nov 2021, Matthias Cuntz
+   * Prepend mathematica to all palette names, Nov 2021, Matthias Cuntz
+   * Use : instead of _ in colormap names, Oct 2024, Matthias Cuntz
 
 """
 
@@ -19,7 +20,7 @@ __all__ = ['mathematica_rainbow']
 
 # Mathematica color maps
 mathematica_rainbow = {
-    'mathematica_dark_rainbow_8': [
+    'mathematica:dark_rainbow_8': [
         (0.237736, 0.340215, 0.575113),
         (0.256345, 0.364426, 0.514838),
         (0.277947, 0.450097, 0.328156),
@@ -28,7 +29,7 @@ mathematica_rainbow = {
         (0.829244, 0.75748, 0.309318),
         (0.845341, 0.62487, 0.315178),
         (0.750604, 0.309223, 0.249086) ],
-    'mathematica_dark_rainbow_16': [
+    'mathematica:dark_rainbow_16': [
         (0.237736, 0.340215, 0.575113),
         (0.247683, 0.343139, 0.564512),
         (0.256345, 0.364426, 0.514838),
@@ -45,7 +46,7 @@ mathematica_rainbow = {
         (0.80244, 0.483782, 0.294397),
         (0.750604, 0.309223, 0.249086),
         (0.72987, 0.239399, 0.230961) ],
-    'mathematica_dark_rainbow_256': [
+    'mathematica:dark_rainbow_256': [
         (0.237736, 0.340215, 0.575113),
         (0.238358, 0.340398, 0.57445),
         (0.238979, 0.34058, 0.573788),

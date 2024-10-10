@@ -392,8 +392,20 @@ document.write(`
   <section id="changelog">
 <span id="id1"></span><h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">#</a></h1>
 <dl class="simple">
-<dt>v1.1 (??? 2024)</dt><dd><ul class="simple">
+<dt>v2.0 (??? 2024)</dt><dd><ul class="simple">
+<li><p>Prefix IPCC colors with ipcc:</p></li>
+<li><p>Use : instead of _ in colormap names.</p></li>
+<li><p>Start Brewer colors after Matplotlib colors at new page in
+<cite>show_palettes</cite>.</p></li>
 <li><p>Renamed file <cite>mcplot.py</cite> to <cite>class_mcplot.py</cite>.</p></li>
+<li><p>Change class variables <cite>lwidth</cite> to <cite>lw</cite>, <cite>alwidth</cite> to <cite>alw</cite>,
+<cite>elwidth</cite> to <cite>elw</cite>, <cite>msize</cite> to <cite>ms</cite>, <cite>mwidth</cite> to <cite>mew</cite> in
+<cite>mcPlot</cite>.</p></li>
+<li><p>Added <cite>loc</cite> and set <cite>xbbox</cite> and <cite>ybbox</cite> in <cite>mcPlot</cite> so that
+legend is in upper right corner.</p></li>
+<li><p>Change <cite>llxbbox</cite> to <cite>xbbox</cite>, <cite>llybbox</cite> to <cite>ybbox</cite>, <cite>llrspace</cite> to
+<cite>labelspacing</cite>, <cite>llcspace</cite> to <cite>columnspacing</cite>, <cite>llhtextpad</cite> to
+<cite>handletextpad</cite>, <cite>llhlength</cite> to <cite>handlelength</cite> in <cite>mcPlot</cite>.</p></li>
 <li><p>Reorder <cite>ldashes</cite> from little to more dots between dashes in
 <cite>mcPlot</cite>.</p></li>
 <li><p>Set <cite>dxabc</cite> and <cite>dyabc</cite> to upper left corner of plot in

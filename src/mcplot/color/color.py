@@ -21,22 +21,25 @@ The following functions are provided:
    show_palettes
 
 History
-    * Written Nov 2021, Matthias Cuntz
-    * Change order of color maps, Dec 2021, Matthias Cuntz
-    * More consistent docstrings, Jan 2022, Matthias Cuntz
-    * Added 'order' keyword, Feb 2022, Matthias Cuntz
-    * 'get_color', Mar 2022, Matthias Cuntz
-    * 'cname' can be list of names in 'get_color', Apr 2022, Matthias Cuntz
-    * Register ufz colors only once, Apr 2022, Matthias Cuntz
-    * Added print_colors, Apr 2022, Matthias Cuntz
-    * Use matplotlib.colormaps.get_cmap instead of deprecated
-      matplotlib.cm.get_cmap, Dec 2022, Matthias Cuntz
-    * Use matplotlib.colormaps[name] instead of
-      matplotlib.colormaps.get_cmap(name) to work with matplotlib < v3.6,
-      Jan 2023, Matthias Cuntz
-    * Do not set_bad() for sron palettes, Jan 2023, Matthias Cuntz
-    * Allow ncol=1 in get_cmap, Jun 2023, Matthias Cuntz
-    * Added IPCC colours, Feb 2024, Matthias Cuntz
+   * Written Nov 2021, Matthias Cuntz
+   * Change order of color maps, Dec 2021, Matthias Cuntz
+   * More consistent docstrings, Jan 2022, Matthias Cuntz
+   * Added 'order' keyword, Feb 2022, Matthias Cuntz
+   * 'get_color', Mar 2022, Matthias Cuntz
+   * 'cname' can be list of names in 'get_color', Apr 2022, Matthias Cuntz
+   * Register ufz colors only once, Apr 2022, Matthias Cuntz
+   * Added print_colors, Apr 2022, Matthias Cuntz
+   * Use matplotlib.colormaps.get_cmap instead of deprecated
+     matplotlib.cm.get_cmap, Dec 2022, Matthias Cuntz
+   * Use matplotlib.colormaps[name] instead of
+     matplotlib.colormaps.get_cmap(name) to work with matplotlib < v3.6,
+     Jan 2023, Matthias Cuntz
+   * Do not set_bad() for sron palettes, Jan 2023, Matthias Cuntz
+   * Allow ncol=1 in get_cmap, Jun 2023, Matthias Cuntz
+   * Added IPCC colours, Feb 2024, Matthias Cuntz
+   * Use : instead of _ in colormap names, Oct 2024, Matthias Cuntz
+   * Start Brewer colors after Matplotlib colors at new page in show_palettes,
+     Oct 2024, Matthias Cuntz
 
 """
 
@@ -124,7 +127,7 @@ def get_color(cname=''):
                        if i.startswith('ufz_')
                        and not i.endswith('_palettes') ]
         # ufz has only 1 list with colors
-        ufz_colors = eval('mcplot.color.' + ufz_colors[0])
+        ufz_colors = eval(f'mcplot.color.{ufz_colors[0]}')
         mapping().update(ufz_colors)
 
     if cname:
@@ -143,7 +146,7 @@ def print_colors(collection=''):
     ----------
     collection : str or list of strings, optional
         Name(s) of color collection(s).
-        Known collections are 'base', 'tableau', 'ufz', 'css',
+        Known collections are 'base', 'css', 'tableau', 'ufz',
         and 'xkcd'.
 
     Returns
@@ -159,7 +162,6 @@ def print_colors(collection=''):
 
     """
     import matplotlib.pyplot as plt
-    import mcplot.color
 
     if collection:
         if isinstance(collection, str):
@@ -245,7 +247,7 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
     subsample colormaps. To get smoothly-varying colormaps, you can use the
     method :meth:`matplotlib.colors.LinearSegmentedColormap.from_list`
 
-       cols = get_cmap('sron_ylorbr')
+       cols = get_cmap('sron:ylorbr')
 
        cmap = matplotlib.colors.LinearSegmentedColormap.from_list(cols)
 
@@ -257,7 +259,7 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
     --------
     .. code-block:: python
 
-       cols = get_cmap('mathematica_dark_rainbow_256', 15)
+       cols = get_cmap('mathematica:dark_rainbow_256', 15)
 
     """
     import matplotlib as mpl
@@ -265,9 +267,15 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
     import mcplot.color
     from mcplot import argsort
 
+    # backwards compatibility - mcplot_amwg to mcplot:amwg
+    palette_ = palette
+    if ':' not in palette:
+        palette = palette.replace('_', ':', 1)
+
     # _r at end of palette is same as reverse=True
     if palette.endswith('_r'):
         palette = palette[:-2]
+        palette_ = palette_[:-2]
         reverse = True
 
     mcplot_collections = [ i for i in dir(mcplot.color)
@@ -301,42 +309,54 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
 
     if not found_palette:
         for bb in mcplot_collections:
-            dd = eval('mcplot.color.' + bb)
-            if palette in dd:
+            dd = eval(f'mcplot.color.{bb}')
+            if (palette in dd) or (palette_ in dd):
+                if palette in dd:
+                    pal = palette
+                else:
+                    pal = palette_
                 found_palette = True
-                colors = dd[palette]
+                colors = dd[pal]
 
     if not found_palette:
         for bb in sron_collections:
-            dd = eval('mcplot.color.' + bb)
-            if palette in dd:
+            dd = eval(f'mcplot.color.{bb}')
+            if (palette in dd) or (palette_ in dd):
+                if palette in dd:
+                    pal = palette
+                else:
+                    pal = palette_
                 found_palette = True
                 if bb == 'sron_colors':
                     colors = [ mpl.colors.colorConverter.to_rgb(i)
-                               for i in dd[palette] ]
+                               for i in dd[pal] ]
                 elif bb == 'sron_colormaps':
                     colors = [ mpl.colors.colorConverter.to_rgb(i)
-                               for i in dd[palette][0] ]
-                    # miss = mpl.colors.colorConverter.to_rgb(dd[palette][1])
+                               for i in dd[pal][0] ]
+                    # miss = mpl.colors.colorConverter.to_rgb(dd[pal][1])
                 elif bb == 'sron_functions':
                     nosubsample = True
                     if ncol == 0:
                         ncol1 = 23
                     else:
                         ncol1 = ncol
-                    cols = dd[palette](ncol1)
+                    cols = dd[pal](ncol1)
                     colors = [ mpl.colors.colorConverter.to_rgb(i)
                                for i in cols[0] ]
                     # miss = mpl.colors.colorConverter.to_rgb(cols[1])
 
     if not found_palette:
         for bb in sron2012_collections:
-            dd = eval('mcplot.color.' + bb)
-            if palette in dd:
+            dd = eval(f'mcplot.color.{bb}')
+            if (palette in dd) or (palette_ in dd):
+                if palette in dd:
+                    pal = palette
+                else:
+                    pal = palette_
                 found_palette = True
                 if bb == 'sron2012_colors':
                     colors = [ mpl.colors.colorConverter.to_rgb(i)
-                               for i in dd[palette] ]
+                               for i in dd[pal] ]
                 elif bb == 'sron2012_functions':
                     nosubsample = True
                     colors = []
@@ -350,35 +370,51 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
                         else:
                             x = (offset + float(i) / float(ncol1 - 1) *
                                  (upper - offset))
-                        colors.append(tuple(dd[palette](x)))
+                        colors.append(tuple(dd[pal](x)))
 
     if not found_palette:
         for bb in mathematica_collections:
-            dd = eval('mcplot.color.' + bb)
-            if palette in dd:
+            dd = eval(f'mcplot.color.{bb}')
+            if (palette in dd) or (palette_ in dd):
+                if palette in dd:
+                    pal = palette
+                else:
+                    pal = palette_
                 found_palette = True
-                colors = dd[palette]
+                colors = dd[pal]
 
     if not found_palette:
         for bb in oregon_collections:
-            dd = eval('mcplot.color.' + bb)
-            if palette in dd:
+            dd = eval(f'mcplot.color.{bb}')
+            if (palette in dd) or (palette_ in dd):
+                if palette in dd:
+                    pal = palette
+                else:
+                    pal = palette_
                 found_palette = True
-                colors = [ _rgb2rgb(i) for i in dd[palette] ]
+                colors = [ _rgb2rgb(i) for i in dd[pal] ]
 
     if not found_palette:
         for bb in ipcc_collections:
-            dd = eval('mcplot.color.' + bb)
-            if palette in dd:
+            dd = eval(f'mcplot.color.{bb}')
+            if (palette in dd) or (palette_ in dd):
+                if palette in dd:
+                    pal = palette
+                else:
+                    pal = palette_
                 found_palette = True
-                colors = [ _rgb2rgb(i) for i in dd[palette] ]
+                colors = [ _rgb2rgb(i) for i in dd[pal] ]
 
     if not found_palette:
         for bb in ncl_collections:
-            dd = eval('mcplot.color.' + bb)
-            if palette in dd:
+            dd = eval(f'mcplot.color.{bb}')
+            if (palette in dd) or (palette_ in dd):
+                if palette in dd:
+                    pal = palette
+                else:
+                    pal = palette_
                 found_palette = True
-                colors = dd[palette]
+                colors = dd[pal]
 
     if not found_palette:
         # try:
@@ -388,11 +424,15 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
         #     mplmaps = sorted(mpl.cm.datad.keys())
         amplmaps = plt.colormaps()
         mplmaps = [ i for i in amplmaps if not i.endswith('_r') ]
-        if palette in mplmaps:
+        if (palette in mplmaps) or (palette_ in mplmaps):
+            if palette in mplmaps:
+                pal = palette
+            else:
+                pal = palette_
             found_palette = True
-            # cmap = mpl.cm.get_cmap(palette)
-            # cmap = mpl.colormaps.get_cmap(palette)
-            cmap = mpl.colormaps[palette]
+            # cmap = mpl.cm.get_cmap(pal)
+            # cmap = mpl.colormaps.get_cmap(pal)
+            cmap = mpl.colormaps[pal]
             try:
                 # mpl.colors.ListedColormap
                 colors = cmap.colors
@@ -401,9 +441,13 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
                 colors = [ cmap(i) for i in range(cmap.N) ]
         else:
             lmplmaps = [ i.lower() for i in mplmaps ]
-            if palette.lower() in lmplmaps:
+            if (palette.lower() in lmplmaps) or (palette_.lower() in lmplmaps):
+                if palette.lower() in lmplmaps:
+                    pal = palette
+                else:
+                    pal = palette_
                 found_palette = True
-                ipalette = lmplmaps.index(palette.lower())
+                ipalette = lmplmaps.index(pal.lower())
                 # cmap = mpl.cm.get_cmap(mplmaps[ipalette])
                 # cmap = mpl.colormaps.get_cmap(mplmaps[ipalette])
                 cmap = mpl.colormaps[mplmaps[ipalette]]
@@ -416,13 +460,17 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
 
     if not found_palette:
         for bb in brewer_collections:
-            dd = eval('mcplot.color.' + bb)
-            if palette in dd:
+            dd = eval(f'mcplot.color.{bb}')
+            if (palette in dd) or (palette_ in dd):
+                if palette in dd:
+                    pal = palette
+                else:
+                    pal = palette_
                 found_palette = True
-                colors = [ _rgb2rgb(i) for i in dd[palette] ]
+                colors = [ _rgb2rgb(i) for i in dd[pal] ]
 
     if not found_palette:
-        raise ValueError(palette + ' color palette not found.')
+        raise ValueError(f'{palette} color palette not found.')
 
     if order is not None:
         hsv = ['hue', 'saturation', 'value']
@@ -529,49 +577,49 @@ def print_palettes(collection=''):
         print('mcplot')
         for cc in mcplot_collections:
             print('   ', cc)
-            ll = eval('mcplot.color.' + cc + '.keys()')
+            ll = eval(f'mcplot.color.{cc}.keys()')
             print('       ', list(ll))
 
     if 'sron' in collections:
         print('sron')
         for cc in sron_collections:
             print('   ', cc)
-            ll = eval('mcplot.color.' + cc + '.keys()')
+            ll = eval(f'mcplot.color.{cc}.keys()')
             print('       ', list(ll))
 
     if 'sron2012' in collections:
         print('sron2012')
         for cc in sron2012_collections:
             print('   ', cc)
-            ll = eval('mcplot.color.' + cc + '.keys()')
+            ll = eval(f'mcplot.color.{cc}.keys()')
             print('       ', list(ll))
 
     if 'mathematica' in collections:
         print('mathematica')
         for cc in mathematica_collections:
             print('   ', cc)
-            ll = eval('mcplot.color.' + cc + '.keys()')
+            ll = eval(f'mcplot.color.{cc}.keys()')
             print('       ', list(ll))
 
     if 'oregon' in collections:
         print('oregon')
         for cc in oregon_collections:
             print('   ', cc)
-            ll = eval('mcplot.color.' + cc + '.keys()')
+            ll = eval(f'mcplot.color.{cc}.keys()')
             print('       ', list(ll))
 
     if 'ipcc' in collections:
         print('ipcc')
         for cc in ipcc_collections:
             print('   ', cc)
-            ll = eval('mcplot.color.' + cc + '.keys()')
+            ll = eval(f'mcplot.color.{cc}.keys()')
             print('       ', list(ll))
 
     if 'ncl' in collections:
         print('ncl')
         for cc in ncl_collections:
             print('   ', cc)
-            ll = eval('mcplot.color.' + cc + '.keys()')
+            ll = eval(f'mcplot.color.{cc}.keys()')
             print('       ', list(ll))
 
     if 'matplotlib' in collections:
@@ -591,7 +639,7 @@ def print_palettes(collection=''):
         print('brewer')
         for cc in brewer_collections:
             print('   ', cc)
-            ll = eval('mcplot.color.' + cc + '.keys()')
+            ll = eval(f'mcplot.color.{cc}.keys()')
             print('       ', list(ll))
 
 
@@ -622,7 +670,7 @@ def _newsubplot(nrow, ncol, iplot, iname, ncolors=0):  # pragma: no cover
     dx = -0.01
     dy = 0.5
     if ncolors:
-        iiname = iname + '(' + str(ncolors) + ')'
+        iiname = f'{iname}({ncolors})'
     else:
         iiname = iname
     ax.text(xmin + dx * (xmax - xmin), ymin + dy * (ymax - ymin), iiname,
@@ -769,7 +817,8 @@ def show_palettes(outfile='', collection=''):  # pragma: no cover
         acmaps = plt.colormaps()
         cmaps  = [ i for i in acmaps if not i.endswith('_r') ]
         cmaps.sort()
-        all_collections.extend(cmaps)
+        # all_collections.extend(cmaps) (old)
+        all_collections.append(cmaps)
     if 'brewer' in collections:
         for cc in brewer_collections:
             all_collections.append(cc)
@@ -783,22 +832,26 @@ def show_palettes(outfile='', collection=''):  # pragma: no cover
 
     ipanel = 0
     for cc in all_collections:
-        try:
-            icoll = eval('mcplot.color.' + cc)
+        if isinstance(cc, list):
+            # matplotlib
+            icoll = cc
             newcoll = True
-            collname = cc
-        except AttributeError:
-            # matplotlib name
-            icoll = [cc]
-            newcoll = False
             collname = 'matplotlib'
+        else:
+            try:
+                icoll = eval(f'mcplot.color.{cc}')
+                newcoll = True
+                collname = cc
+            except AttributeError:
+                # matplotlib name (old, should not be here)
+                icoll = [cc]
+                newcoll = False
+                collname = 'matplotlib'
         for iname in icoll:
-            # colors = icoll[iname]
             if ipanel == 0:
                 ifig += 1
                 fig = _newfig(ifig, collname)
             ipanel += 1
-            # ax = _newsubplot(nrow, 1, ipanel, iname)
             _newsubplot(nrow, 1, ipanel, iname)
             if collname == 'sron_functions':
                 for ncolors in range(1, 24):

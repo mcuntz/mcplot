@@ -6,7 +6,7 @@ UFZ, Leipzig, Germany from 18.01.2007
 .. moduleauthor:: Matthias Cuntz
 
 History
-    * Written Mar 2022, Matthias Cuntz
+   * Written Mar 2022, Matthias Cuntz
 
 """
 

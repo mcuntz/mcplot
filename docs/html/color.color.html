@@ -455,6 +455,9 @@ Jan 2023, Matthias Cuntz</p></li>
 <li><p>Do not set_bad() for sron palettes, Jan 2023, Matthias Cuntz</p></li>
 <li><p>Allow ncol=1 in get_cmap, Jun 2023, Matthias Cuntz</p></li>
 <li><p>Added IPCC colours, Feb 2024, Matthias Cuntz</p></li>
+<li><p>Use : instead of _ in colormap names, Oct 2024, Matthias Cuntz</p></li>
+<li><p>Start Brewer colors after Matplotlib colors at new page in show_palettes,
+Oct 2024, Matthias Cuntz</p></li>
 </ul>
 </dd>
 </dl>
@@ -498,7 +501,7 @@ ListedColormap. You can use the <em>ncol</em>, <em>offset</em>, and <em>upper</e
 subsample colormaps. To get smoothly-varying colormaps, you can use the
 method <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.colors.LinearSegmentedColormap.html#matplotlib.colors.LinearSegmentedColormap.from_list" title="(in Matplotlib v3.9.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">matplotlib.colors.LinearSegmentedColormap.from_list()</span></code></a></p>
 <blockquote>
-<div><p>cols = get_cmap(‘sron_ylorbr’)</p>
+<div><p>cols = get_cmap(‘sron:ylorbr’)</p>
 <p>cmap = matplotlib.colors.LinearSegmentedColormap.from_list(cols)</p>
 </div></blockquote>
 <p>You can get the color tuples from a LinearSegmentedColormap like this</p>
@@ -507,7 +510,7 @@ method <a class="reference external" href="https://matplotlib.org/stable/api/_as
 </div></blockquote>
 </div>
 <p class="rubric">Examples</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;mathematica_dark_rainbow_256&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;mathematica:dark_rainbow_256&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -539,7 +542,7 @@ which can be any color name known to Matplotlib.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>collection</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em> of </em><em>strings</em><em>, </em><em>optional</em>) – Name(s) of color collection(s).
-Known collections are ‘base’, ‘tableau’, ‘ufz’, ‘css’,
+Known collections are ‘base’, ‘css’, ‘tableau’, ‘ufz’,
 and ‘xkcd’.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

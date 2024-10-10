@@ -9,6 +9,7 @@ History
      added pyjams_amwg
    * Renamed pyjams_cmaps to mcplot_cmaps, and pyjams_amwg to mcplot_amwg,
      Oct 2024, Matthias Cuntz
+   * Use : instead of _ in colormap names, Oct 2024, Matthias Cuntz
 
 """
 
@@ -42,7 +43,7 @@ mcplot_amwg = [ (c[0] / 255, c[1] / 255, c[2] / 255)
 
 # mcplot color maps
 mcplot_cmaps = {
-    'mcplot_amwg': mcplot_amwg,
+    'mcplot:amwg': mcplot_amwg,
 }
 
 

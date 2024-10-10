@@ -1,8 +1,20 @@
 Changelog
 ---------
 
-v1.1 (??? 2024)
+v2.0 (??? 2024)
+    * Prefix IPCC colors with ipcc:
+    * Use : instead of _ in colormap names.
+    * Start Brewer colors after Matplotlib colors at new page in
+      `show_palettes`.
     * Renamed file `mcplot.py` to `class_mcplot.py`.
+    * Change class variables `lwidth` to `lw`, `alwidth` to `alw`,
+      `elwidth` to `elw`, `msize` to `ms`, `mwidth` to `mew` in
+      `mcPlot`.
+    * Added `loc` and set `xbbox` and `ybbox` in `mcPlot` so that
+      legend is in upper right corner.
+    * Change `llxbbox` to `xbbox`, `llybbox` to `ybbox`, `llrspace` to
+      `labelspacing`, `llcspace` to `columnspacing`, `llhtextpad` to
+      `handletextpad`, `llhlength` to `handlelength` in `mcPlot`.
     * Reorder `ldashes` from little to more dots between dashes in
       `mcPlot`.
     * Set `dxabc` and `dyabc` to upper left corner of plot in

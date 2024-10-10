@@ -347,22 +347,25 @@ document.write(`
 <span class="sd">   show_palettes</span>
 
 <span class="sd">History</span>
-<span class="sd">    * Written Nov 2021, Matthias Cuntz</span>
-<span class="sd">    * Change order of color maps, Dec 2021, Matthias Cuntz</span>
-<span class="sd">    * More consistent docstrings, Jan 2022, Matthias Cuntz</span>
-<span class="sd">    * Added &#39;order&#39; keyword, Feb 2022, Matthias Cuntz</span>
-<span class="sd">    * &#39;get_color&#39;, Mar 2022, Matthias Cuntz</span>
-<span class="sd">    * &#39;cname&#39; can be list of names in &#39;get_color&#39;, Apr 2022, Matthias Cuntz</span>
-<span class="sd">    * Register ufz colors only once, Apr 2022, Matthias Cuntz</span>
-<span class="sd">    * Added print_colors, Apr 2022, Matthias Cuntz</span>
-<span class="sd">    * Use matplotlib.colormaps.get_cmap instead of deprecated</span>
-<span class="sd">      matplotlib.cm.get_cmap, Dec 2022, Matthias Cuntz</span>
-<span class="sd">    * Use matplotlib.colormaps[name] instead of</span>
-<span class="sd">      matplotlib.colormaps.get_cmap(name) to work with matplotlib &lt; v3.6,</span>
-<span class="sd">      Jan 2023, Matthias Cuntz</span>
-<span class="sd">    * Do not set_bad() for sron palettes, Jan 2023, Matthias Cuntz</span>
-<span class="sd">    * Allow ncol=1 in get_cmap, Jun 2023, Matthias Cuntz</span>
-<span class="sd">    * Added IPCC colours, Feb 2024, Matthias Cuntz</span>
+<span class="sd">   * Written Nov 2021, Matthias Cuntz</span>
+<span class="sd">   * Change order of color maps, Dec 2021, Matthias Cuntz</span>
+<span class="sd">   * More consistent docstrings, Jan 2022, Matthias Cuntz</span>
+<span class="sd">   * Added &#39;order&#39; keyword, Feb 2022, Matthias Cuntz</span>
+<span class="sd">   * &#39;get_color&#39;, Mar 2022, Matthias Cuntz</span>
+<span class="sd">   * &#39;cname&#39; can be list of names in &#39;get_color&#39;, Apr 2022, Matthias Cuntz</span>
+<span class="sd">   * Register ufz colors only once, Apr 2022, Matthias Cuntz</span>
+<span class="sd">   * Added print_colors, Apr 2022, Matthias Cuntz</span>
+<span class="sd">   * Use matplotlib.colormaps.get_cmap instead of deprecated</span>
+<span class="sd">     matplotlib.cm.get_cmap, Dec 2022, Matthias Cuntz</span>
+<span class="sd">   * Use matplotlib.colormaps[name] instead of</span>
+<span class="sd">     matplotlib.colormaps.get_cmap(name) to work with matplotlib &lt; v3.6,</span>
+<span class="sd">     Jan 2023, Matthias Cuntz</span>
+<span class="sd">   * Do not set_bad() for sron palettes, Jan 2023, Matthias Cuntz</span>
+<span class="sd">   * Allow ncol=1 in get_cmap, Jun 2023, Matthias Cuntz</span>
+<span class="sd">   * Added IPCC colours, Feb 2024, Matthias Cuntz</span>
+<span class="sd">   * Use : instead of _ in colormap names, Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * Start Brewer colors after Matplotlib colors at new page in show_palettes,</span>
+<span class="sd">     Oct 2024, Matthias Cuntz</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -452,7 +455,7 @@ document.write(`
                        <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;ufz_&#39;</span><span class="p">)</span>
                        <span class="ow">and</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_palettes&#39;</span><span class="p">)</span> <span class="p">]</span>
         <span class="c1"># ufz has only 1 list with colors</span>
-        <span class="n">ufz_colors</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">ufz_colors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">ufz_colors</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">ufz_colors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">mapping</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ufz_colors</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">cname</span><span class="p">:</span>
@@ -474,7 +477,7 @@ document.write(`
 <span class="sd">    ----------</span>
 <span class="sd">    collection : str or list of strings, optional</span>
 <span class="sd">        Name(s) of color collection(s).</span>
-<span class="sd">        Known collections are &#39;base&#39;, &#39;tableau&#39;, &#39;ufz&#39;, &#39;css&#39;,</span>
+<span class="sd">        Known collections are &#39;base&#39;, &#39;css&#39;, &#39;tableau&#39;, &#39;ufz&#39;,</span>
 <span class="sd">        and &#39;xkcd&#39;.</span>
 
 <span class="sd">    Returns</span>
@@ -490,7 +493,6 @@ document.write(`
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-    <span class="kn">import</span> <span class="nn">mcplot.color</span>
 
     <span class="k">if</span> <span class="n">collection</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -579,7 +581,7 @@ document.write(`
 <span class="sd">    subsample colormaps. To get smoothly-varying colormaps, you can use the</span>
 <span class="sd">    method :meth:`matplotlib.colors.LinearSegmentedColormap.from_list`</span>
 
-<span class="sd">       cols = get_cmap(&#39;sron_ylorbr&#39;)</span>
+<span class="sd">       cols = get_cmap(&#39;sron:ylorbr&#39;)</span>
 
 <span class="sd">       cmap = matplotlib.colors.LinearSegmentedColormap.from_list(cols)</span>
 
@@ -591,7 +593,7 @@ document.write(`
 <span class="sd">    --------</span>
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">       cols = get_cmap(&#39;mathematica_dark_rainbow_256&#39;, 15)</span>
+<span class="sd">       cols = get_cmap(&#39;mathematica:dark_rainbow_256&#39;, 15)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
@@ -599,9 +601,15 @@ document.write(`
     <span class="kn">import</span> <span class="nn">mcplot.color</span>
     <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">argsort</span>
 
+    <span class="c1"># backwards compatibility - mcplot_amwg to mcplot:amwg</span>
+    <span class="n">palette_</span> <span class="o">=</span> <span class="n">palette</span>
+    <span class="k">if</span> <span class="s1">&#39;:&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">palette</span><span class="p">:</span>
+        <span class="n">palette</span> <span class="o">=</span> <span class="n">palette</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
     <span class="c1"># _r at end of palette is same as reverse=True</span>
     <span class="k">if</span> <span class="n">palette</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_r&#39;</span><span class="p">):</span>
         <span class="n">palette</span> <span class="o">=</span> <span class="n">palette</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">palette_</span> <span class="o">=</span> <span class="n">palette_</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">reverse</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="n">mcplot_collections</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">mcplot</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
@@ -635,42 +643,54 @@ document.write(`
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">bb</span> <span class="ow">in</span> <span class="n">mcplot_collections</span><span class="p">:</span>
-            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">bb</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">bb</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette_</span>
                 <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="n">colors</span> <span class="o">=</span> <span class="n">dd</span><span class="p">[</span><span class="n">palette</span><span class="p">]</span>
+                <span class="n">colors</span> <span class="o">=</span> <span class="n">dd</span><span class="p">[</span><span class="n">pal</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">bb</span> <span class="ow">in</span> <span class="n">sron_collections</span><span class="p">:</span>
-            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">bb</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">bb</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette_</span>
                 <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="k">if</span> <span class="n">bb</span> <span class="o">==</span> <span class="s1">&#39;sron_colors&#39;</span><span class="p">:</span>
                     <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">colorConverter</span><span class="o">.</span><span class="n">to_rgb</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                               <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">[</span><span class="n">palette</span><span class="p">]</span> <span class="p">]</span>
+                               <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">[</span><span class="n">pal</span><span class="p">]</span> <span class="p">]</span>
                 <span class="k">elif</span> <span class="n">bb</span> <span class="o">==</span> <span class="s1">&#39;sron_colormaps&#39;</span><span class="p">:</span>
                     <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">colorConverter</span><span class="o">.</span><span class="n">to_rgb</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                               <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">[</span><span class="n">palette</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">]</span>
-                    <span class="c1"># miss = mpl.colors.colorConverter.to_rgb(dd[palette][1])</span>
+                               <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">[</span><span class="n">pal</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">]</span>
+                    <span class="c1"># miss = mpl.colors.colorConverter.to_rgb(dd[pal][1])</span>
                 <span class="k">elif</span> <span class="n">bb</span> <span class="o">==</span> <span class="s1">&#39;sron_functions&#39;</span><span class="p">:</span>
                     <span class="n">nosubsample</span> <span class="o">=</span> <span class="kc">True</span>
                     <span class="k">if</span> <span class="n">ncol</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                         <span class="n">ncol1</span> <span class="o">=</span> <span class="mi">23</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">ncol1</span> <span class="o">=</span> <span class="n">ncol</span>
-                    <span class="n">cols</span> <span class="o">=</span> <span class="n">dd</span><span class="p">[</span><span class="n">palette</span><span class="p">](</span><span class="n">ncol1</span><span class="p">)</span>
+                    <span class="n">cols</span> <span class="o">=</span> <span class="n">dd</span><span class="p">[</span><span class="n">pal</span><span class="p">](</span><span class="n">ncol1</span><span class="p">)</span>
                     <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">colorConverter</span><span class="o">.</span><span class="n">to_rgb</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
                                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">]</span>
                     <span class="c1"># miss = mpl.colors.colorConverter.to_rgb(cols[1])</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">bb</span> <span class="ow">in</span> <span class="n">sron2012_collections</span><span class="p">:</span>
-            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">bb</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">bb</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette_</span>
                 <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="k">if</span> <span class="n">bb</span> <span class="o">==</span> <span class="s1">&#39;sron2012_colors&#39;</span><span class="p">:</span>
                     <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">colorConverter</span><span class="o">.</span><span class="n">to_rgb</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                               <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">[</span><span class="n">palette</span><span class="p">]</span> <span class="p">]</span>
+                               <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">[</span><span class="n">pal</span><span class="p">]</span> <span class="p">]</span>
                 <span class="k">elif</span> <span class="n">bb</span> <span class="o">==</span> <span class="s1">&#39;sron2012_functions&#39;</span><span class="p">:</span>
                     <span class="n">nosubsample</span> <span class="o">=</span> <span class="kc">True</span>
                     <span class="n">colors</span> <span class="o">=</span> <span class="p">[]</span>
@@ -684,35 +704,51 @@ document.write(`
                         <span class="k">else</span><span class="p">:</span>
                             <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">offset</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">ncol1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span>
                                  <span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">offset</span><span class="p">))</span>
-                        <span class="n">colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">dd</span><span class="p">[</span><span class="n">palette</span><span class="p">](</span><span class="n">x</span><span class="p">)))</span>
+                        <span class="n">colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">dd</span><span class="p">[</span><span class="n">pal</span><span class="p">](</span><span class="n">x</span><span class="p">)))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">bb</span> <span class="ow">in</span> <span class="n">mathematica_collections</span><span class="p">:</span>
-            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">bb</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">bb</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette_</span>
                 <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="n">colors</span> <span class="o">=</span> <span class="n">dd</span><span class="p">[</span><span class="n">palette</span><span class="p">]</span>
+                <span class="n">colors</span> <span class="o">=</span> <span class="n">dd</span><span class="p">[</span><span class="n">pal</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">bb</span> <span class="ow">in</span> <span class="n">oregon_collections</span><span class="p">:</span>
-            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">bb</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">bb</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette_</span>
                 <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">_rgb2rgb</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">[</span><span class="n">palette</span><span class="p">]</span> <span class="p">]</span>
+                <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">_rgb2rgb</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">[</span><span class="n">pal</span><span class="p">]</span> <span class="p">]</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">bb</span> <span class="ow">in</span> <span class="n">ipcc_collections</span><span class="p">:</span>
-            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">bb</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">bb</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette_</span>
                 <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">_rgb2rgb</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">[</span><span class="n">palette</span><span class="p">]</span> <span class="p">]</span>
+                <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">_rgb2rgb</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">[</span><span class="n">pal</span><span class="p">]</span> <span class="p">]</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">bb</span> <span class="ow">in</span> <span class="n">ncl_collections</span><span class="p">:</span>
-            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">bb</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">bb</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette_</span>
                 <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="n">colors</span> <span class="o">=</span> <span class="n">dd</span><span class="p">[</span><span class="n">palette</span><span class="p">]</span>
+                <span class="n">colors</span> <span class="o">=</span> <span class="n">dd</span><span class="p">[</span><span class="n">pal</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
         <span class="c1"># try:</span>
@@ -722,11 +758,15 @@ document.write(`
         <span class="c1">#     mplmaps = sorted(mpl.cm.datad.keys())</span>
         <span class="n">amplmaps</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colormaps</span><span class="p">()</span>
         <span class="n">mplmaps</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">amplmaps</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_r&#39;</span><span class="p">)</span> <span class="p">]</span>
-        <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">mplmaps</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">mplmaps</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">mplmaps</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">mplmaps</span><span class="p">:</span>
+                <span class="n">pal</span> <span class="o">=</span> <span class="n">palette</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pal</span> <span class="o">=</span> <span class="n">palette_</span>
             <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="c1"># cmap = mpl.cm.get_cmap(palette)</span>
-            <span class="c1"># cmap = mpl.colormaps.get_cmap(palette)</span>
-            <span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="n">palette</span><span class="p">]</span>
+            <span class="c1"># cmap = mpl.cm.get_cmap(pal)</span>
+            <span class="c1"># cmap = mpl.colormaps.get_cmap(pal)</span>
+            <span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="n">pal</span><span class="p">]</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="c1"># mpl.colors.ListedColormap</span>
                 <span class="n">colors</span> <span class="o">=</span> <span class="n">cmap</span><span class="o">.</span><span class="n">colors</span>
@@ -735,9 +775,13 @@ document.write(`
                 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">cmap</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)</span> <span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">lmplmaps</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mplmaps</span> <span class="p">]</span>
-            <span class="k">if</span> <span class="n">palette</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">lmplmaps</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">palette</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">lmplmaps</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">lmplmaps</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">palette</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">lmplmaps</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette_</span>
                 <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="n">ipalette</span> <span class="o">=</span> <span class="n">lmplmaps</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">palette</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+                <span class="n">ipalette</span> <span class="o">=</span> <span class="n">lmplmaps</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pal</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
                 <span class="c1"># cmap = mpl.cm.get_cmap(mplmaps[ipalette])</span>
                 <span class="c1"># cmap = mpl.colormaps.get_cmap(mplmaps[ipalette])</span>
                 <span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="n">mplmaps</span><span class="p">[</span><span class="n">ipalette</span><span class="p">]]</span>
@@ -750,13 +794,17 @@ document.write(`
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">bb</span> <span class="ow">in</span> <span class="n">brewer_collections</span><span class="p">:</span>
-            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">bb</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+            <span class="n">dd</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">bb</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette_</span>
                 <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">_rgb2rgb</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">[</span><span class="n">palette</span><span class="p">]</span> <span class="p">]</span>
+                <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">_rgb2rgb</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dd</span><span class="p">[</span><span class="n">pal</span><span class="p">]</span> <span class="p">]</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">palette</span> <span class="o">+</span> <span class="s1">&#39; color palette not found.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">palette</span><span class="si">}</span><span class="s1"> color palette not found.&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">order</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">hsv</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;hue&#39;</span><span class="p">,</span> <span class="s1">&#39;saturation&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">]</span>
@@ -866,49 +914,49 @@ document.write(`
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mcplot&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">mcplot_collections</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   &#39;</span><span class="p">,</span> <span class="n">cc</span><span class="p">)</span>
-            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">cc</span> <span class="o">+</span> <span class="s1">&#39;.keys()&#39;</span><span class="p">)</span>
+            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">cc</span><span class="si">}</span><span class="s1">.keys()&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;       &#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">ll</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="s1">&#39;sron&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sron&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">sron_collections</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   &#39;</span><span class="p">,</span> <span class="n">cc</span><span class="p">)</span>
-            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">cc</span> <span class="o">+</span> <span class="s1">&#39;.keys()&#39;</span><span class="p">)</span>
+            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">cc</span><span class="si">}</span><span class="s1">.keys()&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;       &#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">ll</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="s1">&#39;sron2012&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sron2012&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">sron2012_collections</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   &#39;</span><span class="p">,</span> <span class="n">cc</span><span class="p">)</span>
-            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">cc</span> <span class="o">+</span> <span class="s1">&#39;.keys()&#39;</span><span class="p">)</span>
+            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">cc</span><span class="si">}</span><span class="s1">.keys()&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;       &#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">ll</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="s1">&#39;mathematica&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mathematica&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">mathematica_collections</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   &#39;</span><span class="p">,</span> <span class="n">cc</span><span class="p">)</span>
-            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">cc</span> <span class="o">+</span> <span class="s1">&#39;.keys()&#39;</span><span class="p">)</span>
+            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">cc</span><span class="si">}</span><span class="s1">.keys()&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;       &#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">ll</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="s1">&#39;oregon&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;oregon&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">oregon_collections</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   &#39;</span><span class="p">,</span> <span class="n">cc</span><span class="p">)</span>
-            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">cc</span> <span class="o">+</span> <span class="s1">&#39;.keys()&#39;</span><span class="p">)</span>
+            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">cc</span><span class="si">}</span><span class="s1">.keys()&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;       &#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">ll</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="s1">&#39;ipcc&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ipcc&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">ipcc_collections</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   &#39;</span><span class="p">,</span> <span class="n">cc</span><span class="p">)</span>
-            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">cc</span> <span class="o">+</span> <span class="s1">&#39;.keys()&#39;</span><span class="p">)</span>
+            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">cc</span><span class="si">}</span><span class="s1">.keys()&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;       &#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">ll</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="s1">&#39;ncl&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ncl&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">ncl_collections</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   &#39;</span><span class="p">,</span> <span class="n">cc</span><span class="p">)</span>
-            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">cc</span> <span class="o">+</span> <span class="s1">&#39;.keys()&#39;</span><span class="p">)</span>
+            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">cc</span><span class="si">}</span><span class="s1">.keys()&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;       &#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">ll</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="s1">&#39;matplotlib&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
@@ -928,7 +976,7 @@ document.write(`
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;brewer&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">brewer_collections</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   &#39;</span><span class="p">,</span> <span class="n">cc</span><span class="p">)</span>
-            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">cc</span> <span class="o">+</span> <span class="s1">&#39;.keys()&#39;</span><span class="p">)</span>
+            <span class="n">ll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">cc</span><span class="si">}</span><span class="s1">.keys()&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;       &#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">ll</span><span class="p">))</span></div>
 
 
@@ -960,7 +1008,7 @@ document.write(`
     <span class="n">dx</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.01</span>
     <span class="n">dy</span> <span class="o">=</span> <span class="mf">0.5</span>
     <span class="k">if</span> <span class="n">ncolors</span><span class="p">:</span>
-        <span class="n">iiname</span> <span class="o">=</span> <span class="n">iname</span> <span class="o">+</span> <span class="s1">&#39;(&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ncolors</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+        <span class="n">iiname</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">iname</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="n">ncolors</span><span class="si">}</span><span class="s1">)&#39;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">iiname</span> <span class="o">=</span> <span class="n">iname</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">xmin</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">),</span> <span class="n">ymin</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="p">(</span><span class="n">ymax</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">),</span> <span class="n">iiname</span><span class="p">,</span>
@@ -1109,7 +1157,8 @@ document.write(`
         <span class="n">acmaps</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colormaps</span><span class="p">()</span>
         <span class="n">cmaps</span>  <span class="o">=</span> <span class="p">[</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">acmaps</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_r&#39;</span><span class="p">)</span> <span class="p">]</span>
         <span class="n">cmaps</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-        <span class="n">all_collections</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">cmaps</span><span class="p">)</span>
+        <span class="c1"># all_collections.extend(cmaps) (old)</span>
+        <span class="n">all_collections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmaps</span><span class="p">)</span>
     <span class="k">if</span> <span class="s1">&#39;brewer&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">brewer_collections</span><span class="p">:</span>
             <span class="n">all_collections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
@@ -1123,22 +1172,26 @@ document.write(`
 
     <span class="n">ipanel</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">all_collections</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">icoll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;mcplot.color.&#39;</span> <span class="o">+</span> <span class="n">cc</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cc</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="c1"># matplotlib</span>
+            <span class="n">icoll</span> <span class="o">=</span> <span class="n">cc</span>
             <span class="n">newcoll</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="n">collname</span> <span class="o">=</span> <span class="n">cc</span>
-        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="c1"># matplotlib name</span>
-            <span class="n">icoll</span> <span class="o">=</span> <span class="p">[</span><span class="n">cc</span><span class="p">]</span>
-            <span class="n">newcoll</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="n">collname</span> <span class="o">=</span> <span class="s1">&#39;matplotlib&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">icoll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">cc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">newcoll</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">collname</span> <span class="o">=</span> <span class="n">cc</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="c1"># matplotlib name (old, should not be here)</span>
+                <span class="n">icoll</span> <span class="o">=</span> <span class="p">[</span><span class="n">cc</span><span class="p">]</span>
+                <span class="n">newcoll</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">collname</span> <span class="o">=</span> <span class="s1">&#39;matplotlib&#39;</span>
         <span class="k">for</span> <span class="n">iname</span> <span class="ow">in</span> <span class="n">icoll</span><span class="p">:</span>
-            <span class="c1"># colors = icoll[iname]</span>
             <span class="k">if</span> <span class="n">ipanel</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">ifig</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">fig</span> <span class="o">=</span> <span class="n">_newfig</span><span class="p">(</span><span class="n">ifig</span><span class="p">,</span> <span class="n">collname</span><span class="p">)</span>
             <span class="n">ipanel</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="c1"># ax = _newsubplot(nrow, 1, ipanel, iname)</span>
             <span class="n">_newsubplot</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ipanel</span><span class="p">,</span> <span class="n">iname</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">collname</span> <span class="o">==</span> <span class="s1">&#39;sron_functions&#39;</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">ncolors</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">):</span>

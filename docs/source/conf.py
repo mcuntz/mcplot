@@ -172,6 +172,7 @@ html_theme_options = {
     "use_issues_button": True,
     "use_repository_button": True,
     "use_download_button": True,
+    "navigation_with_keys": False,
 }
 
 # # Add any paths that contain custom static files (such as style sheets) here,
