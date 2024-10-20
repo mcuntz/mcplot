@@ -58,6 +58,10 @@ History
      llcspace -> columnspacing, llhtextpad -> handletextpad,
      llhlength -> handlelength, Oct 2024, Matthias Cuntz
    * Added loc, Oct 2024, Matthias Cuntz
+   * -o and --output for -p plotname, Oct 2024, Matthias Cuntz
+   * Use 10/12 instead of 4/5 to reduce a4 figsize on screen windows,
+     Oct 2024, Matthias Cuntz
+   * Use f-strings whenever possible, Oct 2024, Matthias Cuntz
 
 """
 import numpy as np
@@ -266,7 +270,8 @@ class mcPlot(object):
 
            optional arguments:
              -h, --help            show this help message and exit
-             -p plotname, --plotname plotname
+             -o plot_filename, --output plot_filename,
+             -p plot_filename, --plotname plot_filename
                                    Name of plot output file for types pdf,
                                    html, d3, or hvplot, and name basis for type
                                    png (default: calling_filename without
@@ -291,7 +296,7 @@ class mcPlot(object):
         .. code-block:: python
 
            iplot = mcPlot(desc="Test Matthias' plotting class.",
-                          argstr="directory file")
+                          argstr='directory file')
 
         """
         import argparse
@@ -323,9 +328,9 @@ class mcPlot(object):
         hstr = (f'Name of plot output file for types pdf, html, d3, or'
                 f' hvplot, and name basis for type png (default:'
                 f' {plotname}).')
-        parser.add_argument('-p', '--plotname', action='store',
-                            default=plotname, dest='plotname',
-                            metavar='plotname', help=hstr)
+        parser.add_argument('-o', '--output', '-p', '--plotname',
+                            action='store', default=plotname, dest='plotname',
+                            metavar='plot_filename', help=hstr)
         hstr = 'Use serif font; default sans serif.'
         parser.add_argument('-s', '--serif', action='store_true',
                             default=serif, dest='serif', help=hstr)
@@ -487,7 +492,7 @@ class mcPlot(object):
            class myPlot(mcPlot):
                def __init__(self, *args, **kwargs):
                    super().__init__(*args, **kwargs)
-                   self.lcol1     = 'black'
+                   self.lcol1    = 'black'
                    self.mynewcol = 'red'
                    # reset global values after colour changes, etc.
                    self.set_matplotlib_rcparams()
@@ -534,7 +539,7 @@ class mcPlot(object):
         else:
             self.fgcolor = 'black'
             self.bgcolor = 'white'
-        # mcplot' amwg color map without the first three colours
+        # mcplot:amwg color map without the first three colours
         # white, black and purple
         amwg = [(0.141, 0.129, 0.408),  # dark blue
                 (0.141, 0.357, 0.6),    # medium blue
@@ -568,8 +573,8 @@ class mcPlot(object):
         self.loc   = 'upper right'
         self.xbbox = 1.0
         self.ybbox = 1.0
-        self.labelspacing  = 0.4  # spacing between rows in legend
-        self.columnspacing = 1.0  # spacing between columns in legend
+        self.labelspacing  = 0.0  # extra spacing between rows in legend
+        self.columnspacing = 1.0  # extra spacing between columns in legend
         self.handletextpad = 0.4  # pad between the legend handle and text
         self.handlelength  = 1.5  # length of the legend handles
         self.frameon = False      # if True, draw a frame around the legend.
@@ -601,7 +606,7 @@ class mcPlot(object):
 
         self.ifig += 1
         iplot  = 0
-        print('    Plot - Fig ', self.ifig)
+        print(f'    Plot - Fig {self.ifig}')
         fig = plt.figure(self.ifig)
 
         nn = 100
@@ -680,7 +685,7 @@ class mcPlot(object):
             try:
                 import mpld3
             except ModuleNotFoundError:
-                print("    No mpld3 found. Use output type html instead.")
+                print('    No mpld3 found. Use output type html instead.')
                 self.outtype = 'html'
 
         if (self.outtype == 'hvplot'):
@@ -819,8 +824,8 @@ class mcPlot(object):
                     mpl.rcParams['font.sans-serif'] = 'DejaVu Sans'
             mpl.rc('savefig', dpi=self.dpi, format='png')
         else:
-            # a4 portrait
-            mpl.rc('figure', figsize=(4. / 5. * 8.27, 4. / 5. * 11.69))
+            # 80% of a4 portrait
+            mpl.rc('figure', figsize=(10. / 12. * 8.27, 10. / 12. * 11.69))
         # print(mpl.rcParams)
         mpl.rc('axes', linewidth=self.alw, edgecolor=self.fgcolor,
                facecolor=self.bgcolor, labelcolor=self.fgcolor,
@@ -901,12 +906,10 @@ class mcPlot(object):
                       f'</html>', file=ff)
             ibase = os.path.dirname(self.plotfile)
             if not ibase:
-                ibase = './'
-            else:
-                ibase += '/'
-            if not os.path.exists(ibase + 'html'):
-                os.mkdir(ibase + 'html')
-            with open(ibase + 'html/empty.html', 'w') as ff:
+                ibase = '.'
+            if not os.path.exists(f'{ibase}/html'):
+                os.mkdir(f'{ibase}/html')
+            with open(f'{ibase}/html/empty.html', 'w') as ff:
                 print('<!DOCTYPE html public "-//W3C//DTD HTML 4.01'
                       ' Frameset//EN"\n'
                       ' "http://www.w3.org/TR/html4/frameset.dtd">\n'
@@ -914,7 +917,7 @@ class mcPlot(object):
                       '    <body>\n'
                       '    </body>\n'
                       '</html>', file=ff)
-            self.fhtml = open(ibase + 'html/menu.html', 'w')
+            self.fhtml = open(f'{ibase}/html/menu.html', 'w')
             print(f'<!DOCTYPE html public "-//W3C//DTD HTML'
                   f' 4.01 Transitional//EN"\n'
                   f' "http://www.w3.org/TR/html4/loose.dtd">\n'
@@ -961,7 +964,7 @@ class mcPlot(object):
             self.pdf_pages.savefig(fig, **kwargs)
             plt.close(fig)
         elif (self.outtype == 'png'):
-            pngfile = self.plotfile + "{0:04d}".format(self.ifig) + ".png"
+            pngfile = f'{self.plotfile}{self.ifig:04d}.png'
             if 'transparent' not in kwargs:
                 kwargs.update({'transparent': self.transparent})
             if 'bbox_inches' not in kwargs:
@@ -971,8 +974,7 @@ class mcPlot(object):
             fig.savefig(pngfile, **kwargs)
             plt.close(fig)
         elif (self.outtype == 'html'):
-            pngfile  = filebase(self.plotfile) + "_"
-            pngfile += "{0:04d}".format(self.ifig) + ".png"
+            pngfile  = filebase(self.plotfile) + f'_{self.ifig:04d}.png'
             if 'transparent' not in kwargs:
                 kwargs.update({'transparent': self.transparent})
             if 'bbox_inches' not in kwargs:
@@ -980,7 +982,7 @@ class mcPlot(object):
             if 'pad_inches' not in kwargs:
                 kwargs.update({'pad_inches': self.pad_inches})
             fig.savefig(pngfile, **kwargs)
-            print('<p><img src=' + pngfile + '></p>', file=self.fhtml)
+            print(f'<p><img src={pngfile}></p>', file=self.fhtml)
             plt.close(fig)
         elif (self.outtype == 'd3'):
             import mpld3
@@ -999,9 +1001,7 @@ class mcPlot(object):
             # html directory in same directory as output file
             ibase = os.path.dirname(self.plotfile)
             if not ibase:
-                ibase = './'
-            else:
-                ibase += '/'
+                ibase = '.'
 
             # make holoviews panel or layout
             if 'ncol' in kwargs:
@@ -1035,7 +1035,7 @@ class mcPlot(object):
             # filename in html/
             html = f'{ff}_{ffig}.html'
             # filename in .
-            hhtml = ibase + 'html/' + html
+            hhtml = f'{ibase}/html/{html}'
             print(f'        <p><a href="{html}" target="dynamic">'
                   f'{ffig}</a>', file=self.fhtml)
             hvplot.save(layout, hhtml, resources=INLINE)

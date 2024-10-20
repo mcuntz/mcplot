@@ -384,6 +384,10 @@ document.write(`
 <span class="sd">     llcspace -&gt; columnspacing, llhtextpad -&gt; handletextpad,</span>
 <span class="sd">     llhlength -&gt; handlelength, Oct 2024, Matthias Cuntz</span>
 <span class="sd">   * Added loc, Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * -o and --output for -p plotname, Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * Use 10/12 instead of 4/5 to reduce a4 figsize on screen windows,</span>
+<span class="sd">     Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * Use f-strings whenever possible, Oct 2024, Matthias Cuntz</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -596,7 +600,8 @@ document.write(`
 
 <span class="sd">           optional arguments:</span>
 <span class="sd">             -h, --help            show this help message and exit</span>
-<span class="sd">             -p plotname, --plotname plotname</span>
+<span class="sd">             -o plot_filename, --output plot_filename,</span>
+<span class="sd">             -p plot_filename, --plotname plot_filename</span>
 <span class="sd">                                   Name of plot output file for types pdf,</span>
 <span class="sd">                                   html, d3, or hvplot, and name basis for type</span>
 <span class="sd">                                   png (default: calling_filename without</span>
@@ -621,7 +626,7 @@ document.write(`
 <span class="sd">        .. code-block:: python</span>
 
 <span class="sd">           iplot = mcPlot(desc=&quot;Test Matthias&#39; plotting class.&quot;,</span>
-<span class="sd">                          argstr=&quot;directory file&quot;)</span>
+<span class="sd">                          argstr=&#39;directory file&#39;)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">argparse</span>
@@ -653,9 +658,9 @@ document.write(`
         <span class="n">hstr</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Name of plot output file for types pdf, html, d3, or&#39;</span>
                 <span class="sa">f</span><span class="s1">&#39; hvplot, and name basis for type png (default:&#39;</span>
                 <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">plotname</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--plotname&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span>
-                            <span class="n">default</span><span class="o">=</span><span class="n">plotname</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;plotname&#39;</span><span class="p">,</span>
-                            <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;plotname&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--output&#39;</span><span class="p">,</span> <span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--plotname&#39;</span><span class="p">,</span>
+                            <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">plotname</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;plotname&#39;</span><span class="p">,</span>
+                            <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;plot_filename&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
         <span class="n">hstr</span> <span class="o">=</span> <span class="s1">&#39;Use serif font; default sans serif.&#39;</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;--serif&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
                             <span class="n">default</span><span class="o">=</span><span class="n">serif</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
@@ -820,7 +825,7 @@ document.write(`
 <span class="sd">           class myPlot(mcPlot):</span>
 <span class="sd">               def __init__(self, *args, **kwargs):</span>
 <span class="sd">                   super().__init__(*args, **kwargs)</span>
-<span class="sd">                   self.lcol1     = &#39;black&#39;</span>
+<span class="sd">                   self.lcol1    = &#39;black&#39;</span>
 <span class="sd">                   self.mynewcol = &#39;red&#39;</span>
 <span class="sd">                   # reset global values after colour changes, etc.</span>
 <span class="sd">                   self.set_matplotlib_rcparams()</span>
@@ -867,7 +872,7 @@ document.write(`
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fgcolor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bgcolor</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span>
-        <span class="c1"># mcplot&#39; amwg color map without the first three colours</span>
+        <span class="c1"># mcplot:amwg color map without the first three colours</span>
         <span class="c1"># white, black and purple</span>
         <span class="n">amwg</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.141</span><span class="p">,</span> <span class="mf">0.129</span><span class="p">,</span> <span class="mf">0.408</span><span class="p">),</span>  <span class="c1"># dark blue</span>
                 <span class="p">(</span><span class="mf">0.141</span><span class="p">,</span> <span class="mf">0.357</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">),</span>    <span class="c1"># medium blue</span>
@@ -901,8 +906,8 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">loc</span>   <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">xbbox</span> <span class="o">=</span> <span class="mf">1.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ybbox</span> <span class="o">=</span> <span class="mf">1.0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">labelspacing</span>  <span class="o">=</span> <span class="mf">0.4</span>  <span class="c1"># spacing between rows in legend</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">columnspacing</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># spacing between columns in legend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labelspacing</span>  <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># extra spacing between rows in legend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columnspacing</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># extra spacing between columns in legend</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">handletextpad</span> <span class="o">=</span> <span class="mf">0.4</span>  <span class="c1"># pad between the legend handle and text</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">handlelength</span>  <span class="o">=</span> <span class="mf">1.5</span>  <span class="c1"># length of the legend handles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frameon</span> <span class="o">=</span> <span class="kc">False</span>      <span class="c1"># if True, draw a frame around the legend.</span>
@@ -937,7 +942,7 @@ document.write(`
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ifig</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">iplot</span>  <span class="o">=</span> <span class="mi">0</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    Plot - Fig &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    Plot - Fig </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="p">)</span>
 
         <span class="n">nn</span> <span class="o">=</span> <span class="mi">100</span>
@@ -1019,7 +1024,7 @@ document.write(`
             <span class="k">try</span><span class="p">:</span>
                 <span class="kn">import</span> <span class="nn">mpld3</span>
             <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    No mpld3 found. Use output type html instead.&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    No mpld3 found. Use output type html instead.&#39;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">outtype</span> <span class="o">=</span> <span class="s1">&#39;html&#39;</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outtype</span> <span class="o">==</span> <span class="s1">&#39;hvplot&#39;</span><span class="p">):</span>
@@ -1161,8 +1166,8 @@ document.write(`
                     <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;DejaVu Sans&#39;</span>
             <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;savefig&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dpi</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># a4 portrait</span>
-            <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">4.</span> <span class="o">/</span> <span class="mf">5.</span> <span class="o">*</span> <span class="mf">8.27</span><span class="p">,</span> <span class="mf">4.</span> <span class="o">/</span> <span class="mf">5.</span> <span class="o">*</span> <span class="mf">11.69</span><span class="p">))</span>
+            <span class="c1"># 80% of a4 portrait</span>
+            <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">10.</span> <span class="o">/</span> <span class="mf">12.</span> <span class="o">*</span> <span class="mf">8.27</span><span class="p">,</span> <span class="mf">10.</span> <span class="o">/</span> <span class="mf">12.</span> <span class="o">*</span> <span class="mf">11.69</span><span class="p">))</span>
         <span class="c1"># print(mpl.rcParams)</span>
         <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alw</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fgcolor</span><span class="p">,</span>
                <span class="n">facecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bgcolor</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fgcolor</span><span class="p">,</span>
@@ -1246,12 +1251,10 @@ document.write(`
                       <span class="sa">f</span><span class="s1">&#39;&lt;/html&gt;&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">ff</span><span class="p">)</span>
             <span class="n">ibase</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plotfile</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">ibase</span><span class="p">:</span>
-                <span class="n">ibase</span> <span class="o">=</span> <span class="s1">&#39;./&#39;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">ibase</span> <span class="o">+=</span> <span class="s1">&#39;/&#39;</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ibase</span> <span class="o">+</span> <span class="s1">&#39;html&#39;</span><span class="p">):</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">ibase</span> <span class="o">+</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ibase</span> <span class="o">+</span> <span class="s1">&#39;html/empty.html&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ff</span><span class="p">:</span>
+                <span class="n">ibase</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ibase</span><span class="si">}</span><span class="s1">/html&#39;</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ibase</span><span class="si">}</span><span class="s1">/html&#39;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ibase</span><span class="si">}</span><span class="s1">/html/empty.html&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ff</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&lt;!DOCTYPE html public &quot;-//W3C//DTD HTML 4.01&#39;</span>
                       <span class="s1">&#39; Frameset//EN&quot;</span><span class="se">\n</span><span class="s1">&#39;</span>
                       <span class="s1">&#39; &quot;http://www.w3.org/TR/html4/frameset.dtd&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
@@ -1259,7 +1262,7 @@ document.write(`
                       <span class="s1">&#39;    &lt;body&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
                       <span class="s1">&#39;    &lt;/body&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
                       <span class="s1">&#39;&lt;/html&gt;&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">ff</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fhtml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">ibase</span> <span class="o">+</span> <span class="s1">&#39;html/menu.html&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fhtml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ibase</span><span class="si">}</span><span class="s1">/html/menu.html&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&lt;!DOCTYPE html public &quot;-//W3C//DTD HTML&#39;</span>
                   <span class="sa">f</span><span class="s1">&#39; 4.01 Transitional//EN&quot;</span><span class="se">\n</span><span class="s1">&#39;</span>
                   <span class="sa">f</span><span class="s1">&#39; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
@@ -1312,7 +1315,7 @@ document.write(`
             <span class="bp">self</span><span class="o">.</span><span class="n">pdf_pages</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
         <span class="k">elif</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outtype</span> <span class="o">==</span> <span class="s1">&#39;png&#39;</span><span class="p">):</span>
-            <span class="n">pngfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotfile</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">{0:04d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.png&quot;</span>
+            <span class="n">pngfile</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">plotfile</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="si">:</span><span class="s1">04d</span><span class="si">}</span><span class="s1">.png&#39;</span>
             <span class="k">if</span> <span class="s1">&#39;transparent&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
                 <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;transparent&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">transparent</span><span class="p">})</span>
             <span class="k">if</span> <span class="s1">&#39;bbox_inches&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
@@ -1322,8 +1325,7 @@ document.write(`
             <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">pngfile</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
         <span class="k">elif</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outtype</span> <span class="o">==</span> <span class="s1">&#39;html&#39;</span><span class="p">):</span>
-            <span class="n">pngfile</span>  <span class="o">=</span> <span class="n">filebase</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plotfile</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span>
-            <span class="n">pngfile</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{0:04d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.png&quot;</span>
+            <span class="n">pngfile</span>  <span class="o">=</span> <span class="n">filebase</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plotfile</span><span class="p">)</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="si">:</span><span class="s1">04d</span><span class="si">}</span><span class="s1">.png&#39;</span>
             <span class="k">if</span> <span class="s1">&#39;transparent&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
                 <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;transparent&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">transparent</span><span class="p">})</span>
             <span class="k">if</span> <span class="s1">&#39;bbox_inches&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
@@ -1331,7 +1333,7 @@ document.write(`
             <span class="k">if</span> <span class="s1">&#39;pad_inches&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
                 <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;pad_inches&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad_inches</span><span class="p">})</span>
             <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">pngfile</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&lt;p&gt;&lt;img src=&#39;</span> <span class="o">+</span> <span class="n">pngfile</span> <span class="o">+</span> <span class="s1">&#39;&gt;&lt;/p&gt;&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fhtml</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&lt;p&gt;&lt;img src=</span><span class="si">{</span><span class="n">pngfile</span><span class="si">}</span><span class="s1">&gt;&lt;/p&gt;&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fhtml</span><span class="p">)</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
         <span class="k">elif</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outtype</span> <span class="o">==</span> <span class="s1">&#39;d3&#39;</span><span class="p">):</span>
             <span class="kn">import</span> <span class="nn">mpld3</span>
@@ -1350,9 +1352,7 @@ document.write(`
             <span class="c1"># html directory in same directory as output file</span>
             <span class="n">ibase</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plotfile</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">ibase</span><span class="p">:</span>
-                <span class="n">ibase</span> <span class="o">=</span> <span class="s1">&#39;./&#39;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">ibase</span> <span class="o">+=</span> <span class="s1">&#39;/&#39;</span>
+                <span class="n">ibase</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span>
 
             <span class="c1"># make holoviews panel or layout</span>
             <span class="k">if</span> <span class="s1">&#39;ncol&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
@@ -1386,7 +1386,7 @@ document.write(`
             <span class="c1"># filename in html/</span>
             <span class="n">html</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ff</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">ffig</span><span class="si">}</span><span class="s1">.html&#39;</span>
             <span class="c1"># filename in .</span>
-            <span class="n">hhtml</span> <span class="o">=</span> <span class="n">ibase</span> <span class="o">+</span> <span class="s1">&#39;html/&#39;</span> <span class="o">+</span> <span class="n">html</span>
+            <span class="n">hhtml</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ibase</span><span class="si">}</span><span class="s1">/html/</span><span class="si">{</span><span class="n">html</span><span class="si">}</span><span class="s1">&#39;</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;        &lt;p&gt;&lt;a href=&quot;</span><span class="si">{</span><span class="n">html</span><span class="si">}</span><span class="s1">&quot; target=&quot;dynamic&quot;&gt;&#39;</span>
                   <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ffig</span><span class="si">}</span><span class="s1">&lt;/a&gt;&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fhtml</span><span class="p">)</span>
             <span class="n">hvplot</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">hhtml</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="n">INLINE</span><span class="p">)</span></div>

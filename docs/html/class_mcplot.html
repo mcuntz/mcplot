@@ -486,6 +486,10 @@ Oct 2024, Matthias Cuntz</p></li>
 llcspace -&gt; columnspacing, llhtextpad -&gt; handletextpad,
 llhlength -&gt; handlelength, Oct 2024, Matthias Cuntz</p></li>
 <li><p>Added loc, Oct 2024, Matthias Cuntz</p></li>
+<li><p>-o and –output for -p plotname, Oct 2024, Matthias Cuntz</p></li>
+<li><p>Use 10/12 instead of 4/5 to reduce a4 figsize on screen windows,
+Oct 2024, Matthias Cuntz</p></li>
+<li><p>Use f-strings whenever possible, Oct 2024, Matthias Cuntz</p></li>
 </ul>
 </dd>
 </dl>
@@ -728,7 +732,8 @@ and raise an error.</p></li>
 
 optional<span class="w"> </span>arguments:
 <span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
-<span class="w">  </span>-p<span class="w"> </span>plotname,<span class="w"> </span>--plotname<span class="w"> </span>plotname
+<span class="w">  </span>-o<span class="w"> </span>plot_filename,<span class="w"> </span>--output<span class="w"> </span>plot_filename,
+<span class="w">  </span>-p<span class="w"> </span>plot_filename,<span class="w"> </span>--plotname<span class="w"> </span>plot_filename
 <span class="w">                        </span>Name<span class="w"> </span>of<span class="w"> </span>plot<span class="w"> </span>output<span class="w"> </span>file<span class="w"> </span><span class="k">for</span><span class="w"> </span>types<span class="w"> </span>pdf,
 <span class="w">                        </span>html,<span class="w"> </span>d3,<span class="w"> </span>or<span class="w"> </span>hvplot,<span class="w"> </span>and<span class="w"> </span>name<span class="w"> </span>basis<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">type</span>
 <span class="w">                        </span>png<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span>calling_filename<span class="w"> </span>without
@@ -752,7 +757,7 @@ optional<span class="w"> </span>arguments:
 </div>
 <p class="rubric">Examples</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">iplot</span> <span class="o">=</span> <span class="n">mcPlot</span><span class="p">(</span><span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Test Matthias&#39; plotting class.&quot;</span><span class="p">,</span>
-               <span class="n">argstr</span><span class="o">=</span><span class="s2">&quot;directory file&quot;</span><span class="p">)</span>
+               <span class="n">argstr</span><span class="o">=</span><span class="s1">&#39;directory file&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -981,7 +986,7 @@ bbox of the figure</p></td>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">myPlot</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span>     <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span>    <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mynewcol</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span>
         <span class="c1"># reset global values after colour changes, etc.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_matplotlib_rcparams</span><span class="p">()</span>

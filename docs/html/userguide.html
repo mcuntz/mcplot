@@ -441,7 +441,7 @@ the test plot.</p>
 </pre></div>
 </div>
 <p>gives the help message:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">mcplot_test</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">plotname</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span> <span class="n">outtype</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">u</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">mcplot_test</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">plotname</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span> <span class="n">outtype</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">u</span><span class="p">]</span>
                       <span class="p">[</span><span class="o">-</span><span class="n">w</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">dpi</span> <span class="n">number</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">transparent</span><span class="p">]</span> <span class="p">[</span><span class="n">args</span> <span class="o">...</span><span class="p">]</span>
 
 <span class="n">Test</span> <span class="n">mcPlot</span>
@@ -451,9 +451,11 @@ the test plot.</p>
 
 <span class="n">options</span><span class="p">:</span>
   <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
-  <span class="o">-</span><span class="n">p</span> <span class="n">plotname</span><span class="p">,</span> <span class="o">--</span><span class="n">plotname</span> <span class="n">plotname</span>
-                        <span class="n">Name</span> <span class="n">of</span> <span class="n">plot</span> <span class="n">output</span> <span class="n">file</span> <span class="k">for</span> <span class="n">types</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">d3</span><span class="p">,</span> <span class="ow">or</span>
-                        <span class="n">hvplot</span><span class="p">,</span> <span class="ow">and</span> <span class="n">name</span> <span class="n">basis</span> <span class="k">for</span> <span class="nb">type</span> <span class="n">png</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="n">mcplot</span><span class="p">)</span><span class="o">.</span>
+  <span class="o">-</span><span class="n">o</span> <span class="n">plot_filename</span><span class="p">,</span> <span class="o">--</span><span class="n">output</span> <span class="n">plot_filename</span><span class="p">,</span>
+  <span class="o">-</span><span class="n">p</span> <span class="n">plot_filename</span><span class="p">,</span> <span class="o">--</span><span class="n">plotname</span> <span class="n">plot_filename</span>
+                        <span class="n">Name</span> <span class="n">of</span> <span class="n">plot</span> <span class="n">output</span> <span class="n">file</span> <span class="k">for</span> <span class="n">types</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span>
+                        <span class="n">d3</span><span class="p">,</span> <span class="ow">or</span> <span class="n">hvplot</span><span class="p">,</span> <span class="ow">and</span> <span class="n">name</span> <span class="n">basis</span> <span class="k">for</span> <span class="nb">type</span> <span class="n">png</span>
+                        <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="n">class_mcplot</span><span class="p">)</span><span class="o">.</span>
   <span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">serif</span>           <span class="n">Use</span> <span class="n">serif</span> <span class="n">font</span><span class="p">;</span> <span class="n">default</span> <span class="n">sans</span> <span class="n">serif</span><span class="o">.</span>
   <span class="o">-</span><span class="n">t</span> <span class="n">outtype</span><span class="p">,</span> <span class="o">--</span><span class="nb">type</span> <span class="n">outtype</span>
                         <span class="n">Output</span> <span class="nb">type</span> <span class="ow">is</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">png</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">d3</span><span class="p">,</span> <span class="ow">or</span> <span class="n">hvplot</span>
@@ -469,25 +471,29 @@ the test plot.</p>
 </pre></div>
 </div>
 <p>Thus, the command line option <strong>-t pdf</strong> would write the plot into a
-PDF file. The option <strong>-p test1.pdf</strong> would write it into the file named
+PDF file. The option <strong>-o test1.pdf</strong> would write it into the file named
 <strong>test1.pdf</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_test.py<span class="w"> </span>-t<span class="w"> </span>pdf<span class="w"> </span>-p<span class="w"> </span>test1.pdf
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_test.py<span class="w"> </span>-t<span class="w"> </span>pdf<span class="w"> </span>-o<span class="w"> </span>test1.pdf
 </pre></div>
 </div>
-<p>This uses the sans-serif font <strong>DejaVu Sans</strong>, which the standard font
-of <a class="reference external" href="https://matplotlib.org/">Matplotlib</a>. <a class="reference internal" href="class_mcplot.html#mcplot.class_mcplot.mcPlot" title="mcplot.class_mcplot.mcPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">mcPlot</span></code></a> will use the
-serif font <strong>DejaVue Serif</strong> with the command line option <strong>-s</strong>. It
-will use LaTeX to render text with the <strong>-u</strong> option (see <a class="reference external" href="https://matplotlib.org/stable/users/explain/text/usetex.html#usetex">Text
-rendering with LaTeX</a>). <strong>-u -s</strong> uses LaTeX standard Computer Modern
-font. It uses <strong>MyriadPro</strong> as sans-serif font in LaTeX, which must be
-installed (see section <a class="reference external" href="https://github.com/mcuntz/setup_mac?tab=readme-ov-file#myriad-pro">Myriad Pro</a>).</p>
+<p>This uses the sans-serif font <strong>DejaVu Sans</strong>, which is the standard
+font of <a class="reference external" href="https://matplotlib.org/">Matplotlib</a>. <a class="reference internal" href="class_mcplot.html#mcplot.class_mcplot.mcPlot" title="mcplot.class_mcplot.mcPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">mcPlot</span></code></a> will use
+the serif font <strong>DejaVue Serif</strong> with the command line option
+<strong>-s</strong>. It will use LaTeX to render text with the <strong>-u</strong> option (see
+<a class="reference external" href="https://matplotlib.org/stable/users/explain/text/usetex.html#usetex">Text rendering with LaTeX</a>). <strong>-u -s</strong> uses LaTeX standard Computer
+Modern font. It uses <strong>MyriadPro</strong> as sans-serif font in LaTeX, which
+must be installed separately (see section <a class="reference external" href="https://github.com/mcuntz/setup_mac?tab=readme-ov-file#myriad-pro">Myriad Pro</a>).</p>
 <p>By default, <code class="docutils literal notranslate"><span class="pre">mcPlot</span></code> plots onto a DIN A4 page, which facilitates
 choices of font sizes, etc. The output can be cropped with the utility
 <a class="reference external" href="https://github.com/ho-tex/pdfcrop">pdfcrop</a> which can be acquired from <a class="reference external" href="https://www.ctan.org/pkg/pdfcrop">CTAN</a>. The plot will be tightly
 cropped if the output type is <strong>png</strong>. Plot resolution can be set for
 <strong>png</strong> or rasterized maps in <strong>pdf</strong> (<strong>–dpi</strong>) with standard 300
 dpi. PNG plots can also have transparent background
-(<strong>–transparent</strong>), for example for use in presentations.</p>
+(<strong>–transparent</strong>), for example for use in presentations. Note that
+<strong>figsize</strong> is reduced by 10/12 (ca. 80%) for on screen windows to fit
+on laptop screens. If you are developing the plot on screen and the
+final figure in PNG or PDF should have a textsize of 12 pt, it should
+be developed on screen with 10 pt.</p>
 <p>The command line switch <strong>-w</strong> swaps foreground and backgroud colours,
 i.e. it plots white lines on black background. This is used if you do
 presentations with black background.</p>
@@ -498,8 +504,8 @@ section <a class="reference internal" href="#more-command-line-options">More com
 <p>In summary, the standard command line options allow you to use the
 same script to design a plot using plotting windows on screen, produce
 the publication ready plot writing into a PDF file (options <strong>-t</strong>,
-<strong>-p</strong>, <strong>-u</strong>), and make the same plot with dark background for
-presentations (options <strong>-t</strong>, <strong>-p</strong>, <strong>-u</strong>, <strong>-w</strong>).</p>
+<strong>-o</strong>, <strong>-u</strong>), and make the same plot with dark background for
+presentations (options <strong>-t</strong>, <strong>-o</strong>, <strong>-u</strong>, <strong>-w</strong>).</p>
 </section>
 <section id="extending-the-plotting-class">
 <h2>Extending the plotting class<a class="headerlink" href="#extending-the-plotting-class" title="Link to this heading">#</a></h2>
@@ -512,6 +518,9 @@ that produces a plot. This could give a script like
 
 
 <span class="k">class</span> <span class="nc">myPlot</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># reading one file would use self.cargs[0] such as</span>
@@ -529,7 +538,7 @@ that produces a plot. This could give a script like
         <span class="c1"># plot</span>
         <span class="n">xx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="mf">4.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
         <span class="n">larr</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lwidth</span><span class="p">,</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lw</span><span class="p">,</span>
                  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span><span class="p">)</span>
 
         <span class="c1"># show plot or write in file</span>
@@ -544,7 +553,7 @@ that produces a plot. This could give a script like
 
         <span class="n">xx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="mf">4.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
         <span class="n">larr</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lwidth</span><span class="p">,</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lw</span><span class="p">,</span>
                  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcol2</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">plot_save</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
@@ -568,38 +577,38 @@ methods <code class="xref py py-meth docutils literal notranslate"><span class="
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_fig_2()</span></code>. In the main section, an instance of the extended
 class <code class="xref py py-class docutils literal notranslate"><span class="pre">myPlot</span></code> is created, which prepares also any plotting
 backend such as a Matplotlib window or a PDF file. The data is read
-with the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">read_data()</span></code>. Two figures are created in the
-methods <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_fig_1()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_fig_2()</span></code>, which write the
-figures to the backend with the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_save(fig)()</span></code>. Any
-open backend such as a PDF file will be closed with the method
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code>.</p>
+with the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">read_data()</span></code>, which could also be called directly
+in <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code>. Two figures are created in the methods
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_fig_1()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_fig_2()</span></code>, which write the figures to
+the backend with the method <cite>plot_save(fig)</cite>. Any open backend
+such as a PDF file will be closed with the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code>.</p>
 <p>The script could be called giving the name of an input file
 <strong>input.csv</strong> on the command line, which is then accessible through
 <strong>self.cargs</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_basic.py<span class="w"> </span>-t<span class="w"> </span>png<span class="w"> </span>-p<span class="w"> </span>basic_<span class="w"> </span>input.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_basic.py<span class="w"> </span>-t<span class="w"> </span>png<span class="w"> </span>-o<span class="w"> </span>basic_<span class="w"> </span>input.csv
 </pre></div>
 </div>
 <p>Everytime <strong>self.plot_save(fig)</strong> is called, a figure is written to
 the output file. A PDF file can have multiple pages. PNG files are
-individual plots. For PNG files, only the start of the output files is
-thus given and this will be extended as
+individual plots. Only the start of the output files is
+hence given for PNG files and this start will be extended as
 <strong>f’{start}{self.ifig:04d}.png’</strong>. The example would give the output
-file <strong>basic_0001.png</strong>.</p>
+files <strong>basic_0001.png</strong> and <strong>basic_0002.png</strong>.</p>
 </section>
 <section id="class-variables">
 <h2>Class variables<a class="headerlink" href="#class-variables" title="Link to this heading">#</a></h2>
 <p>The plotting methods <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_fig_1()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_fig_2()</span></code> above
 use the defined variables <strong>self.lcol1</strong> for line color number 1,
-<strong>self.lcol2</strong> for line color number 2, and <strong>self.lwidth</strong> for the
+<strong>self.lcol2</strong> for line color number 2, and <strong>self.lw</strong> for the
 width of the plotted line.</p>
 <p>The are a large number of useful class variables defined, see
 <a class="reference internal" href="class_mcplot.html#id5" title="mcplot.class_mcplot.mcPlot.set_layout_options"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_layout_options()</span></code></a>. They can be
-used in all plotting methods such as different plotting functions to
-make plots have the same appearance.</p>
+used in all plot methods such as different plotting functions to make
+plots having the same appearance.</p>
 <p><strong>Lines and markers</strong></p>
 <ul class="simple">
 <li><p>There are five line colors defined: <strong>lcol1</strong> to <strong>lcol5</strong> (dark
-blue, dark red, light blue, orange, dark green), the same for
+blue, dark red, light blue, orange, dark green); the same for
 markers: <strong>mcol1</strong> to <strong>mcol5</strong>.</p></li>
 <li><p>The are two lists <strong>lcols</strong> and <strong>mcols</strong> with 13 colors (dark blue,
 medium blue, light blue, cyan, turquoise, light green, dark green,
@@ -610,7 +619,7 @@ sand, beige, yellow, orange, light red, dark red), which uses
 <li><p>The foreground color (<strong>fgcolor</strong>) is set to black, and the
 background color (<strong>bgcolor</strong>) is set to white. This is inverted
 with the <strong>-w</strong> command line option, which sets the variable
-<strong>dowhite</strong>.</p></li>
+<strong>self.dowhite</strong>.</p></li>
 <li><p>Linewidth of a plotting line (<strong>lw</strong>) is set to 1.5 while widths
 of axes (<strong>alw</strong>) and errorbars (<strong>elw</strong>) are set to 1.</p></li>
 <li><p>Marker size (<strong>msize</strong>) is set to 1.5 while the width of the marker
@@ -620,13 +629,15 @@ dash-dot-dash, dash-dot-dot-dash, …).</p></li>
 </ul>
 <p><strong>Text</strong></p>
 <ul class="simple">
-<li><p>Textsize (<strong>textsize</strong>) is set to 12 pt.</p></li>
-<li><p>The command line option <strong>-s</strong> sets the variable <strong>serif</strong> to True
-and a serif ouput font is used.</p></li>
-<li><p>The command line option <strong>-u</strong> sets the variable <strong>usetex</strong> to True,
-which can be used with any text in Matplotlib. It then uses LaTeX
-for all text handling. One can also use the function
-<a class="reference internal" href="str2tex.html#mcplot.str2tex.str2tex" title="mcplot.str2tex.str2tex"><code class="xref py py-func docutils literal notranslate"><span class="pre">str2tex()</span></code></a> for automatic conversion.</p></li>
+<li><p>Textsize (<strong>textsize</strong>) is set to 12 pt, which works well together
+with the assumed DIN A4 paper size.</p></li>
+<li><p>The command line option <strong>-s</strong> sets the variable <strong>self.serif</strong> to
+True and a serif ouput font is used.</p></li>
+<li><p>The command line option <strong>-u</strong> sets the variable <strong>self.usetex</strong> to
+True, which can be used with any text in Matplotlib. It then uses
+LaTeX for all text handling. One can also use the function
+<a class="reference internal" href="str2tex.html#mcplot.str2tex.str2tex" title="mcplot.str2tex.str2tex"><code class="xref py py-func docutils literal notranslate"><span class="pre">str2tex()</span></code></a> for automatic conversion of any text
+string to its LaTeX equivalent.</p></li>
 <li><p><strong>dxabc</strong> and <strong>dyabc</strong> are used to place a), b), c), … on the
 plot using <a class="reference internal" href="text2plot.html#mcplot.text2plot.abc2plot" title="mcplot.text2plot.abc2plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">abc2plot()</span></code></a>. These are 0-1 between
 axis minimum and maximum. They are set to 0.05 and 0.9,
@@ -638,32 +649,34 @@ resp., i.e. default is the upper left corner.</p></li>
 <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.gridspec.GridSpec.html#matplotlib.gridspec.GridSpec" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.gridspec.GridSpec</span></code></a> but is used with
 <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.add_axes.html#matplotlib.figure.Figure.add_axes" title="(in Matplotlib v3.9.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">matplotlib.figure.Figure.add_axes()</span></code></a>. It returns the tuple
 <cite>(left, bottom, width, height)</cite> for subplots with
-<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.add_axes.html#matplotlib.figure.Figure.add_axes" title="(in Matplotlib v3.9.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">matplotlib.figure.Figure.add_axes()</span></code></a>.</p>
+<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.add_axes.html#matplotlib.figure.Figure.add_axes" title="(in Matplotlib v3.9.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_axes()</span></code></a>.</p>
 <ul class="simple">
 <li><p><strong>nrow</strong> is set to 3 by default and <strong>ncol</strong> to 2, which gives six
-plotting panels on a DIN A4 page.</p></li>
+plotting panels on a DIN A4 page, which has a ratio between 3/2 and
+4/3.</p></li>
 <li><p>The further class variables <strong>left</strong> (0.125), <strong>right</strong> (0.9),
 <strong>bottom</strong> (0.11), <strong>top</strong> (0.88), <strong>hspace</strong> (0.1), and <strong>vspace</strong>
 (0.1) are fractions of the figure width and height and the same as
-the current defaults of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.gridspec.GridSpec.html#matplotlib.gridspec.GridSpec" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.gridspec.GridSpec</span></code></a>,
-except for hspace and vspace, which were halved. The latter are
-abbreviations for <cite>horizontal space</cite> and <cite>vertical space</cite> between
-subplots, which is more mnemonic for me than <cite>wspace</cite> for <cite>width
-reserved for space between subplots</cite> and <cite>hspace</cite> for <cite>height
-reserved for space between subplots</cite> in
-<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.gridspec.GridSpec.html#matplotlib.gridspec.GridSpec" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.gridspec.GridSpec</span></code></a>.</p></li>
+the current defaults of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.gridspec.GridSpec.html#matplotlib.gridspec.GridSpec" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.gridspec.GridSpec</span></code></a>
+(Matplotlib v3.9), except for <strong>hspace</strong> and <strong>vspace</strong>, which are
+half the corresponding GridSpec values (<cite>wspace</cite> and <cite>hspace</cite>,
+resp.). <strong>hspace</strong> and <strong>vspace</strong> are abbreviations for <cite>horizontal
+space</cite> and <cite>vertical space</cite> between subplots, which is more mnemonic
+for me than <cite>wspace</cite> for <cite>width reserved for space between subplots</cite>
+and <cite>hspace</cite> for <cite>height reserved for space between subplots</cite> in
+<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.gridspec.GridSpec.html#matplotlib.gridspec.GridSpec" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">GridSpec</span></code></a>.</p></li>
 <li><p>It is good practice to increase the figure counter <strong>ifig</strong> if
 opening a new figure.</p></li>
 </ul>
 <p><strong>Legend</strong></p>
-<p>There are class variables for the some of the main keywords of
-<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.legend.html#matplotlib.axes.Axes.legend" title="(in Matplotlib v3.9.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">matplotlib.axes.Axes.legend()</span></code></a> with defaults adapted for a bit
+<p>There are class variables for some of the main keywords of
+<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.legend.html#matplotlib.axes.Axes.legend" title="(in Matplotlib v3.9.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">matplotlib.axes.Axes.legend()</span></code></a> with defaults adapted for a
 tighter layout:</p>
 <ul class="simple">
 <li><p>The length of lines in the legend (<strong>handlelength</strong>) is set to 1.5,
 and the padding to the text (<strong>handletextpad</strong>) is set to 0.4.</p></li>
 <li><p>The vertical space between label rows (<strong>labelspacing</strong>) is set to
-0.4, and the horizontal space between label columns
+0, and the horizontal space between label columns
 (<strong>columnspacing</strong>) is set to 1.</p></li>
 <li><p><strong>frameon</strong> for the frame around the legend is set to False.</p></li>
 <li><p><strong>loc</strong> is set to ‘upper right’. <strong>xbbox</strong> and <strong>ybbox</strong>, to be
@@ -676,15 +689,16 @@ class variables:</p>
 <ul class="simple">
 <li><p>The command line options <strong>–dpi</strong> and <strong>–transparent</strong> set the
 equivalent keywords in
-<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.savefig.html#matplotlib.figure.Figure.savefig" title="(in Matplotlib v3.9.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">savefig()</span></code></a>. They are set by default
-to 300 and False, respectively.</p></li>
+<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.savefig.html#matplotlib.figure.Figure.savefig" title="(in Matplotlib v3.9.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">savefig()</span></code></a>. They are 300 and False by
+default, respectively.</p></li>
 <li><p><strong>bbox_inches</strong> is set to ‘tight’ with a very small padding
 <strong>pad_inches</strong> of 0.035.</p></li>
 </ul>
 <p>After fiddling with any of the class variables, it is a good idea to
 call <strong>set_matplotlib_rcparams()</strong> again (see example below), which
-sets some defaults such as the color of the boxplot whiskers of which
-one might not have thought themselves.</p>
+sets some defaults such as setting the color of the boxplot whiskers
+to the foreground colour, of which one might not have thought
+themselves.</p>
 </section>
 <section id="more-command-line-options">
 <h2>More command line options<a class="headerlink" href="#more-command-line-options" title="Link to this heading">#</a></h2>
@@ -693,7 +707,7 @@ one might not have thought themselves.</p>
 <a class="reference internal" href="class_mcplot.html#mcplot.class_mcplot.mcPlot" title="mcplot.class_mcplot.mcPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">mcPlot</span></code></a> with your own method if you want
 completely different command line arguments. Or you can extend the
 existing arguments using the <a class="reference external" href="https://docs.python.org/3/library/argparse.html#parents">parents</a> keyword to Python’s
-<code class="xref py py-class docutils literal notranslate"><span class="pre">argpase.ArgumentParser</span></code>. For the latter, you create an
+<a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">argparse.ArgumentParser</span></code></a>. For the latter, you create an
 <code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code> with the extra arguments you want and
 then parse it to <a class="reference internal" href="class_mcplot.html#mcplot.class_mcplot.mcPlot" title="mcplot.class_mcplot.mcPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">mcPlot</span></code></a> with the
 <strong>parents</strong> keyword:</p>
@@ -703,19 +717,20 @@ then parse it to <a class="reference internal" href="class_mcplot.html#mcplot.cl
     <span class="n">desc</span> <span class="o">=</span> <span class="s1">&#39;Example to add missing value command line argument&#39;</span>
     <span class="n">argstr</span> <span class="o">=</span> <span class="s1">&#39;input_file&#39;</span>
 
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
-        <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
-        <span class="n">add_help</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">add_help</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
     <span class="n">miss</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9999.</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-m&#39;</span><span class="p">,</span> <span class="s1">&#39;--missing&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span>
                         <span class="n">default</span><span class="o">=</span><span class="n">miss</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;miss&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
                         <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;missing_value&#39;</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data treated as missing value in</span>
-                              <span class="sa">f</span><span class="s1">&#39;input file (default: </span><span class="si">{</span><span class="n">miss</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">))</span>
+                        <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data treated as missing value in&#39;</span>
+                              <span class="sa">f</span><span class="s1">&#39; input file (default: </span><span class="si">{</span><span class="n">miss</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">))</span>
 
-    <span class="n">iplot</span> <span class="o">=</span> <span class="n">PlotIt</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">argstr</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">parser</span><span class="p">)</span>
+    <span class="n">iplot</span> <span class="o">=</span> <span class="n">myPlot</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">argstr</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">parser</span><span class="p">)</span>
+
     <span class="n">iplot</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">plot_fig_1</span><span class="p">()</span>
+    <span class="n">iplot</span><span class="o">.</span><span class="n">plot_fig_2</span><span class="p">()</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -731,6 +746,9 @@ and raise an error.</p>
 <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">mcPlot</span>
 
 <span class="k">class</span> <span class="nc">myPlot</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># reading one file would use self.cargs[0] such as</span>
@@ -748,7 +766,7 @@ and raise an error.</p>
         <span class="c1"># plot</span>
         <span class="n">xx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="mf">4.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
         <span class="n">larr</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lwidth</span><span class="p">,</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lw</span><span class="p">,</span>
                  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span><span class="p">)</span>
 
         <span class="c1"># show plot or write in file</span>
@@ -763,7 +781,7 @@ and raise an error.</p>
 
         <span class="n">xx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="mf">4.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
         <span class="n">larr</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lwidth</span><span class="p">,</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lw</span><span class="p">,</span>
                  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcol2</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">plot_save</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>

@@ -47,7 +47,7 @@ Adding the command line option **-h** gives a short usage note:
 
 gives the help message::
 
-   usage: mcplot_test.py [-h] [-p plotname] [-s] [-t outtype] [-u]
+   usage: mcplot_test.py [-h] [-o plotname] [-s] [-t outtype] [-u]
                          [-w] [--dpi number] [--transparent] [args ...]
 
    Test mcPlot
@@ -57,9 +57,11 @@ gives the help message::
 
    options:
      -h, --help            show this help message and exit
-     -p plotname, --plotname plotname
-                           Name of plot output file for types pdf, html, d3, or
-                           hvplot, and name basis for type png (default: mcplot).
+     -o plot_filename, --output plot_filename,
+     -p plot_filename, --plotname plot_filename
+                           Name of plot output file for types pdf, html,
+			   d3, or hvplot, and name basis for type png
+			   (default: class_mcplot).
      -s, --serif           Use serif font; default sans serif.
      -t outtype, --type outtype
                            Output type is pdf, png, html, d3, or hvplot
@@ -74,20 +76,20 @@ gives the help message::
                            (default: black or white).
 
 Thus, the command line option **-t pdf** would write the plot into a
-PDF file. The option **-p test1.pdf** would write it into the file named
+PDF file. The option **-o test1.pdf** would write it into the file named
 **test1.pdf**:
 
 .. code-block:: bash
 
-   python mcplot_test.py -t pdf -p test1.pdf
+   python mcplot_test.py -t pdf -o test1.pdf
 
-This uses the sans-serif font **DejaVu Sans**, which the standard font
-of `Matplotlib`_. :class:`~mcplot.class_mcplot.mcPlot` will use the
-serif font **DejaVue Serif** with the command line option **-s**. It
-will use LaTeX to render text with the **-u** option (see `Text
-rendering with LaTeX`_). **-u -s** uses LaTeX standard Computer Modern
-font. It uses **MyriadPro** as sans-serif font in LaTeX, which must be
-installed (see section `Myriad Pro`_).
+This uses the sans-serif font **DejaVu Sans**, which is the standard
+font of `Matplotlib`_. :class:`~mcplot.class_mcplot.mcPlot` will use
+the serif font **DejaVue Serif** with the command line option
+**-s**. It will use LaTeX to render text with the **-u** option (see
+`Text rendering with LaTeX`_). **-u -s** uses LaTeX standard Computer
+Modern font. It uses **MyriadPro** as sans-serif font in LaTeX, which
+must be installed separately (see section `Myriad Pro`_).
 
 By default, ``mcPlot`` plots onto a DIN A4 page, which facilitates
 choices of font sizes, etc. The output can be cropped with the utility
@@ -95,7 +97,11 @@ pdfcrop_ which can be acquired from CTAN_. The plot will be tightly
 cropped if the output type is **png**. Plot resolution can be set for
 **png** or rasterized maps in **pdf** (**--dpi**) with standard 300
 dpi. PNG plots can also have transparent background
-(**--transparent**), for example for use in presentations.
+(**--transparent**), for example for use in presentations. Note that
+**figsize** is reduced by 10/12 (ca. 80%) for on screen windows to fit
+on laptop screens. If you are developing the plot on screen and the
+final figure in PNG or PDF should have a textsize of 12 pt, it should
+be developed on screen with 10 pt.
 
 The command line switch **-w** swaps foreground and backgroud colours,
 i.e. it plots white lines on black background. This is used if you do
@@ -110,8 +116,8 @@ section `More command line options`_ below.
 In summary, the standard command line options allow you to use the
 same script to design a plot using plotting windows on screen, produce
 the publication ready plot writing into a PDF file (options **-t**,
-**-p**, **-u**), and make the same plot with dark background for
-presentations (options **-t**, **-p**, **-u**, **-w**).
+**-o**, **-u**), and make the same plot with dark background for
+presentations (options **-t**, **-o**, **-u**, **-w**).
 
 
 Extending the plotting class
@@ -130,6 +136,9 @@ that produces a plot. This could give a script like
 
    class myPlot(mcPlot):
 
+       def __init__(self, *args, **kwargs):
+           super().__init__(*args, **kwargs)
+
        def read_data(self):
            # reading one file would use self.cargs[0] such as
            # self.dat = np.loadtxt(self.cargs[0])
@@ -146,7 +155,7 @@ that produces a plot. This could give a script like
            # plot
            xx = self.dat / float(self.dat.size) * 4. * np.pi
            larr = ax.plot(xx, np.sin(xx))
-           plt.setp(larr[-1], linestyle='-', linewidth=self.lwidth,
+           plt.setp(larr[-1], linestyle='-', linewidth=self.lw,
                     marker='', color=self.lcol1)
 
            # show plot or write in file
@@ -161,7 +170,7 @@ that produces a plot. This could give a script like
 
            xx = self.dat / float(self.dat.size) * 4. * np.pi
            larr = ax.plot(xx, np.cos(xx))
-           plt.setp(larr[-1], linestyle='-', linewidth=self.lwidth,
+           plt.setp(larr[-1], linestyle='-', linewidth=self.lw,
                     marker='', color=self.lcol2)
 
            self.plot_save(fig)
@@ -184,11 +193,11 @@ methods :meth:`read_data`, :meth:`plot_fig_1`, and
 :meth:`plot_fig_2`. In the main section, an instance of the extended
 class :class:`myPlot` is created, which prepares also any plotting
 backend such as a Matplotlib window or a PDF file. The data is read
-with the method :meth:`read_data`. Two figures are created in the
-methods :meth:`plot_fig_1` and :meth:`plot_fig_2`, which write the
-figures to the backend with the method :meth:`plot_save(fig)`. Any
-open backend such as a PDF file will be closed with the method
-:meth:`close`.
+with the method :meth:`read_data`, which could also be called directly
+in :meth:`__init__`. Two figures are created in the methods
+:meth:`plot_fig_1` and :meth:`plot_fig_2`, which write the figures to
+the backend with the method `plot_save(fig)`. Any open backend
+such as a PDF file will be closed with the method :meth:`close`.
 
 The script could be called giving the name of an input file
 **input.csv** on the command line, which is then accessible through
@@ -196,14 +205,14 @@ The script could be called giving the name of an input file
 
 .. code-block:: bash
 
-   python mcplot_basic.py -t png -p basic_ input.csv
+   python mcplot_basic.py -t png -o basic_ input.csv
 
 Everytime **self.plot_save(fig)** is called, a figure is written to
 the output file. A PDF file can have multiple pages. PNG files are
-individual plots. For PNG files, only the start of the output files is
-thus given and this will be extended as
+individual plots. Only the start of the output files is
+hence given for PNG files and this start will be extended as
 **f'{start}{self.ifig:04d}.png'**. The example would give the output
-file **basic_0001.png**.
+files **basic_0001.png** and **basic_0002.png**.
 
 
 Class variables
@@ -211,18 +220,18 @@ Class variables
 
 The plotting methods :meth:`plot_fig_1` and :meth:`plot_fig_2` above
 use the defined variables **self.lcol1** for line color number 1,
-**self.lcol2** for line color number 2, and **self.lwidth** for the
+**self.lcol2** for line color number 2, and **self.lw** for the
 width of the plotted line.
 
 The are a large number of useful class variables defined, see
 :meth:`~mcplot.class_mcplot.mcPlot.set_layout_options`. They can be
-used in all plotting methods such as different plotting functions to
-make plots have the same appearance.
+used in all plot methods such as different plotting functions to make
+plots having the same appearance.
 
 **Lines and markers**
 
 * There are five line colors defined: **lcol1** to **lcol5** (dark
-  blue, dark red, light blue, orange, dark green), the same for
+  blue, dark red, light blue, orange, dark green); the same for
   markers: **mcol1** to **mcol5**.
 * The are two lists **lcols** and **mcols** with 13 colors (dark blue,
   medium blue, light blue, cyan, turquoise, light green, dark green,
@@ -233,7 +242,7 @@ make plots have the same appearance.
 * The foreground color (**fgcolor**) is set to black, and the
   background color (**bgcolor**) is set to white. This is inverted
   with the **-w** command line option, which sets the variable
-  **dowhite**.
+  **self.dowhite**.
 * Linewidth of a plotting line (**lw**) is set to 1.5 while widths
   of axes (**alw**) and errorbars (**elw**) are set to 1.
 * Marker size (**msize**) is set to 1.5 while the width of the marker
@@ -243,13 +252,15 @@ make plots have the same appearance.
 
 **Text**
 
-* Textsize (**textsize**) is set to 12 pt.
-* The command line option **-s** sets the variable **serif** to True
-  and a serif ouput font is used.
-* The command line option **-u** sets the variable **usetex** to True,
-  which can be used with any text in Matplotlib. It then uses LaTeX
-  for all text handling. One can also use the function
-  :func:`~mcplot.str2tex.str2tex` for automatic conversion.
+* Textsize (**textsize**) is set to 12 pt, which works well together
+  with the assumed DIN A4 paper size.
+* The command line option **-s** sets the variable **self.serif** to
+  True and a serif ouput font is used.
+* The command line option **-u** sets the variable **self.usetex** to
+  True, which can be used with any text in Matplotlib. It then uses
+  LaTeX for all text handling. One can also use the function
+  :func:`~mcplot.str2tex.str2tex` for automatic conversion of any text
+  string to its LaTeX equivalent.
 * **dxabc** and **dyabc** are used to place a), b), c), ... on the
   plot using :func:`~mcplot.text2plot.abc2plot`. These are 0-1 between
   axis minimum and maximum. They are set to 0.05 and 0.9,
@@ -262,33 +273,35 @@ The module :mod:`mcplot` includes a function
 :class:`matplotlib.gridspec.GridSpec` but is used with
 :meth:`matplotlib.figure.Figure.add_axes`. It returns the tuple
 `(left, bottom, width, height)` for subplots with
-:meth:`matplotlib.figure.Figure.add_axes`.
+:meth:`~matplotlib.figure.Figure.add_axes`.
 
 * **nrow** is set to 3 by default and **ncol** to 2, which gives six
-  plotting panels on a DIN A4 page.
+  plotting panels on a DIN A4 page, which has a ratio between 3/2 and
+  4/3.
 * The further class variables **left** (0.125), **right** (0.9),
   **bottom** (0.11), **top** (0.88), **hspace** (0.1), and **vspace**
   (0.1) are fractions of the figure width and height and the same as
-  the current defaults of :class:`matplotlib.gridspec.GridSpec`,
-  except for hspace and vspace, which were halved. The latter are
-  abbreviations for `horizontal space` and `vertical space` between
-  subplots, which is more mnemonic for me than `wspace` for `width
-  reserved for space between subplots` and `hspace` for `height
-  reserved for space between subplots` in
-  :class:`matplotlib.gridspec.GridSpec`.
+  the current defaults of :class:`matplotlib.gridspec.GridSpec`
+  (Matplotlib v3.9), except for **hspace** and **vspace**, which are
+  half the corresponding GridSpec values (`wspace` and `hspace`,
+  resp.). **hspace** and **vspace** are abbreviations for `horizontal
+  space` and `vertical space` between subplots, which is more mnemonic
+  for me than `wspace` for `width reserved for space between subplots`
+  and `hspace` for `height reserved for space between subplots` in
+  :class:`~matplotlib.gridspec.GridSpec`.
 * It is good practice to increase the figure counter **ifig** if
   opening a new figure.
 
 **Legend**
 
-There are class variables for the some of the main keywords of
-:meth:`matplotlib.axes.Axes.legend` with defaults adapted for a bit
+There are class variables for some of the main keywords of
+:meth:`matplotlib.axes.Axes.legend` with defaults adapted for a
 tighter layout:
 
 * The length of lines in the legend (**handlelength**) is set to 1.5,
   and the padding to the text (**handletextpad**) is set to 0.4.
 * The vertical space between label rows (**labelspacing**) is set to
-  0.4, and the horizontal space between label columns
+  0, and the horizontal space between label columns
   (**columnspacing**) is set to 1.
 * **frameon** for the frame around the legend is set to False.
 * **loc** is set to 'upper right'. **xbbox** and **ybbox**, to be
@@ -302,15 +315,16 @@ class variables:
 
 * The command line options **--dpi** and **--transparent** set the
   equivalent keywords in
-  :meth:`~matplotlib.figure.Figure.savefig`. They are set by default
-  to 300 and False, respectively.
+  :meth:`~matplotlib.figure.Figure.savefig`. They are 300 and False by
+  default, respectively.
 * **bbox_inches** is set to 'tight' with a very small padding
   **pad_inches** of 0.035.
 
 After fiddling with any of the class variables, it is a good idea to
 call **set_matplotlib_rcparams()** again (see example below), which
-sets some defaults such as the color of the boxplot whiskers of which
-one might not have thought themselves.
+sets some defaults such as setting the color of the boxplot whiskers
+to the foreground colour, of which one might not have thought
+themselves.
 
 
 More command line options
@@ -321,7 +335,7 @@ You can replace the method
 :class:`~mcplot.class_mcplot.mcPlot` with your own method if you want
 completely different command line arguments. Or you can extend the
 existing arguments using the `parents`_ keyword to Python's
-:class:`argpase.ArgumentParser`. For the latter, you create an
+:class:`argparse.ArgumentParser`. For the latter, you create an
 :class:`~argpase.ArgumentParser` with the extra arguments you want and
 then parse it to :class:`~mcplot.class_mcplot.mcPlot` with the
 **parents** keyword:
@@ -334,19 +348,20 @@ then parse it to :class:`~mcplot.class_mcplot.mcPlot` with the
        desc = 'Example to add missing value command line argument'
        argstr = 'input_file'
 
-       parser = argparse.ArgumentParser(
-           formatter_class=argparse.RawDescriptionHelpFormatter,
-           add_help=False)
+       parser = argparse.ArgumentParser(add_help=False)
+
        miss = -9999.
        parser.add_argument('-m', '--missing', action='store',
                            default=miss, dest='miss', type=float,
                            metavar='missing_value',
-                           help=(f'Data treated as missing value in
-                                 f'input file (default: {miss}).'))
+                           help=(f'Data treated as missing value in'
+                                 f' input file (default: {miss}).'))
 
-       iplot = PlotIt(desc, argstr, parents=parser)
+       iplot = myPlot(desc, argstr, parents=parser)
+
        iplot.read_data()
        iplot.plot_fig_1()
+       iplot.plot_fig_2()
        iplot.close()
 
 You have to set **add_help=False** in the instance of
@@ -367,6 +382,9 @@ To be continued ...
 
    class myPlot(mcPlot):
 
+       def __init__(self, *args, **kwargs):
+           super().__init__(*args, **kwargs)
+
        def read_data(self):
            # reading one file would use self.cargs[0] such as
            # self.dat = np.loadtxt(self.cargs[0])
@@ -383,7 +401,7 @@ To be continued ...
            # plot
            xx = self.dat / float(self.dat.size) * 4. * np.pi
            larr = ax.plot(xx, np.sin(xx))
-           plt.setp(larr[-1], linestyle='-', linewidth=self.lwidth,
+           plt.setp(larr[-1], linestyle='-', linewidth=self.lw,
                     marker='', color=self.lcol1)
 
            # show plot or write in file
@@ -398,7 +416,7 @@ To be continued ...
 
            xx = self.dat / float(self.dat.size) * 4. * np.pi
            larr = ax.plot(xx, np.cos(xx))
-           plt.setp(larr[-1], linestyle='-', linewidth=self.lwidth,
+           plt.setp(larr[-1], linestyle='-', linewidth=self.lw,
                     marker='', color=self.lcol2)
 
            self.plot_save(fig)

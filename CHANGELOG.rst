@@ -2,6 +2,8 @@ Changelog
 ---------
 
 v2.0 (??? 2024)
+    * Use 10/12 instead of 4/5 to reduce figsize on screen windows.
+    * Also `-o` and `--output` for `-p output_plot_filename` possible.
     * Prefix IPCC colors with ipcc:
     * Use : instead of _ in colormap names.
     * Start Brewer colors after Matplotlib colors at new page in
