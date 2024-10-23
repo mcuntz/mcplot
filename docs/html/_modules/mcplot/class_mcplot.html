@@ -13,33 +13,33 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=628480d8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/documentation_options.js?v=3bf95b74"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/documentation_options.js?v=67977bc4"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/mcplot/class_mcplot';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -52,27 +52,23 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -94,8 +90,13 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -121,6 +122,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="../../contents.html">
   
@@ -136,7 +139,7 @@
 
  <script>
  document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="search-button__default-text">Search</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -152,9 +155,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../api.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../argsort.html">argmax/argmin/argsort</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../color.html">Color module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../color.html">Color module</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../color.color.html">Color functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../color.brewer_palettes.html">Brewer palettes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../color.ipcc_palettes.html">IPCC WG1 palettes</a></li>
@@ -166,14 +169,14 @@
 <li class="toctree-l3"><a class="reference internal" href="../../color.sron_palettes.html">SRON palettes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../color.ufz_palettes.html">UFZ colors</a></li>
 </ul>
-</li>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../class_mcplot.html">mcPlot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../position.html">position</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../romanliterals.html">Roman literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../str2tex.html">str2tex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../text2plot.html">text2plot</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -189,7 +192,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -198,14 +201,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -282,10 +285,10 @@
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
@@ -293,7 +296,7 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
@@ -388,6 +391,16 @@ document.write(`
 <span class="sd">   * Use 10/12 instead of 4/5 to reduce a4 figsize on screen windows,</span>
 <span class="sd">     Oct 2024, Matthias Cuntz</span>
 <span class="sd">   * Use f-strings whenever possible, Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * Remove desc, argstr, and parents keyword arguments from</span>
+<span class="sd">     get_command_line_arguments and use self.desc, self.argstr, and</span>
+<span class="sd">     self.parents within method instead, Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * If nor desc nor argstr given, the command line will be bypassed</span>
+<span class="sd">     in order to use the class without the command line from within Python,</span>
+<span class="sd">     Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * Rename print_layout_options to print_class_variables,</span>
+<span class="sd">     Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * Use self.__dict__ to access all variables in print_class_variables,</span>
+<span class="sd">     Oct 2024, Matthias Cuntz</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -427,6 +440,25 @@ document.write(`
 <span class="sd">        Note, these parsers should be initialised with `add_help=False`.</span>
 <span class="sd">        Otherwise, the ArgumentParser will see two -h/--help options</span>
 <span class="sd">        and raise an error.</span>
+<span class="sd">    outtype : str, optional</span>
+<span class="sd">        Output type is pdf, png, html, d3, or hvplot</span>
+<span class="sd">        (default: open screen windows).</span>
+<span class="sd">    plotname : str, optional</span>
+<span class="sd">        Name of plot output file for types pdf, html, d3, or hvplot, and</span>
+<span class="sd">        name basis for type png (default: class_mcplot).</span>
+<span class="sd">    serif : bool, optional</span>
+<span class="sd">        Use serif font; default sans serif.</span>
+<span class="sd">    usetex : bool, optional</span>
+<span class="sd">        If True, use LaTeX to render text in pdf, png and html</span>
+<span class="sd">        (default: False).</span>
+<span class="sd">    dowhite : bool, optional</span>
+<span class="sd">        If True, plot white lines on transparent or black background;</span>
+<span class="sd">        default: black lines on transparent or white background.</span>
+<span class="sd">    dpi : int, optional</span>
+<span class="sd">        Dots Per inch (DPI) for non-vector output types or rasterized</span>
+<span class="sd">        maps in vector output (default: 300).</span>
+<span class="sd">    transparent : bool, optional</span>
+<span class="sd">        Transparent figure background (default: black or white).</span>
 
 <span class="sd">    Methods</span>
 <span class="sd">    -------</span>
@@ -445,9 +477,17 @@ document.write(`
 <span class="sd">        or add a new method that resets some of the layout options and call it</span>
 <span class="sd">        in the initialisation of the extending class, or simply set layout</span>
 <span class="sd">        options in the initialisation of the extending class.</span>
+<span class="sd">    set_matplotlib_rcparams()</span>
+<span class="sd">        Set rcParams of Matplotlib depending on output type, and chosen layout.</span>
+<span class="sd">        rcParams can also be re-set in the initialisation of the extending</span>
+<span class="sd">        class.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
+<span class="sd">    If neither `desc` nor `argstr` is given upon initialisation,</span>
+<span class="sd">    `get_command_line_arguments()` will not be called, i.e. it is assumed that</span>
+<span class="sd">    the class is called from within Python.</span>
+
 <span class="sd">    Several more methods are defined, which should probably not be changed.</span>
 
 <span class="sd">    plot_begin() or plot_start()</span>
@@ -457,7 +497,7 @@ document.write(`
 <span class="sd">        A simple plot as an example.</span>
 
 <span class="sd">    print_layout_options(rcparams=False)</span>
-<span class="sd">        Prints current layout options and optionally matplotlib&#39;&#39;s rcParams.</span>
+<span class="sd">        Prints current layout options and optionally matplotlib&#39;s rcParams.</span>
 
 <span class="sd">    set_matplotlib_rcparams()</span>
 <span class="sd">        Set rcParams of Matplotlib depending on output type, and chosen layout.</span>
@@ -528,7 +568,9 @@ document.write(`
     <span class="c1"># -------------------------------------------------------------------------</span>
     <span class="c1"># init</span>
     <span class="c1">#</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">argstr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">argstr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="p">[],</span>
+                 <span class="n">plotname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">serif</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">outtype</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">usetex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dowhite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialise the class mcPlot.</span>
 
@@ -549,16 +591,31 @@ document.write(`
 <span class="sd">                   super().__init__(*args, **kwargs)`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># get options</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">get_command_line_arguments</span><span class="p">(</span><span class="n">desc</span><span class="o">=</span><span class="n">desc</span><span class="p">,</span> <span class="n">argstr</span><span class="o">=</span><span class="n">argstr</span><span class="p">,</span>
-                                        <span class="n">parents</span><span class="o">=</span><span class="n">parents</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">desc</span> <span class="o">=</span> <span class="n">desc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">argstr</span> <span class="o">=</span> <span class="n">argstr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parents</span> <span class="o">=</span> <span class="n">parents</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plotname</span> <span class="o">=</span> <span class="n">plotname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">serif</span> <span class="o">=</span> <span class="n">serif</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outtype</span> <span class="o">=</span> <span class="n">outtype</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transparent</span> <span class="o">=</span> <span class="n">transparent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">usetex</span> <span class="o">=</span> <span class="n">usetex</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dowhite</span> <span class="o">=</span> <span class="n">dowhite</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dpi</span> <span class="o">=</span> <span class="n">dpi</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">desc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argstr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="c1"># command line options</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_command_line_arguments</span><span class="p">()</span>
+
         <span class="c1"># pdf, png, ...</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_output_type</span><span class="p">()</span>
+
         <span class="c1"># nrow, ncol, colours, etc.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_layout_options</span><span class="p">()</span>
+
         <span class="c1"># mpl.use and rcParams</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_matplotlib_rcparams</span><span class="p">()</span>
-        <span class="c1"># begin plot</span>
+
+        <span class="c1"># open plot file</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">plot_begin</span><span class="p">()</span>
 
     <span class="c1"># -------------------------------------------------------------------------</span>
@@ -566,7 +623,7 @@ document.write(`
     <span class="c1">#</span>
 <div class="viewcode-block" id="mcPlot.get_command_line_arguments">
 <a class="viewcode-back" href="../../class_mcplot.html#mcplot.class_mcplot.mcPlot.get_command_line_arguments">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_command_line_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">argstr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="k">def</span> <span class="nf">get_command_line_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Standard command line parser with default arguments</span>
 <span class="sd">        such as plot type, filename, etc.</span>
@@ -574,20 +631,6 @@ document.write(`
 <span class="sd">        If extra arguments are needed, one should copy this routine</span>
 <span class="sd">        into an extending class and adapt it to its needs,</span>
 <span class="sd">        keeping the existing optional arguments.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        desc : string, optional</span>
-<span class="sd">            Description for command line parser, which will be shown when</span>
-<span class="sd">            called with -h.</span>
-<span class="sd">        argstr : string, optional</span>
-<span class="sd">            String given as description for the positional arguments.</span>
-<span class="sd">        parents : ArgumentParser or list, optional</span>
-<span class="sd">            ArgumentParser or list of ArgumentParser objects whose arguments</span>
-<span class="sd">            should also be included.</span>
-<span class="sd">            Note, these parsers should be initialised with `add_help=False`.</span>
-<span class="sd">            Otherwise, the ArgumentParser will see two -h/--help options</span>
-<span class="sd">            and raise an error.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
@@ -632,72 +675,69 @@ document.write(`
         <span class="kn">import</span> <span class="nn">argparse</span>
         <span class="kn">import</span> <span class="nn">os</span>
 
-        <span class="k">if</span> <span class="n">desc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">idesc</span> <span class="o">=</span> <span class="s2">&quot;Matthias Cuntz&#39; standard plotting class.&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">idesc</span> <span class="o">=</span> <span class="n">desc</span>
-        <span class="k">if</span> <span class="n">argstr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">iargstr</span> <span class="o">=</span> <span class="s1">&#39;Command line arguments.&#39;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">iargstr</span> <span class="o">=</span> <span class="n">argstr</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">desc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">desc</span> <span class="o">=</span> <span class="s2">&quot;Matthias Cuntz&#39; standard plotting class.&quot;</span>
 
-        <span class="n">plotname</span> <span class="o">=</span> <span class="n">filebase</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-        <span class="n">serif</span>    <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">outtype</span>  <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-        <span class="n">transparent</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">usetex</span>   <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">dowhite</span>  <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">dpi</span>      <span class="o">=</span> <span class="mi">300</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">argstr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">argstr</span> <span class="o">=</span> <span class="s1">&#39;Command line arguments.&#39;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotname</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plotname</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plotname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotname</span>
+
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">_</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">parents</span><span class="p">)</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="n">parents</span> <span class="o">=</span> <span class="p">[</span><span class="n">parents</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parents</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span>
+
         <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
             <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="n">idesc</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">parents</span><span class="p">)</span>
+            <span class="n">description</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">desc</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="p">)</span>
         <span class="n">hstr</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Name of plot output file for types pdf, html, d3, or&#39;</span>
                 <span class="sa">f</span><span class="s1">&#39; hvplot, and name basis for type png (default:&#39;</span>
-                <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">plotname</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--output&#39;</span><span class="p">,</span> <span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--plotname&#39;</span><span class="p">,</span>
-                            <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">plotname</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;plotname&#39;</span><span class="p">,</span>
-                            <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;plot_filename&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
+                <span class="sa">f</span><span class="s1">&#39; mcplot).&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--output&#39;</span><span class="p">,</span> <span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--plotname&#39;</span><span class="p">,</span>
+            <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">plotname</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;plotname&#39;</span><span class="p">,</span>
+            <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;plot_filename&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
         <span class="n">hstr</span> <span class="o">=</span> <span class="s1">&#39;Use serif font; default sans serif.&#39;</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;--serif&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-                            <span class="n">default</span><span class="o">=</span><span class="n">serif</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;--serif&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">serif</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
         <span class="n">hstr</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Output type is pdf, png, html, d3, or hvplot&#39;</span>
                 <span class="s1">&#39; (default: open screen windows).&#39;</span><span class="p">)</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="s1">&#39;--type&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">outtype</span><span class="p">,</span>
-                            <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;outtype&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;outtype&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="s1">&#39;--type&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">outtype</span><span class="p">,</span>
+            <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;outtype&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;outtype&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
         <span class="n">hstr</span> <span class="o">=</span> <span class="s1">&#39;Use LaTeX to render text in pdf, png and html.&#39;</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-u&#39;</span><span class="p">,</span> <span class="s1">&#39;--usetex&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-                            <span class="n">default</span><span class="o">=</span><span class="n">usetex</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;usetex&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s1">&#39;-u&#39;</span><span class="p">,</span> <span class="s1">&#39;--usetex&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;usetex&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
         <span class="n">hstr</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;White lines on transparent or black background;&#39;</span>
                 <span class="s1">&#39; default: black lines on transparent or white background.&#39;</span><span class="p">)</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-w&#39;</span><span class="p">,</span> <span class="s1">&#39;--white&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-                            <span class="n">default</span><span class="o">=</span><span class="n">dowhite</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;dowhite&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
-        <span class="n">hstr</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Dots Per inch (DPI) for non-vector output types or rasterized&#39;</span>
-                <span class="s1">&#39; maps in vector output (default: 300).&#39;</span><span class="p">)</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--dpi&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-                            <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;dpi&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s1">&#39;-w&#39;</span><span class="p">,</span> <span class="s1">&#39;--white&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dowhite</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;dowhite&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
+        <span class="n">hstr</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Dots Per inch (DPI) for non-vector output types or&#39;</span>
+                <span class="sa">f</span><span class="s1">&#39; rasterized maps in vector output (default: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dpi</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s1">&#39;--dpi&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dpi</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;dpi&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
         <span class="n">hstr</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Transparent figure background (default: black or white).&#39;</span><span class="p">)</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--transparent&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-                            <span class="n">default</span><span class="o">=</span><span class="n">transparent</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;transparent&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;cargs&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                            <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;args&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">iargstr</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s1">&#39;--transparent&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transparent</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;transparent&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s1">&#39;cargs&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;args&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">argstr</span><span class="p">)</span>
 
         <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 
-        <span class="c1"># self.plotname    = args.plotname</span>
-        <span class="c1"># self.serif       = args.serif</span>
-        <span class="c1"># self.outtype     = args.outtype</span>
-        <span class="c1"># self.usetex      = args.usetex</span>
-        <span class="c1"># self.dowhite     = args.dowhite</span>
-        <span class="c1"># self.dpi         = args.dpi</span>
-        <span class="c1"># self.transparent = args.transparent</span>
+        <span class="c1"># self.plotname = args.plotname</span>
         <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">arg</span><span class="p">])</span>
-        <span class="c1"># for backward compatibility</span>
-        <span class="c1"># self.args        = args.cargs</span>
+
+        <span class="c1"># for backward compatibility: self.args = args.cargs</span>
         <span class="k">if</span> <span class="s1">&#39;cargs&#39;</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;args&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;cargs&#39;</span><span class="p">])</span>
 
@@ -987,7 +1027,7 @@ document.write(`
                         <span class="n">labelspacing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">labelspacing</span><span class="p">,</span>
                         <span class="n">handletextpad</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handletextpad</span><span class="p">,</span>
                         <span class="n">handlelength</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handlelength</span><span class="p">,</span>
-                        <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span>
+                        <span class="n">loc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span>
                         <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xbbox</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ybbox</span><span class="p">),</span>
                         <span class="n">scatterpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">numpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">get_texts</span><span class="p">(),</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;small&#39;</span><span class="p">)</span>
@@ -1015,7 +1055,7 @@ document.write(`
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;outtype&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">outtype</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">outtype</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outtype</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outtype</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">outtype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">outtypes</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Output </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">outtype</span><span class="si">}</span><span class="s1"> type must be in:&#39;</span>
                           <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">outtypes</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -1208,7 +1248,7 @@ document.write(`
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotname</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">plotfile</span>  <span class="o">=</span> <span class="p">(</span><span class="n">filebase</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plotfile</span>  <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;mcplot&#39;</span> <span class="o">+</span>
                               <span class="bp">self</span><span class="o">.</span><span class="n">outtype_ends</span><span class="p">[</span>
                                   <span class="bp">self</span><span class="o">.</span><span class="n">outtypes</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outtype</span><span class="p">)])</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1461,61 +1501,28 @@ document.write(`
     <span class="c1"># -------------------------------------------------------------------------</span>
     <span class="c1"># print layout options</span>
     <span class="c1">#</span>
-<div class="viewcode-block" id="mcPlot.print_layout_options">
-<a class="viewcode-back" href="../../class_mcplot.html#mcplot.class_mcplot.mcPlot.print_layout_options">[docs]</a>
-    <span class="k">def</span> <span class="nf">print_layout_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rcparams</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="mcPlot.print_class_variables">
+<a class="viewcode-back" href="../../class_mcplot.html#mcplot.class_mcplot.mcPlot.print_class_variables">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_class_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rcparams</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Print the current layout options</span>
+<span class="sd">        Print the current class variables</span>
+<span class="sd">        and optionally matplotlib.rcParams</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        Setting layout options in initialisation</span>
+<span class="sd">        Printing standard class variables and rcParams</span>
 
 <span class="sd">        .. code-block:: python</span>
 
 <span class="sd">           pp = mcplot.mcPlot()</span>
-<span class="sd">           pp.print_layout_options(rcparams=True)</span>
+<span class="sd">           pp.print_class_variables(rcparams=True)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Current mcPlot layout options&#39;</span><span class="p">)</span>
-        <span class="n">opts</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;self.nrow&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrow</span><span class="p">,</span> <span class="s1">&#39;self.ncol&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span><span class="p">,</span>
-                <span class="s1">&#39;self.left&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="s1">&#39;self.right&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">,</span>
-                <span class="s1">&#39;self.bottom&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span><span class="p">,</span> <span class="s1">&#39;self.top&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">,</span>
-                <span class="s1">&#39;self.hspace&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hspace</span><span class="p">,</span> <span class="s1">&#39;self.vspace&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vspace</span><span class="p">,</span>
-                <span class="s1">&#39;self.textsize&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">textsize</span><span class="p">,</span>
-                <span class="s1">&#39;self.dxabc&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="s1">&#39;self.dyabc&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span>
-                <span class="s1">&#39;self.lw&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lw</span><span class="p">,</span>
-                <span class="s1">&#39;self.elw&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">elw</span><span class="p">,</span>
-                <span class="s1">&#39;self.alw&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">alw</span><span class="p">,</span>
-                <span class="s1">&#39;self.ms&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ms</span><span class="p">,</span> <span class="s1">&#39;self.mew&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mew</span><span class="p">,</span>
-                <span class="s1">&#39;self.dowhite&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dowhite</span><span class="p">,</span>
-                <span class="s1">&#39;self.fgcolor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fgcolor</span><span class="p">,</span> <span class="s1">&#39;self.bgcolor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bgcolor</span><span class="p">,</span>
-                <span class="s1">&#39;self.mcols&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span><span class="p">,</span>
-                <span class="s1">&#39;self.mcol1&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol1</span><span class="p">,</span> <span class="s1">&#39;self.mcol2&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span><span class="p">,</span>
-                <span class="s1">&#39;self.mcol3&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol3</span><span class="p">,</span> <span class="s1">&#39;self.mcol4&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol4</span><span class="p">,</span>
-                <span class="s1">&#39;self.mcol5&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol5</span><span class="p">,</span>
-                <span class="s1">&#39;self.lcols&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcols</span><span class="p">,</span>
-                <span class="s1">&#39;self.lcol1&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span><span class="p">,</span> <span class="s1">&#39;self.lcol2&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol2</span><span class="p">,</span>
-                <span class="s1">&#39;self.lcol3&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol3</span><span class="p">,</span> <span class="s1">&#39;self.lcol4&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol4</span><span class="p">,</span>
-                <span class="s1">&#39;self.lcol5&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcol5</span><span class="p">,</span>
-                <span class="s1">&#39;self.ldashes&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ldashes</span><span class="p">,</span>
-                <span class="s1">&#39;self.loc&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span>
-                <span class="s1">&#39;self.xbbox&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">xbbox</span><span class="p">,</span> <span class="s1">&#39;self.ybbox&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ybbox</span><span class="p">,</span>
-                <span class="s1">&#39;self.labelspacing&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">labelspacing</span><span class="p">,</span>
-                <span class="s1">&#39;self.columnspacing&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnspacing</span><span class="p">,</span>
-                <span class="s1">&#39;self.handletextpad&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">handletextpad</span><span class="p">,</span>
-                <span class="s1">&#39;self.handlelength&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">handlelength</span><span class="p">,</span>
-                <span class="s1">&#39;self.frameon&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">frameon</span><span class="p">,</span>
-                <span class="s1">&#39;self.bbox_inches&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bbox_inches</span><span class="p">,</span>
-                <span class="s1">&#39;self.pad_inches&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad_inches</span><span class="p">,</span>
-                <span class="s1">&#39;self.dpi&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dpi</span><span class="p">,</span>
-                <span class="s1">&#39;self.transparent&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">transparent</span><span class="p">,</span>
-                <span class="s1">&#39;self.serif&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">serif</span><span class="p">,</span>
-                <span class="s1">&#39;self.usetex&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">}</span>
-        <span class="n">kk</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">opts</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kk</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">opts</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Class variables&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">rcparams</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
@@ -1546,7 +1553,7 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
 </div>
@@ -1555,8 +1562,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"></div>
               
             
           </div>
@@ -1601,8 +1606,8 @@ By Matthias Cuntz
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

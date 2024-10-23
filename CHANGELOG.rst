@@ -2,9 +2,17 @@ Changelog
 ---------
 
 v2.0 (??? 2024)
+    * Rename `print_layout_options` to `print_class_variables`,
+      using `self.__dict__` to access all variables.
+    * Remove `desc`, `argstr`, and `parents` keyword arguments from
+      `get_command_line_arguments` to not interfere with possible
+      child method.
+    * If nor `desc` nor `argstr` given, the command line will be
+      bypassed in order to use the class `mcPlot` without the command
+      line from within Python.
     * Use 10/12 instead of 4/5 to reduce figsize on screen windows.
     * Also `-o` and `--output` for `-p output_plot_filename` possible.
-    * Prefix IPCC colors with ipcc:
+    * Prefix IPCC colors with ipcc:.
     * Use : instead of _ in colormap names.
     * Start Brewer colors after Matplotlib colors at new page in
       `show_palettes`.
@@ -15,10 +23,8 @@ v2.0 (??? 2024)
     * Added `loc` and set `xbbox` and `ybbox` in `mcPlot` so that
       legend is in upper right corner.
     * Change `llxbbox` to `xbbox`, `llybbox` to `ybbox`, `llrspace` to
-      `labelspacing`, `llcspace` to `columnspacing`, `llhtextpad` to
-      `handletextpad`, `llhlength` to `handlelength` in `mcPlot`.
-    * Reorder `ldashes` from little to more dots between dashes in
-      `mcPlot`.
+      `labelspacing`, `llcspace` to names of Matplotlib's `Axes.legend`.
+    * Reorder `ldashes` from little to more dots between dashes.
     * Set `dxabc` and `dyabc` to upper left corner of plot in
       `mcPlot`.
     * Use same left, right, bottom, top as GridSpec of Matplotlib in

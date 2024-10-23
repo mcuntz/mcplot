@@ -172,7 +172,7 @@ def print_colors(collection=''):
         collections = ['base', 'tableau', 'ufz', 'css', 'xkcd']
 
     # register ufz colors if needed
-    get_color()
+    _ = get_color()
     mapping = plt.cm.colors.get_named_colors_mapping
     colors = mapping().keys()
 

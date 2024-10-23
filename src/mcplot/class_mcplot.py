@@ -62,6 +62,16 @@ History
    * Use 10/12 instead of 4/5 to reduce a4 figsize on screen windows,
      Oct 2024, Matthias Cuntz
    * Use f-strings whenever possible, Oct 2024, Matthias Cuntz
+   * Remove desc, argstr, and parents keyword arguments from
+     get_command_line_arguments and use self.desc, self.argstr, and
+     self.parents within method instead, Oct 2024, Matthias Cuntz
+   * If nor desc nor argstr given, the command line will be bypassed
+     in order to use the class without the command line from within Python,
+     Oct 2024, Matthias Cuntz
+   * Rename print_layout_options to print_class_variables,
+     Oct 2024, Matthias Cuntz
+   * Use self.__dict__ to access all variables in print_class_variables,
+     Oct 2024, Matthias Cuntz
 
 """
 import numpy as np
@@ -99,6 +109,25 @@ class mcPlot(object):
         Note, these parsers should be initialised with `add_help=False`.
         Otherwise, the ArgumentParser will see two -h/--help options
         and raise an error.
+    outtype : str, optional
+        Output type is pdf, png, html, d3, or hvplot
+        (default: open screen windows).
+    plotname : str, optional
+        Name of plot output file for types pdf, html, d3, or hvplot, and
+        name basis for type png (default: class_mcplot).
+    serif : bool, optional
+        Use serif font; default sans serif.
+    usetex : bool, optional
+        If True, use LaTeX to render text in pdf, png and html
+        (default: False).
+    dowhite : bool, optional
+        If True, plot white lines on transparent or black background;
+        default: black lines on transparent or white background.
+    dpi : int, optional
+        Dots Per inch (DPI) for non-vector output types or rasterized
+        maps in vector output (default: 300).
+    transparent : bool, optional
+        Transparent figure background (default: black or white).
 
     Methods
     -------
@@ -117,9 +146,17 @@ class mcPlot(object):
         or add a new method that resets some of the layout options and call it
         in the initialisation of the extending class, or simply set layout
         options in the initialisation of the extending class.
+    set_matplotlib_rcparams()
+        Set rcParams of Matplotlib depending on output type, and chosen layout.
+        rcParams can also be re-set in the initialisation of the extending
+        class.
 
     Notes
     -----
+    If neither `desc` nor `argstr` is given upon initialisation,
+    `get_command_line_arguments()` will not be called, i.e. it is assumed that
+    the class is called from within Python.
+
     Several more methods are defined, which should probably not be changed.
 
     plot_begin() or plot_start()
@@ -129,7 +166,7 @@ class mcPlot(object):
         A simple plot as an example.
 
     print_layout_options(rcparams=False)
-        Prints current layout options and optionally matplotlib''s rcParams.
+        Prints current layout options and optionally matplotlib's rcParams.
 
     set_matplotlib_rcparams()
         Set rcParams of Matplotlib depending on output type, and chosen layout.
@@ -200,7 +237,9 @@ class mcPlot(object):
     # -------------------------------------------------------------------------
     # init
     #
-    def __init__(self, desc=None, argstr=None, parents=[]):
+    def __init__(self, desc=None, argstr=None, parents=[],
+                 plotname=None, serif=False, outtype='', transparent=False,
+                 usetex=False, dowhite=False, dpi=300):
         """
         Initialise the class mcPlot.
 
@@ -221,22 +260,37 @@ class mcPlot(object):
                    super().__init__(*args, **kwargs)`
 
         """
-        # get options
-        self.get_command_line_arguments(desc=desc, argstr=argstr,
-                                        parents=parents)
+        self.desc = desc
+        self.argstr = argstr
+        self.parents = parents
+        self.plotname = plotname
+        self.serif = serif
+        self.outtype = outtype
+        self.transparent = transparent
+        self.usetex = usetex
+        self.dowhite = dowhite
+        self.dpi = dpi
+
+        if (self.desc is not None) or (self.argstr is not None):
+            # command line options
+            self.get_command_line_arguments()
+
         # pdf, png, ...
         self.set_output_type()
+
         # nrow, ncol, colours, etc.
         self.set_layout_options()
+
         # mpl.use and rcParams
         self.set_matplotlib_rcparams()
-        # begin plot
+
+        # open plot file
         self.plot_begin()
 
     # -------------------------------------------------------------------------
     # command line arguments
     #
-    def get_command_line_arguments(self, desc=None, argstr=None, parents=[]):
+    def get_command_line_arguments(self):
         """
         Standard command line parser with default arguments
         such as plot type, filename, etc.
@@ -244,20 +298,6 @@ class mcPlot(object):
         If extra arguments are needed, one should copy this routine
         into an extending class and adapt it to its needs,
         keeping the existing optional arguments.
-
-        Parameters
-        ----------
-        desc : string, optional
-            Description for command line parser, which will be shown when
-            called with -h.
-        argstr : string, optional
-            String given as description for the positional arguments.
-        parents : ArgumentParser or list, optional
-            ArgumentParser or list of ArgumentParser objects whose arguments
-            should also be included.
-            Note, these parsers should be initialised with `add_help=False`.
-            Otherwise, the ArgumentParser will see two -h/--help options
-            and raise an error.
 
         Notes
         -----
@@ -302,72 +342,69 @@ class mcPlot(object):
         import argparse
         import os
 
-        if desc is None:
-            idesc = "Matthias Cuntz' standard plotting class."
-        else:
-            idesc = desc
-        if argstr is None:
-            iargstr = 'Command line arguments.'
-        else:
-            iargstr = argstr
+        if self.desc is None:
+            self.desc = "Matthias Cuntz' standard plotting class."
 
-        plotname = filebase(os.path.basename(__file__))
-        serif    = False
-        outtype  = ''
-        transparent = False
-        usetex   = False
-        dowhite  = False
-        dpi      = 300
+        if self.argstr is None:
+            self.argstr = 'Command line arguments.'
+
+        if self.plotname is None:
+            plotname = ''
+        else:
+            plotname = self.plotname
+
         try:
-            _ = len(parents)
+            _ = len(self.parents)
         except TypeError:
-            parents = [parents]
+            self.parents = [self.parents]
+
         parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
-            description=idesc, parents=parents)
+            description=self.desc, parents=self.parents)
         hstr = (f'Name of plot output file for types pdf, html, d3, or'
                 f' hvplot, and name basis for type png (default:'
-                f' {plotname}).')
-        parser.add_argument('-o', '--output', '-p', '--plotname',
-                            action='store', default=plotname, dest='plotname',
-                            metavar='plot_filename', help=hstr)
+                f' mcplot).')
+        parser.add_argument(
+            '-o', '--output', '-p', '--plotname',
+            action='store', default=plotname, dest='plotname',
+            metavar='plot_filename', help=hstr)
         hstr = 'Use serif font; default sans serif.'
-        parser.add_argument('-s', '--serif', action='store_true',
-                            default=serif, dest='serif', help=hstr)
+        parser.add_argument(
+            '-s', '--serif', action='store_true',
+            default=self.serif, dest='serif', help=hstr)
         hstr = ('Output type is pdf, png, html, d3, or hvplot'
                 ' (default: open screen windows).')
-        parser.add_argument('-t', '--type', action='store', default=outtype,
-                            dest='outtype', metavar='outtype', help=hstr)
+        parser.add_argument(
+            '-t', '--type', action='store', default=self.outtype,
+            dest='outtype', metavar='outtype', help=hstr)
         hstr = 'Use LaTeX to render text in pdf, png and html.'
-        parser.add_argument('-u', '--usetex', action='store_true',
-                            default=usetex, dest='usetex', help=hstr)
+        parser.add_argument(
+            '-u', '--usetex', action='store_true',
+            default=self.usetex, dest='usetex', help=hstr)
         hstr = ('White lines on transparent or black background;'
                 ' default: black lines on transparent or white background.')
-        parser.add_argument('-w', '--white', action='store_true',
-                            default=dowhite, dest='dowhite', help=hstr)
-        hstr = ('Dots Per inch (DPI) for non-vector output types or rasterized'
-                ' maps in vector output (default: 300).')
-        parser.add_argument('--dpi', action='store', default=dpi, type=int,
-                            dest='dpi', metavar='number', help=hstr)
+        parser.add_argument(
+            '-w', '--white', action='store_true',
+            default=self.dowhite, dest='dowhite', help=hstr)
+        hstr = (f'Dots Per inch (DPI) for non-vector output types or'
+                f' rasterized maps in vector output (default: {self.dpi}).')
+        parser.add_argument(
+            '--dpi', action='store', default=self.dpi, type=int,
+            dest='dpi', metavar='number', help=hstr)
         hstr = ('Transparent figure background (default: black or white).')
-        parser.add_argument('--transparent', action='store_true',
-                            default=transparent, dest='transparent', help=hstr)
-        parser.add_argument('cargs', nargs='*', default=None,
-                            metavar='args', help=iargstr)
+        parser.add_argument(
+            '--transparent', action='store_true',
+            default=self.transparent, dest='transparent', help=hstr)
+        parser.add_argument(
+            'cargs', nargs='*', default=None, metavar='args', help=self.argstr)
 
         args = parser.parse_args()
 
-        # self.plotname    = args.plotname
-        # self.serif       = args.serif
-        # self.outtype     = args.outtype
-        # self.usetex      = args.usetex
-        # self.dowhite     = args.dowhite
-        # self.dpi         = args.dpi
-        # self.transparent = args.transparent
+        # self.plotname = args.plotname
         for arg in args.__dict__:
             setattr(self, arg, args.__dict__[arg])
-        # for backward compatibility
-        # self.args        = args.cargs
+
+        # for backward compatibility: self.args = args.cargs
         if 'cargs' in args.__dict__:
             setattr(self, 'args', args.__dict__['cargs'])
 
@@ -651,7 +688,7 @@ class mcPlot(object):
                         labelspacing=self.labelspacing,
                         handletextpad=self.handletextpad,
                         handlelength=self.handlelength,
-                        loc='upper left',
+                        loc=self.loc,
                         bbox_to_anchor=(self.xbbox, self.ybbox),
                         scatterpoints=1, numpoints=1)
         plt.setp(ll.get_texts(), fontsize='small')
@@ -676,7 +713,7 @@ class mcPlot(object):
         if not hasattr(self, 'outtype'):
             self.outtype = ''
 
-        self.outtype  = self.outtype.lower()
+        self.outtype = self.outtype.lower()
         if self.outtype not in self.outtypes:
             raise IOError(f'Output {self.outtype} type must be in:'
                           f'{self.outtypes}')
@@ -863,7 +900,7 @@ class mcPlot(object):
 
         """
         if self.plotname == '':
-            self.plotfile  = (filebase(os.path.basename(__file__)) +
+            self.plotfile  = ('mcplot' +
                               self.outtype_ends[
                                   self.outtypes.index(self.outtype)])
         else:
@@ -1094,59 +1131,26 @@ class mcPlot(object):
     # -------------------------------------------------------------------------
     # print layout options
     #
-    def print_layout_options(self, rcparams=False):
+    def print_class_variables(self, rcparams=False):
         """
-        Print the current layout options
+        Print the current class variables
+        and optionally matplotlib.rcParams
 
         Examples
         --------
-        Setting layout options in initialisation
+        Printing standard class variables and rcParams
 
         .. code-block:: python
 
            pp = mcplot.mcPlot()
-           pp.print_layout_options(rcparams=True)
+           pp.print_class_variables(rcparams=True)
 
         """
         import matplotlib as mpl
-        print('Current mcPlot layout options')
-        opts = {'self.nrow': self.nrow, 'self.ncol': self.ncol,
-                'self.left': self.left, 'self.right': self.right,
-                'self.bottom': self.bottom, 'self.top': self.top,
-                'self.hspace': self.hspace, 'self.vspace': self.vspace,
-                'self.textsize': self.textsize,
-                'self.dxabc': self.dxabc, 'self.dyabc': self.dyabc,
-                'self.lw': self.lw,
-                'self.elw': self.elw,
-                'self.alw': self.alw,
-                'self.ms': self.ms, 'self.mew': self.mew,
-                'self.dowhite': self.dowhite,
-                'self.fgcolor': self.fgcolor, 'self.bgcolor': self.bgcolor,
-                'self.mcols': self.mcols,
-                'self.mcol1': self.mcol1, 'self.mcol2': self.mcol2,
-                'self.mcol3': self.mcol3, 'self.mcol4': self.mcol4,
-                'self.mcol5': self.mcol5,
-                'self.lcols': self.lcols,
-                'self.lcol1': self.lcol1, 'self.lcol2': self.lcol2,
-                'self.lcol3': self.lcol3, 'self.lcol4': self.lcol4,
-                'self.lcol5': self.lcol5,
-                'self.ldashes': self.ldashes,
-                'self.loc': self.loc,
-                'self.xbbox': self.xbbox, 'self.ybbox': self.ybbox,
-                'self.labelspacing': self.labelspacing,
-                'self.columnspacing': self.columnspacing,
-                'self.handletextpad': self.handletextpad,
-                'self.handlelength': self.handlelength,
-                'self.frameon': self.frameon,
-                'self.bbox_inches': self.bbox_inches,
-                'self.pad_inches': self.pad_inches,
-                'self.dpi': self.dpi,
-                'self.transparent': self.transparent,
-                'self.serif': self.serif,
-                'self.usetex': self.usetex}
-        kk = sorted(opts.keys())
-        for k in kk:
-            print(f'{k} = {opts[k]}')
+
+        print('Class variables')
+        for k in self.__dict__:
+            print(f'    {k} = {self.__dict__[k]}')
 
         if rcparams:
             print('')
