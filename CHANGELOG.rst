@@ -2,6 +2,9 @@ Changelog
 ---------
 
 v2.0 (??? 2024)
+    * Directly use color dictionaries in `get_cmap`, `get_color`,
+      `print_colors`, and `print_palettes`.
+    * Print named colors using predefined dictionaries.
     * Rename `print_layout_options` to `print_class_variables`,
       using `self.__dict__` to access all variables.
     * Remove `desc`, `argstr`, and `parents` keyword arguments from
@@ -42,7 +45,7 @@ v0.18 (Aug 2024)
     * Use DejaVuSans and DejaVueSerif as standard fonts if not LaTeX
       in `mcPlot`.
     * Add `mcPlot` method `print_layout_options`.
-    * Added IPCC WG1 colours.
+    * Added IPCC WG1 colors.
     * Set default options for `mcPlot` if not given on command line.
 
 v0.17 (Jun 2023)

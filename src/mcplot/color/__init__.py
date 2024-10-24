@@ -24,10 +24,10 @@ from .brewer_palettes import brewer_sequential, brewer_diverging
 from .brewer_palettes import brewer_qualitative
 from .ipcc_palettes import ipcc_categorical, ipcc_diverging, ipcc_sequential
 from .mathematica_palettes import mathematica_rainbow
+from .mcplot_palettes import mcplot_cmaps
 from .ncl_palettes import ncl_large, ncl_small, ncl_meteo_swiss
 from .oregon_palettes import oregon_sequential, oregon_diverging
 from .oregon_palettes import oregon_qualitative
-from .mcplot_palettes import mcplot_cmaps
 from .sron2012_palettes import sron2012_colors, sron2012_functions
 from .sron_palettes import sron_colors, sron_colormaps, sron_functions
 from .ufz_palettes import ufz_colors
