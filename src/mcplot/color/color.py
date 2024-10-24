@@ -331,7 +331,6 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
                 ipal = palette
             else:
                 ipal = palette_
-            print(sron_collections[ipal])
             if ipal in sron_colors:
                 colors = [ mcolors.colorConverter.to_rgb(i)
                            for i in sron_colors[ipal] ]
@@ -767,6 +766,7 @@ def _newsubplot_cmaps(nrow, ncol, iplot, iname,
                       ncolors=0):  # pragma: no cover
     """ Helper function for show_cmaps """
     import numpy as np
+
     ax = plt.subplot(nrow, ncol, iplot)
     ax.axis('off')
     cmap = get_cmap(iname, ncolors, as_cmap=True)
@@ -816,6 +816,8 @@ def show_cmaps(outfile='', collection=''):  # pragma: no cover
                      collection=['mathematica', 'matplotlib'])
 
     """
+    import mcplot.color as mc
+
     # outtype
     if '.' in outfile:
         outtype = outfile[outfile.rfind('.') + 1:]
@@ -895,7 +897,7 @@ def show_cmaps(outfile='', collection=''):  # pragma: no cover
             collname = 'matplotlib'
         else:
             try:
-                icoll = eval(f'mcplot.color.{cc}')
+                icoll = eval(f'mc.{cc}')
                 newcoll = True
                 collname = cc
             except AttributeError:

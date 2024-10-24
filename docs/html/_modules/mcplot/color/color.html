@@ -665,7 +665,6 @@ document.write(`
                 <span class="n">ipal</span> <span class="o">=</span> <span class="n">palette</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">ipal</span> <span class="o">=</span> <span class="n">palette_</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">sron_collections</span><span class="p">[</span><span class="n">ipal</span><span class="p">])</span>
             <span class="k">if</span> <span class="n">ipal</span> <span class="ow">in</span> <span class="n">sron_colors</span><span class="p">:</span>
                 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">colorConverter</span><span class="o">.</span><span class="n">to_rgb</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
                            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sron_colors</span><span class="p">[</span><span class="n">ipal</span><span class="p">]</span> <span class="p">]</span>
@@ -1117,6 +1116,7 @@ document.write(`
                       <span class="n">ncolors</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Helper function for show_cmaps &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
     <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">,</span> <span class="n">iplot</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
     <span class="n">cmap</span> <span class="o">=</span> <span class="n">get_cmap</span><span class="p">(</span><span class="n">iname</span><span class="p">,</span> <span class="n">ncolors</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1168,6 +1168,8 @@ document.write(`
 <span class="sd">                     collection=[&#39;mathematica&#39;, &#39;matplotlib&#39;])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">mcplot.color</span> <span class="k">as</span> <span class="nn">mc</span>
+
     <span class="c1"># outtype</span>
     <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">outfile</span><span class="p">:</span>
         <span class="n">outtype</span> <span class="o">=</span> <span class="n">outfile</span><span class="p">[</span><span class="n">outfile</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
@@ -1247,7 +1249,7 @@ document.write(`
             <span class="n">collname</span> <span class="o">=</span> <span class="s1">&#39;matplotlib&#39;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">icoll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mcplot.color.</span><span class="si">{</span><span class="n">cc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">icoll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mc.</span><span class="si">{</span><span class="n">cc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
                 <span class="n">newcoll</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="n">collname</span> <span class="o">=</span> <span class="n">cc</span>
             <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
