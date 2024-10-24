@@ -2,6 +2,12 @@ Changelog
 ---------
 
 v2.0 (??? 2024)
+    * Add `color_palette` = `get_cmap` to have a very similar function
+      as seaborn.
+    * Add alias `get_palette` = `get_cmap`, `print_palettes` =
+      `print_cmaps`, `show_palettes` = `show_cmaps` to have both
+      notations, `Matplotlib` and `seaborn`, respectively.
+    * Added `show_colors` to plot known named colors.
     * Directly use color dictionaries in `get_cmap`, `get_color`,
       `print_colors`, and `print_palettes`.
     * Print named colors using predefined dictionaries.

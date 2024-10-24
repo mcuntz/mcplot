@@ -67,8 +67,8 @@ class TestColor(unittest.TestCase):
     def test_get_cmap(self):
         import matplotlib as mpl
         mpl.use('Agg')
-        import matplotlib.pyplot as plt  # needed to work
-        from mcplot.color import get_cmap
+        import matplotlib.pyplot as plt  # needed for tests to work
+        from mcplot.color import get_cmap, color_palette, get_palette
         from mcplot.color import brewer_sequential
         from mcplot.color import mathematica_rainbow
         from mcplot.color import ncl_small
@@ -100,11 +100,11 @@ class TestColor(unittest.TestCase):
         sron2012_light = [ mpl.colors.colorConverter.to_rgb(i)
                            for i in sron2012_light ]
 
-        sron2012_ylorbr_3 = [ sron2012_functions['sron2012:ylorbr'](i/2.)
+        sron2012_ylorbr_3 = [ sron2012_functions['sron2012:ylorbr'](i / 2.)
                               for i in range(3) ]
-        sron2012_buylrd_3 = [ sron2012_functions['sron2012:buylrd'](i/2.)
+        sron2012_buylrd_3 = [ sron2012_functions['sron2012:buylrd'](i / 2.)
                               for i in range(3) ]
-        sron2012_rainbow_3 = [ sron2012_functions['sron2012:rainbow'](i/2.)
+        sron2012_rainbow_3 = [ sron2012_functions['sron2012:rainbow'](i / 2.)
                                for i in range(3) ]
 
         # sron
@@ -138,12 +138,12 @@ class TestColor(unittest.TestCase):
         self.assertEqual(cmap, target)
 
         # resample
-        cmap = get_cmap('brewer_ylgn3', ncol=2)
+        cmap = color_palette('brewer_ylgn3', ncol=2)
         target = [brewer_ylgn3[0], brewer_ylgn3[2]]
         self.assertEqual(cmap, target)
 
         # color map
-        cmap = get_cmap('brewer:ylgn3', as_cmap=True)
+        cmap = get_palette('brewer:ylgn3', as_cmap=True)
         assert isinstance(cmap, mpl.colors.ListedColormap)
 
         # reverse
@@ -151,12 +151,12 @@ class TestColor(unittest.TestCase):
         target = brewer_ylgn3[::-1]
         self.assertEqual(cmap, target)
 
-        cmap = get_cmap('brewer:ylgn3_r')
+        cmap = color_palette('brewer:ylgn3_r')
         target = brewer_ylgn3[::-1]
         self.assertEqual(cmap, target)
 
         # grey
-        cmap = get_cmap('brewer_ylgn3', grey=True)
+        cmap = get_palette('brewer_ylgn3', grey=True)
         target = [ _to_grey(i) for i in brewer_ylgn3 ]
         self.assertEqual(cmap, target)
 
@@ -165,11 +165,11 @@ class TestColor(unittest.TestCase):
         target = brewer_ylgn3
         self.assertEqual(cmap, target)
 
-        cmap = get_cmap('brewer_ylgn3', order='Saturation')
+        cmap = color_palette('brewer_ylgn3', order='Saturation')
         target = brewer_ylgn3
         self.assertEqual(cmap, target)
 
-        cmap = get_cmap('brewer:ylgn3', order='value')
+        cmap = get_palette('brewer:ylgn3', order='value')
         target = brewer_ylgn3[::-1]
         self.assertEqual(cmap, target)
 
@@ -178,12 +178,12 @@ class TestColor(unittest.TestCase):
         self.assertEqual(cmap, target)
 
         # mathematica
-        cmap = get_cmap('mathematica:dark_rainbow_8')
+        cmap = color_palette('mathematica:dark_rainbow_8')
         target = mathematica_dark_rainbow_8
         self.assertEqual(cmap, target)
 
         # ncl
-        cmap = get_cmap('ncl:amwg')
+        cmap = get_palette('ncl:amwg')
         target = ncl_amwg
         self.assertEqual(cmap, target)
 
@@ -193,12 +193,12 @@ class TestColor(unittest.TestCase):
         self.assertEqual(cmap, target)
 
         # oregon
-        cmap = get_cmap('osu_bu7')
+        cmap = color_palette('osu_bu7')
         target = osu_bu7
         self.assertEqual(cmap, target)
 
         # sron2012_colors
-        cmap = get_cmap('sron2012:light')
+        cmap = get_palette('sron2012:light')
         target = sron2012_light
         self.assertEqual(cmap, target)
 
@@ -208,29 +208,29 @@ class TestColor(unittest.TestCase):
         self.assertEqual(cmap, target)
 
         # sron2012_functions
-        cmap = get_cmap('sron2012:buylrd', ncol=3)
+        cmap = color_palette('sron2012:buylrd', ncol=3)
         target = sron2012_buylrd_3
         self.assertEqual(cmap, target)
 
         # sron2012_functions
-        cmap = get_cmap('sron2012:rainbow', 3)
+        cmap = get_palette('sron2012:rainbow', 3)
         target = sron2012_rainbow_3
         self.assertEqual(cmap, target)
 
         # sron2012_functions - ncol=0
         cmap = get_cmap('sron2012_rainbow')
-        target = [ sron2012_functions['sron2012:rainbow'](i/255.)
+        target = [ sron2012_functions['sron2012:rainbow'](i / 255.)
                    for i in range(256) ]
         self.assertEqual(cmap, target)
 
         # sron2012_functions - offset, upper
-        cmap = get_cmap('sron2012_rainbow', ncol=3, offset=0.2, upper=0.9)
-        target = [ sron2012_functions['sron2012:rainbow'](0.2+i*0.7/2.)
+        cmap = color_palette('sron2012_rainbow', ncol=3, offset=0.2, upper=0.9)
+        target = [ sron2012_functions['sron2012:rainbow'](0.2 + i * 0.7 / 2.)
                    for i in range(3) ]
         self.assertEqual(cmap, target)
 
         # sron2012_functions - offset, upper, ncol=1
-        cmap = get_cmap('sron2012:rainbow', ncol=1, offset=0.2, upper=0.9)
+        cmap = get_palette('sron2012:rainbow', ncol=1, offset=0.2, upper=0.9)
         target = [ sron2012_functions['sron2012:rainbow'](0.2) ]
         self.assertEqual(cmap, target)
 
@@ -240,12 +240,12 @@ class TestColor(unittest.TestCase):
         self.assertEqual(cmap, target)
 
         # sron_colormaps
-        cmap = get_cmap('sron_iridescent')
+        cmap = color_palette('sron_iridescent')
         target = sron_iridescent
         self.assertEqual(cmap, target)
 
         # sron_colormaps - as_cmap
-        cmap = get_cmap('sron:iridescent', as_cmap=True)
+        cmap = get_palette('sron:iridescent', as_cmap=True)
         cols = cmap.colors
         target = sron_iridescent
         self.assertEqual(cols, target)
@@ -258,12 +258,12 @@ class TestColor(unittest.TestCase):
         cmap = get_cmap('sron:rainbow_discrete', 3)
         target = sron_rainbow_discrete_3
         self.assertEqual(cmap, target)
-        cmap = get_cmap('sron:rainbow_discrete', 23)
+        cmap = color_palette('sron:rainbow_discrete', 23)
         target = sron_rainbow_discrete_23
         self.assertEqual(cmap, target)
 
         # sron_functions - as_cmap
-        cmap = get_cmap('sron_rainbow_discrete', ncol=3, as_cmap=True)
+        cmap = get_palette('sron_rainbow_discrete', ncol=3, as_cmap=True)
         cols = cmap.colors
         target = sron_rainbow_discrete_3
         self.assertEqual(cols, target)
@@ -281,12 +281,12 @@ class TestColor(unittest.TestCase):
         #     self.assertEqual(miss, target)
 
         # matplotlib - ListedColormap
-        cmap = get_cmap('viridis')
+        cmap = color_palette('viridis')
         target = mpl.colormaps['viridis'].colors
         self.assertEqual(cmap, target)
 
         # matplotlib - LinearSegmentedColormap
-        cmap = get_cmap('Blues')
+        cmap = get_palette('Blues')
         target = mpl.colormaps['Blues']
         target = [ target(i) for i in range(target.N) ]
         self.assertEqual(cmap, target)
@@ -297,20 +297,25 @@ class TestColor(unittest.TestCase):
         self.assertEqual(cmap, target)
 
         # matplotlib - LinearSegmentedColormap - upper-/lowercase
-        cmap = get_cmap('blues')
+        cmap = color_palette('blues')
         target = mpl.colormaps['Blues']
         target = [ target(i) for i in range(target.N) ]
         self.assertEqual(cmap, target)
 
         # nonsense name
-        self.assertRaises(ValueError, get_cmap, 'NonSense')
+        self.assertRaises(ValueError, get_palette, 'NonSense')
 
         # unknown order
         self.assertRaises(ValueError, get_cmap, 'brewer:ylgn3',
                           order='luminance')
 
     def test_print_palettes(self):
+        from mcplot.color import print_cmaps
         from mcplot.color import print_palettes
+
+        assert print_cmaps('mathematica') is None
+        assert print_cmaps(['mathematica', 'matplotlib']) is None
+        assert print_cmaps() is None
 
         assert print_palettes('mathematica') is None
         assert print_palettes(['mathematica', 'matplotlib']) is None

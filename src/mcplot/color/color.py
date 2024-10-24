@@ -14,10 +14,15 @@ France.
 The following functions are provided:
 
 .. autosummary::
-   get_color
-   print_colors
+   color_palette
    get_cmap
+   get_color
+   get_palette
+   print_cmaps
+   print_colors
    print_palettes
+   show_cmaps
+   show_colors
    show_palettes
 
 History
@@ -44,6 +49,10 @@ History
      Oct 2024, Matthias Cuntz
    * Use color dictionaries directly in get_color, get_cmap, print_palettes,
      Oct 2024, Matthias Cuntz
+   * Added show_colors, Oct 2024, Matthias Cuntz
+   * Add alias get_palette = get_cmap, print_palettes = print_cmaps,
+     show_palettes = show_cmaps, Oct 2024, Matthias Cuntz
+   * Add alias color_palette = get_cmap as in seaborn, Oct 2024, Matthias Cuntz
 
 """
 import matplotlib as mpl
@@ -63,8 +72,10 @@ from .sron_palettes import sron_colors, sron_colormaps, sron_functions
 from .ufz_palettes import ufz_colors
 
 
-__all__ = ['get_color', 'print_colors',
-           'get_cmap', 'print_palettes', 'show_palettes']
+__all__ = ['get_color', 'print_colors', 'show_colors',
+           'get_cmap', 'print_cmaps', 'show_cmaps',
+           'get_palette', 'print_palettes', 'show_palettes',
+           'color_palette']
 
 
 def _rgb2rgb(col):
@@ -439,7 +450,17 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
     return colors
 
 
-def print_palettes(collection=''):
+def color_palette(*args, **kwargs):
+    """ Alias for get_cmap """
+    return get_cmap(*args, **kwargs)
+
+
+def get_palette(*args, **kwargs):
+    """ Alias for get_cmap """
+    return get_cmap(*args, **kwargs)
+
+
+def print_cmaps(collection=''):
     """
     Print the known color palettes and continuous colormaps
 
@@ -460,7 +481,7 @@ def print_palettes(collection=''):
     --------
     .. code-block:: python
 
-       print_palettes()
+       print_cmaps()
 
     """
     if collection:
@@ -522,15 +543,218 @@ def print_palettes(collection=''):
             print('       ', list(dd[ii].keys()))
 
 
+def print_palettes(*args, **kwargs):
+    """ Alias for print_cmaps """
+    return print_cmaps(*args, **kwargs)
+
+
 #
 # show colors and palettes
 #
 
-# https://matplotlib.org/stable/gallery/color/named_colors.html
-# https://matplotlib.org/stable/gallery/color/colormap_reference.html
+def _savefig(fig, ifig, outtype, outfile, pdf_pages):  # pragma: no cover
+    """ Helper function for show_colors and show_palettes """
+    if (outtype == 'pdf'):
+        pdf_pages.savefig(fig)
+        plt.close(fig)
+    elif not (outtype == 'X'):
+        ofile = (outfile[:outfile.rfind('.')] + '_' + '{:04d}'.format(ifig)
+                 + '.' + outtype)
+        fig.savefig(ofile)
+        plt.close(fig)
+    else:
+        pass
 
-def _newfig(ifig, ititle):  # pragma: no cover
-    """ Helper function for show_palettes """
+
+def _newfig_colors(ifig, ititle, *,
+                   cell_width=212, cell_height=22,
+                   swatch_width=48, sidemargin=12,
+                   topmargin=36,
+                   ncols=37, nrows=4, dpi=72,
+                   width=872, height=838,
+                   textsize=10):  # pragma: no cover
+    """ Helper function for show_colors """
+    fig, ax = plt.subplots(num=ifig,
+                           figsize=(width / dpi, height / dpi), dpi=dpi)
+    fig.subplots_adjust(sidemargin / width, topmargin / height,
+                        (width - sidemargin) / width,
+                        (height - topmargin) / height)
+    ax.set_xlim(0, cell_width * ncols)
+    ax.set_ylim(cell_height * (nrows - 0.5),
+                -cell_height / 2.)
+
+    ax.yaxis.set_visible(False)
+    ax.xaxis.set_visible(False)
+    ax.set_axis_off()
+
+    fig.suptitle(ititle, fontsize=1.5 * textsize)
+
+    return fig, ax
+
+
+# https://matplotlib.org/stable/gallery/color/named_colors.html
+def _plot_colors(ifig, table, colors, *, ncols=4, sort_colors=True,
+                 textsize=10, outtype='X', outfile='', pdf_pages=None):
+    """ Helper function for show_colors """
+    from matplotlib.patches import Rectangle
+
+    # n = len(colors)
+    # nrows = math.ceil(n / ncols)
+    nrows = len(mcolors.CSS4_COLORS) // ncols
+    cell_width = 212
+    cell_height = 22
+    swatch_width = 48
+    sidemargin = 12
+    topmargin = 48
+    dpi = 72
+    width = cell_width * ncols + 2 * sidemargin
+    height = cell_height * nrows + 2 * topmargin
+
+    ckw = {'cell_width': cell_width,
+           'cell_height': cell_height,
+           'swatch_width': swatch_width,
+           'sidemargin': sidemargin,
+           'topmargin': topmargin,
+           'ncols': ncols,
+           'nrows': nrows,
+           'dpi': dpi,
+           'height': height,
+           'width': width,
+           'textsize': textsize}
+
+    # Sort colors by hue, saturation, value and name.
+    if sort_colors is True:
+        if table == 'ufz':
+            names = sorted(
+                colors, key=lambda c:
+                tuple(mcolors.rgb_to_hsv(colors[c])))
+        else:
+            names = sorted(
+                colors, key=lambda c:
+                tuple(mcolors.rgb_to_hsv(mcolors.to_rgb(c))))
+    else:
+        names = list(colors)
+
+    nplots = nrows * ncols
+    nnames = len(names)
+    for i, name in enumerate(names):
+        row = i % nrows
+        col = (i // nrows) % ncols
+        if (row == 0) and (col == 0):
+            ifig += 1
+            fig, ax = _newfig_colors(ifig, table, **ckw)
+        y = row * cell_height
+
+        swatch_start_x = cell_width * col
+        text_pos_x = cell_width * col + swatch_width + 7
+
+        ax.text(text_pos_x, y, name, fontsize=textsize,
+                horizontalalignment='left',
+                verticalalignment='center')
+
+        ax.add_patch(
+            Rectangle(xy=(swatch_start_x, y - 9), width=swatch_width,
+                      height=18, facecolor=colors[name], edgecolor='0.7')
+        )
+
+        if (i == (nnames - 1)) or (((i + 1) % nplots) == 0):
+            _savefig(fig, ifig, outtype, outfile, pdf_pages)
+
+    return ifig
+
+
+def show_colors(outfile='', collection=''):
+    """
+    Show the known named colors
+
+    Parameters
+    ----------
+    outfile : str, optional
+        Output file name. Output type will be determined from file suffix.
+    collection : str or list of strings, optional
+        Name(s) of color collection(s).
+        Known collections are
+        'base', 'css', 'tableau', 'ufz', and 'xkcd'.
+
+    Returns
+    -------
+    None
+        Plots known names colors in file or on plotting window.
+
+    Examples
+    --------
+    .. code-block:: python
+
+       show_colors(outfile='mcplot_colors.pdf',
+                   collection=['ufz', 'tableau'])
+
+    """
+    # outtype
+    if '.' in outfile:
+        outtype = outfile[outfile.rfind('.') + 1:]
+        if outtype == 'pdf':
+            mpl.use('PDF')  # set directly after import matplotlib
+            from matplotlib.backends.backend_pdf import PdfPages
+            textsize = 12
+        else:
+            mpl.use('Agg')  # set directly after import matplotlib
+            textsize = 12
+    else:
+        outtype = 'X'
+        textsize = 12
+
+    # plot setup
+    if outfile:
+        mpl.rc('figure', figsize=(8.27, 11.69))  # a4 portrait
+        if not (outtype == 'pdf'):
+            mpl.rc('savefig', dpi=300, format=outtype)
+    else:
+        mpl.rc('figure', figsize=(8.27 * 0.75, 11.69 * 0.75))
+    # figsize = mpl.rcParams['figure.figsize']
+    mpl.rc('font', size=textsize)
+
+    # plotting
+    ifig = 0
+    if (outtype == 'pdf'):
+        pdf_pages = PdfPages(outfile)
+    else:
+        pdf_pages = None
+
+    if collection:
+        if isinstance(collection, str):
+            collections = [collection.lower()]
+        else:
+            collections = [ i.lower for i in collection ]
+    else:
+        collections = ['base', 'tableau', 'ufz', 'css', 'xkcd']
+
+    dall = {}
+    if 'base' in collections:
+        dall.update({'base': mcolors.BASE_COLORS})
+    if 'tableau' in collections:
+        dall.update({'tableau': mcolors.TABLEAU_COLORS})
+    if 'ufz' in collections:
+        dall.update({'ufz': ufz_colors})
+    if 'css' in collections:
+        dall.update({'css': mcolors.CSS4_COLORS})
+    if 'xkcd' in collections:
+        dall.update({'xkcd': mcolors.XKCD_COLORS})
+
+    for cc in dall:
+        ifig = _plot_colors(ifig, cc, dall[cc], sort_colors=True,
+                            textsize=textsize, outtype=outtype,
+                            outfile=outfile, pdf_pages=pdf_pages)
+
+    if outtype == 'pdf':
+        pdf_pages.close()
+    elif outtype == 'X':
+        plt.show()
+    else:
+        pass
+
+
+def _newfig_cmaps(ifig, ititle):  # pragma: no cover
+    """ Helper function for show_cmaps """
     fig = plt.figure(ifig)
     fig.suptitle(ititle)
     plt.subplots_adjust(left=0.3, bottom=0.1,
@@ -539,8 +763,9 @@ def _newfig(ifig, ititle):  # pragma: no cover
     return fig
 
 
-def _newsubplot(nrow, ncol, iplot, iname, ncolors=0):  # pragma: no cover
-    """ Helper function for show_palettes """
+def _newsubplot_cmaps(nrow, ncol, iplot, iname,
+                      ncolors=0):  # pragma: no cover
+    """ Helper function for show_cmaps """
     import numpy as np
     ax = plt.subplot(nrow, ncol, iplot)
     ax.axis('off')
@@ -562,21 +787,8 @@ def _newsubplot(nrow, ncol, iplot, iname, ncolors=0):  # pragma: no cover
     # return ax
 
 
-def _savefig(fig, ifig, outtype, outfile, pdf_pages):  # pragma: no cover
-    """ Helper function for show_palettes """
-    if (outtype == 'pdf'):
-        pdf_pages.savefig(fig)
-        plt.close(fig)
-    elif not (outtype == 'X'):
-        ofile = (outfile[:outfile.rfind('.')] + '_' + '{:04d}'.format(ifig)
-                 + '.' + outtype)
-        fig.savefig(ofile)
-        plt.close(fig)
-    else:
-        pass
-
-
-def show_palettes(outfile='', collection=''):  # pragma: no cover
+# https://matplotlib.org/stable/gallery/color/colormap_reference.html
+def show_cmaps(outfile='', collection=''):  # pragma: no cover
     """
     Show the known color palettes and continuous colormaps
 
@@ -600,7 +812,7 @@ def show_palettes(outfile='', collection=''):  # pragma: no cover
     --------
     .. code-block:: python
 
-       show_palettes(outfile='mcplot_cmaps.pdf',
+       show_cmaps(outfile='mcplot_cmaps.pdf',
                      collection=['mathematica', 'matplotlib'])
 
     """
@@ -694,13 +906,13 @@ def show_palettes(outfile='', collection=''):  # pragma: no cover
         for iname in icoll:
             if ipanel == 0:
                 ifig += 1
-                fig = _newfig(ifig, collname)
+                fig = _newfig_cmaps(ifig, collname)
             ipanel += 1
-            _newsubplot(nrow, 1, ipanel, iname)
+            _newsubplot_cmaps(nrow, 1, ipanel, iname)
             if collname == 'sron_functions':
                 for ncolors in range(1, 24):
                     ipanel += 1
-                    _newsubplot(nrow, 1, ipanel, iname, ncolors)
+                    _newsubplot_cmaps(nrow, 1, ipanel, iname, ncolors)
             if ipanel == nrow:
                 _savefig(fig, ifig, outtype, outfile, pdf_pages)
                 ipanel = 0
@@ -716,6 +928,11 @@ def show_palettes(outfile='', collection=''):  # pragma: no cover
         plt.show()
     else:
         pass
+
+
+def show_palettes(*args, **kwargs):
+    """ Alias for show_cmaps """
+    return show_cmaps(*args, **kwargs)
 
 
 if __name__ == '__main__':

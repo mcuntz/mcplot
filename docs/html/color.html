@@ -388,10 +388,15 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.color_palette"><code class="docutils literal notranslate"><span class="pre">color_palette()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.get_cmap"><code class="docutils literal notranslate"><span class="pre">get_cmap()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.get_color"><code class="docutils literal notranslate"><span class="pre">get_color()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.get_palette"><code class="docutils literal notranslate"><span class="pre">get_palette()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.print_cmaps"><code class="docutils literal notranslate"><span class="pre">print_cmaps()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.print_colors"><code class="docutils literal notranslate"><span class="pre">print_colors()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.print_palettes"><code class="docutils literal notranslate"><span class="pre">print_palettes()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.show_cmaps"><code class="docutils literal notranslate"><span class="pre">show_cmaps()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.show_colors"><code class="docutils literal notranslate"><span class="pre">show_colors()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.show_palettes"><code class="docutils literal notranslate"><span class="pre">show_palettes()</span></code></a></li>
 </ul>
             </nav>
@@ -452,6 +457,12 @@ document.write(`
 </tbody>
 </table>
 </section>
+<dl class="py function">
+<dt class="sig sig-object py" id="mcplot.color.color_palette">
+<span class="sig-name descname"><span class="pre">color_palette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/color/color.html#color_palette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.color.color_palette" title="Link to this definition">#</a></dt>
+<dd><p>Alias for get_cmap</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="mcplot.color.get_cmap">
 <span class="sig-name descname"><span class="pre">get_cmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">palette</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/color/color.html#get_cmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.color.get_cmap" title="Link to this definition">#</a></dt>
@@ -527,6 +538,36 @@ which can be any color name known to Matplotlib.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mcplot.color.get_palette">
+<span class="sig-name descname"><span class="pre">get_palette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/color/color.html#get_palette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.color.get_palette" title="Link to this definition">#</a></dt>
+<dd><p>Alias for get_cmap</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mcplot.color.print_cmaps">
+<span class="sig-name descname"><span class="pre">print_cmaps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/color/color.html#print_cmaps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.color.print_cmaps" title="Link to this definition">#</a></dt>
+<dd><p>Print the known color palettes and continuous colormaps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>collection</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em> of </em><em>strings</em><em>, </em><em>optional</em>) – Name(s) of color palette collection(s).
+Known collections are ‘mcplot’, ‘sron’, ‘sron2012’, ‘mathematica’,
+‘oregon’, ‘ipcc’, ‘ncl’, ‘matplotlib’, and ‘brewer’.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Prints list of known color palettes and continuous colormaps to
+console.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">print_cmaps</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mcplot.color.print_colors">
 <span class="sig-name descname"><span class="pre">print_colors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/color/color.html#print_colors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.color.print_colors" title="Link to this definition">#</a></dt>
 <dd><p>Print the known named colors</p>
@@ -551,31 +592,13 @@ Known collections are
 
 <dl class="py function">
 <dt class="sig sig-object py" id="mcplot.color.print_palettes">
-<span class="sig-name descname"><span class="pre">print_palettes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/color/color.html#print_palettes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.color.print_palettes" title="Link to this definition">#</a></dt>
-<dd><p>Print the known color palettes and continuous colormaps</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>collection</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em> of </em><em>strings</em><em>, </em><em>optional</em>) – Name(s) of color palette collection(s).
-Known collections are ‘mcplot’, ‘sron’, ‘sron2012’, ‘mathematica’,
-‘oregon’, ‘ipcc’, ‘ncl’, ‘matplotlib’, and ‘brewer’.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Prints list of known color palettes and continuous colormaps to
-console.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">print_palettes</span><span class="p">()</span>
-</pre></div>
-</div>
+<span class="sig-name descname"><span class="pre">print_palettes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/color/color.html#print_palettes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.color.print_palettes" title="Link to this definition">#</a></dt>
+<dd><p>Alias for print_cmaps</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="mcplot.color.show_palettes">
-<span class="sig-name descname"><span class="pre">show_palettes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/color/color.html#show_palettes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.color.show_palettes" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="mcplot.color.show_cmaps">
+<span class="sig-name descname"><span class="pre">show_cmaps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/color/color.html#show_cmaps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.color.show_cmaps" title="Link to this definition">#</a></dt>
 <dd><p>Show the known color palettes and continuous colormaps</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -596,10 +619,43 @@ plotting window.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">show_palettes</span><span class="p">(</span><span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;mcplot_cmaps.pdf&#39;</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">show_cmaps</span><span class="p">(</span><span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;mcplot_cmaps.pdf&#39;</span><span class="p">,</span>
               <span class="n">collection</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mathematica&#39;</span><span class="p">,</span> <span class="s1">&#39;matplotlib&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mcplot.color.show_colors">
+<span class="sig-name descname"><span class="pre">show_colors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/color/color.html#show_colors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.color.show_colors" title="Link to this definition">#</a></dt>
+<dd><p>Show the known named colors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Output file name. Output type will be determined from file suffix.</p></li>
+<li><p><strong>collection</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em> of </em><em>strings</em><em>, </em><em>optional</em>) – Name(s) of color collection(s).
+Known collections are
+‘base’, ‘css’, ‘tableau’, ‘ufz’, and ‘xkcd’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plots known names colors in file or on plotting window.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">show_colors</span><span class="p">(</span><span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;mcplot_colors.pdf&#39;</span><span class="p">,</span>
+            <span class="n">collection</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ufz&#39;</span><span class="p">,</span> <span class="s1">&#39;tableau&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mcplot.color.show_palettes">
+<span class="sig-name descname"><span class="pre">show_palettes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/color/color.html#show_palettes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.color.show_palettes" title="Link to this definition">#</a></dt>
+<dd><p>Alias for show_cmaps</p>
 </dd></dl>
 
 <div class="toctree-wrapper compound">
@@ -664,10 +720,15 @@ plotting window.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.color_palette"><code class="docutils literal notranslate"><span class="pre">color_palette()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.get_cmap"><code class="docutils literal notranslate"><span class="pre">get_cmap()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.get_color"><code class="docutils literal notranslate"><span class="pre">get_color()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.get_palette"><code class="docutils literal notranslate"><span class="pre">get_palette()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.print_cmaps"><code class="docutils literal notranslate"><span class="pre">print_cmaps()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.print_colors"><code class="docutils literal notranslate"><span class="pre">print_colors()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.print_palettes"><code class="docutils literal notranslate"><span class="pre">print_palettes()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.show_cmaps"><code class="docutils literal notranslate"><span class="pre">show_cmaps()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.show_colors"><code class="docutils literal notranslate"><span class="pre">show_colors()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.color.show_palettes"><code class="docutils literal notranslate"><span class="pre">show_palettes()</span></code></a></li>
 </ul>
   </nav></div>

@@ -32,8 +32,10 @@ from .sron2012_palettes import sron2012_colors, sron2012_functions
 from .sron_palettes import sron_colors, sron_colormaps, sron_functions
 from .ufz_palettes import ufz_colors
 # get, show, print colors and color palettes
-from .color import get_color, print_colors
-from .color import get_cmap, print_palettes, show_palettes
+from .color import get_color, print_colors, show_colors
+from .color import get_cmap, print_cmaps, show_cmaps
+from .color import get_palette, print_palettes, show_palettes
+from .color import color_palette
 
 
 __all__ = ['brewer_sequential', 'brewer_diverging', 'brewer_qualitative',
@@ -45,6 +47,8 @@ __all__ = ['brewer_sequential', 'brewer_diverging', 'brewer_qualitative',
            'sron2012_colors', 'sron2012_functions',
            'sron_colors', 'sron_colormaps', 'sron_functions',
            'ufz_colors',
-           'get_color', 'print_colors',
-           'get_cmap', 'print_palettes', 'show_palettes',
+           'get_color', 'print_colors', 'show_colors',
+           'get_cmap', 'print_cmaps', 'show_cmaps',
+           'get_palette', 'print_palettes', 'show_palettes',
+           'color_palette'
            ]

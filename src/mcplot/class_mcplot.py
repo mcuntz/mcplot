@@ -994,6 +994,7 @@ class mcPlot(object):
 
         """
         import matplotlib.pyplot as plt
+
         # save pages
         if (self.outtype == 'pdf'):
             if 'transparent' not in kwargs:
