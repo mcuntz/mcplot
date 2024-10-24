@@ -113,7 +113,8 @@ def str2tex(strin, space2linebreak=False,
     else:
         # '\n' has to be unicode string and not raw string in Matplotlib
         rep_n = lambda s: s.replace(r'\n', '' + a0 + '\n' + a0 + '')
-        rep_newline = lambda s: s.replace(r'\newline', '' + a0 + '\n' + a0 + '')
+        rep_newline = lambda s: s.replace(r'\newline', '' + a0 + '\n' +
+                                          a0 + '')
     rep_down = lambda s: s.replace('_', r'\_')
     rep_up = lambda s: s.replace('^', r'\^')
     rep_hash = lambda s: s.replace('#', r'\#')

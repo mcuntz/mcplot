@@ -129,8 +129,6 @@ def text2plot(handle, dx, dy, itext,
                  usetex=usetex, mathrm=False)
 
     """
-    import matplotlib.pyplot as plt
-
     # Check input
     ifont = small + medium + large + xsmall + xxsmall + xlarge + xxlarge
     assert ifont <= 1, ('only one of small, medium, large, xsmall, xxsmall'

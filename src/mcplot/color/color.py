@@ -816,7 +816,7 @@ def show_cmaps(outfile='', collection=''):  # pragma: no cover
                      collection=['mathematica', 'matplotlib'])
 
     """
-    import mcplot.color as mc
+    import mcplot.color as mc  # used in eval
 
     # outtype
     if '.' in outfile:
