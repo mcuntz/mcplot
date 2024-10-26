@@ -39,13 +39,6 @@ class TestColor(unittest.TestCase):
         # ufz
         ufz = ufz_colors
 
-        # register ufz colors
-        get_color()
-        for cc in ufz:
-            cmap = plt.cm.colors.get_named_colors_mapping()[cc]
-            target = ufz[cc]
-            self.assertEqual(cmap, target)
-
         # get single colors
         for cc in ufz:
             cmap = get_color(cc)

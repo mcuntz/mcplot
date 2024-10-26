@@ -53,6 +53,11 @@ History
    * Add alias get_palette = get_cmap, print_palettes = print_cmaps,
      show_palettes = show_cmaps, Oct 2024, Matthias Cuntz
    * Add alias color_palette = get_cmap as in seaborn, Oct 2024, Matthias Cuntz
+   * Use named colors from matplotlib.colors rather than plt.cm.colors,
+     Oct 2024, Matthias Cuntz
+   * Only do case-insensitive search for cmaps of Matplotlib in get_cmap,
+     Oct 2024, Matthias Cuntz
+   * Order Matplotlib colormaps into categories, Oct 2024, Matthias Cuntz
 
 """
 import matplotlib as mpl
@@ -78,6 +83,64 @@ __all__ = ['get_color', 'print_colors', 'show_colors',
            'color_palette']
 
 
+def _mpl_cmaps():
+    """
+    Get Matplotlib colormaps in categories of perception
+
+    See
+    https://matplotlib.org/stable/gallery/color/colormap_reference.html
+
+    Returns
+    -------
+    dict
+        dict with 'categories': dict with 'colormaps': list_of_values
+
+    Examples
+    --------
+    .. code-block:: python
+
+       cmaps = _mpl_cmaps()
+
+    """
+    mpl_palettes = {'perceptually uniform sequential':
+                    ['viridis', 'plasma', 'inferno', 'magma', 'cividis'],
+                    'sequential':
+                    ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds',
+                     'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd', 'RdPu', 'BuPu',
+                     'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn',
+                     'binary', 'gist_yarg', 'gist_gray', 'gray', 'bone',
+                     'pink', 'spring', 'summer', 'autumn', 'winter', 'cool',
+                     'Wistia', 'hot', 'afmhot', 'gist_heat', 'copper'],
+                    'diverging':
+                    ['PiYG', 'PRGn', 'BrBG', 'PuOr', 'RdGy', 'RdBu',
+                     'RdYlBu', 'RdYlGn', 'Spectral', 'coolwarm', 'bwr',
+                     'seismic'],
+                    'cyclic':
+                    ['twilight', 'twilight_shifted', 'hsv'],
+                    'qualitative':
+                    ['Pastel1', 'Pastel2', 'Paired', 'Accent',
+                     'Dark2', 'Set1', 'Set2', 'Set3',
+                     'tab10', 'tab20', 'tab20b', 'tab20c'],
+                    'miscellaneous':
+                    ['flag', 'prism', 'ocean', 'gist_earth', 'terrain',
+                     'gist_stern', 'gnuplot', 'gnuplot2', 'CMRmap',
+                     'cubehelix', 'brg', 'gist_rainbow', 'rainbow', 'jet',
+                     'turbo', 'nipy_spectral', 'gist_ncar']}
+
+    mpl_cmaps = {}
+    for pp in mpl_palettes:
+        mpl_cmaps.update({pp: {}})
+        for cc in mpl_palettes[pp]:
+            cmap = mpl.colormaps[cc]
+            try:
+                colors = cmap.colors
+            except AttributeError:
+                colors = [ cmap(i) for i in range(cmap.N) ]
+            mpl_cmaps[pp].update({cc: colors})
+
+    return mpl_cmaps
+
+
 def _rgb2rgb(col):
     """
     Transform RGB tuple with values 0-255 to tuple with values 0-1
@@ -94,8 +157,10 @@ def _rgb2rgb(col):
 
     Examples
     --------
-    col = (0, 126, 255)
-    col = _rgb2rgb(col)
+    .. code-block:: python
+
+       col = (0, 126, 255)
+       col = _rgb2rgb(col)
 
     """
     return tuple([ i / 255. for i in col ])
@@ -117,8 +182,10 @@ def _to_grey(col):
 
     Examples
     --------
-    col = (0, 0.5, 1)
-    col = _to_grey(col)
+    .. code-block:: python
+
+       col = (0, 0.5, 1)
+       col = _to_grey(col)
 
     """
     isgrey = 0.2125 * col[0] + 0.7154 * col[1] + 0.072 * col[2]
@@ -127,11 +194,7 @@ def _to_grey(col):
 
 def get_color(cname=''):
     """
-    Register new named colors with Matplotlib and return named color(s)
-
-    Registers the named colors given in ufz_palettes.
-    Optionally returns the value(s) of the named color(s),
-    which can be any color name known to Matplotlib.
+    Return named color(s)
 
     Parameters
     ----------
@@ -149,17 +212,19 @@ def get_color(cname=''):
     """
     from collections.abc import Iterable
 
-    mapping = plt.cm.colors.get_named_colors_mapping
-    # register ufz colors if not known yet
-    if 'ufz:blue' not in mapping().keys():
-        mapping().update(ufz_colors)
+    dall = {}
+    dall.update(mcolors.BASE_COLORS)
+    dall.update(mcolors.TABLEAU_COLORS)
+    dall.update(ufz_colors)
+    dall.update(mcolors.CSS4_COLORS)
+    dall.update(mcolors.XKCD_COLORS)
 
     if cname:
         if isinstance(cname, Iterable) and (not isinstance(cname, str)):
-            out = [ mapping()[i] for i in cname ]
+            out = [ dall[i] for i in cname ]
             return out
         else:
-            return mapping()[cname]
+            return dall[cname]
 
 
 def print_colors(collection=''):
@@ -300,7 +365,7 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
     nosubsample = False
     # miss = None
 
-    # mcplot, matehmatica, ncl
+    # mcplot, mathematica, ncl
     simplepals = {**mcplot_collections, **mathematica_collections,
                   **ncl_collections}
     if not found_palette:
@@ -379,33 +444,20 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
 
     # matplotlib
     if not found_palette:
-        amplmaps = plt.colormaps()
-        mplmaps = [ i for i in amplmaps if not i.endswith('_r') ]
-        if (palette in mplmaps) or (palette_ in mplmaps):
-            if palette in mplmaps:
+        mplmaps = [ i for i in list(mpl.colormaps) if not i.endswith('_r') ]
+        lmplmaps = [ i.lower() for i in mplmaps ]
+        if (palette.lower() in lmplmaps) or (palette_.lower() in lmplmaps):
+            if palette.lower() in lmplmaps:
                 pal = palette
             else:
                 pal = palette_
             found_palette = True
-            cmap = mpl.colormaps[pal]
+            ipalette = lmplmaps.index(pal.lower())
+            cmap = mpl.colormaps[mplmaps[ipalette]]
             try:
                 colors = cmap.colors
             except AttributeError:
                 colors = [ cmap(i) for i in range(cmap.N) ]
-        else:
-            lmplmaps = [ i.lower() for i in mplmaps ]
-            if (palette.lower() in lmplmaps) or (palette_.lower() in lmplmaps):
-                if palette.lower() in lmplmaps:
-                    pal = palette
-                else:
-                    pal = palette_
-                found_palette = True
-                ipalette = lmplmaps.index(pal.lower())
-                cmap = mpl.colormaps[mplmaps[ipalette]]
-                try:
-                    colors = cmap.colors
-                except AttributeError:
-                    colors = [ cmap(i) for i in range(cmap.N) ]
 
     if not found_palette:
         raise ValueError(f'{palette} color palette not found.')
@@ -521,12 +573,7 @@ def print_cmaps(collection=''):
                       'ncl_large': ncl_large,
                       'ncl_meteo_swiss': ncl_meteo_swiss}})
     if 'matplotlib' in collections:
-        acmaps = plt.colormaps()
-        cmaps  = [ i for i in acmaps if not i.endswith('_r') ]
-        cmaps.sort()
-        cmaps = { cc: 0 for cc in cmaps }  # dummy colormaps
-        dall.update({'matplotlib':
-                     {'matplotlib': cmaps}})
+        dall.update({'matplotlib': _mpl_cmaps()})
     if 'brewer' in collections:
         dall.update({'brewer':
                      {'brewer_sequential': brewer_sequential,
@@ -872,8 +919,7 @@ def show_cmaps(outfile='', collection=''):  # pragma: no cover
     if 'ncl' in collections:
         all_collections.extend(['ncl_large', 'ncl_small', 'ncl_meteo_swiss'])
     if 'matplotlib' in collections:
-        acmaps = plt.colormaps()
-        cmaps  = [ i for i in acmaps if not i.endswith('_r') ]
+        cmaps  = [ i for i in list(mpl.colormaps) if not i.endswith('_r') ]
         cmaps.sort()
         # all_collections.extend(cmaps) (old)
         all_collections.append(cmaps)

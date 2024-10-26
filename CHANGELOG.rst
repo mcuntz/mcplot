@@ -2,6 +2,9 @@ Changelog
 ---------
 
 v2.0 (??? 2024)
+    * Order Matplotlib colormaps into categories.
+    * Use named colors from `matplotlib.colors` rather than
+      `plt.cm.colors`.
     * Add `color_palette` = `get_cmap` to have a very similar function
       as seaborn.
     * Add alias `get_palette` = `get_cmap`, `print_palettes` =
