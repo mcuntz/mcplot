@@ -2,6 +2,9 @@ Changelog
 ---------
 
 v2.0 (??? 2024)
+    * Add sron named colors.
+    * Add pale and dark colors to sron_colors.
+    * Use helper functions for all colors and colormaps.
     * Order Matplotlib colormaps into categories.
     * Use named colors from `matplotlib.colors` rather than
       `plt.cm.colors`.

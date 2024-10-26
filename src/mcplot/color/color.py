@@ -58,6 +58,9 @@ History
    * Only do case-insensitive search for cmaps of Matplotlib in get_cmap,
      Oct 2024, Matthias Cuntz
    * Order Matplotlib colormaps into categories, Oct 2024, Matthias Cuntz
+   * Use helper functions _all_colors, _mpl_cmaps, and _all_cmaps,
+     Oct 2024, Matthias Cuntz
+   * Add sron_named_colors, Oct 2024, Matthias Cuntz
 
 """
 import matplotlib as mpl
@@ -73,6 +76,7 @@ from .ncl_palettes import ncl_large, ncl_small, ncl_meteo_swiss
 from .oregon_palettes import (oregon_sequential, oregon_diverging,
                               oregon_qualitative)
 from .sron2012_palettes import sron2012_colors, sron2012_functions
+from .sron_palettes import sron_named_colors
 from .sron_palettes import sron_colors, sron_colormaps, sron_functions
 from .ufz_palettes import ufz_colors
 
@@ -81,6 +85,55 @@ __all__ = ['get_color', 'print_colors', 'show_colors',
            'get_cmap', 'print_cmaps', 'show_cmaps',
            'get_palette', 'print_palettes', 'show_palettes',
            'color_palette']
+
+
+def _all_colors(collection=''):
+    """
+    Get all known named colors
+
+    Parameters
+    ----------
+    collection : str or list of strings, optional
+        Name(s) of color collection(s).
+        Known collections are
+        'base', 'css', 'tableau', 'sron', 'ufz', and 'xkcd'.
+
+    Returns
+    -------
+    dict
+        dict of dict. First keys: collection, 2nd keys: color names,
+        values: colors
+
+    Examples
+    --------
+    .. code-block:: python
+
+       call = _all_colors(['tableau', 'ufz'])
+
+    """
+    if collection:
+        if isinstance(collection, str):
+            collects = [collection.lower()]
+        else:
+            collects = [ i.lower() for i in collection ]
+    else:
+        collects = ['base', 'tableau', 'sron', 'ufz', 'css', 'xkcd']
+
+    dall = {}
+    if 'base' in collects:
+        dall.update({'base': mcolors.BASE_COLORS})
+    if 'tableau' in collects:
+        dall.update({'tableau': mcolors.TABLEAU_COLORS})
+    if 'sron' in collects:
+        dall.update({'sron': sron_named_colors})
+    if 'ufz' in collects:
+        dall.update({'ufz': ufz_colors})
+    if 'css' in collects:
+        dall.update({'css': mcolors.CSS4_COLORS})
+    if 'xkcd' in collects:
+        dall.update({'xkcd': mcolors.XKCD_COLORS})
+
+    return dall
 
 
 def _mpl_cmaps():
@@ -93,7 +146,8 @@ def _mpl_cmaps():
     Returns
     -------
     dict
-        dict with 'categories': dict with 'colormaps': list_of_values
+        dict of dict dict. First keys: categories, 2nd keys: colormap names,
+        values: colors
 
     Examples
     --------
@@ -139,6 +193,78 @@ def _mpl_cmaps():
             mpl_cmaps[pp].update({cc: colors})
 
     return mpl_cmaps
+
+
+def _all_cmaps(collection=''):
+    """
+    Get all known color palettes and continuous colormaps
+
+    Parameters
+    ----------
+    collection : str or list of strings, optional
+        Name(s) of color palette collection(s).
+        Known collections are 'mcplot', 'sron', 'sron2012', 'mathematica',
+        'oregon', 'ipcc', 'ncl', 'matplotlib', and 'brewer'.
+
+    Returns
+    -------
+    dict
+        dict of dict of dict. First keys: collection, 2nd keys: categories,
+        3rd keys: colormap names, values: colors
+
+    Examples
+    --------
+    .. code-block:: python
+
+       cmaps = _all_cmaps(['mcplot', 'sron'])
+
+    """
+    if collection:
+        if isinstance(collection, str):
+            collects = [collection.lower()]
+        else:
+            collects = [ i.lower() for i in collection ]
+    else:
+        collects = ['mcplot', 'sron', 'sron2012', 'mathematica', 'oregon',
+                    'ipcc', 'ncl', 'matplotlib', 'brewer']
+
+    dall = {}
+    if 'mcplot' in collects:
+        dall.update({'mcplot': {'mcplot_cmaps': mcplot_cmaps}})
+    if 'sron' in collects:
+        dall.update({'sron': {'sron_colors': sron_colors,
+                              'sron_colormaps': sron_colormaps,
+                              'sron_functions': sron_functions}})
+    if 'sron2012' in collects:
+        dall.update({'sron2012': {'sron2012_colors': sron2012_colors,
+                                  'sron2012_functions': sron2012_functions}})
+    if 'mathematica' in collects:
+        dall.update({'mathematica':
+                     {'mathematica_rainbow': mathematica_rainbow}})
+    if 'oregon' in collects:
+        dall.update({'oregon_sequential':
+                     {'oregon_sequential': oregon_sequential,
+                      'oregon_diverging': oregon_diverging,
+                      'oregon_qualitative': oregon_qualitative}})
+    if 'ipcc' in collects:
+        dall.update({'ipcc':
+                     {'ipcc_categorical': ipcc_categorical,
+                      'ipcc_diverging': ipcc_diverging,
+                      'ipcc_sequential': ipcc_sequential}})
+    if 'ncl' in collects:
+        dall.update({'ncl':
+                     {'ncl_small': ncl_small,
+                      'ncl_large': ncl_large,
+                      'ncl_meteo_swiss': ncl_meteo_swiss}})
+    if 'matplotlib' in collects:
+        dall.update({'matplotlib': _mpl_cmaps()})
+    if 'brewer' in collects:
+        dall.update({'brewer':
+                     {'brewer_sequential': brewer_sequential,
+                      'brewer_diverging': brewer_diverging,
+                      'brewer_qualitative': brewer_qualitative}})
+
+    return dall
 
 
 def _rgb2rgb(col):
@@ -212,12 +338,10 @@ def get_color(cname=''):
     """
     from collections.abc import Iterable
 
+    call = _all_colors()
     dall = {}
-    dall.update(mcolors.BASE_COLORS)
-    dall.update(mcolors.TABLEAU_COLORS)
-    dall.update(ufz_colors)
-    dall.update(mcolors.CSS4_COLORS)
-    dall.update(mcolors.XKCD_COLORS)
+    for cc in call:
+        dall.update(call[cc])
 
     if cname:
         if isinstance(cname, Iterable) and (not isinstance(cname, str)):
@@ -236,7 +360,7 @@ def print_colors(collection=''):
     collection : str or list of strings, optional
         Name(s) of color collection(s).
         Known collections are
-        'base', 'css', 'tableau', 'ufz', and 'xkcd'.
+        'base', 'css', 'tableau', 'sron', 'ufz', and 'xkcd'.
 
     Returns
     -------
@@ -250,25 +374,7 @@ def print_colors(collection=''):
        print_colors()
 
     """
-    if collection:
-        if isinstance(collection, str):
-            collections = [collection.lower()]
-        else:
-            collections = [ i.lower for i in collection ]
-    else:
-        collections = ['base', 'tableau', 'ufz', 'css', 'xkcd']
-
-    dall = {}
-    if 'base' in collections:
-        dall.update({'base': mcolors.BASE_COLORS})
-    if 'tableau' in collections:
-        dall.update({'tableau': mcolors.TABLEAU_COLORS})
-    if 'ufz' in collections:
-        dall.update({'ufz': ufz_colors})
-    if 'css' in collections:
-        dall.update({'css': mcolors.CSS4_COLORS})
-    if 'xkcd' in collections:
-        dall.update({'xkcd': mcolors.XKCD_COLORS})
+    dall = _all_colors(collection)
 
     for cc in dall:
         print('')
@@ -349,25 +455,25 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
         palette_ = palette_[:-2]
         reverse = True
 
-    brewer_collections = {**brewer_sequential, **brewer_diverging,
-                          **brewer_qualitative}  # concat dictionaries
-    ipcc_collections = {**ipcc_categorical, **ipcc_diverging,
-                        **ipcc_sequential}
-    mathematica_collections = mathematica_rainbow
-    mcplot_collections = mcplot_cmaps
-    ncl_collections = {**ncl_large, **ncl_small, **ncl_meteo_swiss}
-    oregon_collections = {**oregon_sequential, **oregon_diverging,
-                          **oregon_qualitative}
-    sron2012_collections = {**sron2012_colors, **sron2012_functions}
-    sron_collections = {**sron_colors, **sron_colormaps, **sron_functions}
+    brewer_collects = {**brewer_sequential, **brewer_diverging,
+                       **brewer_qualitative}  # concat dictionaries
+    ipcc_collects = {**ipcc_categorical, **ipcc_diverging,
+                     **ipcc_sequential}
+    mathematica_collects = mathematica_rainbow
+    mcplot_collects = mcplot_cmaps
+    ncl_collects = {**ncl_large, **ncl_small, **ncl_meteo_swiss}
+    oregon_collects = {**oregon_sequential, **oregon_diverging,
+                       **oregon_qualitative}
+    sron2012_collects = {**sron2012_colors, **sron2012_functions}
+    sron_collects = {**sron_colors, **sron_colormaps, **sron_functions}
 
     found_palette = False
     nosubsample = False
     # miss = None
 
     # mcplot, mathematica, ncl
-    simplepals = {**mcplot_collections, **mathematica_collections,
-                  **ncl_collections}
+    simplepals = {**mcplot_collects, **mathematica_collects,
+                  **ncl_collects}
     if not found_palette:
         if (palette in simplepals) or (palette_ in simplepals):
             found_palette = True
@@ -378,7 +484,7 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
             colors = simplepals[ipal]
 
     # brewer, ipcc, oregon
-    rgbpals = {**brewer_collections, **ipcc_collections, **oregon_collections}
+    rgbpals = {**brewer_collects, **ipcc_collects, **oregon_collects}
     if not found_palette:
         if (palette in rgbpals) or (palette_ in rgbpals):
             found_palette = True
@@ -390,9 +496,9 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
 
     # sron
     if not found_palette:
-        if (palette in sron_collections) or (palette_ in sron_collections):
+        if (palette in sron_collects) or (palette_ in sron_collects):
             found_palette = True
-            if palette in sron_collections:
+            if palette in sron_collects:
                 ipal = palette
             else:
                 ipal = palette_
@@ -417,10 +523,10 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
 
     # sron2012
     if not found_palette:
-        if ( (palette in sron2012_collections) or
-             (palette_ in sron2012_collections) ):
+        if ( (palette in sron2012_collects) or
+             (palette_ in sron2012_collects) ):
             found_palette = True
-            if palette in sron2012_collections:
+            if palette in sron2012_collects:
                 ipal = palette
             else:
                 ipal = palette_
@@ -532,53 +638,10 @@ def print_cmaps(collection=''):
     --------
     .. code-block:: python
 
-       print_cmaps()
+       print_cmaps(collection=['mcplot', 'sron'])
 
     """
-    if collection:
-        if isinstance(collection, str):
-            collections = [collection.lower()]
-        else:
-            collections = [ i.lower for i in collection ]
-    else:
-        collections = ['mcplot', 'sron', 'sron2012', 'mathematica', 'oregon',
-                       'ipcc', 'ncl', 'matplotlib', 'brewer']
-
-    dall = {}
-    if 'mcplot' in collections:
-        dall.update({'mcplot': {'mcplot_cmaps': mcplot_cmaps}})
-    if 'sron' in collections:
-        dall.update({'sron': {'sron_colors': sron_colors,
-                              'sron_colormaps': sron_colormaps,
-                              'sron_functions': sron_functions}})
-    if 'sron2012' in collections:
-        dall.update({'sron2012': {'sron2012_colors': sron2012_colors,
-                                  'sron2012_functions': sron2012_functions}})
-    if 'mathematica' in collections:
-        dall.update({'mathematica':
-                     {'mathematica_rainbow': mathematica_rainbow}})
-    if 'oregon' in collections:
-        dall.update({'oregon_sequential':
-                     {'oregon_sequential': oregon_sequential,
-                      'oregon_diverging': oregon_diverging,
-                      'oregon_qualitative': oregon_qualitative}})
-    if 'ipcc' in collections:
-        dall.update({'ipcc':
-                     {'ipcc_categorical': ipcc_categorical,
-                      'ipcc_diverging': ipcc_diverging,
-                      'ipcc_sequential': ipcc_sequential}})
-    if 'ncl' in collections:
-        dall.update({'ncl':
-                     {'ncl_small': ncl_small,
-                      'ncl_large': ncl_large,
-                      'ncl_meteo_swiss': ncl_meteo_swiss}})
-    if 'matplotlib' in collections:
-        dall.update({'matplotlib': _mpl_cmaps()})
-    if 'brewer' in collections:
-        dall.update({'brewer':
-                     {'brewer_sequential': brewer_sequential,
-                      'brewer_diverging': brewer_diverging,
-                      'brewer_qualitative': brewer_qualitative}})
+    dall = _all_cmaps(collection)
 
     for cc in dall:
         print('')
@@ -674,6 +737,14 @@ def _plot_colors(ifig, table, colors, *, ncols=4, sort_colors=True,
             names = sorted(
                 colors, key=lambda c:
                 tuple(mcolors.rgb_to_hsv(colors[c])))
+        elif table == 'sron':
+            # names = sorted(
+            #     colors, key=lambda c:
+            #     tuple(mcolors.rgb_to_hsv(mcolors.to_rgb(colors[c]))))
+            # do not sort but keep in categories,
+            # which are already sorted by hue (or luminance for high-
+            # and medium-contrast)
+            names = list(colors)
         else:
             names = sorted(
                 colors, key=lambda c:
@@ -720,7 +791,7 @@ def show_colors(outfile='', collection=''):
     collection : str or list of strings, optional
         Name(s) of color collection(s).
         Known collections are
-        'base', 'css', 'tableau', 'ufz', and 'xkcd'.
+        'base', 'css', 'tableau', 'sron', 'ufz', and 'xkcd'.
 
     Returns
     -------
@@ -766,26 +837,7 @@ def show_colors(outfile='', collection=''):
     else:
         pdf_pages = None
 
-    if collection:
-        if isinstance(collection, str):
-            collections = [collection.lower()]
-        else:
-            collections = [ i.lower for i in collection ]
-    else:
-        collections = ['base', 'tableau', 'ufz', 'css', 'xkcd']
-
-    dall = {}
-    if 'base' in collections:
-        dall.update({'base': mcolors.BASE_COLORS})
-    if 'tableau' in collections:
-        dall.update({'tableau': mcolors.TABLEAU_COLORS})
-    if 'ufz' in collections:
-        dall.update({'ufz': ufz_colors})
-    if 'css' in collections:
-        dall.update({'css': mcolors.CSS4_COLORS})
-    if 'xkcd' in collections:
-        dall.update({'xkcd': mcolors.XKCD_COLORS})
-
+    dall = _all_colors(collection)
     for cc in dall:
         ifig = _plot_colors(ifig, cc, dall[cc], sort_colors=True,
                             textsize=textsize, outtype=outtype,
@@ -817,8 +869,6 @@ def _newsubplot_cmaps(nrow, ncol, iplot, iname,
     ax = plt.subplot(nrow, ncol, iplot)
     ax.axis('off')
     cmap = get_cmap(iname, ncolors, as_cmap=True)
-    # ax.pcolormesh(np.outer(np.ones(cmap.N), np.arange(cmap.N)),
-    #               cmap=cmap)
     ax.imshow(np.outer(np.ones(cmap.N), np.arange(cmap.N)),
               aspect='auto', cmap=cmap, origin="lower")
     xmin, xmax = ax.get_xlim()
@@ -879,16 +929,6 @@ def show_cmaps(outfile='', collection=''):  # pragma: no cover
         outtype = 'X'
         textsize = 8
 
-    # which collections to include
-    collections = ['mcplot', 'sron', 'sron2012', 'mathematica', 'oregon',
-                   'ipcc', 'ncl', 'matplotlib', 'brewer']
-    if collection:
-        if isinstance(collection, str):
-            if collection.lower() != 'all':
-                collections = [collection.lower()]
-        else:
-            collections = [ i.lower() for i in collection ]
-
     # plot setup
     if outfile:
         mpl.rc('figure', figsize=(8.27, 11.69))  # a4 portrait
@@ -900,33 +940,6 @@ def show_cmaps(outfile='', collection=''):  # pragma: no cover
     mpl.rc('font', size=textsize)
     nrow = 35
 
-    all_collections = []
-    if 'mcplot' in collections:
-        all_collections.extend(['mcplot_cmaps'])
-    if 'sron' in collections:
-        all_collections.extend(['sron_colors', 'sron_colormaps',
-                                'sron_functions'])
-    if 'sron2012' in collections:
-        all_collections.extend(['sron2012_colors', 'sron2012_functions'])
-    if 'mathematica' in collections:
-        all_collections.extend(['mathematica_rainbow'])
-    if 'oregon' in collections:
-        all_collections.extend(['oregon_sequential', 'oregon_diverging',
-                                'oregon_qualitative'])
-    if 'ipcc' in collections:
-        all_collections.extend(['ipcc_categorical', 'ipcc_diverging',
-                                'ipcc_sequential'])
-    if 'ncl' in collections:
-        all_collections.extend(['ncl_large', 'ncl_small', 'ncl_meteo_swiss'])
-    if 'matplotlib' in collections:
-        cmaps  = [ i for i in list(mpl.colormaps) if not i.endswith('_r') ]
-        cmaps.sort()
-        # all_collections.extend(cmaps) (old)
-        all_collections.append(cmaps)
-    if 'brewer' in collections:
-        all_collections.extend(['brewer_sequential', 'brewer_diverging',
-                                'brewer_qualitative'])
-
     # plotting
     ifig = 0
     if (outtype == 'pdf'):
@@ -934,40 +947,41 @@ def show_cmaps(outfile='', collection=''):  # pragma: no cover
     else:
         pdf_pages = None
 
+    dall = _all_cmaps(collection)
     ipanel = 0
-    for cc in all_collections:
-        if isinstance(cc, list):
-            # matplotlib
-            icoll = cc
-            newcoll = True
-            collname = 'matplotlib'
-        else:
-            try:
-                icoll = eval(f'mc.{cc}')
-                newcoll = True
-                collname = cc
-            except AttributeError:
-                # matplotlib name (old, should not be here)
-                icoll = [cc]
-                newcoll = False
-                collname = 'matplotlib'
-        for iname in icoll:
-            if ipanel == 0:
-                ifig += 1
-                fig = _newfig_cmaps(ifig, collname)
-            ipanel += 1
-            _newsubplot_cmaps(nrow, 1, ipanel, iname)
-            if collname == 'sron_functions':
-                for ncolors in range(1, 24):
-                    ipanel += 1
-                    _newsubplot_cmaps(nrow, 1, ipanel, iname, ncolors)
-            if ipanel == nrow:
+    for dd in dall:
+        collname = dd
+        call = dall[dd]
+        for cc in call:
+            if collname == 'matplotlib':
+                catname = f'{collname} - {cc}'
+            else:
+                catname = cc
+            icoll = call[cc]
+            for iname in icoll:
+                if ipanel == 0:
+                    ifig += 1
+                    fig = _newfig_cmaps(ifig, catname)
+                ipanel += 1
+                _newsubplot_cmaps(nrow, 1, ipanel, iname)
+
+                if catname == 'sron_functions':
+                    for ncolors in range(1, 24):
+                        ipanel += 1
+                        _newsubplot_cmaps(nrow, 1, ipanel, iname, ncolors)
+                    # new page after each function
+                    _savefig(fig, ifig, outtype, outfile, pdf_pages)
+                    ipanel = 0
+
+                if ipanel == nrow:  # new page if enough rows per page
+                    _savefig(fig, ifig, outtype, outfile, pdf_pages)
+                    ipanel = 0
+
+            if ipanel != 0:  # new page after each category
                 _savefig(fig, ifig, outtype, outfile, pdf_pages)
                 ipanel = 0
-        if (ipanel != 0) and newcoll:
-            _savefig(fig, ifig, outtype, outfile, pdf_pages)
-            ipanel = 0
-    if ipanel != 0:
+
+    if ipanel != 0:  # finish at end of all cmaps
         _savefig(fig, ifig, outtype, outfile, pdf_pages)
 
     if outtype == 'pdf':

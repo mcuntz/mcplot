@@ -432,7 +432,7 @@ France.</p>
 <td><p>Get colors of defined palettes or continuous colormaps</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#mcplot.color.color.get_color" title="mcplot.color.color.get_color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_color</span></code></a>([cname])</p></td>
-<td><p>Register new named colors with Matplotlib and return named color(s)</p></td>
+<td><p>Return named color(s)</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#mcplot.color.color.get_palette" title="mcplot.color.color.get_palette"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_palette</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Alias for get_cmap</p></td>
@@ -486,6 +486,14 @@ Oct 2024, Matthias Cuntz</p></li>
 <li><p>Add alias get_palette = get_cmap, print_palettes = print_cmaps,
 show_palettes = show_cmaps, Oct 2024, Matthias Cuntz</p></li>
 <li><p>Add alias color_palette = get_cmap as in seaborn, Oct 2024, Matthias Cuntz</p></li>
+<li><p>Use named colors from matplotlib.colors rather than plt.cm.colors,
+Oct 2024, Matthias Cuntz</p></li>
+<li><p>Only do case-insensitive search for cmaps of Matplotlib in get_cmap,
+Oct 2024, Matthias Cuntz</p></li>
+<li><p>Order Matplotlib colormaps into categories, Oct 2024, Matthias Cuntz</p></li>
+<li><p>Use helper functions _all_colors, _mpl_cmaps, and _all_cmaps,
+Oct 2024, Matthias Cuntz</p></li>
+<li><p>Add sron_named_colors, Oct 2024, Matthias Cuntz</p></li>
 </ul>
 </dd>
 </dl>
@@ -552,10 +560,7 @@ method <a class="reference external" href="https://matplotlib.org/stable/api/_as
 <dl class="py function">
 <dt class="sig sig-object py" id="mcplot.color.color.get_color">
 <span class="sig-name descname"><span class="pre">get_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/color/color.html#get_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.color.color.get_color" title="Link to this definition">#</a></dt>
-<dd><p>Register new named colors with Matplotlib and return named color(s)</p>
-<p>Registers the named colors given in ufz_palettes.
-Optionally returns the value(s) of the named color(s),
-which can be any color name known to Matplotlib.</p>
+<dd><p>Return named color(s)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>cname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> or </em><em>iterable</em><em> of </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Color name(s)</p>
@@ -594,7 +599,7 @@ console.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">print_cmaps</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">print_cmaps</span><span class="p">(</span><span class="n">collection</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mcplot&#39;</span><span class="p">,</span> <span class="s1">&#39;sron&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -607,7 +612,7 @@ console.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>collection</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em> of </em><em>strings</em><em>, </em><em>optional</em>) – Name(s) of color collection(s).
 Known collections are
-‘base’, ‘css’, ‘tableau’, ‘ufz’, and ‘xkcd’.</p>
+‘base’, ‘css’, ‘tableau’, ‘sron’, ‘ufz’, and ‘xkcd’.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Prints list of known named colors to console.</p>
@@ -667,7 +672,7 @@ plotting window.</p>
 <li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Output file name. Output type will be determined from file suffix.</p></li>
 <li><p><strong>collection</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em> of </em><em>strings</em><em>, </em><em>optional</em>) – Name(s) of color collection(s).
 Known collections are
-‘base’, ‘css’, ‘tableau’, ‘ufz’, and ‘xkcd’.</p></li>
+‘base’, ‘css’, ‘tableau’, ‘sron’, ‘ufz’, and ‘xkcd’.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

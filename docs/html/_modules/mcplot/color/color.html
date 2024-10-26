@@ -379,6 +379,14 @@ document.write(`
 <span class="sd">   * Add alias get_palette = get_cmap, print_palettes = print_cmaps,</span>
 <span class="sd">     show_palettes = show_cmaps, Oct 2024, Matthias Cuntz</span>
 <span class="sd">   * Add alias color_palette = get_cmap as in seaborn, Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * Use named colors from matplotlib.colors rather than plt.cm.colors,</span>
+<span class="sd">     Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * Only do case-insensitive search for cmaps of Matplotlib in get_cmap,</span>
+<span class="sd">     Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * Order Matplotlib colormaps into categories, Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * Use helper functions _all_colors, _mpl_cmaps, and _all_cmaps,</span>
+<span class="sd">     Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * Add sron_named_colors, Oct 2024, Matthias Cuntz</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
@@ -394,6 +402,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">.oregon_palettes</span> <span class="kn">import</span> <span class="p">(</span><span class="n">oregon_sequential</span><span class="p">,</span> <span class="n">oregon_diverging</span><span class="p">,</span>
                               <span class="n">oregon_qualitative</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.sron2012_palettes</span> <span class="kn">import</span> <span class="n">sron2012_colors</span><span class="p">,</span> <span class="n">sron2012_functions</span>
+<span class="kn">from</span> <span class="nn">.sron_palettes</span> <span class="kn">import</span> <span class="n">sron_named_colors</span>
 <span class="kn">from</span> <span class="nn">.sron_palettes</span> <span class="kn">import</span> <span class="n">sron_colors</span><span class="p">,</span> <span class="n">sron_colormaps</span><span class="p">,</span> <span class="n">sron_functions</span>
 <span class="kn">from</span> <span class="nn">.ufz_palettes</span> <span class="kn">import</span> <span class="n">ufz_colors</span>
 
@@ -402,6 +411,186 @@ document.write(`
            <span class="s1">&#39;get_cmap&#39;</span><span class="p">,</span> <span class="s1">&#39;print_cmaps&#39;</span><span class="p">,</span> <span class="s1">&#39;show_cmaps&#39;</span><span class="p">,</span>
            <span class="s1">&#39;get_palette&#39;</span><span class="p">,</span> <span class="s1">&#39;print_palettes&#39;</span><span class="p">,</span> <span class="s1">&#39;show_palettes&#39;</span><span class="p">,</span>
            <span class="s1">&#39;color_palette&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_all_colors</span><span class="p">(</span><span class="n">collection</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get all known named colors</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    collection : str or list of strings, optional</span>
+<span class="sd">        Name(s) of color collection(s).</span>
+<span class="sd">        Known collections are</span>
+<span class="sd">        &#39;base&#39;, &#39;css&#39;, &#39;tableau&#39;, &#39;sron&#39;, &#39;ufz&#39;, and &#39;xkcd&#39;.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        dict of dict. First keys: collection, 2nd keys: color names,</span>
+<span class="sd">        values: colors</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       call = _all_colors([&#39;tableau&#39;, &#39;ufz&#39;])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">collection</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">collects</span> <span class="o">=</span> <span class="p">[</span><span class="n">collection</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">collects</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">collection</span> <span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">collects</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;base&#39;</span><span class="p">,</span> <span class="s1">&#39;tableau&#39;</span><span class="p">,</span> <span class="s1">&#39;sron&#39;</span><span class="p">,</span> <span class="s1">&#39;ufz&#39;</span><span class="p">,</span> <span class="s1">&#39;css&#39;</span><span class="p">,</span> <span class="s1">&#39;xkcd&#39;</span><span class="p">]</span>
+
+    <span class="n">dall</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="s1">&#39;base&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;base&#39;</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">BASE_COLORS</span><span class="p">})</span>
+    <span class="k">if</span> <span class="s1">&#39;tableau&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;tableau&#39;</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">TABLEAU_COLORS</span><span class="p">})</span>
+    <span class="k">if</span> <span class="s1">&#39;sron&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;sron&#39;</span><span class="p">:</span> <span class="n">sron_named_colors</span><span class="p">})</span>
+    <span class="k">if</span> <span class="s1">&#39;ufz&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;ufz&#39;</span><span class="p">:</span> <span class="n">ufz_colors</span><span class="p">})</span>
+    <span class="k">if</span> <span class="s1">&#39;css&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;css&#39;</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">CSS4_COLORS</span><span class="p">})</span>
+    <span class="k">if</span> <span class="s1">&#39;xkcd&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;xkcd&#39;</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">XKCD_COLORS</span><span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">dall</span>
+
+
+<span class="k">def</span> <span class="nf">_mpl_cmaps</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get Matplotlib colormaps in categories of perception</span>
+
+<span class="sd">    See</span>
+<span class="sd">    https://matplotlib.org/stable/gallery/color/colormap_reference.html</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        dict of dict dict. First keys: categories, 2nd keys: colormap names,</span>
+<span class="sd">        values: colors</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       cmaps = _mpl_cmaps()</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mpl_palettes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;perceptually uniform sequential&#39;</span><span class="p">:</span>
+                    <span class="p">[</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="s1">&#39;plasma&#39;</span><span class="p">,</span> <span class="s1">&#39;inferno&#39;</span><span class="p">,</span> <span class="s1">&#39;magma&#39;</span><span class="p">,</span> <span class="s1">&#39;cividis&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;sequential&#39;</span><span class="p">:</span>
+                    <span class="p">[</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="s1">&#39;Purples&#39;</span><span class="p">,</span> <span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="s1">&#39;Greens&#39;</span><span class="p">,</span> <span class="s1">&#39;Oranges&#39;</span><span class="p">,</span> <span class="s1">&#39;Reds&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;YlOrBr&#39;</span><span class="p">,</span> <span class="s1">&#39;YlOrRd&#39;</span><span class="p">,</span> <span class="s1">&#39;OrRd&#39;</span><span class="p">,</span> <span class="s1">&#39;PuRd&#39;</span><span class="p">,</span> <span class="s1">&#39;RdPu&#39;</span><span class="p">,</span> <span class="s1">&#39;BuPu&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;GnBu&#39;</span><span class="p">,</span> <span class="s1">&#39;PuBu&#39;</span><span class="p">,</span> <span class="s1">&#39;YlGnBu&#39;</span><span class="p">,</span> <span class="s1">&#39;PuBuGn&#39;</span><span class="p">,</span> <span class="s1">&#39;BuGn&#39;</span><span class="p">,</span> <span class="s1">&#39;YlGn&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;binary&#39;</span><span class="p">,</span> <span class="s1">&#39;gist_yarg&#39;</span><span class="p">,</span> <span class="s1">&#39;gist_gray&#39;</span><span class="p">,</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;bone&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;pink&#39;</span><span class="p">,</span> <span class="s1">&#39;spring&#39;</span><span class="p">,</span> <span class="s1">&#39;summer&#39;</span><span class="p">,</span> <span class="s1">&#39;autumn&#39;</span><span class="p">,</span> <span class="s1">&#39;winter&#39;</span><span class="p">,</span> <span class="s1">&#39;cool&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;Wistia&#39;</span><span class="p">,</span> <span class="s1">&#39;hot&#39;</span><span class="p">,</span> <span class="s1">&#39;afmhot&#39;</span><span class="p">,</span> <span class="s1">&#39;gist_heat&#39;</span><span class="p">,</span> <span class="s1">&#39;copper&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;diverging&#39;</span><span class="p">:</span>
+                    <span class="p">[</span><span class="s1">&#39;PiYG&#39;</span><span class="p">,</span> <span class="s1">&#39;PRGn&#39;</span><span class="p">,</span> <span class="s1">&#39;BrBG&#39;</span><span class="p">,</span> <span class="s1">&#39;PuOr&#39;</span><span class="p">,</span> <span class="s1">&#39;RdGy&#39;</span><span class="p">,</span> <span class="s1">&#39;RdBu&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;RdYlBu&#39;</span><span class="p">,</span> <span class="s1">&#39;RdYlGn&#39;</span><span class="p">,</span> <span class="s1">&#39;Spectral&#39;</span><span class="p">,</span> <span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="s1">&#39;bwr&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;seismic&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;cyclic&#39;</span><span class="p">:</span>
+                    <span class="p">[</span><span class="s1">&#39;twilight&#39;</span><span class="p">,</span> <span class="s1">&#39;twilight_shifted&#39;</span><span class="p">,</span> <span class="s1">&#39;hsv&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;qualitative&#39;</span><span class="p">:</span>
+                    <span class="p">[</span><span class="s1">&#39;Pastel1&#39;</span><span class="p">,</span> <span class="s1">&#39;Pastel2&#39;</span><span class="p">,</span> <span class="s1">&#39;Paired&#39;</span><span class="p">,</span> <span class="s1">&#39;Accent&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;Dark2&#39;</span><span class="p">,</span> <span class="s1">&#39;Set1&#39;</span><span class="p">,</span> <span class="s1">&#39;Set2&#39;</span><span class="p">,</span> <span class="s1">&#39;Set3&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;tab10&#39;</span><span class="p">,</span> <span class="s1">&#39;tab20&#39;</span><span class="p">,</span> <span class="s1">&#39;tab20b&#39;</span><span class="p">,</span> <span class="s1">&#39;tab20c&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;miscellaneous&#39;</span><span class="p">:</span>
+                    <span class="p">[</span><span class="s1">&#39;flag&#39;</span><span class="p">,</span> <span class="s1">&#39;prism&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean&#39;</span><span class="p">,</span> <span class="s1">&#39;gist_earth&#39;</span><span class="p">,</span> <span class="s1">&#39;terrain&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;gist_stern&#39;</span><span class="p">,</span> <span class="s1">&#39;gnuplot&#39;</span><span class="p">,</span> <span class="s1">&#39;gnuplot2&#39;</span><span class="p">,</span> <span class="s1">&#39;CMRmap&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;cubehelix&#39;</span><span class="p">,</span> <span class="s1">&#39;brg&#39;</span><span class="p">,</span> <span class="s1">&#39;gist_rainbow&#39;</span><span class="p">,</span> <span class="s1">&#39;rainbow&#39;</span><span class="p">,</span> <span class="s1">&#39;jet&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;turbo&#39;</span><span class="p">,</span> <span class="s1">&#39;nipy_spectral&#39;</span><span class="p">,</span> <span class="s1">&#39;gist_ncar&#39;</span><span class="p">]}</span>
+
+    <span class="n">mpl_cmaps</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">pp</span> <span class="ow">in</span> <span class="n">mpl_palettes</span><span class="p">:</span>
+        <span class="n">mpl_cmaps</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">pp</span><span class="p">:</span> <span class="p">{}})</span>
+        <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">mpl_palettes</span><span class="p">[</span><span class="n">pp</span><span class="p">]:</span>
+            <span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="n">cc</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">colors</span> <span class="o">=</span> <span class="n">cmap</span><span class="o">.</span><span class="n">colors</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">cmap</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)</span> <span class="p">]</span>
+            <span class="n">mpl_cmaps</span><span class="p">[</span><span class="n">pp</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">cc</span><span class="p">:</span> <span class="n">colors</span><span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">mpl_cmaps</span>
+
+
+<span class="k">def</span> <span class="nf">_all_cmaps</span><span class="p">(</span><span class="n">collection</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get all known color palettes and continuous colormaps</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    collection : str or list of strings, optional</span>
+<span class="sd">        Name(s) of color palette collection(s).</span>
+<span class="sd">        Known collections are &#39;mcplot&#39;, &#39;sron&#39;, &#39;sron2012&#39;, &#39;mathematica&#39;,</span>
+<span class="sd">        &#39;oregon&#39;, &#39;ipcc&#39;, &#39;ncl&#39;, &#39;matplotlib&#39;, and &#39;brewer&#39;.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        dict of dict of dict. First keys: collection, 2nd keys: categories,</span>
+<span class="sd">        3rd keys: colormap names, values: colors</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       cmaps = _all_cmaps([&#39;mcplot&#39;, &#39;sron&#39;])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">collection</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">collects</span> <span class="o">=</span> <span class="p">[</span><span class="n">collection</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">collects</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">collection</span> <span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">collects</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mcplot&#39;</span><span class="p">,</span> <span class="s1">&#39;sron&#39;</span><span class="p">,</span> <span class="s1">&#39;sron2012&#39;</span><span class="p">,</span> <span class="s1">&#39;mathematica&#39;</span><span class="p">,</span> <span class="s1">&#39;oregon&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;ipcc&#39;</span><span class="p">,</span> <span class="s1">&#39;ncl&#39;</span><span class="p">,</span> <span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;brewer&#39;</span><span class="p">]</span>
+
+    <span class="n">dall</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="s1">&#39;mcplot&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;mcplot&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mcplot_cmaps&#39;</span><span class="p">:</span> <span class="n">mcplot_cmaps</span><span class="p">}})</span>
+    <span class="k">if</span> <span class="s1">&#39;sron&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;sron&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;sron_colors&#39;</span><span class="p">:</span> <span class="n">sron_colors</span><span class="p">,</span>
+                              <span class="s1">&#39;sron_colormaps&#39;</span><span class="p">:</span> <span class="n">sron_colormaps</span><span class="p">,</span>
+                              <span class="s1">&#39;sron_functions&#39;</span><span class="p">:</span> <span class="n">sron_functions</span><span class="p">}})</span>
+    <span class="k">if</span> <span class="s1">&#39;sron2012&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;sron2012&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;sron2012_colors&#39;</span><span class="p">:</span> <span class="n">sron2012_colors</span><span class="p">,</span>
+                                  <span class="s1">&#39;sron2012_functions&#39;</span><span class="p">:</span> <span class="n">sron2012_functions</span><span class="p">}})</span>
+    <span class="k">if</span> <span class="s1">&#39;mathematica&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;mathematica&#39;</span><span class="p">:</span>
+                     <span class="p">{</span><span class="s1">&#39;mathematica_rainbow&#39;</span><span class="p">:</span> <span class="n">mathematica_rainbow</span><span class="p">}})</span>
+    <span class="k">if</span> <span class="s1">&#39;oregon&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;oregon_sequential&#39;</span><span class="p">:</span>
+                     <span class="p">{</span><span class="s1">&#39;oregon_sequential&#39;</span><span class="p">:</span> <span class="n">oregon_sequential</span><span class="p">,</span>
+                      <span class="s1">&#39;oregon_diverging&#39;</span><span class="p">:</span> <span class="n">oregon_diverging</span><span class="p">,</span>
+                      <span class="s1">&#39;oregon_qualitative&#39;</span><span class="p">:</span> <span class="n">oregon_qualitative</span><span class="p">}})</span>
+    <span class="k">if</span> <span class="s1">&#39;ipcc&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;ipcc&#39;</span><span class="p">:</span>
+                     <span class="p">{</span><span class="s1">&#39;ipcc_categorical&#39;</span><span class="p">:</span> <span class="n">ipcc_categorical</span><span class="p">,</span>
+                      <span class="s1">&#39;ipcc_diverging&#39;</span><span class="p">:</span> <span class="n">ipcc_diverging</span><span class="p">,</span>
+                      <span class="s1">&#39;ipcc_sequential&#39;</span><span class="p">:</span> <span class="n">ipcc_sequential</span><span class="p">}})</span>
+    <span class="k">if</span> <span class="s1">&#39;ncl&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;ncl&#39;</span><span class="p">:</span>
+                     <span class="p">{</span><span class="s1">&#39;ncl_small&#39;</span><span class="p">:</span> <span class="n">ncl_small</span><span class="p">,</span>
+                      <span class="s1">&#39;ncl_large&#39;</span><span class="p">:</span> <span class="n">ncl_large</span><span class="p">,</span>
+                      <span class="s1">&#39;ncl_meteo_swiss&#39;</span><span class="p">:</span> <span class="n">ncl_meteo_swiss</span><span class="p">}})</span>
+    <span class="k">if</span> <span class="s1">&#39;matplotlib&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">:</span> <span class="n">_mpl_cmaps</span><span class="p">()})</span>
+    <span class="k">if</span> <span class="s1">&#39;brewer&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;brewer&#39;</span><span class="p">:</span>
+                     <span class="p">{</span><span class="s1">&#39;brewer_sequential&#39;</span><span class="p">:</span> <span class="n">brewer_sequential</span><span class="p">,</span>
+                      <span class="s1">&#39;brewer_diverging&#39;</span><span class="p">:</span> <span class="n">brewer_diverging</span><span class="p">,</span>
+                      <span class="s1">&#39;brewer_qualitative&#39;</span><span class="p">:</span> <span class="n">brewer_qualitative</span><span class="p">}})</span>
+
+    <span class="k">return</span> <span class="n">dall</span>
 
 
 <span class="k">def</span> <span class="nf">_rgb2rgb</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
@@ -420,8 +609,10 @@ document.write(`
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    col = (0, 126, 255)</span>
-<span class="sd">    col = _rgb2rgb(col)</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       col = (0, 126, 255)</span>
+<span class="sd">       col = _rgb2rgb(col)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">([</span> <span class="n">i</span> <span class="o">/</span> <span class="mf">255.</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">col</span> <span class="p">])</span>
@@ -443,8 +634,10 @@ document.write(`
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    col = (0, 0.5, 1)</span>
-<span class="sd">    col = _to_grey(col)</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       col = (0, 0.5, 1)</span>
+<span class="sd">       col = _to_grey(col)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">isgrey</span> <span class="o">=</span> <span class="mf">0.2125</span> <span class="o">*</span> <span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.7154</span> <span class="o">*</span> <span class="n">col</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.072</span> <span class="o">*</span> <span class="n">col</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
@@ -455,11 +648,7 @@ document.write(`
 <a class="viewcode-back" href="../../../color.color.html#mcplot.color.get_color">[docs]</a>
 <span class="k">def</span> <span class="nf">get_color</span><span class="p">(</span><span class="n">cname</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Register new named colors with Matplotlib and return named color(s)</span>
-
-<span class="sd">    Registers the named colors given in ufz_palettes.</span>
-<span class="sd">    Optionally returns the value(s) of the named color(s),</span>
-<span class="sd">    which can be any color name known to Matplotlib.</span>
+<span class="sd">    Return named color(s)</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -477,17 +666,17 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
 
-    <span class="n">mapping</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">get_named_colors_mapping</span>
-    <span class="c1"># register ufz colors if not known yet</span>
-    <span class="k">if</span> <span class="s1">&#39;ufz:blue&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="n">mapping</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ufz_colors</span><span class="p">)</span>
+    <span class="n">call</span> <span class="o">=</span> <span class="n">_all_colors</span><span class="p">()</span>
+    <span class="n">dall</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">call</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">call</span><span class="p">[</span><span class="n">cc</span><span class="p">])</span>
 
     <span class="k">if</span> <span class="n">cname</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cname</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cname</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
-            <span class="n">out</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mapping</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cname</span> <span class="p">]</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="p">[</span> <span class="n">dall</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cname</span> <span class="p">]</span>
             <span class="k">return</span> <span class="n">out</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">mapping</span><span class="p">()[</span><span class="n">cname</span><span class="p">]</span></div>
+            <span class="k">return</span> <span class="n">dall</span><span class="p">[</span><span class="n">cname</span><span class="p">]</span></div>
 
 
 
@@ -502,7 +691,7 @@ document.write(`
 <span class="sd">    collection : str or list of strings, optional</span>
 <span class="sd">        Name(s) of color collection(s).</span>
 <span class="sd">        Known collections are</span>
-<span class="sd">        &#39;base&#39;, &#39;css&#39;, &#39;tableau&#39;, &#39;ufz&#39;, and &#39;xkcd&#39;.</span>
+<span class="sd">        &#39;base&#39;, &#39;css&#39;, &#39;tableau&#39;, &#39;sron&#39;, &#39;ufz&#39;, and &#39;xkcd&#39;.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -516,25 +705,7 @@ document.write(`
 <span class="sd">       print_colors()</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">collection</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">collections</span> <span class="o">=</span> <span class="p">[</span><span class="n">collection</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">collections</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span><span class="o">.</span><span class="n">lower</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">collection</span> <span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">collections</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;base&#39;</span><span class="p">,</span> <span class="s1">&#39;tableau&#39;</span><span class="p">,</span> <span class="s1">&#39;ufz&#39;</span><span class="p">,</span> <span class="s1">&#39;css&#39;</span><span class="p">,</span> <span class="s1">&#39;xkcd&#39;</span><span class="p">]</span>
-
-    <span class="n">dall</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">if</span> <span class="s1">&#39;base&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;base&#39;</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">BASE_COLORS</span><span class="p">})</span>
-    <span class="k">if</span> <span class="s1">&#39;tableau&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;tableau&#39;</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">TABLEAU_COLORS</span><span class="p">})</span>
-    <span class="k">if</span> <span class="s1">&#39;ufz&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;ufz&#39;</span><span class="p">:</span> <span class="n">ufz_colors</span><span class="p">})</span>
-    <span class="k">if</span> <span class="s1">&#39;css&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;css&#39;</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">CSS4_COLORS</span><span class="p">})</span>
-    <span class="k">if</span> <span class="s1">&#39;xkcd&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;xkcd&#39;</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">XKCD_COLORS</span><span class="p">})</span>
+    <span class="n">dall</span> <span class="o">=</span> <span class="n">_all_colors</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">dall</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
@@ -618,25 +789,25 @@ document.write(`
         <span class="n">palette_</span> <span class="o">=</span> <span class="n">palette_</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">reverse</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="n">brewer_collections</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">brewer_sequential</span><span class="p">,</span> <span class="o">**</span><span class="n">brewer_diverging</span><span class="p">,</span>
-                          <span class="o">**</span><span class="n">brewer_qualitative</span><span class="p">}</span>  <span class="c1"># concat dictionaries</span>
-    <span class="n">ipcc_collections</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">ipcc_categorical</span><span class="p">,</span> <span class="o">**</span><span class="n">ipcc_diverging</span><span class="p">,</span>
-                        <span class="o">**</span><span class="n">ipcc_sequential</span><span class="p">}</span>
-    <span class="n">mathematica_collections</span> <span class="o">=</span> <span class="n">mathematica_rainbow</span>
-    <span class="n">mcplot_collections</span> <span class="o">=</span> <span class="n">mcplot_cmaps</span>
-    <span class="n">ncl_collections</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">ncl_large</span><span class="p">,</span> <span class="o">**</span><span class="n">ncl_small</span><span class="p">,</span> <span class="o">**</span><span class="n">ncl_meteo_swiss</span><span class="p">}</span>
-    <span class="n">oregon_collections</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">oregon_sequential</span><span class="p">,</span> <span class="o">**</span><span class="n">oregon_diverging</span><span class="p">,</span>
-                          <span class="o">**</span><span class="n">oregon_qualitative</span><span class="p">}</span>
-    <span class="n">sron2012_collections</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">sron2012_colors</span><span class="p">,</span> <span class="o">**</span><span class="n">sron2012_functions</span><span class="p">}</span>
-    <span class="n">sron_collections</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">sron_colors</span><span class="p">,</span> <span class="o">**</span><span class="n">sron_colormaps</span><span class="p">,</span> <span class="o">**</span><span class="n">sron_functions</span><span class="p">}</span>
+    <span class="n">brewer_collects</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">brewer_sequential</span><span class="p">,</span> <span class="o">**</span><span class="n">brewer_diverging</span><span class="p">,</span>
+                       <span class="o">**</span><span class="n">brewer_qualitative</span><span class="p">}</span>  <span class="c1"># concat dictionaries</span>
+    <span class="n">ipcc_collects</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">ipcc_categorical</span><span class="p">,</span> <span class="o">**</span><span class="n">ipcc_diverging</span><span class="p">,</span>
+                     <span class="o">**</span><span class="n">ipcc_sequential</span><span class="p">}</span>
+    <span class="n">mathematica_collects</span> <span class="o">=</span> <span class="n">mathematica_rainbow</span>
+    <span class="n">mcplot_collects</span> <span class="o">=</span> <span class="n">mcplot_cmaps</span>
+    <span class="n">ncl_collects</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">ncl_large</span><span class="p">,</span> <span class="o">**</span><span class="n">ncl_small</span><span class="p">,</span> <span class="o">**</span><span class="n">ncl_meteo_swiss</span><span class="p">}</span>
+    <span class="n">oregon_collects</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">oregon_sequential</span><span class="p">,</span> <span class="o">**</span><span class="n">oregon_diverging</span><span class="p">,</span>
+                       <span class="o">**</span><span class="n">oregon_qualitative</span><span class="p">}</span>
+    <span class="n">sron2012_collects</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">sron2012_colors</span><span class="p">,</span> <span class="o">**</span><span class="n">sron2012_functions</span><span class="p">}</span>
+    <span class="n">sron_collects</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">sron_colors</span><span class="p">,</span> <span class="o">**</span><span class="n">sron_colormaps</span><span class="p">,</span> <span class="o">**</span><span class="n">sron_functions</span><span class="p">}</span>
 
     <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">nosubsample</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="c1"># miss = None</span>
 
-    <span class="c1"># mcplot, matehmatica, ncl</span>
-    <span class="n">simplepals</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">mcplot_collections</span><span class="p">,</span> <span class="o">**</span><span class="n">mathematica_collections</span><span class="p">,</span>
-                  <span class="o">**</span><span class="n">ncl_collections</span><span class="p">}</span>
+    <span class="c1"># mcplot, mathematica, ncl</span>
+    <span class="n">simplepals</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">mcplot_collects</span><span class="p">,</span> <span class="o">**</span><span class="n">mathematica_collects</span><span class="p">,</span>
+                  <span class="o">**</span><span class="n">ncl_collects</span><span class="p">}</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">simplepals</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">simplepals</span><span class="p">):</span>
             <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
@@ -647,7 +818,7 @@ document.write(`
             <span class="n">colors</span> <span class="o">=</span> <span class="n">simplepals</span><span class="p">[</span><span class="n">ipal</span><span class="p">]</span>
 
     <span class="c1"># brewer, ipcc, oregon</span>
-    <span class="n">rgbpals</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">brewer_collections</span><span class="p">,</span> <span class="o">**</span><span class="n">ipcc_collections</span><span class="p">,</span> <span class="o">**</span><span class="n">oregon_collections</span><span class="p">}</span>
+    <span class="n">rgbpals</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">brewer_collects</span><span class="p">,</span> <span class="o">**</span><span class="n">ipcc_collects</span><span class="p">,</span> <span class="o">**</span><span class="n">oregon_collects</span><span class="p">}</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">rgbpals</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">rgbpals</span><span class="p">):</span>
             <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
@@ -659,9 +830,9 @@ document.write(`
 
     <span class="c1"># sron</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">sron_collections</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">sron_collections</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">sron_collects</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">sron_collects</span><span class="p">):</span>
             <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">sron_collections</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">sron_collects</span><span class="p">:</span>
                 <span class="n">ipal</span> <span class="o">=</span> <span class="n">palette</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">ipal</span> <span class="o">=</span> <span class="n">palette_</span>
@@ -686,10 +857,10 @@ document.write(`
 
     <span class="c1"># sron2012</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
-        <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">sron2012_collections</span><span class="p">)</span> <span class="ow">or</span>
-             <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">sron2012_collections</span><span class="p">)</span> <span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">sron2012_collects</span><span class="p">)</span> <span class="ow">or</span>
+             <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">sron2012_collects</span><span class="p">)</span> <span class="p">):</span>
             <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">sron2012_collections</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">sron2012_collects</span><span class="p">:</span>
                 <span class="n">ipal</span> <span class="o">=</span> <span class="n">palette</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">ipal</span> <span class="o">=</span> <span class="n">palette_</span>
@@ -713,33 +884,20 @@ document.write(`
 
     <span class="c1"># matplotlib</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
-        <span class="n">amplmaps</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colormaps</span><span class="p">()</span>
-        <span class="n">mplmaps</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">amplmaps</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_r&#39;</span><span class="p">)</span> <span class="p">]</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">palette</span> <span class="ow">in</span> <span class="n">mplmaps</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span> <span class="ow">in</span> <span class="n">mplmaps</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">palette</span> <span class="ow">in</span> <span class="n">mplmaps</span><span class="p">:</span>
+        <span class="n">mplmaps</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_r&#39;</span><span class="p">)</span> <span class="p">]</span>
+        <span class="n">lmplmaps</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mplmaps</span> <span class="p">]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">palette</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">lmplmaps</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">lmplmaps</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">palette</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">lmplmaps</span><span class="p">:</span>
                 <span class="n">pal</span> <span class="o">=</span> <span class="n">palette</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">pal</span> <span class="o">=</span> <span class="n">palette_</span>
             <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="n">pal</span><span class="p">]</span>
+            <span class="n">ipalette</span> <span class="o">=</span> <span class="n">lmplmaps</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pal</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+            <span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="n">mplmaps</span><span class="p">[</span><span class="n">ipalette</span><span class="p">]]</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">colors</span> <span class="o">=</span> <span class="n">cmap</span><span class="o">.</span><span class="n">colors</span>
             <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
                 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">cmap</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)</span> <span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">lmplmaps</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mplmaps</span> <span class="p">]</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">palette</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">lmplmaps</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">palette_</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">lmplmaps</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">palette</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">lmplmaps</span><span class="p">:</span>
-                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">pal</span> <span class="o">=</span> <span class="n">palette_</span>
-                <span class="n">found_palette</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="n">ipalette</span> <span class="o">=</span> <span class="n">lmplmaps</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pal</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-                <span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="n">mplmaps</span><span class="p">[</span><span class="n">ipalette</span><span class="p">]]</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">colors</span> <span class="o">=</span> <span class="n">cmap</span><span class="o">.</span><span class="n">colors</span>
-                <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-                    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span> <span class="n">cmap</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)</span> <span class="p">]</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">found_palette</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">palette</span><span class="si">}</span><span class="s1"> color palette not found.&#39;</span><span class="p">)</span>
@@ -823,58 +981,10 @@ document.write(`
 <span class="sd">    --------</span>
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">       print_cmaps()</span>
+<span class="sd">       print_cmaps(collection=[&#39;mcplot&#39;, &#39;sron&#39;])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">collection</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">collections</span> <span class="o">=</span> <span class="p">[</span><span class="n">collection</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">collections</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span><span class="o">.</span><span class="n">lower</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">collection</span> <span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">collections</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mcplot&#39;</span><span class="p">,</span> <span class="s1">&#39;sron&#39;</span><span class="p">,</span> <span class="s1">&#39;sron2012&#39;</span><span class="p">,</span> <span class="s1">&#39;mathematica&#39;</span><span class="p">,</span> <span class="s1">&#39;oregon&#39;</span><span class="p">,</span>
-                       <span class="s1">&#39;ipcc&#39;</span><span class="p">,</span> <span class="s1">&#39;ncl&#39;</span><span class="p">,</span> <span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;brewer&#39;</span><span class="p">]</span>
-
-    <span class="n">dall</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">if</span> <span class="s1">&#39;mcplot&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;mcplot&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mcplot_cmaps&#39;</span><span class="p">:</span> <span class="n">mcplot_cmaps</span><span class="p">}})</span>
-    <span class="k">if</span> <span class="s1">&#39;sron&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;sron&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;sron_colors&#39;</span><span class="p">:</span> <span class="n">sron_colors</span><span class="p">,</span>
-                              <span class="s1">&#39;sron_colormaps&#39;</span><span class="p">:</span> <span class="n">sron_colormaps</span><span class="p">,</span>
-                              <span class="s1">&#39;sron_functions&#39;</span><span class="p">:</span> <span class="n">sron_functions</span><span class="p">}})</span>
-    <span class="k">if</span> <span class="s1">&#39;sron2012&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;sron2012&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;sron2012_colors&#39;</span><span class="p">:</span> <span class="n">sron2012_colors</span><span class="p">,</span>
-                                  <span class="s1">&#39;sron2012_functions&#39;</span><span class="p">:</span> <span class="n">sron2012_functions</span><span class="p">}})</span>
-    <span class="k">if</span> <span class="s1">&#39;mathematica&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;mathematica&#39;</span><span class="p">:</span>
-                     <span class="p">{</span><span class="s1">&#39;mathematica_rainbow&#39;</span><span class="p">:</span> <span class="n">mathematica_rainbow</span><span class="p">}})</span>
-    <span class="k">if</span> <span class="s1">&#39;oregon&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;oregon_sequential&#39;</span><span class="p">:</span>
-                     <span class="p">{</span><span class="s1">&#39;oregon_sequential&#39;</span><span class="p">:</span> <span class="n">oregon_sequential</span><span class="p">,</span>
-                      <span class="s1">&#39;oregon_diverging&#39;</span><span class="p">:</span> <span class="n">oregon_diverging</span><span class="p">,</span>
-                      <span class="s1">&#39;oregon_qualitative&#39;</span><span class="p">:</span> <span class="n">oregon_qualitative</span><span class="p">}})</span>
-    <span class="k">if</span> <span class="s1">&#39;ipcc&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;ipcc&#39;</span><span class="p">:</span>
-                     <span class="p">{</span><span class="s1">&#39;ipcc_categorical&#39;</span><span class="p">:</span> <span class="n">ipcc_categorical</span><span class="p">,</span>
-                      <span class="s1">&#39;ipcc_diverging&#39;</span><span class="p">:</span> <span class="n">ipcc_diverging</span><span class="p">,</span>
-                      <span class="s1">&#39;ipcc_sequential&#39;</span><span class="p">:</span> <span class="n">ipcc_sequential</span><span class="p">}})</span>
-    <span class="k">if</span> <span class="s1">&#39;ncl&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;ncl&#39;</span><span class="p">:</span>
-                     <span class="p">{</span><span class="s1">&#39;ncl_small&#39;</span><span class="p">:</span> <span class="n">ncl_small</span><span class="p">,</span>
-                      <span class="s1">&#39;ncl_large&#39;</span><span class="p">:</span> <span class="n">ncl_large</span><span class="p">,</span>
-                      <span class="s1">&#39;ncl_meteo_swiss&#39;</span><span class="p">:</span> <span class="n">ncl_meteo_swiss</span><span class="p">}})</span>
-    <span class="k">if</span> <span class="s1">&#39;matplotlib&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">acmaps</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colormaps</span><span class="p">()</span>
-        <span class="n">cmaps</span>  <span class="o">=</span> <span class="p">[</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">acmaps</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_r&#39;</span><span class="p">)</span> <span class="p">]</span>
-        <span class="n">cmaps</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-        <span class="n">cmaps</span> <span class="o">=</span> <span class="p">{</span> <span class="n">cc</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">cmaps</span> <span class="p">}</span>  <span class="c1"># dummy colormaps</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">:</span>
-                     <span class="p">{</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">:</span> <span class="n">cmaps</span><span class="p">}})</span>
-    <span class="k">if</span> <span class="s1">&#39;brewer&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;brewer&#39;</span><span class="p">:</span>
-                     <span class="p">{</span><span class="s1">&#39;brewer_sequential&#39;</span><span class="p">:</span> <span class="n">brewer_sequential</span><span class="p">,</span>
-                      <span class="s1">&#39;brewer_diverging&#39;</span><span class="p">:</span> <span class="n">brewer_diverging</span><span class="p">,</span>
-                      <span class="s1">&#39;brewer_qualitative&#39;</span><span class="p">:</span> <span class="n">brewer_qualitative</span><span class="p">}})</span>
+    <span class="n">dall</span> <span class="o">=</span> <span class="n">_all_cmaps</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">dall</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
@@ -974,6 +1084,14 @@ document.write(`
             <span class="n">names</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
                 <span class="n">colors</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span>
                 <span class="nb">tuple</span><span class="p">(</span><span class="n">mcolors</span><span class="o">.</span><span class="n">rgb_to_hsv</span><span class="p">(</span><span class="n">colors</span><span class="p">[</span><span class="n">c</span><span class="p">])))</span>
+        <span class="k">elif</span> <span class="n">table</span> <span class="o">==</span> <span class="s1">&#39;sron&#39;</span><span class="p">:</span>
+            <span class="c1"># names = sorted(</span>
+            <span class="c1">#     colors, key=lambda c:</span>
+            <span class="c1">#     tuple(mcolors.rgb_to_hsv(mcolors.to_rgb(colors[c]))))</span>
+            <span class="c1"># do not sort but keep in categories,</span>
+            <span class="c1"># which are already sorted by hue (or luminance for high-</span>
+            <span class="c1"># and medium-contrast)</span>
+            <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">names</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
                 <span class="n">colors</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span>
@@ -1022,7 +1140,7 @@ document.write(`
 <span class="sd">    collection : str or list of strings, optional</span>
 <span class="sd">        Name(s) of color collection(s).</span>
 <span class="sd">        Known collections are</span>
-<span class="sd">        &#39;base&#39;, &#39;css&#39;, &#39;tableau&#39;, &#39;ufz&#39;, and &#39;xkcd&#39;.</span>
+<span class="sd">        &#39;base&#39;, &#39;css&#39;, &#39;tableau&#39;, &#39;sron&#39;, &#39;ufz&#39;, and &#39;xkcd&#39;.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1068,26 +1186,7 @@ document.write(`
     <span class="k">else</span><span class="p">:</span>
         <span class="n">pdf_pages</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">if</span> <span class="n">collection</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">collections</span> <span class="o">=</span> <span class="p">[</span><span class="n">collection</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">collections</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span><span class="o">.</span><span class="n">lower</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">collection</span> <span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">collections</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;base&#39;</span><span class="p">,</span> <span class="s1">&#39;tableau&#39;</span><span class="p">,</span> <span class="s1">&#39;ufz&#39;</span><span class="p">,</span> <span class="s1">&#39;css&#39;</span><span class="p">,</span> <span class="s1">&#39;xkcd&#39;</span><span class="p">]</span>
-
-    <span class="n">dall</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">if</span> <span class="s1">&#39;base&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;base&#39;</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">BASE_COLORS</span><span class="p">})</span>
-    <span class="k">if</span> <span class="s1">&#39;tableau&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;tableau&#39;</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">TABLEAU_COLORS</span><span class="p">})</span>
-    <span class="k">if</span> <span class="s1">&#39;ufz&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;ufz&#39;</span><span class="p">:</span> <span class="n">ufz_colors</span><span class="p">})</span>
-    <span class="k">if</span> <span class="s1">&#39;css&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;css&#39;</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">CSS4_COLORS</span><span class="p">})</span>
-    <span class="k">if</span> <span class="s1">&#39;xkcd&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;xkcd&#39;</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">XKCD_COLORS</span><span class="p">})</span>
-
+    <span class="n">dall</span> <span class="o">=</span> <span class="n">_all_colors</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">dall</span><span class="p">:</span>
         <span class="n">ifig</span> <span class="o">=</span> <span class="n">_plot_colors</span><span class="p">(</span><span class="n">ifig</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">dall</span><span class="p">[</span><span class="n">cc</span><span class="p">],</span> <span class="n">sort_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="n">textsize</span><span class="o">=</span><span class="n">textsize</span><span class="p">,</span> <span class="n">outtype</span><span class="o">=</span><span class="n">outtype</span><span class="p">,</span>
@@ -1120,8 +1219,6 @@ document.write(`
     <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">,</span> <span class="n">iplot</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
     <span class="n">cmap</span> <span class="o">=</span> <span class="n">get_cmap</span><span class="p">(</span><span class="n">iname</span><span class="p">,</span> <span class="n">ncolors</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="c1"># ax.pcolormesh(np.outer(np.ones(cmap.N), np.arange(cmap.N)),</span>
-    <span class="c1">#               cmap=cmap)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)),</span>
               <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">)</span>
     <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>
@@ -1168,7 +1265,7 @@ document.write(`
 <span class="sd">                     collection=[&#39;mathematica&#39;, &#39;matplotlib&#39;])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">mcplot.color</span> <span class="k">as</span> <span class="nn">mc</span>
+    <span class="kn">import</span> <span class="nn">mcplot.color</span> <span class="k">as</span> <span class="nn">mc</span>  <span class="c1"># used in eval</span>
 
     <span class="c1"># outtype</span>
     <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">outfile</span><span class="p">:</span>
@@ -1184,16 +1281,6 @@ document.write(`
         <span class="n">outtype</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span>
         <span class="n">textsize</span> <span class="o">=</span> <span class="mi">8</span>
 
-    <span class="c1"># which collections to include</span>
-    <span class="n">collections</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mcplot&#39;</span><span class="p">,</span> <span class="s1">&#39;sron&#39;</span><span class="p">,</span> <span class="s1">&#39;sron2012&#39;</span><span class="p">,</span> <span class="s1">&#39;mathematica&#39;</span><span class="p">,</span> <span class="s1">&#39;oregon&#39;</span><span class="p">,</span>
-                   <span class="s1">&#39;ipcc&#39;</span><span class="p">,</span> <span class="s1">&#39;ncl&#39;</span><span class="p">,</span> <span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;brewer&#39;</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">collection</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">collection</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
-                <span class="n">collections</span> <span class="o">=</span> <span class="p">[</span><span class="n">collection</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">collections</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">collection</span> <span class="p">]</span>
-
     <span class="c1"># plot setup</span>
     <span class="k">if</span> <span class="n">outfile</span><span class="p">:</span>
         <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">8.27</span><span class="p">,</span> <span class="mf">11.69</span><span class="p">))</span>  <span class="c1"># a4 portrait</span>
@@ -1205,34 +1292,6 @@ document.write(`
     <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">textsize</span><span class="p">)</span>
     <span class="n">nrow</span> <span class="o">=</span> <span class="mi">35</span>
 
-    <span class="n">all_collections</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">if</span> <span class="s1">&#39;mcplot&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">all_collections</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;mcplot_cmaps&#39;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="s1">&#39;sron&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">all_collections</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;sron_colors&#39;</span><span class="p">,</span> <span class="s1">&#39;sron_colormaps&#39;</span><span class="p">,</span>
-                                <span class="s1">&#39;sron_functions&#39;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="s1">&#39;sron2012&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">all_collections</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;sron2012_colors&#39;</span><span class="p">,</span> <span class="s1">&#39;sron2012_functions&#39;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="s1">&#39;mathematica&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">all_collections</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;mathematica_rainbow&#39;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="s1">&#39;oregon&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">all_collections</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;oregon_sequential&#39;</span><span class="p">,</span> <span class="s1">&#39;oregon_diverging&#39;</span><span class="p">,</span>
-                                <span class="s1">&#39;oregon_qualitative&#39;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="s1">&#39;ipcc&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">all_collections</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;ipcc_categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;ipcc_diverging&#39;</span><span class="p">,</span>
-                                <span class="s1">&#39;ipcc_sequential&#39;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="s1">&#39;ncl&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">all_collections</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;ncl_large&#39;</span><span class="p">,</span> <span class="s1">&#39;ncl_small&#39;</span><span class="p">,</span> <span class="s1">&#39;ncl_meteo_swiss&#39;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="s1">&#39;matplotlib&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">acmaps</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colormaps</span><span class="p">()</span>
-        <span class="n">cmaps</span>  <span class="o">=</span> <span class="p">[</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">acmaps</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_r&#39;</span><span class="p">)</span> <span class="p">]</span>
-        <span class="n">cmaps</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-        <span class="c1"># all_collections.extend(cmaps) (old)</span>
-        <span class="n">all_collections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmaps</span><span class="p">)</span>
-    <span class="k">if</span> <span class="s1">&#39;brewer&#39;</span> <span class="ow">in</span> <span class="n">collections</span><span class="p">:</span>
-        <span class="n">all_collections</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;brewer_sequential&#39;</span><span class="p">,</span> <span class="s1">&#39;brewer_diverging&#39;</span><span class="p">,</span>
-                                <span class="s1">&#39;brewer_qualitative&#39;</span><span class="p">])</span>
-
     <span class="c1"># plotting</span>
     <span class="n">ifig</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">outtype</span> <span class="o">==</span> <span class="s1">&#39;pdf&#39;</span><span class="p">):</span>
@@ -1240,40 +1299,41 @@ document.write(`
     <span class="k">else</span><span class="p">:</span>
         <span class="n">pdf_pages</span> <span class="o">=</span> <span class="kc">None</span>
 
+    <span class="n">dall</span> <span class="o">=</span> <span class="n">_all_cmaps</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
     <span class="n">ipanel</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">all_collections</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cc</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="c1"># matplotlib</span>
-            <span class="n">icoll</span> <span class="o">=</span> <span class="n">cc</span>
-            <span class="n">newcoll</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="n">collname</span> <span class="o">=</span> <span class="s1">&#39;matplotlib&#39;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">icoll</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mc.</span><span class="si">{</span><span class="n">cc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-                <span class="n">newcoll</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="n">collname</span> <span class="o">=</span> <span class="n">cc</span>
-            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-                <span class="c1"># matplotlib name (old, should not be here)</span>
-                <span class="n">icoll</span> <span class="o">=</span> <span class="p">[</span><span class="n">cc</span><span class="p">]</span>
-                <span class="n">newcoll</span> <span class="o">=</span> <span class="kc">False</span>
-                <span class="n">collname</span> <span class="o">=</span> <span class="s1">&#39;matplotlib&#39;</span>
-        <span class="k">for</span> <span class="n">iname</span> <span class="ow">in</span> <span class="n">icoll</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">ipanel</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">ifig</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="n">fig</span> <span class="o">=</span> <span class="n">_newfig_cmaps</span><span class="p">(</span><span class="n">ifig</span><span class="p">,</span> <span class="n">collname</span><span class="p">)</span>
-            <span class="n">ipanel</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">_newsubplot_cmaps</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ipanel</span><span class="p">,</span> <span class="n">iname</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">collname</span> <span class="o">==</span> <span class="s1">&#39;sron_functions&#39;</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">ncolors</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">):</span>
-                    <span class="n">ipanel</span> <span class="o">+=</span> <span class="mi">1</span>
-                    <span class="n">_newsubplot_cmaps</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ipanel</span><span class="p">,</span> <span class="n">iname</span><span class="p">,</span> <span class="n">ncolors</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">ipanel</span> <span class="o">==</span> <span class="n">nrow</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">dd</span> <span class="ow">in</span> <span class="n">dall</span><span class="p">:</span>
+        <span class="n">collname</span> <span class="o">=</span> <span class="n">dd</span>
+        <span class="n">call</span> <span class="o">=</span> <span class="n">dall</span><span class="p">[</span><span class="n">dd</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">call</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">collname</span> <span class="o">==</span> <span class="s1">&#39;matplotlib&#39;</span><span class="p">:</span>
+                <span class="n">catname</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">collname</span><span class="si">}</span><span class="s1"> - </span><span class="si">{</span><span class="n">cc</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">catname</span> <span class="o">=</span> <span class="n">cc</span>
+            <span class="n">icoll</span> <span class="o">=</span> <span class="n">call</span><span class="p">[</span><span class="n">cc</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">iname</span> <span class="ow">in</span> <span class="n">icoll</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ipanel</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">ifig</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">fig</span> <span class="o">=</span> <span class="n">_newfig_cmaps</span><span class="p">(</span><span class="n">ifig</span><span class="p">,</span> <span class="n">catname</span><span class="p">)</span>
+                <span class="n">ipanel</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">_newsubplot_cmaps</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ipanel</span><span class="p">,</span> <span class="n">iname</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">catname</span> <span class="o">==</span> <span class="s1">&#39;sron_functions&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">ncolors</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">):</span>
+                        <span class="n">ipanel</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="n">_newsubplot_cmaps</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ipanel</span><span class="p">,</span> <span class="n">iname</span><span class="p">,</span> <span class="n">ncolors</span><span class="p">)</span>
+                    <span class="c1"># new page after each function</span>
+                    <span class="n">_savefig</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ifig</span><span class="p">,</span> <span class="n">outtype</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">pdf_pages</span><span class="p">)</span>
+                    <span class="n">ipanel</span> <span class="o">=</span> <span class="mi">0</span>
+
+                <span class="k">if</span> <span class="n">ipanel</span> <span class="o">==</span> <span class="n">nrow</span><span class="p">:</span>  <span class="c1"># new page if enough rows per page</span>
+                    <span class="n">_savefig</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ifig</span><span class="p">,</span> <span class="n">outtype</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">pdf_pages</span><span class="p">)</span>
+                    <span class="n">ipanel</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="k">if</span> <span class="n">ipanel</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># new page after each category</span>
                 <span class="n">_savefig</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ifig</span><span class="p">,</span> <span class="n">outtype</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">pdf_pages</span><span class="p">)</span>
                 <span class="n">ipanel</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">ipanel</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="n">newcoll</span><span class="p">:</span>
-            <span class="n">_savefig</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ifig</span><span class="p">,</span> <span class="n">outtype</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">pdf_pages</span><span class="p">)</span>
-            <span class="n">ipanel</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="n">ipanel</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+
+    <span class="k">if</span> <span class="n">ipanel</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># finish at end of all cmaps</span>
         <span class="n">_savefig</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ifig</span><span class="p">,</span> <span class="n">outtype</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">pdf_pages</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">outtype</span> <span class="o">==</span> <span class="s1">&#39;pdf&#39;</span><span class="p">:</span>

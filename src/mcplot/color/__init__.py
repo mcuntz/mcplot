@@ -29,6 +29,7 @@ from .ncl_palettes import ncl_large, ncl_small, ncl_meteo_swiss
 from .oregon_palettes import oregon_sequential, oregon_diverging
 from .oregon_palettes import oregon_qualitative
 from .sron2012_palettes import sron2012_colors, sron2012_functions
+from .sron_palettes import sron_named_colors
 from .sron_palettes import sron_colors, sron_colormaps, sron_functions
 from .ufz_palettes import ufz_colors
 # get, show, print colors and color palettes
@@ -45,6 +46,7 @@ __all__ = ['brewer_sequential', 'brewer_diverging', 'brewer_qualitative',
            'oregon_sequential', 'oregon_diverging', 'oregon_qualitative',
            'mcplot_cmaps',
            'sron2012_colors', 'sron2012_functions',
+           'sron_named_colors',
            'sron_colors', 'sron_colormaps', 'sron_functions',
            'ufz_colors',
            'get_color', 'print_colors', 'show_colors',
