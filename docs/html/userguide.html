@@ -44,7 +44,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'userguide';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="next" title="Commented Example" href="full_example.html" />
     <link rel="prev" title="mcplot" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -149,6 +149,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="index.html">mcplot</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="full_example.html">Commented Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
@@ -519,9 +520,6 @@ that produces a plot. This could give a script like
 
 <span class="k">class</span> <span class="nc">myPlot</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># reading one file would use self.cargs[0] such as</span>
         <span class="c1"># self.dat = np.loadtxt(self.cargs[0])</span>
@@ -602,7 +600,7 @@ use the defined variables <strong>self.lcol1</strong> for line color number 1,
 <strong>self.lcol2</strong> for line color number 2, and <strong>self.lw</strong> for the
 width of the plotted line.</p>
 <p>The are a large number of useful class variables defined, see
-<a class="reference internal" href="class_mcplot.html#id5" title="mcplot.class_mcplot.mcPlot.set_layout_options"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_layout_options()</span></code></a>. They can be
+<a class="reference internal" href="class_mcplot.html#id6" title="mcplot.class_mcplot.mcPlot.set_layout_options"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_layout_options()</span></code></a>. They can be
 used in all plot methods such as different plotting functions to make
 plots having the same appearance.</p>
 <p><strong>Lines and markers</strong></p>
@@ -699,6 +697,71 @@ call <strong>set_matplotlib_rcparams()</strong> again (see example below), which
 sets some defaults such as setting the color of the boxplot whiskers
 to the foreground colour, of which one might not have thought
 themselves.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">mcPlot</span>
+
+<span class="k">class</span> <span class="nc">myPlot</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Set some user-defined layout options overwriting the defaults</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_extra_layout_options</span><span class="p">()</span>
+        <span class="c1"># It is a good idea to update the rcParams as well then.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_matplotlib_rcparams</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">set_extra_layout_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set some class variables that can be used for plotting.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">mcplot.color</span> <span class="kn">import</span> <span class="n">get_cmap</span><span class="p">,</span> <span class="n">get_color</span>
+
+        <span class="c1"># Set layout and spaces</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nrow</span> <span class="o">=</span> <span class="mi">5</span>       <span class="c1"># # of rows of subplots per figure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span> <span class="o">=</span> <span class="mi">3</span>       <span class="c1"># # of columns of subplots per figure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hspace</span> <span class="o">=</span> <span class="mf">0.09</span>  <span class="c1"># x-space between subplots</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vspace</span> <span class="o">=</span> <span class="mf">0.04</span>  <span class="c1"># y-space between subplots</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">textsize</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># standard text size</span>
+
+        <span class="c1"># Set come line and marker properties</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lw</span> <span class="o">=</span> <span class="mf">1.5</span>   <span class="c1"># linewidth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ms</span> <span class="o">=</span> <span class="mf">5.0</span>   <span class="c1"># marker size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mew</span> <span class="o">=</span> <span class="mf">0.3</span>  <span class="c1"># marker edge width</span>
+
+        <span class="c1"># Set come colors</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dowhite</span><span class="p">:</span>
+            <span class="c1"># delete starting white, black, and pink from palette</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span> <span class="o">=</span> <span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;ncl_amwg&#39;</span><span class="p">)[</span><span class="mi">3</span><span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># delete starting white, black, and pink from palette</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span> <span class="o">=</span> <span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;mcplot_amwg&#39;</span><span class="p">)[</span><span class="mi">3</span><span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mcol1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fgcolor</span>       <span class="c1"># black or white</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>     <span class="c1"># red</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mcol3</span> <span class="o">=</span> <span class="n">get_color</span><span class="p">(</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>  <span class="c1"># grey</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mcol4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>      <span class="c1"># light blue</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mcol5</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>     <span class="c1"># orange</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcol2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcol3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcol4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcol5</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span>
+
+        <span class="c1"># Set legend properties</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;lower right&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xbbox</span> <span class="o">=</span> <span class="mf">1.</span>  <span class="c1"># x-data of corner of self.loc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ybbox</span> <span class="o">=</span> <span class="mf">0.</span>  <span class="c1"># y-data of corner of self.loc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labelspacing</span>  <span class="o">=</span> <span class="mf">0.2</span>  <span class="c1"># spacing between rows in legend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columnspacing</span> <span class="o">=</span> <span class="mf">1.</span>   <span class="c1"># spacing between columns in legend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handletextpad</span> <span class="o">=</span> <span class="mf">0.4</span>  <span class="c1"># pad between the legend handle and text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handlelength</span>  <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># length of the legend handles</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">iplot</span> <span class="o">=</span> <span class="n">myPlot</span><span class="p">(</span><span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Change some class variables&#39;</span><span class="p">)</span>
+    <span class="n">iplot</span><span class="o">.</span><span class="n">plot_test</span><span class="p">()</span>
+    <span class="n">iplot</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
 </section>
 <section id="more-command-line-options">
 <h2>More command line options<a class="headerlink" href="#more-command-line-options" title="Link to this heading">#</a></h2>
@@ -743,70 +806,301 @@ and raise an error.</p>
 <h2>A commented extended example<a class="headerlink" href="#a-commented-extended-example" title="Link to this heading">#</a></h2>
 <p>To be continued …</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">mcPlot</span>
+
 
 <span class="k">class</span> <span class="nc">myPlot</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialise the instance</span>
+
+<span class="sd">        The following methods are called on initialisation of mcPlot:</span>
+<span class="sd">        * the command line arguments are gathered if at least one of</span>
+<span class="sd">          the arguments `desc` or `argstr` is given:</span>
+<span class="sd">          get_command_line_arguments()</span>
+<span class="sd">        * the output type (self.outtype) is set and additional modules</span>
+<span class="sd">          are loaded if necessary: set_output_type()</span>
+<span class="sd">        * standard class variables for layout options, etc. are set:</span>
+<span class="sd">          set_layout_options()</span>
+<span class="sd">        * global rcParams are set for Matplotlib using the class variables</span>
+<span class="sd">          set in set_layout_options(): set_matplotlib_rcparams()</span>
+<span class="sd">        * the output filename is set, the output file is opened (if required),</span>
+<span class="sd">          and possible html headers or menus are written: plot_begin()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Set some user-defined layout options overwriting the defaults</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_extra_layout_options</span><span class="p">()</span>
+        <span class="c1"># If plot and layout options were changed, it is a good idea to</span>
+        <span class="c1"># update the rcParams as well, i.e. set_matplotlib_rcparams()</span>
+        <span class="c1"># should be called. This sets, for example, the (newly-defined)</span>
+        <span class="c1"># background color and the like.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_matplotlib_rcparams</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">set_extra_layout_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set some class variables that can be used for plotting.</span>
+<span class="sd">        Some class variables are used to set more defaults</span>
+<span class="sd">        in set_matplotlib_rcparams().</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">mcplot.color</span> <span class="kn">import</span> <span class="n">get_cmap</span><span class="p">,</span> <span class="n">get_color</span>
+
+        <span class="c1"># Set layout and spaces</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nrow</span> <span class="o">=</span> <span class="mi">5</span>       <span class="c1"># # of rows of subplots per figure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span> <span class="o">=</span> <span class="mi">3</span>       <span class="c1"># # of columns of subplots per figure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hspace</span> <span class="o">=</span> <span class="mf">0.09</span>  <span class="c1"># x-space between subplots</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vspace</span> <span class="o">=</span> <span class="mf">0.04</span>  <span class="c1"># y-space between subplots</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">textsize</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># standard text size</span>
+
+        <span class="c1"># Set come line and marker properties</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lw</span> <span class="o">=</span> <span class="mf">1.5</span>   <span class="c1"># linewidth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ms</span> <span class="o">=</span> <span class="mf">5.0</span>   <span class="c1"># marker size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mew</span> <span class="o">=</span> <span class="mf">0.3</span>  <span class="c1"># marker edge width</span>
+
+        <span class="c1"># Set come colors</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dowhite</span><span class="p">:</span>
+            <span class="c1"># delete starting white, black, and pink from palette</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span> <span class="o">=</span> <span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;ncl_amwg&#39;</span><span class="p">)[</span><span class="mi">3</span><span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># delete starting white, black, and pink from palette</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span> <span class="o">=</span> <span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;mcplot_amwg&#39;</span><span class="p">)[</span><span class="mi">3</span><span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mcol1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fgcolor</span>       <span class="c1"># black or white</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>     <span class="c1"># red</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mcol3</span> <span class="o">=</span> <span class="n">get_color</span><span class="p">(</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>  <span class="c1"># grey</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mcol4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>      <span class="c1"># light blue</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mcol5</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>     <span class="c1"># orange</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcol2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcol3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcol4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcol5</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcol5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcols</span>
+
+        <span class="c1"># Set legend properties</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;lower right&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xbbox</span> <span class="o">=</span> <span class="mf">1.</span>  <span class="c1"># x-data of corner of self.loc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ybbox</span> <span class="o">=</span> <span class="mf">0.</span>  <span class="c1"># y-data of corner of self.loc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labelspacing</span>  <span class="o">=</span> <span class="mf">0.2</span>  <span class="c1"># spacing between rows in legend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columnspacing</span> <span class="o">=</span> <span class="mf">1.</span>   <span class="c1"># spacing between columns in legend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handletextpad</span> <span class="o">=</span> <span class="mf">0.4</span>  <span class="c1"># pad between the legend handle and text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handlelength</span>  <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># length of the legend handles</span>
 
     <span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># reading one file would use self.cargs[0] such as</span>
-        <span class="c1"># self.dat = np.loadtxt(self.cargs[0])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The command line arguments are in the list self.cargs.</span>
+<span class="sd">        This can be used to pass, e.g. filenames to read, etc.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ifiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cargs</span>
+        <span class="c1"># Check that only one input file given</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ifiles</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s1">&#39;Only one input file should be given&#39;</span><span class="p">)</span>
+        <span class="n">ifile</span> <span class="o">=</span> <span class="n">ifiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># Read DataFrame from mcplot_iris.csv produced in the __main__</span>
+        <span class="c1"># section, setting self.miss to NaN (from the new command line</span>
+        <span class="c1"># option -m also added in the __main__ section)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ifile</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">miss</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">plot_fig_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="kn">import</span> <span class="n">polynomial</span> <span class="k">as</span> <span class="n">P</span>
+        <span class="c1"># get dimensions of new Axes for Figure.add_axes</span>
+        <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">position</span>
+        <span class="c1"># convert strings to LaTeX strings</span>
+        <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">str2tex</span>
+        <span class="c1"># put text on plot</span>
+        <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">text2plot</span>
+        <span class="c1"># add a), b), c) to plot</span>
+        <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">abc2plot</span>
 
-        <span class="c1"># make axes</span>
+        <span class="c1"># open new figure, increasing figure counter</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ifig</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># iplot is used to count the number of plots on the current figure</span>
+        <span class="n">iplot</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Open figure </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="p">)</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.125</span><span class="p">,</span> <span class="mf">0.667</span><span class="p">,</span> <span class="mf">0.3375</span><span class="p">,</span> <span class="mf">0.233</span><span class="p">])</span>
 
-        <span class="c1"># plot</span>
-        <span class="n">xx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="mf">4.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
-        <span class="n">larr</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lw</span><span class="p">,</span>
-                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span><span class="p">)</span>
+        <span class="c1">#</span>
+        <span class="c1"># Panel 1</span>
+        <span class="c1">#</span>
 
-        <span class="c1"># show plot or write in file</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">plot_save</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+        <span class="c1"># petal_length vs. sepal_length</span>
+        <span class="n">iplot</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;petal_length&#39;</span><span class="p">]</span>
+        <span class="c1"># None = free scaling</span>
+        <span class="n">xlim</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">ylim</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># Use raw string for Matplotlib&#39;s LaTeX-like notation.</span>
+        <span class="c1"># str2tex converts into full LaTeX math notation used by</span>
+        <span class="c1"># matplotlib&#39;s usetex keyword. Takes care, for example, that the</span>
+        <span class="c1"># pdf engine actually uses the full LaTeX notation,</span>
+        <span class="c1"># e.g. \newline vs. \n in Matplotlib.</span>
+        <span class="c1"># \textnormal{} is LaTeX and not in Matplotlib so only used</span>
+        <span class="c1"># if user sets -u, which sets self.usetex = True.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">:</span>
+            <span class="n">xlab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;L$_\textnormal</span><span class="si">{sepal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
+            <span class="n">ylab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;L$_\textnormal</span><span class="si">{petal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">xlab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;L$_</span><span class="si">{sepal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
+            <span class="n">ylab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;L$_</span><span class="si">{petal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">plot_fig_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="c1"># Make subplots using add_axes.</span>
+        <span class="c1"># This is equivalent to using subplot with Gridspec.</span>
+        <span class="c1"># position returns (left, bottom, width, height) in figure coordinates</span>
+        <span class="c1"># (0-1). The counter `iplot` goes from left to right and from top to</span>
+        <span class="c1"># bottom, expect if `sortcol=True` where first columns then plots will</span>
+        <span class="c1"># be filled.</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">position</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nrow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span><span class="p">,</span> <span class="n">iplot</span><span class="p">,</span>
+                       <span class="n">hspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hspace</span><span class="p">,</span> <span class="n">vspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vspace</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">iplot</span><span class="p">))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">ifig</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="p">)</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.125</span><span class="p">,</span> <span class="mf">0.667</span><span class="p">,</span> <span class="mf">0.3375</span><span class="p">,</span> <span class="mf">0.233</span><span class="p">])</span>
+        <span class="c1"># Plot markers. Plot returns list of line2D objects, which is added to</span>
+        <span class="c1"># larr to collect all line objects for a possible legend.</span>
+        <span class="n">larr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">tarr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">larr</span> <span class="o">+=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol5</span><span class="p">,</span>
+                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+                 <span class="n">markersize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ms</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mew</span><span class="p">)</span>
+        <span class="c1"># add a possible legend entry to list tarr</span>
+        <span class="n">tarr</span> <span class="o">+=</span> <span class="p">[</span><span class="n">str2tex</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)]</span>
 
-        <span class="n">xx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="mf">4.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
-        <span class="n">larr</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lw</span><span class="p">,</span>
-                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcol2</span><span class="p">)</span>
+        <span class="c1"># Add trend line</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">yy</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">ii</span> <span class="o">=</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="n">xx</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+        <span class="n">yy</span> <span class="o">=</span> <span class="n">yy</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">pyy</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+        <span class="n">larr</span> <span class="o">+=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">pyy</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lw</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span>
+                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span><span class="p">)</span>
+        <span class="n">tarr</span> <span class="o">+=</span> <span class="p">[</span><span class="n">str2tex</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)]</span>
+        <span class="c1"># Write equation on plot</span>
+        <span class="c1"># to have correct minus symbol</span>
+        <span class="n">s0</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$-$&#39;</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">s1</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$-$&#39;</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;+&#39;</span>
+        <span class="n">teq</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">rf</span><span class="s1">&#39;y=</span><span class="si">{</span><span class="n">s0</span><span class="si">}{</span><span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span>
+                      <span class="sa">rf</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">s1</span><span class="si">}{</span><span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">x&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
+        <span class="c1"># # Another possibility is to set the whole equations in $...$</span>
+        <span class="c1"># # but this uses more space and the second sign still has to be</span>
+        <span class="c1"># # chosen beforehand.</span>
+        <span class="c1"># s1 = &#39;-&#39; if p[1] &lt; 0 else &#39;+&#39;</span>
+        <span class="c1"># teq = str2tex(rf&#39;$y={p[0]:.2f}x{s1}{abs(p[1]):.2f}$&#39;,</span>
+        <span class="c1">#               usetex=self.usetex)</span>
+        <span class="c1">#</span>
+        <span class="c1"># Put the equation as text on plot</span>
+        <span class="c1"># One can set one of the sizes xxsmall, xsmall, small, medium, large,</span>
+        <span class="c1"># xlarge, xxlarge to True. Also bold and italic can be set to true.</span>
+        <span class="c1"># All other keywords will be passed to Matplotlib&#39;s Axes.text() such</span>
+        <span class="c1"># as `color` here.</span>
+        <span class="n">text2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">teq</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span><span class="p">,</span>
+                  <span class="n">small</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
+        <span class="c1"># Add legend using the two list of lines (larr) and text (tarr)</span>
+        <span class="c1"># loc and bbox_to_anchor behave slightly different for different</span>
+        <span class="c1"># fontsizes.</span>
+        <span class="n">ll</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">larr</span><span class="p">,</span> <span class="n">tarr</span><span class="p">,</span>
+                       <span class="n">frameon</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">frameon</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                       <span class="n">labelspacing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">labelspacing</span><span class="p">,</span>
+                       <span class="n">handletextpad</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handletextpad</span><span class="p">,</span>
+                       <span class="n">handlelength</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handlelength</span><span class="p">,</span>
+                       <span class="n">columnspacing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">columnspacing</span><span class="p">,</span>
+                       <span class="n">loc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span>
+                       <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xbbox</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ybbox</span><span class="p">),</span>
+                       <span class="n">scatterpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">numpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                       <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;small&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Put a), b), c), ... on plot</span>
+        <span class="c1"># The panel counter can be upper- or lower letters,</span>
+        <span class="c1"># arabic or roman number, or `iplot` can be treated as string.</span>
+        <span class="c1"># The counter can have parentheses, brackets or braces before and</span>
+        <span class="c1"># after. It can be italic or boldface.</span>
+        <span class="n">abc2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">iplot</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bold</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">parentheses</span><span class="o">=</span><span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">,</span> <span class="n">mathrm</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Final axes layout</span>
+        <span class="c1"># Labels set if not empty.</span>
+        <span class="c1"># Axes limits are only set if not None.</span>
+        <span class="k">if</span> <span class="n">xlab</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="n">xlab</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ylab</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylab</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">xlim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ylim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">)</span>
+
+        <span class="c1"># Show plot or write it into file, adding a link to the image file into</span>
+        <span class="c1"># a possible html file.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">plot_save</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">argparse</span>
+    <span class="kn">import</span> <span class="nn">os</span>
 
-    <span class="n">desc</span> <span class="o">=</span> <span class="s1">&#39;Example to add missing value command line argument&#39;</span>
-    <span class="n">argstr</span> <span class="o">=</span> <span class="s1">&#39;input_file&#39;</span>
-
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
-        <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
-        <span class="n">add_help</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1">#</span>
+    <span class="c1"># Get iris data set for test</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="c1"># Set some data points to missing data</span>
     <span class="n">miss</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9999.</span>
+    <span class="n">ndata</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ndata</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">miss</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ndata</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;sepal_width&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">miss</span>
+    <span class="c1"># Write into csv file</span>
+    <span class="n">ifile</span> <span class="o">=</span> <span class="s1">&#39;mcplot_iris.csv&#39;</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">ifile</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># Extra command line argument -m to be called as:</span>
+    <span class="c1">#     -m &#39;-9999&#39; or --missing=-9999</span>
+    <span class="c1"># The parser must have `add_help=False`!</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">add_help</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-m&#39;</span><span class="p">,</span> <span class="s1">&#39;--missing&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span>
                         <span class="n">default</span><span class="o">=</span><span class="n">miss</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;miss&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
                         <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;missing_value&#39;</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data treated as missing value in</span>
-                              <span class="sa">f</span><span class="s1">&#39;input file (default: </span><span class="si">{</span><span class="n">miss</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">))</span>
+                        <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data treated as missing value in&#39;</span>
+                              <span class="sa">f</span><span class="s1">&#39; input file (default: </span><span class="si">{</span><span class="n">miss</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">))</span>
 
-    <span class="n">iplot</span> <span class="o">=</span> <span class="n">PlotIt</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">argstr</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">parser</span><span class="p">)</span>
+    <span class="c1">#</span>
+    <span class="c1"># New instance of myPlot. This also gets the command line arguments,</span>
+    <span class="c1"># to be called for example as:</span>
+    <span class="c1">#     python mcplot_example.py -t pdf -o ex.pdf mcplot_iris.csv</span>
+    <span class="n">desc</span> <span class="o">=</span> <span class="s1">&#39;Full commented example of mcPlot&#39;</span>
+    <span class="n">argstr</span> <span class="o">=</span> <span class="s1">&#39;input_file&#39;</span>
+    <span class="n">iplot</span> <span class="o">=</span> <span class="n">myPlot</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">argstr</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">parser</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># Reading data</span>
+    <span class="c1"># read the input file given on the command line</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># Plot</span>
+    <span class="c1"># make a seasonal plot</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">plot_fig_1</span><span class="p">()</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># Finish</span>
+    <span class="c1"># close any open plot files</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># Clean up</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ifile</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">ifile</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -833,11 +1127,11 @@ and raise an error.</p>
       </div>
     </a>
     <a class="right-next"
-       href="installation.html"
+       href="full_example.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Installation</p>
+        <p class="prev-next-title">Commented Example</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

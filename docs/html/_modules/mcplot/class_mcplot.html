@@ -148,6 +148,7 @@
         <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">mcplot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../full_example.html">Commented Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
@@ -398,6 +399,7 @@ document.write(`
 <span class="sd">     Oct 2024, Matthias Cuntz</span>
 <span class="sd">   * Use self.__dict__ to access all variables in print_class_variables,</span>
 <span class="sd">     Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * Removed trailing &gt; in html output, Oct 2024, Matthias Cuntz</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -468,6 +470,9 @@ document.write(`
 <span class="sd">        Finish, closing opened output files.</span>
 <span class="sd">    plot_save(fig, **kwargs)</span>
 <span class="sd">        Save, close or show `figure`.</span>
+<span class="sd">    print_class_variables(rcparams=False)</span>
+<span class="sd">        Prints current class variables for layout, etc. and optionally</span>
+<span class="sd">        matplotlib&#39;s rcParams.</span>
 <span class="sd">    set_layout_options()</span>
 <span class="sd">        Sets the colours and styles that can be used in plots.</span>
 <span class="sd">        One can either copy this routine into the extending class and adapt it,</span>
@@ -483,26 +488,18 @@ document.write(`
 <span class="sd">    -----</span>
 <span class="sd">    If neither `desc` nor `argstr` is given upon initialisation,</span>
 <span class="sd">    `get_command_line_arguments()` will not be called, i.e. it is assumed that</span>
-<span class="sd">    the class is called from within Python.</span>
+<span class="sd">    the class is initiated from within Python.</span>
 
-<span class="sd">    Several more methods are defined, which should probably not be changed.</span>
+<span class="sd">    Several more methods are defined and used under the hood:</span>
 
-<span class="sd">    plot_begin() or plot_start()</span>
-<span class="sd">        Open output file and similar at the beginning.</span>
+<span class="sd">        plot_begin() or plot_start()</span>
+<span class="sd">            Open output file and similar at the beginning.</span>
 
-<span class="sd">    plot_test()</span>
-<span class="sd">        A simple plot as an example.</span>
+<span class="sd">        plot_test()</span>
+<span class="sd">            A simple plot as an example.</span>
 
-<span class="sd">    print_layout_options(rcparams=False)</span>
-<span class="sd">        Prints current layout options and optionally matplotlib&#39;s rcParams.</span>
-
-<span class="sd">    set_matplotlib_rcparams()</span>
-<span class="sd">        Set rcParams of Matplotlib depending on output type, and chosen layout.</span>
-<span class="sd">        rcParams can also be re-set in the initialisation of the extending</span>
-<span class="sd">        class.</span>
-
-<span class="sd">    set_output_type()</span>
-<span class="sd">        Set the format of the output such as pdf or png.</span>
+<span class="sd">        set_output_type()</span>
+<span class="sd">            Set the format of the output such as pdf or png.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -514,14 +511,10 @@ document.write(`
 <span class="sd">       from mcplot import mcPlot</span>
 
 <span class="sd">       class PlotIt(mcPlot):</span>
-<span class="sd">           def __init__(self, *args, **kwargs):</span>
-<span class="sd">               super().__init__(*args, **kwargs)</span>
-<span class="sd">               # change e.g. colors</span>
-<span class="sd">               self.lcol1 = &#39;cyan&#39;</span>
 
 <span class="sd">           def read_data(self):</span>
-<span class="sd">               # do something</span>
-<span class="sd">               self.dat = np.arange(10)</span>
+<span class="sd">               # do something with self.cargs</span>
+<span class="sd">               self.dat = np.loadtxt(self.cargs[0])</span>
 
 <span class="sd">           def plot_fig_1(self):</span>
 <span class="sd">               import matplotlib.pyplot as plt</span>
@@ -537,24 +530,9 @@ document.write(`
 
 <span class="sd">               self.plot_save(fig)</span>
 
-<span class="sd">           def plot_fig_2(self):</span>
-<span class="sd">               import matplotlib.pyplot as plt</span>
-
-<span class="sd">               self.ifig += 1</span>
-<span class="sd">               fig = plt.figure(self.ifig)</span>
-
-<span class="sd">               sub = fig.add_axes([0.125, 0.667, 0.3375, 0.233])</span>
-
-<span class="sd">               larr = sub.plot(2*self.dat)</span>
-<span class="sd">               plt.setp(larr[-1], linestyle=&#39;-&#39;, linewidth=self.lw,</span>
-<span class="sd">                        marker=&#39;&#39;, color=self.lcols[-1])</span>
-
-<span class="sd">               self.plot_save(fig)</span>
-
 <span class="sd">       if __name__ == &#39;__main__&#39;:</span>
 <span class="sd">           iplot = PlotIt(desc=&#39;Test mcPlot&#39;)</span>
 <span class="sd">           iplot.read_data()</span>
-<span class="sd">           iplot.plot_fig_1()</span>
 <span class="sd">           iplot.plot_fig_2()</span>
 <span class="sd">           iplot.close()</span>
 
@@ -1263,7 +1241,7 @@ document.write(`
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    Write html file &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotfile</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fhtml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plotfile</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01&#39;</span>
-                  <span class="sa">f</span><span class="s1">&#39; Transitional//EN&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                  <span class="sa">f</span><span class="s1">&#39; Transitional//EN&quot;</span><span class="se">\n</span><span class="s1">&#39;</span>
                   <span class="sa">f</span><span class="s1">&#39; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
                   <span class="sa">f</span><span class="s1">&#39;&lt;html&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
                   <span class="sa">f</span><span class="s1">&#39;    &lt;head&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
@@ -1497,7 +1475,7 @@ document.write(`
 
 
     <span class="c1"># -------------------------------------------------------------------------</span>
-    <span class="c1"># print layout options</span>
+    <span class="c1"># print class variables for layout, etc.</span>
     <span class="c1">#</span>
 <div class="viewcode-block" id="mcPlot.print_class_variables">
 <a class="viewcode-back" href="../../class_mcplot.html#mcplot.class_mcplot.mcPlot.print_class_variables">[docs]</a>

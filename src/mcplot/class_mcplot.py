@@ -72,6 +72,7 @@ History
      Oct 2024, Matthias Cuntz
    * Use self.__dict__ to access all variables in print_class_variables,
      Oct 2024, Matthias Cuntz
+   * Removed trailing > in html output, Oct 2024, Matthias Cuntz
 
 """
 import numpy as np
@@ -140,6 +141,9 @@ class mcPlot(object):
         Finish, closing opened output files.
     plot_save(fig, **kwargs)
         Save, close or show `figure`.
+    print_class_variables(rcparams=False)
+        Prints current class variables for layout, etc. and optionally
+        matplotlib's rcParams.
     set_layout_options()
         Sets the colours and styles that can be used in plots.
         One can either copy this routine into the extending class and adapt it,
@@ -155,26 +159,18 @@ class mcPlot(object):
     -----
     If neither `desc` nor `argstr` is given upon initialisation,
     `get_command_line_arguments()` will not be called, i.e. it is assumed that
-    the class is called from within Python.
+    the class is initiated from within Python.
 
-    Several more methods are defined, which should probably not be changed.
+    Several more methods are defined and used under the hood:
 
-    plot_begin() or plot_start()
-        Open output file and similar at the beginning.
+        plot_begin() or plot_start()
+            Open output file and similar at the beginning.
 
-    plot_test()
-        A simple plot as an example.
+        plot_test()
+            A simple plot as an example.
 
-    print_layout_options(rcparams=False)
-        Prints current layout options and optionally matplotlib's rcParams.
-
-    set_matplotlib_rcparams()
-        Set rcParams of Matplotlib depending on output type, and chosen layout.
-        rcParams can also be re-set in the initialisation of the extending
-        class.
-
-    set_output_type()
-        Set the format of the output such as pdf or png.
+        set_output_type()
+            Set the format of the output such as pdf or png.
 
     Examples
     --------
@@ -186,14 +182,10 @@ class mcPlot(object):
        from mcplot import mcPlot
 
        class PlotIt(mcPlot):
-           def __init__(self, *args, **kwargs):
-               super().__init__(*args, **kwargs)
-               # change e.g. colors
-               self.lcol1 = 'cyan'
 
            def read_data(self):
-               # do something
-               self.dat = np.arange(10)
+               # do something with self.cargs
+               self.dat = np.loadtxt(self.cargs[0])
 
            def plot_fig_1(self):
                import matplotlib.pyplot as plt
@@ -209,24 +201,9 @@ class mcPlot(object):
 
                self.plot_save(fig)
 
-           def plot_fig_2(self):
-               import matplotlib.pyplot as plt
-
-               self.ifig += 1
-               fig = plt.figure(self.ifig)
-
-               sub = fig.add_axes([0.125, 0.667, 0.3375, 0.233])
-
-               larr = sub.plot(2*self.dat)
-               plt.setp(larr[-1], linestyle='-', linewidth=self.lw,
-                        marker='', color=self.lcols[-1])
-
-               self.plot_save(fig)
-
        if __name__ == '__main__':
            iplot = PlotIt(desc='Test mcPlot')
            iplot.read_data()
-           iplot.plot_fig_1()
            iplot.plot_fig_2()
            iplot.close()
 
@@ -918,7 +895,7 @@ class mcPlot(object):
             print('    Write html file ', self.plotfile)
             self.fhtml = open(self.plotfile, 'w')
             print(f'<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01'
-                  f' Transitional//EN">\n'
+                  f' Transitional//EN"\n'
                   f' "http://www.w3.org/TR/html4/loose.dtd">\n'
                   f'<html>\n'
                   f'    <head>\n'
@@ -1130,7 +1107,7 @@ class mcPlot(object):
         self.plot_end()
 
     # -------------------------------------------------------------------------
-    # print layout options
+    # print class variables for layout, etc.
     #
     def print_class_variables(self, rcparams=False):
         """

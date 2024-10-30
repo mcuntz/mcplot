@@ -2,6 +2,7 @@ Changelog
 ---------
 
 v2.0 (??? 2024)
+    * Removed trailing > in html output.
     * Add sron named colors.
     * Add pale and dark colors to sron_colors.
     * Use helper functions for all colors and colormaps.

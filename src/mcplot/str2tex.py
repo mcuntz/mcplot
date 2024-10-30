@@ -224,7 +224,7 @@ def str2tex(strin, space2linebreak=False,
         #            for i in istrin ]
         # do not escape %
         istrin = [ rep_nopercent(i) if (r'\%' in i) else i for i in istrin ]
-        # '\n' is Matplotlib but nor LaTeX
+        # '\n' is Matplotlib but not LaTeX
         for j, s in enumerate(istrin):
             if (r'\n' in istrin[j]) and not (r'\newline' in istrin[j]):
                 istrin[j] = rep_n(istrin[j])

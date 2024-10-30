@@ -149,6 +149,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="index.html">mcplot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="full_example.html">Commented Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
@@ -401,6 +402,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.get_command_line_arguments"><code class="docutils literal notranslate"><span class="pre">mcPlot.get_command_line_arguments()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_end"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_end()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_save"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_save()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.print_class_variables"><code class="docutils literal notranslate"><span class="pre">mcPlot.print_class_variables()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.set_layout_options"><code class="docutils literal notranslate"><span class="pre">mcPlot.set_layout_options()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.set_matplotlib_rcparams"><code class="docutils literal notranslate"><span class="pre">mcPlot.set_matplotlib_rcparams()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.close"><code class="docutils literal notranslate"><span class="pre">mcPlot.close()</span></code></a></li>
@@ -413,9 +415,9 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_start"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_start()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_stop"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_stop()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_test"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_test()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.print_class_variables"><code class="docutils literal notranslate"><span class="pre">mcPlot.print_class_variables()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><code class="docutils literal notranslate"><span class="pre">mcPlot.set_layout_options()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><code class="docutils literal notranslate"><span class="pre">mcPlot.set_matplotlib_rcparams()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><code class="docutils literal notranslate"><span class="pre">mcPlot.print_class_variables()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><code class="docutils literal notranslate"><span class="pre">mcPlot.set_layout_options()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><code class="docutils literal notranslate"><span class="pre">mcPlot.set_matplotlib_rcparams()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.set_output_type"><code class="docutils literal notranslate"><span class="pre">mcPlot.set_output_type()</span></code></a></li>
 </ul>
 </li>
@@ -508,6 +510,7 @@ Oct 2024, Matthias Cuntz</p></li>
 Oct 2024, Matthias Cuntz</p></li>
 <li><p>Use self.__dict__ to access all variables in print_class_variables,
 Oct 2024, Matthias Cuntz</p></li>
+<li><p>Removed trailing &gt; in html output, Oct 2024, Matthias Cuntz</p></li>
 </ul>
 </dd>
 </dl>
@@ -664,6 +667,13 @@ with <cite>add_help=False</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="mcplot.class_mcplot.mcPlot.print_class_variables">
+<span class="sig-name descname"><span class="pre">print_class_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rcparams</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/class_mcplot.html#mcPlot.print_class_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.class_mcplot.mcPlot.print_class_variables" title="Link to this definition">#</a></dt>
+<dd><p>Prints current class variables for layout, etc. and optionally
+matplotlib’s rcParams.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="mcplot.class_mcplot.mcPlot.set_layout_options">
 <span class="sig-name descname"><span class="pre">set_layout_options</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/class_mcplot.html#mcPlot.set_layout_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.class_mcplot.mcPlot.set_layout_options" title="Link to this definition">#</a></dt>
 <dd><p>Sets the colours and styles that can be used in plots.
@@ -685,22 +695,18 @@ class.</p>
 <p class="admonition-title">Notes</p>
 <p>If neither <cite>desc</cite> nor <cite>argstr</cite> is given upon initialisation,
 <cite>get_command_line_arguments()</cite> will not be called, i.e. it is assumed that
-the class is called from within Python.</p>
-<p>Several more methods are defined, which should probably not be changed.</p>
-<dl class="simple">
+the class is initiated from within Python.</p>
+<p>Several more methods are defined and used under the hood:</p>
+<blockquote>
+<div><dl class="simple">
 <dt>plot_begin() or plot_start()</dt><dd><p>Open output file and similar at the beginning.</p>
 </dd>
 <dt>plot_test()</dt><dd><p>A simple plot as an example.</p>
 </dd>
-<dt>print_layout_options(rcparams=False)</dt><dd><p>Prints current layout options and optionally matplotlib’s rcParams.</p>
-</dd>
-<dt>set_matplotlib_rcparams()</dt><dd><p>Set rcParams of Matplotlib depending on output type, and chosen layout.
-rcParams can also be re-set in the initialisation of the extending
-class.</p>
-</dd>
 <dt>set_output_type()</dt><dd><p>Set the format of the output such as pdf or png.</p>
 </dd>
 </dl>
+</div></blockquote>
 </div>
 <p class="rubric">Examples</p>
 <p>The simplest way to use <cite>mcPlot</cite> is to extend the class:</p>
@@ -708,14 +714,10 @@ class.</p>
 <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">mcPlot</span>
 
 <span class="k">class</span> <span class="nc">PlotIt</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="c1"># change e.g. colors</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span> <span class="o">=</span> <span class="s1">&#39;cyan&#39;</span>
 
     <span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># do something</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+        <span class="c1"># do something with self.cargs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cargs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">plot_fig_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -731,24 +733,9 @@ class.</p>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">plot_save</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">plot_fig_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">ifig</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="p">)</span>
-
-        <span class="n">sub</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.125</span><span class="p">,</span> <span class="mf">0.667</span><span class="p">,</span> <span class="mf">0.3375</span><span class="p">,</span> <span class="mf">0.233</span><span class="p">])</span>
-
-        <span class="n">larr</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lw</span><span class="p">,</span>
-                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcols</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">plot_save</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">iplot</span> <span class="o">=</span> <span class="n">PlotIt</span><span class="p">(</span><span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Test mcPlot&#39;</span><span class="p">)</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
-    <span class="n">iplot</span><span class="o">.</span><span class="n">plot_fig_1</span><span class="p">()</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">plot_fig_2</span><span class="p">()</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
@@ -787,13 +774,13 @@ class.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#mcplot.class_mcplot.mcPlot.plot_test" title="mcplot.class_mcplot.mcPlot.plot_test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_test</span></code></a>()</p></td>
 <td><p>A simple test plot</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#mcplot.class_mcplot.mcPlot.print_class_variables" title="mcplot.class_mcplot.mcPlot.print_class_variables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_class_variables</span></code></a>([rcparams])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id5" title="mcplot.class_mcplot.mcPlot.print_class_variables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_class_variables</span></code></a>([rcparams])</p></td>
 <td><p>Print the current class variables and optionally matplotlib.rcParams</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id5" title="mcplot.class_mcplot.mcPlot.set_layout_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_layout_options</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#id6" title="mcplot.class_mcplot.mcPlot.set_layout_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_layout_options</span></code></a>()</p></td>
 <td><p>Standard layout options that can be used in plotting methods</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id6" title="mcplot.class_mcplot.mcPlot.set_matplotlib_rcparams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_matplotlib_rcparams</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id7" title="mcplot.class_mcplot.mcPlot.set_matplotlib_rcparams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_matplotlib_rcparams</span></code></a>()</p></td>
 <td><p>Set rcParams depending on output type and other options such as using LaTeX, serif fonts, etc.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#mcplot.class_mcplot.mcPlot.set_output_type" title="mcplot.class_mcplot.mcPlot.set_output_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output_type</span></code></a>()</p></td>
@@ -913,8 +900,8 @@ optional<span class="w"> </span>arguments:
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="mcplot.class_mcplot.mcPlot.print_class_variables">
-<span class="sig-name descname"><span class="pre">print_class_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rcparams</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/class_mcplot.html#mcPlot.print_class_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.class_mcplot.mcPlot.print_class_variables" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">print_class_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rcparams</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/class_mcplot.html#mcPlot.print_class_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition">#</a></dt>
 <dd><p>Print the current class variables
 and optionally matplotlib.rcParams</p>
 <p class="rubric">Examples</p>
@@ -926,8 +913,8 @@ and optionally matplotlib.rcParams</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="id5">
-<span class="sig-name descname"><span class="pre">set_layout_options</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/class_mcplot.html#mcPlot.set_layout_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">set_layout_options</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/class_mcplot.html#mcPlot.set_layout_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Link to this definition">#</a></dt>
 <dd><p>Standard layout options that can be used in plotting methods</p>
 <p>One can either copy this routine into an extending class and adapt it,
 or add a new method that resets some of the layout options and call it
@@ -1093,8 +1080,8 @@ bbox of the figure</p></td>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="id6">
-<span class="sig-name descname"><span class="pre">set_matplotlib_rcparams</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/class_mcplot.html#mcPlot.set_matplotlib_rcparams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">set_matplotlib_rcparams</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/class_mcplot.html#mcPlot.set_matplotlib_rcparams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id7" title="Link to this definition">#</a></dt>
 <dd><p>Set rcParams depending on output type and other options such as using
 LaTeX, serif fonts, etc.</p>
 <p>rcParams can be overwritten in the initialisation of an extending
@@ -1236,6 +1223,7 @@ installed.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.get_command_line_arguments"><code class="docutils literal notranslate"><span class="pre">mcPlot.get_command_line_arguments()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_end"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_end()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_save"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_save()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.print_class_variables"><code class="docutils literal notranslate"><span class="pre">mcPlot.print_class_variables()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.set_layout_options"><code class="docutils literal notranslate"><span class="pre">mcPlot.set_layout_options()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.set_matplotlib_rcparams"><code class="docutils literal notranslate"><span class="pre">mcPlot.set_matplotlib_rcparams()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.close"><code class="docutils literal notranslate"><span class="pre">mcPlot.close()</span></code></a></li>
@@ -1248,9 +1236,9 @@ installed.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_start"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_start()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_stop"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_stop()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_test"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_test()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.print_class_variables"><code class="docutils literal notranslate"><span class="pre">mcPlot.print_class_variables()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><code class="docutils literal notranslate"><span class="pre">mcPlot.set_layout_options()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><code class="docutils literal notranslate"><span class="pre">mcPlot.set_matplotlib_rcparams()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><code class="docutils literal notranslate"><span class="pre">mcPlot.print_class_variables()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><code class="docutils literal notranslate"><span class="pre">mcPlot.set_layout_options()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><code class="docutils literal notranslate"><span class="pre">mcPlot.set_matplotlib_rcparams()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.set_output_type"><code class="docutils literal notranslate"><span class="pre">mcPlot.set_output_type()</span></code></a></li>
 </ul>
 </li>
