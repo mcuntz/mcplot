@@ -339,9 +339,9 @@ class mcPlot(object):
         parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
             description=self.desc, parents=self.parents)
-        hstr = (f'Name of plot output file for types pdf, html, d3, or'
-                f' hvplot, and name basis for type png (default:'
-                f' mcplot).')
+        hstr = ('Name of plot output file for types pdf, html, d3, or'
+                ' hvplot, and name basis for type png (default:'
+                ' mcplot).')
         parser.add_argument(
             '-o', '--output', '-p', '--plotname',
             action='store', default=plotname, dest='plotname',
@@ -594,6 +594,7 @@ class mcPlot(object):
         self.handlelength  = 1.5  # length of the legend handles
         self.frameon = False      # if True, draw a frame around the legend.
                                   # If None, use rc
+
         # png
         self.bbox_inches = 'tight'
         self.pad_inches  = 0.035

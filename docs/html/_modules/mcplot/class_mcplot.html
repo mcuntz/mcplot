@@ -670,9 +670,9 @@ document.write(`
         <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
             <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
             <span class="n">description</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">desc</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="p">)</span>
-        <span class="n">hstr</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Name of plot output file for types pdf, html, d3, or&#39;</span>
-                <span class="sa">f</span><span class="s1">&#39; hvplot, and name basis for type png (default:&#39;</span>
-                <span class="sa">f</span><span class="s1">&#39; mcplot).&#39;</span><span class="p">)</span>
+        <span class="n">hstr</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Name of plot output file for types pdf, html, d3, or&#39;</span>
+                <span class="s1">&#39; hvplot, and name basis for type png (default:&#39;</span>
+                <span class="s1">&#39; mcplot).&#39;</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--output&#39;</span><span class="p">,</span> <span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--plotname&#39;</span><span class="p">,</span>
             <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">plotname</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;plotname&#39;</span><span class="p">,</span>
@@ -928,6 +928,7 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">handlelength</span>  <span class="o">=</span> <span class="mf">1.5</span>  <span class="c1"># length of the legend handles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frameon</span> <span class="o">=</span> <span class="kc">False</span>      <span class="c1"># if True, draw a frame around the legend.</span>
                                   <span class="c1"># If None, use rc</span>
+
         <span class="c1"># png</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pad_inches</span>  <span class="o">=</span> <span class="mf">0.035</span>

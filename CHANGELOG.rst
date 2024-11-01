@@ -2,6 +2,8 @@ Changelog
 ---------
 
 v2.0 (Nov 2024)
+    * Tighter layout in `show_colors` and tight bounding box for
+      non-pdf output of `show_colors` and `show_cmaps`.
     * Use class variables in test plot of `mcPlot`.
     * Pass italic and bold along to `str2tex` in `text2plot`.
     * Put $...$ around a, b, c only if mathrm=True in `abc2plot`.

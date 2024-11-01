@@ -61,6 +61,9 @@ History
    * Use helper functions _all_colors, _mpl_cmaps, and _all_cmaps,
      Oct 2024, Matthias Cuntz
    * Add sron_named_colors, Oct 2024, Matthias Cuntz
+   * Tighter layout in show_colors, Nov 2024, Matthias Cuntz
+   * Tight bounding box for non-pdf output of show_colors and show_cmaps,
+     Nov 2024, Matthias Cuntz
 
 """
 import matplotlib as mpl
@@ -669,13 +672,14 @@ def _savefig(fig, ifig, outtype, outfile, pdf_pages):  # pragma: no cover
     elif not (outtype == 'X'):
         ofile = (outfile[:outfile.rfind('.')] + '_' + '{:04d}'.format(ifig)
                  + '.' + outtype)
-        fig.savefig(ofile)
+        fig.savefig(ofile, bbox_inches='tight', pad_inches=0.035)
         plt.close(fig)
     else:
         pass
 
 
 def _newfig_colors(ifig, ititle, *,
+                   cell_width_base=212,
                    cell_width=212, cell_height=22,
                    swatch_width=48, sidemargin=12,
                    topmargin=36,
@@ -706,20 +710,35 @@ def _plot_colors(ifig, table, colors, *, ncols=4, sort_colors=True,
                  textsize=10, outtype='X', outfile='', pdf_pages=None):
     """ Helper function for show_colors """
     from matplotlib.patches import Rectangle
+    import math
 
     # n = len(colors)
     # nrows = math.ceil(n / ncols)
-    nrows = len(mcolors.CSS4_COLORS) // ncols
-    cell_width = 212
+    nrowsmax = math.ceil(len(mcolors.CSS4_COLORS) / ncols)
+    nrows = min(math.ceil(len(colors) / ncols), nrowsmax)
+    cell_width_base = 212
     cell_height = 22
     swatch_width = 48
-    sidemargin = 12
+    sidemargin = 36
     topmargin = 48
     dpi = 72
+
+    if (table == 'base'):
+        cell_width = 89
+    elif (table == 'tableau'):
+        cell_width = 142
+    elif (table == 'sron'):
+        cell_width = 282
+    elif (table == 'ufz'):
+        cell_width = 159
+    else:
+        cell_width = cell_width_base
+
     width = cell_width * ncols + 2 * sidemargin
     height = cell_height * nrows + 2 * topmargin
 
-    ckw = {'cell_width': cell_width,
+    ckw = {'cell_width_base': cell_width_base,
+           'cell_width': cell_width,
            'cell_height': cell_height,
            'swatch_width': swatch_width,
            'sidemargin': sidemargin,
