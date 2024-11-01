@@ -393,8 +393,12 @@ document.write(`
   <section id="changelog">
 <span id="id1"></span><h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">#</a></h1>
 <dl class="simple">
-<dt>v2.0 (??? 2024)</dt><dd><ul class="simple">
-<li><p>Removed trailing &gt; in html output.</p></li>
+<dt>v2.0 (Nov 2024)</dt><dd><ul class="simple">
+<li><p>Use class variables in test plot of <cite>mcPlot</cite>.</p></li>
+<li><p>Pass italic and bold along to <cite>str2tex</cite> in <cite>text2plot</cite>.</p></li>
+<li><p>Put $…$ around a, b, c only if mathrm=True in <cite>abc2plot</cite>.</p></li>
+<li><p>Use backslash with braces only if <cite>usetex</cite> not if only pdf
+output in <cite>abc2plot</cite>.  * Removed trailing &gt; in html output.</p></li>
 <li><p>Add sron named colors.</p></li>
 <li><p>Add pale and dark colors to sron_colors.</p></li>
 <li><p>Use helper functions for all colors and colormaps.</p></li>

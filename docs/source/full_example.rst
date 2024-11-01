@@ -1,7 +1,9 @@
-Commented Example 
+Commented Example
 =================
 
-Below is a fully commented example that uses a lot of the classes and functions of :mod:`mcplot`. It reads a file with `pandas`_ that can be written as:
+Here is a fully commented example that uses most of the class and
+functions of :mod:`mcplot`. It reads a file with `pandas`_ that can be
+written as:
 
 .. code-block:: python
 		
@@ -23,24 +25,23 @@ Below is a fully commented example that uses a lot of the classes and functions 
    ifile = 'mcplot_iris.csv'
    df.to_csv(ifile, index=False)
 
-The file **mcplot_iris.csv** can then be given on the command line, for example:
 
-.. code-block:: bash
-
-   python mcplot_example.py mcplot_iris.csv
-
-
-A commented extended example
-----------------------------
+Example using mcPlot
+--------------------
 
 .. code-block:: python
 
+   # file: mcplot_example.py
    import numpy as np
    import pandas as pd
    from mcplot import mcPlot
 
 
    class myPlot(mcPlot):
+
+       #
+       # init
+       #
 
        def __init__(self, *args, **kwargs):
            """
@@ -69,6 +70,10 @@ A commented extended example
            # background color and the like.
            self.set_matplotlib_rcparams()
 
+       #
+       # Class variables
+       #
+
        def set_extra_layout_options(self):
            """
            Set some class variables that can be used for plotting.
@@ -82,13 +87,16 @@ A commented extended example
            self.nrow = 4       # # of rows of subplots per figure
            self.ncol = 3       # # of columns of subplots per figure
            self.hspace = 0.09  # x-space between subplots
-           self.vspace = 0.04  # y-space between subplots
-           self.textsize = 10  # standard text size
+           self.vspace = 0.06  # y-space between subplots
+           if self.usetex:
+               self.textsize = 12  # standard text size
+           else:
+               self.textsize = 10  # standard text size
 
            # Set come line and marker properties
            self.lw = 1.5   # linewidth
            self.ms = 5.0   # marker size
-           self.mew = 0.3  # marker edge width
+           self.mew = 1.0  # marker edge width
 
            # Set come colors
            if self.dowhite:
@@ -118,6 +126,10 @@ A commented extended example
            self.handletextpad = 0.4  # pad between the legend handle and text
            self.handlelength  = 1.0  # length of the legend handles
 
+       #
+       # Read data
+       #
+
        def read_data(self):
            """
            The command line arguments are in the list self.cargs.
@@ -134,6 +146,10 @@ A commented extended example
            # option -m also added in the __main__ section)
            self.df = pd.read_csv(ifile, na_values=[self.miss])
 
+       #
+       # Figure 1
+       #
+
        def plot_fig_1(self):
            import matplotlib.pyplot as plt
            from numpy.polynomial import polynomial as P
@@ -145,6 +161,8 @@ A commented extended example
            from mcplot import text2plot
            # add a), b), c) to plot
            from mcplot import abc2plot
+           # put '(C) YYYY itext' on plot
+           from mcplot import signature2plot
 
            # open new figure, increasing figure counter
            self.ifig += 1
@@ -198,57 +216,10 @@ A commented extended example
            larr += ax.plot(x, y)
            plt.setp(larr[-1], linestyle='None',
                     marker='o', markeredgecolor=self.mcol5,
-                    markerfacecolor='None',
+                    markerfacecolor=self.mcol4,
                     markersize=self.ms, markeredgewidth=self.mew)
            # add a possible legend entry to list tarr
            tarr += [str2tex('data', usetex=self.usetex)]
-
-           # Add trend line
-           xx = x.to_numpy()
-           yy = y.to_numpy()
-           ii = ~np.isnan(xx)
-           xx = xx[ii]
-           yy = yy[ii]
-           p = P.polyfit(xx, yy, 1)
-           pyy = P.polyval(xx, p)
-           larr += ax.plot(xx, pyy)
-           plt.setp(larr[-1], linestyle='-', linewidth=self.lw / 2.,
-                    marker='None', color=self.mcol2)
-           tarr += [str2tex('model', usetex=self.usetex)]
-           # Write equation on plot
-           # to have correct minus symbol
-           s0 = r'$-$' if p[0] < 0 else ''
-           s1 = r'$-$' if p[1] < 0 else '+'
-           teq = str2tex(rf'y={s0}{abs(p[0]):.2f}'
-                         rf'{s1}{abs(p[1]):.2f}x', usetex=self.usetex)
-           # # Another possibility is to set the whole equations in $...$
-           # # but this uses more space and the second sign still has to be
-           # # chosen beforehand.
-           # s1 = '-' if p[1] < 0 else '+'
-           # teq = str2tex(rf'$y={p[0]:.2f}x{s1}{abs(p[1]):.2f}$',
-           #               usetex=self.usetex)
-           #
-           # Put the equation as text on plot
-           # One can set one of the sizes xxsmall, xsmall, small, medium, large,
-           # xlarge, xxlarge to True. Also bold and italic can be set to true.
-           # All other keywords will be passed to Matplotlib's Axes.text() such
-           # as `color` here.
-           text2plot(ax, 0.2, self.dyabc, teq, color=self.mcol2,
-                     small=True)
-
-           # Add legend using the two list of lines (larr) and text (tarr)
-           # loc and bbox_to_anchor behave slightly different for different
-           # fontsizes.
-           ll = ax.legend(larr, tarr,
-                          frameon=self.frameon, ncol=1,
-                          labelspacing=self.labelspacing,
-                          handletextpad=self.handletextpad,
-                          handlelength=self.handlelength,
-                          columnspacing=self.columnspacing,
-                          loc=self.loc,
-                          bbox_to_anchor=(self.xbbox, self.ybbox),
-                          scatterpoints=1, numpoints=1,
-                          fontsize='small')
 
            # Put a), b), c), ... on plot
            # The panel counter can be upper- or lower letters,
@@ -257,6 +228,19 @@ A commented extended example
            # after. It can be italic or boldface.
            abc2plot(ax, self.dxabc, self.dyabc, iabc, lower=True, bold=False,
                     parentheses='close', usetex=self.usetex, mathrm=True)
+           abc2plot(ax, 3. * self.dxabc, 0.8 * self.dyabc, iabc, upper=True,
+                    bold=False, parentheses='open', usetex=self.usetex,
+                    mathrm=True)
+           abc2plot(ax, 5. * self.dxabc, 0.6 * self.dyabc, iabc, lower=True,
+                    bold=True, roman=True, parentheses='both', usetex=self.usetex)
+           abc2plot(ax, 7. * self.dxabc, 0.4 * self.dyabc, iabc, upper=True,
+                    roman=True, brackets='close', usetex=self.usetex, mathrm=True,
+                    italic=True)
+           abc2plot(ax, 9. * self.dxabc, 0.2 * self.dyabc, iabc, lower=True,
+                    bold=False, braces='both', usetex=self.usetex, mathrm=False)
+           abc2plot(ax, 11. * self.dxabc, 0.05 * self.dyabc, f'I am panel {iabc}',
+                    string=True, bold=False, braces='both', usetex=self.usetex,
+                    mathrm=True, italic=True)
 
            # Final axes layout
            # Labels set if not empty.
@@ -277,68 +261,6 @@ A commented extended example
            # Large Panel 2
            #
 
-           # sepal_width vs. sepal_length
-           iplot += 1
-           iabc += 1
-           x = self.df['sepal_length']
-           y = self.df['sepal_width']
-           xlim = None
-           ylim = None
-           if self.usetex:
-               xlab = str2tex(r'L$_\textnormal{sepal}$ (cm)', usetex=self.usetex)
-               ylab = str2tex(r'W$_\textnormal{sepal}$ (cm)', usetex=self.usetex)
-           else:
-               xlab = str2tex(r'L$_{sepal}$ (cm)', usetex=self.usetex)
-               ylab = str2tex(r'W$_{sepal}$ (cm)', usetex=self.usetex)
-
-           # Make subplots using add_axes
-           # We want to span two figure columns on the same row.
-           # Here we do this by hand: get panel coordinates of the next two
-           # panels, and combine the distance between the left edges plus the
-           # widths to the `rect` (left, bottom, width, height).
-           pos1 = position(self.nrow, self.ncol, iplot,
-                           hspace=self.hspace, vspace=self.vspace)
-           pos2 = position(self.nrow, self.ncol, iplot + 1,
-                           hspace=self.hspace, vspace=self.vspace)
-           pos = [pos1[0], pos1[1], pos2[0] - pos1[0] + pos2[2], pos1[3]]
-           ax = fig.add_axes(pos, label=str(iplot))
-           # if you want to have double the figure width instead, just change
-           # the width in `rect`, such as
-           # pos = position(self.nrow, self.ncol, iplot,
-           #                hspace=self.hspace, vspace=self.vspace)
-           # pos[2] = pos[2] * 2.
-
-           # Plot markers
-           mark1 = ax.plot(x, y)
-           plt.setp(mark1, linestyle='None',
-                    marker='o', markeredgecolor=self.mcol5,
-                    markerfacecolor='None',
-                    markersize=self.ms, markeredgewidth=self.mew)
-
-           # Put a), b), c), ... on plot
-           abc2plot(ax, self.dxabc, self.dyabc, iabc, upper=True, bold=True,
-                    parentheses='both', usetex=self.usetex, mathrm=True)
-
-           # Final axes layout
-           if xlab != '':
-               plt.setp(ax, xlabel=xlab)
-           if ylab != '':
-               plt.setp(ax, ylabel=ylab)
-           ax.grid(False)
-           ax.spines['right'].set_color('none')
-           ax.spines['top'].set_color('none')
-           if xlim is not None:
-               plt.setp(ax, xlim=xlim)
-           if ylim is not None:
-               plt.setp(ax, ylim=ylim)
-
-           # increase number in (nrow, ncol) subplots because we used two subplots
-           iplot += 1
-
-           #
-           # Large Panel 3
-           #
-
            # petal_length vs. petal_width
            iplot += 1
            iabc += 1
@@ -353,24 +275,108 @@ A commented extended example
                xlab = str2tex(r'L$_{sepal}$ (cm)', usetex=self.usetex)
                ylab = str2tex(r'W$_{sepal}$ (cm)', usetex=self.usetex)
 
-           # Make subplots using add_axes
-           # If you want to have double the figure width, just change
-           # the width in `rect`, such as
+           # We want to span two figure columns on the same row.
+           # Here we do this by hand: get panel coordinates of the next two
+           # panels, and combine the distance between the left edges plus the
+           # widths to the `rect` (left, bottom, width, height).
+           pos1 = position(self.nrow, self.ncol, iplot,
+                           hspace=self.hspace, vspace=self.vspace)
+           pos2 = position(self.nrow, self.ncol, iplot + 1,
+                           hspace=self.hspace, vspace=self.vspace)
+           pos = [pos1[0], pos1[1], pos2[0] - pos1[0] + pos2[2], pos1[3]]
+           ax = fig.add_axes(pos, label=str(iplot))
+
+           mark1 = ax.plot(x, y)
+           plt.setp(mark1, linestyle='None',
+                    marker='o', markeredgecolor=self.mcol5,
+                    markerfacecolor=self.mcol4,
+                    markersize=self.ms, markeredgewidth=self.mew)
+
+           # Put a copyright on the plot '(C) YYYY itext'
+           # The text right-aligned by default if not given otherwise
+           # (horizontalalignment).
+           signature2plot(ax, 0.98, 0.05, 'M Cuntz', usetex=self.usetex,
+                          small=True, italic=False, mathrm=False)
+
+           # increase number in (nrow, ncol) subplots because we used two subplots
+           iplot += 1
+
+           #
+           # Large Panel 3
+           #
+
+           iplot += 1
+           iabc += 1
+
+           # If you want to have double the figure width (instead of two figure
+           # columns), just change the width in `rect`
            pos = position(self.nrow, self.ncol, iplot,
                           hspace=self.hspace, vspace=self.vspace)
            pos[2] = pos[2] * 2.
            ax = fig.add_axes(pos, label=str(iplot))
 
            # Plot markers
-           mark1 = ax.plot(x, y)
-           plt.setp(mark1, linestyle='None',
+           larr = []
+           tarr = []
+           larr += ax.plot(x, y)
+           plt.setp(larr[-1], linestyle='None',
                     marker='o', markeredgecolor=self.mcol5,
-                    markerfacecolor='None',
+                    markerfacecolor=self.mcol4,
                     markersize=self.ms, markeredgewidth=self.mew)
+           tarr += [str2tex('data', usetex=self.usetex)]
 
-           # Put a), b), c), ... on plot
-           abc2plot(ax, self.dxabc, self.dyabc, iabc, upper=True, bold=True,
-                    parentheses='both', usetex=self.usetex, mathrm=True)
+           # Add trend line
+           xx = x.to_numpy()
+           yy = y.to_numpy()
+           ii = ~np.isnan(xx)
+           xx = xx[ii]
+           yy = yy[ii]
+           p = P.polyfit(xx, yy, 1)
+           pyy = P.polyval(xx, p)
+           larr += ax.plot(xx, pyy)
+           plt.setp(larr[-1], linestyle='-', linewidth=self.lw / 2.,
+                    marker='None', color=self.mcol2)
+           tarr += [str2tex('model', usetex=self.usetex)]
+
+           # Write equation on plot
+           # to have correct minus symbol
+           s0 = r'$-$' if p[0] < 0 else ''
+           s1 = r'$-$' if p[1] < 0 else '+'
+           noteq = rf'y={s0}{abs(p[0]):.2f}{s1}{abs(p[1]):.2f}x'
+           # # Another possibility is to set the whole equations in $...$
+           # # but this uses more space and the second sign still has to be
+           # # chosen beforehand.
+           # s1 = '-' if p[1] < 0 else '+'
+           # teq = str2tex(rf'$y={p[0]:.2f}x{s1}{abs(p[1]):.2f}$',
+           #               usetex=self.usetex)
+           #
+           # Put the equation as text on plot
+           # One can set one of the sizes xxsmall, xsmall, small, medium, large,
+           # xlarge, xxlarge to True. Also bold and italic can be set to true.
+           # All other keywords will be passed to Matplotlib's Axes.text() such
+           # as `color` here.
+           # You can either use a string such as noteq and set usetex=True
+           text2plot(ax, self.dxabc, self.dyabc, noteq, color=self.mcol2,
+                     small=True, usetex=self.usetex)
+           # or you can transform noteq to a LaTeX string first using str2tex
+           teq = str2tex(noteq, usetex=self.usetex)
+           # and then put in on the plot without usetex.
+           text2plot(ax, self.dxabc, 0.8 * self.dyabc, teq, color=self.mcol2,
+                     small=True)
+
+           # Add legend using the two list of lines (larr) and text (tarr)
+           # loc and bbox_to_anchor behave slightly different for different
+           # fontsizes.
+           ll = ax.legend(larr, tarr,
+                          frameon=self.frameon, ncol=1,
+                          labelspacing=self.labelspacing,
+                          handletextpad=self.handletextpad,
+                          handlelength=self.handlelength,
+                          columnspacing=self.columnspacing,
+                          loc=self.loc,
+                          bbox_to_anchor=(self.xbbox, self.ybbox),
+                          scatterpoints=1, numpoints=1,
+                          fontsize='small')
 
            # Final axes layout
            if xlab != '':
@@ -385,32 +391,22 @@ A commented extended example
            if ylim is not None:
                plt.setp(ax, ylim=ylim)
 
-           # increase number in (nrow, ncol) subplots because we used two subplots
+           # increase subplot number
            iplot += 1
 
            #
            # Large Panel 4
            #
 
-           # petal_length vs. petal_width
            iplot += 1
            iabc += 1
-           x = self.df['sepal_length']
-           y = self.df['petal_width']
-           xlim = None
-           ylim = None
-           if self.usetex:
-               xlab = str2tex(r'L$_\textnormal{sepal}$ (cm)', usetex=self.usetex)
-               ylab = str2tex(r'W$_\textnormal{petal}$ (cm)', usetex=self.usetex)
-           else:
-               xlab = str2tex(r'L$_{sepal}$ (cm)', usetex=self.usetex)
-               ylab = str2tex(r'W$_{petal}$ (cm)', usetex=self.usetex)
 
-           # Make subplots using add_axes
-           # One can also imagine other numbers of rows and columns, so that the
-           # panel will have a different size. For examepl, half the number of
-           # rows will give double the height of a panel.
-           # iplot has to be adjusted accordingly.
+           # One can also imagine different numbers of rows and columns,
+           # so that the panel will have a different size.
+           # This is done in the example for axis margins in Matplotlib's gallery
+           # https://matplotlib.org/stable/gallery/subplots_axes_and_figures/axes_margins.html
+           # For example, half the number of rows will give double the height
+           # of a panel. iplot has to be adjusted accordingly.
            pos = position(self.nrow // 2, self.ncol, iplot - self.ncol + 1,
                           hspace=self.hspace, vspace=self.vspace)
            ax = fig.add_axes(pos, label=str(iplot))
@@ -419,10 +415,10 @@ A commented extended example
            mark1 = ax.plot(x, y)
            plt.setp(mark1, linestyle='None',
                     marker='o', markeredgecolor=self.mcol5,
-                    markerfacecolor='None',
+                    markerfacecolor=self.mcol4,
                     markersize=self.ms, markeredgewidth=self.mew)
 
-           # Put a), b), c), ... on plot
+           # iabc has till the right count
            abc2plot(ax, self.dxabc, self.dyabc, iabc, upper=True, bold=True,
                     parentheses='both', usetex=self.usetex, mathrm=True)
 
@@ -439,12 +435,128 @@ A commented extended example
            if ylim is not None:
                plt.setp(ax, ylim=ylim)
 
-           # increase number in (nrow, ncol) subplots because we used two subplots
-           iplot += 1
-
            # Show plot or write it into file, adding a link to the image file into
            # a possible html file.
            self.plot_save(fig)
+
+       #
+       # Figure 2
+       #
+
+       def plot_fig_2(self):
+           import matplotlib.pyplot as plt
+           from numpy.polynomial import polynomial as P
+           from mcplot import position
+           from mcplot import str2tex
+           from mcplot import text2plot
+           from mcplot import abc2plot
+
+           # new figure
+           self.ifig += 1
+           iplot = 0
+           iabc = 0
+           print(f'  Open figure {self.ifig}')
+           fig = plt.figure(self.ifig)
+
+           #
+           # One big panel
+           #
+
+           # petal_length vs. sepal_length
+           iplot += 1
+           iabc += 1
+           x = self.df['sepal_length']
+           y = self.df['petal_length']
+           xlim = None
+           ylim = None
+           if self.usetex:
+               xlab = str2tex(r'L$_\textnormal{sepal}$ (cm)', usetex=self.usetex)
+               ylab = str2tex(r'L$_\textnormal{petal}$ (cm)', usetex=self.usetex)
+           else:
+               xlab = str2tex(r'L$_{sepal}$ (cm)', usetex=self.usetex)
+               ylab = str2tex(r'L$_{petal}$ (cm)', usetex=self.usetex)
+
+           # We make one panel spanning two rows and two columns by hand.
+           # First panel in the upper left corner
+           pos1 = position(self.nrow, self.ncol, iplot,
+                           hspace=self.hspace, vspace=self.vspace)
+           # The second panel is one row down and one column to the right
+           pos2 = position(self.nrow, self.ncol, iplot + self.ncol + 1,
+                           hspace=self.hspace, vspace=self.vspace)
+           # `rect` (left, bottom, width, height)
+           pos = [pos1[0], pos2[1],  # left from panel 1, bottom from panel 2
+                  pos2[0] - pos1[0] + pos2[2],  # height
+                  pos1[1] - pos2[1] + pos1[3]]  # width
+           ax = fig.add_axes(pos, label=str(iplot))
+
+           # Plot markers
+           larr = []
+           tarr = []
+           larr += ax.plot(x, y)
+           plt.setp(larr[-1], linestyle='None',
+                    marker='o', markeredgecolor=self.mcol5,
+                    markerfacecolor=self.mcol4,
+                    markersize=self.ms, markeredgewidth=self.mew)
+           tarr += [str2tex('data', usetex=self.usetex)]
+
+           # Add trend line
+           xx = x.to_numpy()
+           yy = y.to_numpy()
+           ii = ~np.isnan(xx)
+           xx = xx[ii]
+           yy = yy[ii]
+           p = P.polyfit(xx, yy, 1)
+           pyy = P.polyval(xx, p)
+           larr += ax.plot(xx, pyy)
+           plt.setp(larr[-1], linestyle='-', linewidth=self.lw / 2.,
+                    marker='None', color=self.mcol2)
+           tarr += [str2tex('model', usetex=self.usetex)]
+
+           # Equation on plot
+           s0 = r'$-$' if p[0] < 0 else ''
+           s1 = r'$-$' if p[1] < 0 else '+'
+           noteq = rf'y={s0}{abs(p[0]):.2f}{s1}{abs(p[1]):.2f}x'
+           text2plot(ax, 3. * self.dxabc, self.dyabc, noteq, color=self.mcol2,
+                     medium=True, usetex=self.usetex)
+
+           # a), b), c), ...
+           abc2plot(ax, self.dxabc, self.dyabc, iabc, lower=True, bold=True,
+                    parentheses='close', usetex=self.usetex, mathrm=True)
+
+           # Legend
+           ll = ax.legend(larr, tarr,
+                          frameon=self.frameon, ncol=1,
+                          labelspacing=self.labelspacing,
+                          handletextpad=self.handletextpad,
+                          handlelength=self.handlelength,
+                          columnspacing=self.columnspacing,
+                          loc=self.loc,
+                          bbox_to_anchor=(self.xbbox, self.ybbox),
+                          scatterpoints=1, numpoints=1,
+                          fontsize='small')
+
+           # Axes layout
+           if xlab != '':
+               plt.setp(ax, xlabel=xlab)
+           if ylab != '':
+               plt.setp(ax, ylabel=ylab)
+           ax.grid(False)
+           ax.spines['right'].set_color('none')
+           ax.spines['top'].set_color('none')
+           if xlim is not None:
+               plt.setp(ax, xlim=xlim)
+           if ylim is not None:
+               plt.setp(ax, ylim=ylim)
+
+           # increase subplot number
+           iplot += self.ncol + 1
+
+           # Save fig
+           self.plot_save(fig)
+
+   #
+   # Main
+   #
 
 
    if __name__ == '__main__':
@@ -477,18 +589,56 @@ A commented extended example
 
        #
        # Plot
-       # make a seasonal plot
        iplot.plot_fig_1()
+
+       #
+       # Another figure, PNG file, or PDF page
+       iplot.plot_fig_2()
 
        #
        # Finish
        # close any open plot files
        iplot.close()
 
+This script can be called from the command line given
+**mcplot_iris.csv** as the argument, opening on screen windows:
 
-.. _Matplotlib: https://matplotlib.org/
-.. _Myriad Pro: https://github.com/mcuntz/setup_mac?tab=readme-ov-file#myriad-pro
-.. _Text rendering with LaTeX: https://matplotlib.org/stable/users/explain/text/usetex.html#usetex
-.. _matplotlib: https://matplotlib.org/
-.. _numpy: https://numpy.org/
+.. code-block:: bash
+
+   python mcplot_example.py mcplot_iris.csv
+
+plot into a PDF file **mcex.pdf**:
+
+.. code-block:: bash
+
+   python mcplot_example.py -t pdf -o mcex.pdf mcplot_iris.csv
+
+save PNG files **mcex_0001.png** and **mcex_0002.png**:
+
+.. code-block:: bash
+
+   python mcplot_example.py -t png -o mcex_ mcplot_iris.csv
+
+save the PNG files with a black background (and white foreground) in
+high resolution:
+
+.. code-block:: bash
+
+   python mcplot_example.py -t png -o mcex_ -w --dpi 600 mcplot_iris.csv
+
+The test PNG files (with transparent background) give:
+
+.. image:: ../images/mcex_0001.png
+   :width: 860 px
+   :align: left
+   :alt: Plot with 4 panels of different sizes
+
+and:
+
+.. image:: ../images/mcex_0002.png
+   :width: 860 px
+   :align: left
+   :alt: Plot with 4 panels of different sizes
+
+
 .. _pandas: https://pandas.pydata.org/

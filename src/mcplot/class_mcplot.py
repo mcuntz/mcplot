@@ -73,6 +73,7 @@ History
    * Use self.__dict__ to access all variables in print_class_variables,
      Oct 2024, Matthias Cuntz
    * Removed trailing > in html output, Oct 2024, Matthias Cuntz
+   * Use class variables in test plot, Oct 2024, Matthias Cuntz
 
 """
 import numpy as np
@@ -617,6 +618,8 @@ class mcPlot(object):
 
         """
         import matplotlib.pyplot as plt
+        from mcplot import position
+        from mcplot import str2tex
 
         self.ifig += 1
         iplot  = 0
@@ -628,49 +631,46 @@ class mcPlot(object):
         yy1 = np.sin(xx)
         yy2 = np.cos(xx)
 
-        xlab = r'4 $\pi$'
-        ylab = 'sine and cosine function'
+        xlab = str2tex(r'4 $\pi$', usetex=self.usetex)
+        ylab = str2tex('sine and cosine function', usetex=self.usetex)
         xlim = None
         ylim = None
 
         iplot += 1
 
-        sub = fig.add_axes([0.125, 0.667, 0.3375, 0.233], label=str(iplot))
+        pos = position(self.nrow, self.ncol, iplot,
+                       hspace=self.hspace, vspace=self.vspace)
+        ax = fig.add_axes(pos, label=str(iplot))
 
-        tarr = ['sin']
-        larr = sub.plot(xx, yy1)
+        tarr = [str2tex('sin', usetex=self.usetex)]
+        larr = ax.plot(xx, yy1)
         plt.setp(larr[-1], linestyle='-', linewidth=self.lw, marker='',
-                 color=self.lcols[0])
+                 color=self.lcol1)
 
-        tarr += ['cos']
-        larr += sub.plot(xx, yy2)
+        tarr += [str2tex('cos', usetex=self.usetex)]
+        larr += ax.plot(xx, yy2)
         plt.setp(larr[-1], linestyle='-', linewidth=self.lw, marker='',
-                 color=self.lcols[-3])
+                 color=self.lcol2)
 
         if xlab != '':
-            plt.setp(sub, xlabel=xlab)
+            plt.setp(ax, xlabel=xlab)
         if ylab != '':
-            plt.setp(sub, ylabel=ylab)
-        sub.grid(False)
-
-        sub.spines['right'].set_color('none')
-        sub.spines['top'].set_color('none')
-
+            plt.setp(ax, ylabel=ylab)
+        ax.grid(False)
+        ax.spines['right'].set_color('none')
+        ax.spines['top'].set_color('none')
         if xlim is not None:
-            plt.setp(sub, xlim=xlim)
+            plt.setp(ax, xlim=xlim)
         if ylim is not None:
-            plt.setp(sub, ylim=ylim)
+            plt.setp(ax, ylim=ylim)
 
-        ll = sub.legend(larr, tarr, frameon=self.frameon, ncol=1,
-                        labelspacing=self.labelspacing,
-                        handletextpad=self.handletextpad,
-                        handlelength=self.handlelength,
-                        loc=self.loc,
-                        bbox_to_anchor=(self.xbbox, self.ybbox),
-                        scatterpoints=1, numpoints=1)
-        plt.setp(ll.get_texts(), fontsize='small')
-
-        # import pdb; pdb.set_trace()
+        ll = ax.legend(larr, tarr, frameon=self.frameon, ncol=1,
+                       labelspacing=self.labelspacing,
+                       handletextpad=self.handletextpad,
+                       handlelength=self.handlelength,
+                       loc=self.loc,
+                       bbox_to_anchor=(self.xbbox, self.ybbox),
+                       scatterpoints=1, numpoints=1, fontsize='small')
 
         self.plot_save(fig)
 

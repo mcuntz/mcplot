@@ -1,7 +1,5 @@
 mcplot
 ======
-..
-  pandoc -f rst -o README.html -t html README.rst
 
 A Python package with a plotting class and routines for publication-ready graphics.
 
@@ -33,6 +31,7 @@ a command line interface. A most basic example is using the method
 
 .. code-block:: python
 
+   # file: mcplot_test.py
    from mcplot import mcPlot
 
    if __name__ == '__main__':
@@ -49,8 +48,9 @@ gives a short help:
    python mcplot_test.py -h
 
 gives the help message::
-   
-   usage: mcplot_test.py [-h] [-p plotname] [-s] [-t outtype] [-u] [-w] [--dpi number] [--transparent] [args ...]
+
+   usage: mcplot_test.py [-h] [-o plotname] [-s] [-t outtype] [-u]
+                         [-w] [--dpi number] [--transparent] [args ...]
 
    Test mcPlot
 
@@ -59,18 +59,23 @@ gives the help message::
 
    options:
      -h, --help            show this help message and exit
-     -p plotname, --plotname plotname
-                           Name of plot output file for types pdf, html, d3, or hvplot, and name basis for type png
-                           (default: mcplot).
+     -o plot_filename, --output plot_filename,
+     -p plot_filename, --plotname plot_filename
+                           Name of plot output file for types pdf, html,
+			   d3, or hvplot, and name basis for type png
+			   (default: class_mcplot).
      -s, --serif           Use serif font; default sans serif.
      -t outtype, --type outtype
-                           Output type is pdf, png, html, d3, or hvplot (default: open screen windows).
+                           Output type is pdf, png, html, d3, or hvplot
+                           (default: open screen windows).
      -u, --usetex          Use LaTeX to render text in pdf, png and html.
-     -w, --white           White lines on transparent or black background; default: black lines on transparent or white
-                           background.
-     --dpi number          Dots Per inch (DPI) for non-vector output types or rasterized maps in vector output (default:
-                           300).
-     --transparent         Transparent figure background (default: black or white).
+     -w, --white           White lines on transparent or black background;
+                           default: black lines on transparent or
+                           white background.
+     --dpi number          Dots Per inch (DPI) for non-vector output types or
+                           rasterized maps in vector output (default: 300).
+     --transparent         Transparent figure background
+                           (default: black or white).
 
 .. code-block:: bash
 
@@ -82,12 +87,12 @@ opens a standard Matplotlib plotting window with the test plot.
 
    python mcplot_test.py -t pdf -p test1.pdf
 
-writes the plot into the PDF `test1.pdf` using the sans-serif font
-`DejaVuSans` that comes with Matplotlib. It will use the serif font
-DejaVueSerif with the command line option `-s`. It will use LaTeX to
-render text with the `-u` option. `-u -s` uses LaTeX standard Computer
-Modern font. It uses MyriadPro as sans-serif font in LaTeX, which must
-be installed (see section `Myriad Pro`_).
+writes the plot into the PDF file `test1.pdf` using the sans-serif
+font `DejaVuSans` that comes with Matplotlib. It will use the serif
+font DejaVueSerif with the command line option `-s`. It will use LaTeX
+to render text with the `-u` option. `-u -s` uses LaTeX standard
+Computer Modern font. It uses MyriadPro as sans-serif font in LaTeX,
+which must be installed (see section `Myriad Pro`_).
 
 By default, ``mcPlot`` plots onto a DIN A4 page, which facilitates
 choices of font sizes, etc. The output can easily be cropped with the
@@ -108,81 +113,68 @@ options), and make the same plot with dark background for
 presentations (`-t`, `-p`, `-u`, `-w` options).
 
 
-Enhancing the plotting class
-----------------------------
+using the plotting class
+------------------------
 
-The class `mcPlot` can be extended. One can set, for example, its own
-choice of line colours. One normally would have a method to read data
-from a file, and finally a routine that produces a plot. This could
-give a script `mcplot_basic.py`:
+The class `mcPlot` can be extended. One normally would have at least a
+method to read data from a file and a method that produces a
+plot. This could give a script such as:
 
 .. code-block:: python
 
+   # file: mcplot_basic.py
    import numpy as np
    from mcplot import mcPlot
 
-   class PlotIt(mcPlot):
 
-       def __init__(self, *args, **kwargs):
-           super().__init__(*args, **kwargs)
-           # change e.g. colors
-           self.lcol1 = 'cyan'
-           # reset global values after colour changes, etc.
-           self.set_matplotlib_rcparams()
+   class myPlot(mcPlot):
 
        def read_data(self):
            # reading one file would use self.cargs[0] such as
-	   # self.dat = np.loadtxt(self.cargs[0])
-	   self.nn = 100
-           self.dat = np.arange(self.nn)
+           # self.dat = np.loadtxt(self.cargs[0])
+           self.dat = np.arange(100)
 
        def plot_fig_1(self):
            import matplotlib.pyplot as plt
 
-	   # make axes
-	   self.ifig += 1
-           fig = plt.figure(self.ifig)
-           ax = fig.add_axes([0.125, 0.667, 0.3375, 0.233])
+           # make axes
+           fig = plt.figure()
+           ax = fig.add_subplot(3, 2, 1)
 
-	   # plot
-	   xx = self.dat / float(self.nn) * 4. * np.pi
-           larr = ax.plot(xx, np.sin(xx))
-           plt.setp(larr[-1], linestyle='-', linewidth=self.lwidth,
+           # plot
+           xx = self.dat / float(self.dat.size) * 4. * np.pi
+           line1 = ax.plot(xx, np.sin(xx))
+           plt.setp(line1, linestyle='-', linewidth=self.lw,
                     marker='', color=self.lcol1)
 
            # show plot or write in file
            self.plot_save(fig)
 
+
    if __name__ == '__main__':
        # open plot
-       iplot = PlotIt(desc='Pass file to mcPlot',
-                      argstr='input_file')
+       iplot = myPlot(desc='A basic plot')
        # read data
        iplot.read_data()
-       # plot data
+       # plot
        iplot.plot_fig_1()
        # close plot and possible output file
        iplot.close()
 
-This uses the defined variable `self.lcol1` for line colour
-number 1. There are `self.lcol1` to `self.lcol5` defined as well as
-the list of colours `self.lcols` with standard 13 colours. This can
-easily be changed using the `mcplot.color` sub-module. The above code
-uses also `self.lwidth` for linewidth of the plotted line.
-
-After fiddling with colours, it is a good idea to call
-`set_matplotlib_rcparams()` again, which sets some defaults such as
-the colour of the boxplot whiskers of which one might not have thought
-themselves.
-
-The script could be called giving the name of an input file `input.csv` on
+The script could be called giving the name(s) of (an) input file(s) on
 the command line, which is then accessible through `self.cargs`:
 
 .. code-block:: bash
 
    python mcplot_basic.py -t png -p basic_ input.csv
 
-Everytime `self.plot_save(fig)` is called, a figure is written to the output file. A PDF file can have multiple pages. For PNG files, only the start of the output files is given and will be extended by `f'{start}{self.ifig:04d}.png'`. The example would give the outputfile `basic_0001.png`.
+Every time `self.plot_save(fig)` is called, a figure is written to the
+output file. A PDF file can have multiple pages. For PNG files, only
+the start of the output files is given and will be extended by
+`f'{start}{self.ifig:04d}.png'`. The example would give the outputfile
+`basic_0001.png`.
+
+See the complete documentation of ``mcplot`` at: https://mcuntz.github.io/mcplot/
 
 
 Installation
@@ -204,6 +196,7 @@ or via `conda`:
 Requirements
    * numpy_
    * matplotlib_
+   * pandas_
 
 
 License
@@ -233,4 +226,5 @@ Copyright (c) 2021- Matthias Cuntz
 .. _matplotlib: https://matplotlib.org/
 .. _netCDF4: https://github.com/Unidata/netcdf4-python
 .. _numpy: https://numpy.org/
+.. _pandas: https://pandas.pydata.org/
 .. _pdfcrop: https://github.com/ho-tex/pdfcrop

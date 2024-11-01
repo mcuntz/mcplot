@@ -53,6 +53,12 @@ History
    * More consistent docstrings, Jan 2022, Matthias Cuntz
    * Added upper keyword in abc2plot, Jun 2024, Matthias Cuntz
    * Use f-strings and flake8 compliant, Oct 2024, Matthias Cuntz
+   * Use backslash with braces only if usetex not if only pdf output in
+     abc2plot, Oct 2024, Matthias Cuntz
+   * Put $...$ around a, b, c only if mathrm in abc2plot,
+     Oct 2024, Matthias Cuntz
+   * Pass italic and bold along to str2tex in text2plot,
+     Oct 2024, Matthias Cuntz
 
 """
 import time as ptime
@@ -170,7 +176,7 @@ def text2plot(handle, dx, dy, itext,
         fst = 'normal'
 
     # usetex
-    istr = str2tex(itext, usetex=usetex)
+    istr = str2tex(itext, bold=bold, italic=italic, usetex=usetex)
 
     if usetex:
         if mathrm:
@@ -356,17 +362,17 @@ def abc2plot(handle, dx, dy, iplot,
 
     if ibraces:
         if braces.lower() == 'open':
-            if usetex or (plt.get_backend() == 'pdf'):
+            if usetex:  # or (plt.get_backend() == 'pdf'):
                 t = r'\{' + t
             else:
                 t = '{' + t
         elif braces.lower() == 'close':
-            if usetex or (plt.get_backend() == 'pdf'):
+            if usetex:  # or (plt.get_backend() == 'pdf'):
                 t = t + r'\}'
             else:
                 t = t + '}'
         elif braces.lower() == 'both':
-            if usetex or (plt.get_backend() == 'pdf'):
+            if usetex:  # or (plt.get_backend() == 'pdf'):
                 t = r'\{' + t + r'\}'
             else:
                 t = '{' + t + '}'
@@ -384,7 +390,7 @@ def abc2plot(handle, dx, dy, iplot,
                 t = r'\mathit{' + t + '}'
             else:
                 t = r'\mathrm{' + t + '}'
-        t = fr'${t}$'
+            t = fr'${t}$'
 
     text2plot(handle, dx, dy, t,
               bold=bold, italic=italic,
@@ -404,7 +410,9 @@ def signature2plot(handle, dx, dy, itext,
     handle : :class:`matplotlib.axes` subclass
        Matplotlib axes handle
     dx : float
-        % of xlim from min(xlim)
+        % of xlim from min(xlim).
+        The text is 'horizontalalignment' = 'right' by default
+        if not given otherwise in **kwargs.
     dy : float
         % of ylim from min(ylim)
     itext : str

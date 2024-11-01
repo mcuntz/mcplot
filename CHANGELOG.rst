@@ -1,8 +1,12 @@
 Changelog
 ---------
 
-v2.0 (??? 2024)
-    * Removed trailing > in html output.
+v2.0 (Nov 2024)
+    * Use class variables in test plot of `mcPlot`.
+    * Pass italic and bold along to `str2tex` in `text2plot`.
+    * Put $...$ around a, b, c only if mathrm=True in `abc2plot`.
+    * Use backslash with braces only if `usetex` not if only pdf
+      output in `abc2plot`.  * Removed trailing > in html output.
     * Add sron named colors.
     * Add pale and dark colors to sron_colors.
     * Use helper functions for all colors and colormaps.

@@ -465,6 +465,12 @@ Nov 2020, Matthias Cuntz</p></li>
 <li><p>More consistent docstrings, Jan 2022, Matthias Cuntz</p></li>
 <li><p>Added upper keyword in abc2plot, Jun 2024, Matthias Cuntz</p></li>
 <li><p>Use f-strings and flake8 compliant, Oct 2024, Matthias Cuntz</p></li>
+<li><p>Use backslash with braces only if usetex not if only pdf output in
+abc2plot, Oct 2024, Matthias Cuntz</p></li>
+<li><p>Put $…$ around a, b, c only if mathrm in abc2plot,
+Oct 2024, Matthias Cuntz</p></li>
+<li><p>Pass italic and bold along to str2tex in text2plot,
+Oct 2024, Matthias Cuntz</p></li>
 </ul>
 </dd>
 </dl>
@@ -544,7 +550,9 @@ False). <em>integer</em>, <em>roman</em> and <em>lower</em> are disabled then.</
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handle</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.axes</span></code> subclass) – Matplotlib axes handle</p></li>
-<li><p><strong>dx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – % of xlim from min(xlim)</p></li>
+<li><p><strong>dx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – % of xlim from min(xlim).
+The text is ‘horizontalalignment’ = ‘right’ by default
+if not given otherwise in <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs.</p></li>
 <li><p><strong>dy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – % of ylim from min(ylim)</p></li>
 <li><p><strong>itext</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Text after ‘(C) YYYY’, where YYYY is the current 4-digit year</p></li>
 <li><p><strong>**kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>, </em><em>optional</em>) – All additional parameters are passed passed to <a class="reference internal" href="#mcplot.text2plot.text2plot" title="mcplot.text2plot.text2plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">text2plot()</span></code></a></p></li>

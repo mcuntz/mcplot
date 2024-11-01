@@ -388,7 +388,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-commented-extended-example">A commented extended example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-mcplot">Example using mcPlot</a></li>
 </ul>
             </nav>
         </div>
@@ -402,7 +402,9 @@ document.write(`
                   
   <section id="commented-example">
 <h1>Commented Example<a class="headerlink" href="#commented-example" title="Link to this heading">#</a></h1>
-<p>Below is a fully commented example that uses a lot of the classes and functions of <a class="reference internal" href="api.html#module-mcplot" title="mcplot"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mcplot</span></code></a>. It reads a file with <a class="reference external" href="https://pandas.pydata.org/">pandas</a> that can be written as:</p>
+<p>Here is a fully commented example that uses most of the class and
+functions of <a class="reference internal" href="api.html#module-mcplot" title="mcplot"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mcplot</span></code></a>. It reads a file with <a class="reference external" href="https://pandas.pydata.org/">pandas</a> that can be
+written as:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
@@ -422,18 +424,19 @@ document.write(`
 <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">ifile</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The file <strong>mcplot_iris.csv</strong> can then be given on the command line, for example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_example.py<span class="w"> </span>mcplot_iris.csv
-</pre></div>
-</div>
-<section id="a-commented-extended-example">
-<h2>A commented extended example<a class="headerlink" href="#a-commented-extended-example" title="Link to this heading">#</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<section id="example-using-mcplot">
+<h2>Example using mcPlot<a class="headerlink" href="#example-using-mcplot" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># file: mcplot_example.py</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">mcPlot</span>
 
 
 <span class="k">class</span> <span class="nc">myPlot</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># init</span>
+    <span class="c1">#</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -462,6 +465,10 @@ document.write(`
         <span class="c1"># background color and the like.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_matplotlib_rcparams</span><span class="p">()</span>
 
+    <span class="c1">#</span>
+    <span class="c1"># Class variables</span>
+    <span class="c1">#</span>
+
     <span class="k">def</span> <span class="nf">set_extra_layout_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set some class variables that can be used for plotting.</span>
@@ -475,13 +482,16 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">nrow</span> <span class="o">=</span> <span class="mi">4</span>       <span class="c1"># # of rows of subplots per figure</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span> <span class="o">=</span> <span class="mi">3</span>       <span class="c1"># # of columns of subplots per figure</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hspace</span> <span class="o">=</span> <span class="mf">0.09</span>  <span class="c1"># x-space between subplots</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">vspace</span> <span class="o">=</span> <span class="mf">0.04</span>  <span class="c1"># y-space between subplots</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">textsize</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># standard text size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vspace</span> <span class="o">=</span> <span class="mf">0.06</span>  <span class="c1"># y-space between subplots</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">textsize</span> <span class="o">=</span> <span class="mi">12</span>  <span class="c1"># standard text size</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">textsize</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># standard text size</span>
 
         <span class="c1"># Set come line and marker properties</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lw</span> <span class="o">=</span> <span class="mf">1.5</span>   <span class="c1"># linewidth</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ms</span> <span class="o">=</span> <span class="mf">5.0</span>   <span class="c1"># marker size</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mew</span> <span class="o">=</span> <span class="mf">0.3</span>  <span class="c1"># marker edge width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mew</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># marker edge width</span>
 
         <span class="c1"># Set come colors</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dowhite</span><span class="p">:</span>
@@ -511,6 +521,10 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">handletextpad</span> <span class="o">=</span> <span class="mf">0.4</span>  <span class="c1"># pad between the legend handle and text</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">handlelength</span>  <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># length of the legend handles</span>
 
+    <span class="c1">#</span>
+    <span class="c1"># Read data</span>
+    <span class="c1">#</span>
+
     <span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The command line arguments are in the list self.cargs.</span>
@@ -527,6 +541,10 @@ document.write(`
         <span class="c1"># option -m also added in the __main__ section)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ifile</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">miss</span><span class="p">])</span>
 
+    <span class="c1">#</span>
+    <span class="c1"># Figure 1</span>
+    <span class="c1">#</span>
+
     <span class="k">def</span> <span class="nf">plot_fig_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
         <span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="kn">import</span> <span class="n">polynomial</span> <span class="k">as</span> <span class="n">P</span>
@@ -538,6 +556,8 @@ document.write(`
         <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">text2plot</span>
         <span class="c1"># add a), b), c) to plot</span>
         <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">abc2plot</span>
+        <span class="c1"># put &#39;(C) YYYY itext&#39; on plot</span>
+        <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">signature2plot</span>
 
         <span class="c1"># open new figure, increasing figure counter</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ifig</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -591,57 +611,10 @@ document.write(`
         <span class="n">larr</span> <span class="o">+=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
                  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol5</span><span class="p">,</span>
-                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol4</span><span class="p">,</span>
                  <span class="n">markersize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ms</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mew</span><span class="p">)</span>
         <span class="c1"># add a possible legend entry to list tarr</span>
         <span class="n">tarr</span> <span class="o">+=</span> <span class="p">[</span><span class="n">str2tex</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)]</span>
-
-        <span class="c1"># Add trend line</span>
-        <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-        <span class="n">yy</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-        <span class="n">ii</span> <span class="o">=</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
-        <span class="n">xx</span> <span class="o">=</span> <span class="n">xx</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
-        <span class="n">yy</span> <span class="o">=</span> <span class="n">yy</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">pyy</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-        <span class="n">larr</span> <span class="o">+=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">pyy</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lw</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span>
-                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span><span class="p">)</span>
-        <span class="n">tarr</span> <span class="o">+=</span> <span class="p">[</span><span class="n">str2tex</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)]</span>
-        <span class="c1"># Write equation on plot</span>
-        <span class="c1"># to have correct minus symbol</span>
-        <span class="n">s0</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$-$&#39;</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
-        <span class="n">s1</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$-$&#39;</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;+&#39;</span>
-        <span class="n">teq</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">rf</span><span class="s1">&#39;y=</span><span class="si">{</span><span class="n">s0</span><span class="si">}{</span><span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span>
-                      <span class="sa">rf</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">s1</span><span class="si">}{</span><span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">x&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
-        <span class="c1"># # Another possibility is to set the whole equations in $...$</span>
-        <span class="c1"># # but this uses more space and the second sign still has to be</span>
-        <span class="c1"># # chosen beforehand.</span>
-        <span class="c1"># s1 = &#39;-&#39; if p[1] &lt; 0 else &#39;+&#39;</span>
-        <span class="c1"># teq = str2tex(rf&#39;$y={p[0]:.2f}x{s1}{abs(p[1]):.2f}$&#39;,</span>
-        <span class="c1">#               usetex=self.usetex)</span>
-        <span class="c1">#</span>
-        <span class="c1"># Put the equation as text on plot</span>
-        <span class="c1"># One can set one of the sizes xxsmall, xsmall, small, medium, large,</span>
-        <span class="c1"># xlarge, xxlarge to True. Also bold and italic can be set to true.</span>
-        <span class="c1"># All other keywords will be passed to Matplotlib&#39;s Axes.text() such</span>
-        <span class="c1"># as `color` here.</span>
-        <span class="n">text2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">teq</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span><span class="p">,</span>
-                  <span class="n">small</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-        <span class="c1"># Add legend using the two list of lines (larr) and text (tarr)</span>
-        <span class="c1"># loc and bbox_to_anchor behave slightly different for different</span>
-        <span class="c1"># fontsizes.</span>
-        <span class="n">ll</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">larr</span><span class="p">,</span> <span class="n">tarr</span><span class="p">,</span>
-                       <span class="n">frameon</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">frameon</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                       <span class="n">labelspacing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">labelspacing</span><span class="p">,</span>
-                       <span class="n">handletextpad</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handletextpad</span><span class="p">,</span>
-                       <span class="n">handlelength</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handlelength</span><span class="p">,</span>
-                       <span class="n">columnspacing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">columnspacing</span><span class="p">,</span>
-                       <span class="n">loc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span>
-                       <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xbbox</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ybbox</span><span class="p">),</span>
-                       <span class="n">scatterpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">numpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                       <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;small&#39;</span><span class="p">)</span>
 
         <span class="c1"># Put a), b), c), ... on plot</span>
         <span class="c1"># The panel counter can be upper- or lower letters,</span>
@@ -650,6 +623,19 @@ document.write(`
         <span class="c1"># after. It can be italic or boldface.</span>
         <span class="n">abc2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">iabc</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bold</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">parentheses</span><span class="o">=</span><span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">,</span> <span class="n">mathrm</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">abc2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="mf">3.</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">iabc</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">bold</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">parentheses</span><span class="o">=</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">,</span>
+                 <span class="n">mathrm</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">abc2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="mf">5.</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="mf">0.6</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">iabc</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">bold</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">roman</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parentheses</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
+        <span class="n">abc2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="mf">7.</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">iabc</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">roman</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">brackets</span><span class="o">=</span><span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">,</span> <span class="n">mathrm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">italic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">abc2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="mf">9.</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">iabc</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">bold</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">braces</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">,</span> <span class="n">mathrm</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">abc2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="mf">11.</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;I am panel </span><span class="si">{</span><span class="n">iabc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                 <span class="n">string</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bold</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">braces</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">,</span>
+                 <span class="n">mathrm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">italic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="c1"># Final axes layout</span>
         <span class="c1"># Labels set if not empty.</span>
@@ -670,68 +656,6 @@ document.write(`
         <span class="c1"># Large Panel 2</span>
         <span class="c1">#</span>
 
-        <span class="c1"># sepal_width vs. sepal_length</span>
-        <span class="n">iplot</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">iabc</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal_width&#39;</span><span class="p">]</span>
-        <span class="n">xlim</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="n">ylim</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">:</span>
-            <span class="n">xlab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;L$_\textnormal</span><span class="si">{sepal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
-            <span class="n">ylab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;W$_\textnormal</span><span class="si">{sepal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">xlab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;L$_</span><span class="si">{sepal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
-            <span class="n">ylab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;W$_</span><span class="si">{sepal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
-
-        <span class="c1"># Make subplots using add_axes</span>
-        <span class="c1"># We want to span two figure columns on the same row.</span>
-        <span class="c1"># Here we do this by hand: get panel coordinates of the next two</span>
-        <span class="c1"># panels, and combine the distance between the left edges plus the</span>
-        <span class="c1"># widths to the `rect` (left, bottom, width, height).</span>
-        <span class="n">pos1</span> <span class="o">=</span> <span class="n">position</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nrow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span><span class="p">,</span> <span class="n">iplot</span><span class="p">,</span>
-                        <span class="n">hspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hspace</span><span class="p">,</span> <span class="n">vspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vspace</span><span class="p">)</span>
-        <span class="n">pos2</span> <span class="o">=</span> <span class="n">position</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nrow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span><span class="p">,</span> <span class="n">iplot</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
-                        <span class="n">hspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hspace</span><span class="p">,</span> <span class="n">vspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vspace</span><span class="p">)</span>
-        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">pos1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">pos1</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">iplot</span><span class="p">))</span>
-        <span class="c1"># if you want to have double the figure width instead, just change</span>
-        <span class="c1"># the width in `rect`, such as</span>
-        <span class="c1"># pos = position(self.nrow, self.ncol, iplot,</span>
-        <span class="c1">#                hspace=self.hspace, vspace=self.vspace)</span>
-        <span class="c1"># pos[2] = pos[2] * 2.</span>
-
-        <span class="c1"># Plot markers</span>
-        <span class="n">mark1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">mark1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
-                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol5</span><span class="p">,</span>
-                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
-                 <span class="n">markersize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ms</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mew</span><span class="p">)</span>
-
-        <span class="c1"># Put a), b), c), ... on plot</span>
-        <span class="n">abc2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">iabc</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bold</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                 <span class="n">parentheses</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">,</span> <span class="n">mathrm</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-        <span class="c1"># Final axes layout</span>
-        <span class="k">if</span> <span class="n">xlab</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="n">xlab</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ylab</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylab</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">xlim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ylim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">)</span>
-
-        <span class="c1"># increase number in (nrow, ncol) subplots because we used two subplots</span>
-        <span class="n">iplot</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="c1">#</span>
-        <span class="c1"># Large Panel 3</span>
-        <span class="c1">#</span>
-
         <span class="c1"># petal_length vs. petal_width</span>
         <span class="n">iplot</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">iabc</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -746,24 +670,108 @@ document.write(`
             <span class="n">xlab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;L$_</span><span class="si">{sepal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
             <span class="n">ylab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;W$_</span><span class="si">{sepal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
 
-        <span class="c1"># Make subplots using add_axes</span>
-        <span class="c1"># If you want to have double the figure width, just change</span>
-        <span class="c1"># the width in `rect`, such as</span>
+        <span class="c1"># We want to span two figure columns on the same row.</span>
+        <span class="c1"># Here we do this by hand: get panel coordinates of the next two</span>
+        <span class="c1"># panels, and combine the distance between the left edges plus the</span>
+        <span class="c1"># widths to the `rect` (left, bottom, width, height).</span>
+        <span class="n">pos1</span> <span class="o">=</span> <span class="n">position</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nrow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span><span class="p">,</span> <span class="n">iplot</span><span class="p">,</span>
+                        <span class="n">hspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hspace</span><span class="p">,</span> <span class="n">vspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vspace</span><span class="p">)</span>
+        <span class="n">pos2</span> <span class="o">=</span> <span class="n">position</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nrow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span><span class="p">,</span> <span class="n">iplot</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="n">hspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hspace</span><span class="p">,</span> <span class="n">vspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vspace</span><span class="p">)</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">pos1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">pos1</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">iplot</span><span class="p">))</span>
+
+        <span class="n">mark1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">mark1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol5</span><span class="p">,</span>
+                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol4</span><span class="p">,</span>
+                 <span class="n">markersize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ms</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mew</span><span class="p">)</span>
+
+        <span class="c1"># Put a copyright on the plot &#39;(C) YYYY itext&#39;</span>
+        <span class="c1"># The text right-aligned by default if not given otherwise</span>
+        <span class="c1"># (horizontalalignment).</span>
+        <span class="n">signature2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="s1">&#39;M Cuntz&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">,</span>
+                       <span class="n">small</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">italic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mathrm</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># increase number in (nrow, ncol) subplots because we used two subplots</span>
+        <span class="n">iplot</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1">#</span>
+        <span class="c1"># Large Panel 3</span>
+        <span class="c1">#</span>
+
+        <span class="n">iplot</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">iabc</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># If you want to have double the figure width (instead of two figure</span>
+        <span class="c1"># columns), just change the width in `rect`</span>
         <span class="n">pos</span> <span class="o">=</span> <span class="n">position</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nrow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span><span class="p">,</span> <span class="n">iplot</span><span class="p">,</span>
                        <span class="n">hspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hspace</span><span class="p">,</span> <span class="n">vspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vspace</span><span class="p">)</span>
         <span class="n">pos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mf">2.</span>
         <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">iplot</span><span class="p">))</span>
 
         <span class="c1"># Plot markers</span>
-        <span class="n">mark1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">mark1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+        <span class="n">larr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">tarr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">larr</span> <span class="o">+=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
                  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol5</span><span class="p">,</span>
-                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol4</span><span class="p">,</span>
                  <span class="n">markersize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ms</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mew</span><span class="p">)</span>
+        <span class="n">tarr</span> <span class="o">+=</span> <span class="p">[</span><span class="n">str2tex</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)]</span>
 
-        <span class="c1"># Put a), b), c), ... on plot</span>
-        <span class="n">abc2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">iabc</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bold</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                 <span class="n">parentheses</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">,</span> <span class="n">mathrm</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># Add trend line</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">yy</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">ii</span> <span class="o">=</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="n">xx</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+        <span class="n">yy</span> <span class="o">=</span> <span class="n">yy</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">pyy</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+        <span class="n">larr</span> <span class="o">+=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">pyy</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lw</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span>
+                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span><span class="p">)</span>
+        <span class="n">tarr</span> <span class="o">+=</span> <span class="p">[</span><span class="n">str2tex</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)]</span>
+
+        <span class="c1"># Write equation on plot</span>
+        <span class="c1"># to have correct minus symbol</span>
+        <span class="n">s0</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$-$&#39;</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">s1</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$-$&#39;</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;+&#39;</span>
+        <span class="n">noteq</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;y=</span><span class="si">{</span><span class="n">s0</span><span class="si">}{</span><span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}{</span><span class="n">s1</span><span class="si">}{</span><span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">x&#39;</span>
+        <span class="c1"># # Another possibility is to set the whole equations in $...$</span>
+        <span class="c1"># # but this uses more space and the second sign still has to be</span>
+        <span class="c1"># # chosen beforehand.</span>
+        <span class="c1"># s1 = &#39;-&#39; if p[1] &lt; 0 else &#39;+&#39;</span>
+        <span class="c1"># teq = str2tex(rf&#39;$y={p[0]:.2f}x{s1}{abs(p[1]):.2f}$&#39;,</span>
+        <span class="c1">#               usetex=self.usetex)</span>
+        <span class="c1">#</span>
+        <span class="c1"># Put the equation as text on plot</span>
+        <span class="c1"># One can set one of the sizes xxsmall, xsmall, small, medium, large,</span>
+        <span class="c1"># xlarge, xxlarge to True. Also bold and italic can be set to true.</span>
+        <span class="c1"># All other keywords will be passed to Matplotlib&#39;s Axes.text() such</span>
+        <span class="c1"># as `color` here.</span>
+        <span class="c1"># You can either use a string such as noteq and set usetex=True</span>
+        <span class="n">text2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">noteq</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span><span class="p">,</span>
+                  <span class="n">small</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
+        <span class="c1"># or you can transform noteq to a LaTeX string first using str2tex</span>
+        <span class="n">teq</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="n">noteq</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
+        <span class="c1"># and then put in on the plot without usetex.</span>
+        <span class="n">text2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">teq</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span><span class="p">,</span>
+                  <span class="n">small</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Add legend using the two list of lines (larr) and text (tarr)</span>
+        <span class="c1"># loc and bbox_to_anchor behave slightly different for different</span>
+        <span class="c1"># fontsizes.</span>
+        <span class="n">ll</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">larr</span><span class="p">,</span> <span class="n">tarr</span><span class="p">,</span>
+                       <span class="n">frameon</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">frameon</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                       <span class="n">labelspacing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">labelspacing</span><span class="p">,</span>
+                       <span class="n">handletextpad</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handletextpad</span><span class="p">,</span>
+                       <span class="n">handlelength</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handlelength</span><span class="p">,</span>
+                       <span class="n">columnspacing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">columnspacing</span><span class="p">,</span>
+                       <span class="n">loc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span>
+                       <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xbbox</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ybbox</span><span class="p">),</span>
+                       <span class="n">scatterpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">numpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                       <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;small&#39;</span><span class="p">)</span>
 
         <span class="c1"># Final axes layout</span>
         <span class="k">if</span> <span class="n">xlab</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
@@ -778,32 +786,22 @@ document.write(`
         <span class="k">if</span> <span class="n">ylim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">)</span>
 
-        <span class="c1"># increase number in (nrow, ncol) subplots because we used two subplots</span>
+        <span class="c1"># increase subplot number</span>
         <span class="n">iplot</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="c1">#</span>
         <span class="c1"># Large Panel 4</span>
         <span class="c1">#</span>
 
-        <span class="c1"># petal_length vs. petal_width</span>
         <span class="n">iplot</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">iabc</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;petal_width&#39;</span><span class="p">]</span>
-        <span class="n">xlim</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="n">ylim</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">:</span>
-            <span class="n">xlab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;L$_\textnormal</span><span class="si">{sepal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
-            <span class="n">ylab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;W$_\textnormal</span><span class="si">{petal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">xlab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;L$_</span><span class="si">{sepal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
-            <span class="n">ylab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;W$_</span><span class="si">{petal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
 
-        <span class="c1"># Make subplots using add_axes</span>
-        <span class="c1"># One can also imagine other numbers of rows and columns, so that the</span>
-        <span class="c1"># panel will have a different size. For examepl, half the number of</span>
-        <span class="c1"># rows will give double the height of a panel.</span>
-        <span class="c1"># iplot has to be adjusted accordingly.</span>
+        <span class="c1"># One can also imagine different numbers of rows and columns,</span>
+        <span class="c1"># so that the panel will have a different size.</span>
+        <span class="c1"># This is done in the example for axis margins in Matplotlib&#39;s gallery</span>
+        <span class="c1"># https://matplotlib.org/stable/gallery/subplots_axes_and_figures/axes_margins.html</span>
+        <span class="c1"># For example, half the number of rows will give double the height</span>
+        <span class="c1"># of a panel. iplot has to be adjusted accordingly.</span>
         <span class="n">pos</span> <span class="o">=</span> <span class="n">position</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nrow</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span><span class="p">,</span> <span class="n">iplot</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
                        <span class="n">hspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hspace</span><span class="p">,</span> <span class="n">vspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vspace</span><span class="p">)</span>
         <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">iplot</span><span class="p">))</span>
@@ -812,10 +810,10 @@ document.write(`
         <span class="n">mark1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">mark1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
                  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol5</span><span class="p">,</span>
-                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol4</span><span class="p">,</span>
                  <span class="n">markersize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ms</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mew</span><span class="p">)</span>
 
-        <span class="c1"># Put a), b), c), ... on plot</span>
+        <span class="c1"># iabc has till the right count</span>
         <span class="n">abc2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">iabc</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bold</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">parentheses</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">,</span> <span class="n">mathrm</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -832,12 +830,128 @@ document.write(`
         <span class="k">if</span> <span class="n">ylim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">)</span>
 
-        <span class="c1"># increase number in (nrow, ncol) subplots because we used two subplots</span>
-        <span class="n">iplot</span> <span class="o">+=</span> <span class="mi">1</span>
-
         <span class="c1"># Show plot or write it into file, adding a link to the image file into</span>
         <span class="c1"># a possible html file.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">plot_save</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># Figure 2</span>
+    <span class="c1">#</span>
+
+    <span class="k">def</span> <span class="nf">plot_fig_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="kn">import</span> <span class="n">polynomial</span> <span class="k">as</span> <span class="n">P</span>
+        <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">position</span>
+        <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">str2tex</span>
+        <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">text2plot</span>
+        <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">abc2plot</span>
+
+        <span class="c1"># new figure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ifig</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">iplot</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">iabc</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Open figure </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ifig</span><span class="p">)</span>
+
+        <span class="c1">#</span>
+        <span class="c1"># One big panel</span>
+        <span class="c1">#</span>
+
+        <span class="c1"># petal_length vs. sepal_length</span>
+        <span class="n">iplot</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">iabc</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;petal_length&#39;</span><span class="p">]</span>
+        <span class="n">xlim</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">ylim</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">:</span>
+            <span class="n">xlab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;L$_\textnormal</span><span class="si">{sepal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
+            <span class="n">ylab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;L$_\textnormal</span><span class="si">{petal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">xlab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;L$_</span><span class="si">{sepal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
+            <span class="n">ylab</span> <span class="o">=</span> <span class="n">str2tex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;L$_</span><span class="si">{petal}</span><span class="s1">$ (cm)&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
+
+        <span class="c1"># We make one panel spanning two rows and two columns by hand.</span>
+        <span class="c1"># First panel in the upper left corner</span>
+        <span class="n">pos1</span> <span class="o">=</span> <span class="n">position</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nrow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span><span class="p">,</span> <span class="n">iplot</span><span class="p">,</span>
+                        <span class="n">hspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hspace</span><span class="p">,</span> <span class="n">vspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vspace</span><span class="p">)</span>
+        <span class="c1"># The second panel is one row down and one column to the right</span>
+        <span class="n">pos2</span> <span class="o">=</span> <span class="n">position</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nrow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span><span class="p">,</span> <span class="n">iplot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="n">hspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hspace</span><span class="p">,</span> <span class="n">vspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vspace</span><span class="p">)</span>
+        <span class="c1"># `rect` (left, bottom, width, height)</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">pos1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>  <span class="c1"># left from panel 1, bottom from panel 2</span>
+               <span class="n">pos2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>  <span class="c1"># height</span>
+               <span class="n">pos1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">pos1</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span>  <span class="c1"># width</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">iplot</span><span class="p">))</span>
+
+        <span class="c1"># Plot markers</span>
+        <span class="n">larr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">tarr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">larr</span> <span class="o">+=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol5</span><span class="p">,</span>
+                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol4</span><span class="p">,</span>
+                 <span class="n">markersize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ms</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mew</span><span class="p">)</span>
+        <span class="n">tarr</span> <span class="o">+=</span> <span class="p">[</span><span class="n">str2tex</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)]</span>
+
+        <span class="c1"># Add trend line</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">yy</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">ii</span> <span class="o">=</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="n">xx</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+        <span class="n">yy</span> <span class="o">=</span> <span class="n">yy</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">pyy</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+        <span class="n">larr</span> <span class="o">+=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">pyy</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">larr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lw</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span>
+                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span><span class="p">)</span>
+        <span class="n">tarr</span> <span class="o">+=</span> <span class="p">[</span><span class="n">str2tex</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)]</span>
+
+        <span class="c1"># Equation on plot</span>
+        <span class="n">s0</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$-$&#39;</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">s1</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$-$&#39;</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;+&#39;</span>
+        <span class="n">noteq</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;y=</span><span class="si">{</span><span class="n">s0</span><span class="si">}{</span><span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}{</span><span class="n">s1</span><span class="si">}{</span><span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">x&#39;</span>
+        <span class="n">text2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="mf">3.</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">noteq</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mcol2</span><span class="p">,</span>
+                  <span class="n">medium</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">)</span>
+
+        <span class="c1"># a), b), c), ...</span>
+        <span class="n">abc2plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dxabc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyabc</span><span class="p">,</span> <span class="n">iabc</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bold</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">parentheses</span><span class="o">=</span><span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">,</span> <span class="n">mathrm</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Legend</span>
+        <span class="n">ll</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">larr</span><span class="p">,</span> <span class="n">tarr</span><span class="p">,</span>
+                       <span class="n">frameon</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">frameon</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                       <span class="n">labelspacing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">labelspacing</span><span class="p">,</span>
+                       <span class="n">handletextpad</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handletextpad</span><span class="p">,</span>
+                       <span class="n">handlelength</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handlelength</span><span class="p">,</span>
+                       <span class="n">columnspacing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">columnspacing</span><span class="p">,</span>
+                       <span class="n">loc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span>
+                       <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xbbox</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ybbox</span><span class="p">),</span>
+                       <span class="n">scatterpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">numpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                       <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;small&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Axes layout</span>
+        <span class="k">if</span> <span class="n">xlab</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="n">xlab</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ylab</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylab</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">xlim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ylim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">)</span>
+
+        <span class="c1"># increase subplot number</span>
+        <span class="n">iplot</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncol</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="c1"># Save fig</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_save</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+<span class="c1">#</span>
+<span class="c1"># Main</span>
+<span class="c1">#</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -870,8 +984,11 @@ document.write(`
 
     <span class="c1">#</span>
     <span class="c1"># Plot</span>
-    <span class="c1"># make a seasonal plot</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">plot_fig_1</span><span class="p">()</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># Another figure, PNG file, or PDF page</span>
+    <span class="n">iplot</span><span class="o">.</span><span class="n">plot_fig_2</span><span class="p">()</span>
 
     <span class="c1">#</span>
     <span class="c1"># Finish</span>
@@ -879,6 +996,30 @@ document.write(`
     <span class="n">iplot</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
+<p>This script can be called from the command line given
+<strong>mcplot_iris.csv</strong> as the argument, opening on screen windows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_example.py<span class="w"> </span>mcplot_iris.csv
+</pre></div>
+</div>
+<p>plot into a PDF file <strong>mcex.pdf</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_example.py<span class="w"> </span>-t<span class="w"> </span>pdf<span class="w"> </span>-o<span class="w"> </span>mcex.pdf<span class="w"> </span>mcplot_iris.csv
+</pre></div>
+</div>
+<p>save PNG files <strong>mcex_0001.png</strong> and <strong>mcex_0002.png</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_example.py<span class="w"> </span>-t<span class="w"> </span>png<span class="w"> </span>-o<span class="w"> </span>mcex_<span class="w"> </span>mcplot_iris.csv
+</pre></div>
+</div>
+<p>save the PNG files with a black background (and white foreground) in
+high resolution:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_example.py<span class="w"> </span>-t<span class="w"> </span>png<span class="w"> </span>-o<span class="w"> </span>mcex_<span class="w"> </span>-w<span class="w"> </span>--dpi<span class="w"> </span><span class="m">600</span><span class="w"> </span>mcplot_iris.csv
+</pre></div>
+</div>
+<p>The test PNG files (with transparent background) give:</p>
+<a class="reference internal image-reference" href="_images/mcex_0001.png"><img alt="Plot with 4 panels of different sizes" class="align-left" src="_images/mcex_0001.png" style="width: 860px;" />
+</a>
+<p>and:</p>
+<a class="reference internal image-reference" href="_images/mcex_0002.png"><img alt="Plot with 4 panels of different sizes" class="align-left" src="_images/mcex_0002.png" style="width: 860px;" />
+</a>
 </section>
 </section>
 
@@ -927,7 +1068,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-commented-extended-example">A commented extended example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-mcplot">Example using mcPlot</a></li>
 </ul>
   </nav></div>
 

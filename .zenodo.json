@@ -43,5 +43,5 @@
     }
     ],
     "access_right": "open",
-    "description": "<p><strong>mcplot</strong> provides a class that combines methods to easily produce publication-ready graphics on light or black background. It includes a large number of colormaps collected from different sources. There are a number of functions that help to position plots, number plot panels, or generally write text on a graph.</p>\n\n<p>The complete documentation of mcplot is available at: <a href=\"https://mcuntz.github.io/mcplot/\">https://mcuntz.github.io/mcplot/</a></p>"
+    "description": "<p><strong>mcplot</strong> provides a class that combines methods to easily produce publication-ready graphics on light or black background. It includes a large number of colormaps collected from different sources. There are a number of functions that help to position plots, number plot panels, or generally write text on a graph.</p>\n\n<p>The complete documentation of mcplot is available at: <a href=\"https://mcuntz.github.io/mcplot/\">https://mcuntz.github.io/mcplot/</a></p><p>Version 2.0 changed class variables to (almost) the same names as Matplotlib. It sanitized the color module following Matplotlib and seaborn conventions. The class is now usable for standalone scripts as well from within Python.</p>"
 }
