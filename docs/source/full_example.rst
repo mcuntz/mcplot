@@ -626,7 +626,7 @@ high resolution:
 
    python mcplot_example.py -t png -o mcex_ -w --dpi 600 mcplot_iris.csv
 
-The test PNG files (with transparent background) give:
+The test PNG files with the pretty arbitrary plots are:
 
 .. image:: ../images/mcex_0001.png
    :width: 860 px

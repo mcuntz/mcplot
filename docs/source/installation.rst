@@ -17,6 +17,8 @@ or via **conda**:
 Requirements
    * numpy_
    * matplotlib_
+   * pandas_
 
 .. _matplotlib: https://matplotlib.org/
 .. _numpy: https://numpy.org/
+.. _pandas: https://pandas.pydata.org/

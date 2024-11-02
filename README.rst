@@ -113,7 +113,7 @@ options), and make the same plot with dark background for
 presentations (`-t`, `-p`, `-u`, `-w` options).
 
 
-using the plotting class
+Using the plotting class
 ------------------------
 
 The class `mcPlot` can be extended. One normally would have at least a
@@ -215,10 +215,10 @@ Copyright (c) 2021- Matthias Cuntz
    :target: https://anaconda.org/conda-forge/mcplot
 .. |License| image:: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
    :target: https://github.com/mcuntz/mcplot/blob/master/LICENSE
-.. |Build Status| image:: https://github.com/mcuntz/mcplot/workflows/Continuous%20Integration/badge.svg?branch=master
-   :target: https://github.com/mcuntz/mcplot/actions
-.. |Coverage Status| image:: https://coveralls.io/repos/github/mcuntz/mcplot/badge.svg?branch=master
-   :target: https://coveralls.io/github/mcuntz/mcplot?branch=master
+.. |Build Status| image:: https://github.com/mcuntz/mcplot/actions/workflows/main.yml/badge.svg
+   :target: https://github.com/mcuntz/mcplot/actions/workflows/main.yml
+.. |Coverage Status| image:: https://coveralls.io/repos/github/mcuntz/mcplot/badge.svg?branch=main
+   :target: https://coveralls.io/github/mcuntz/mcplot?branch=main
 
 .. _CTAN: https://www.ctan.org/pkg/pdfcrop
 .. _LICENSE: https://github.com/mcuntz/mcplot/blob/main/LICENSE
