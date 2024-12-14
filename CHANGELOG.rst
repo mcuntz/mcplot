@@ -2,7 +2,8 @@ Changelog
 ---------
 
 v2.x (??? 2024)
-   * Change build and coverage status to main branch.
+   * Add Stuart Semple's Freetone colors.
+   * Changed build and coverage status to main branch.
    * Slight amendments to documentation. 
 
 v2.0 (Nov 2024)

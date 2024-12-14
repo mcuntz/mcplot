@@ -8,6 +8,7 @@ Subpackages
 ===========
 .. autosummary::
    brewer_palettes
+   freetone_palettes
    ipcc_palettes
    mathematica_palettes
    ncl_palettes
@@ -22,6 +23,7 @@ Subpackages
 # colour palettes
 from .brewer_palettes import brewer_sequential, brewer_diverging
 from .brewer_palettes import brewer_qualitative
+from .freetone_palettes import freetone_colors
 from .ipcc_palettes import ipcc_categorical, ipcc_diverging, ipcc_sequential
 from .mathematica_palettes import mathematica_rainbow
 from .mcplot_palettes import mcplot_cmaps
@@ -41,10 +43,11 @@ from .color import color_palette
 
 __all__ = ['brewer_sequential', 'brewer_diverging', 'brewer_qualitative',
            'ipcc_categorical', 'ipcc_diverging', 'ipcc_sequential',
+           'freetone_colors'
            'mathematica_rainbow',
+           'mcplot_cmaps',
            'ncl_large', 'ncl_small', 'ncl_meteo_swiss',
            'oregon_sequential', 'oregon_diverging', 'oregon_qualitative',
-           'mcplot_cmaps',
            'sron2012_colors', 'sron2012_functions',
            'sron_named_colors',
            'sron_colors', 'sron_colormaps', 'sron_functions',

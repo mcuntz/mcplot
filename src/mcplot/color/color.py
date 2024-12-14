@@ -64,6 +64,7 @@ History
    * Tighter layout in show_colors, Nov 2024, Matthias Cuntz
    * Tight bounding box for non-pdf output of show_colors and show_cmaps,
      Nov 2024, Matthias Cuntz
+   * Add freetone colors, Dec 2024, Matthias Cuntz
 
 """
 import matplotlib as mpl
@@ -71,6 +72,7 @@ import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
 from .brewer_palettes import (brewer_sequential, brewer_diverging,
                               brewer_qualitative)
+from .freetone_palettes import freetone_colors
 from .ipcc_palettes import (ipcc_categorical, ipcc_diverging,
                             ipcc_sequential)
 from .mathematica_palettes import mathematica_rainbow
@@ -99,7 +101,7 @@ def _all_colors(collection=''):
     collection : str or list of strings, optional
         Name(s) of color collection(s).
         Known collections are
-        'base', 'css', 'tableau', 'sron', 'ufz', and 'xkcd'.
+        'base', 'css', 'freetone', 'sron', 'tableau', 'ufz', and 'xkcd'.
 
     Returns
     -------
@@ -120,7 +122,8 @@ def _all_colors(collection=''):
         else:
             collects = [ i.lower() for i in collection ]
     else:
-        collects = ['base', 'tableau', 'sron', 'ufz', 'css', 'xkcd']
+        collects = ['base', 'tableau', 'sron', 'ufz', 'css', 'xkcd',
+                    'freetone']
 
     dall = {}
     if 'base' in collects:
@@ -135,6 +138,8 @@ def _all_colors(collection=''):
         dall.update({'css': mcolors.CSS4_COLORS})
     if 'xkcd' in collects:
         dall.update({'xkcd': mcolors.XKCD_COLORS})
+    if 'freetone' in collects:
+        dall.update({'freetone': freetone_colors})
 
     return dall
 
@@ -363,7 +368,7 @@ def print_colors(collection=''):
     collection : str or list of strings, optional
         Name(s) of color collection(s).
         Known collections are
-        'base', 'css', 'tableau', 'sron', 'ufz', and 'xkcd'.
+        'base', 'css', 'freetone', 'sron', 'tableau', 'ufz', and 'xkcd'.
 
     Returns
     -------
@@ -723,14 +728,16 @@ def _plot_colors(ifig, table, colors, *, ncols=4, sort_colors=True,
     topmargin = 48
     dpi = 72
 
-    if (table == 'base'):
+    if table == 'base':
         cell_width = 89
-    elif (table == 'tableau'):
+    elif table == 'tableau':
         cell_width = 142
-    elif (table == 'sron'):
+    elif table == 'sron':
         cell_width = 282
-    elif (table == 'ufz'):
+    elif table == 'ufz':
         cell_width = 159
+    elif table == 'freetone':
+        cell_width = 282
     else:
         cell_width = cell_width_base
 
@@ -756,10 +763,10 @@ def _plot_colors(ifig, table, colors, *, ncols=4, sort_colors=True,
             names = sorted(
                 colors, key=lambda c:
                 tuple(mcolors.rgb_to_hsv(colors[c])))
+        elif table == 'freetone':
+            # freetone has his own sorting
+            names = colors
         elif table == 'sron':
-            # names = sorted(
-            #     colors, key=lambda c:
-            #     tuple(mcolors.rgb_to_hsv(mcolors.to_rgb(colors[c]))))
             # do not sort but keep in categories,
             # which are already sorted by hue (or luminance for high-
             # and medium-contrast)
@@ -810,7 +817,7 @@ def show_colors(outfile='', collection=''):
     collection : str or list of strings, optional
         Name(s) of color collection(s).
         Known collections are
-        'base', 'css', 'tableau', 'sron', 'ufz', and 'xkcd'.
+        'base', 'css', 'freetone', 'sron', 'tableau', 'ufz', and 'xkcd'.
 
     Returns
     -------

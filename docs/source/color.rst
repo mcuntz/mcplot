@@ -15,6 +15,7 @@ Color module
 
    color.color.rst
    color.brewer_palettes.rst
+   color.freetone_palettes.rst
    color.ipcc_palettes.rst
    color.mathematica_palettes.rst
    color.ncl_palettes.rst
