@@ -62,8 +62,10 @@ Example using mcPlot
 
            """
            super().__init__(*args, **kwargs)
+
            # Set some user-defined layout options overwriting the defaults
            self.set_extra_layout_options()
+
            # If plot and layout options were changed, it is a good idea to
            # update the rcParams as well, i.e. set_matplotlib_rcparams()
            # should be called. This sets, for example, the (newly-defined)
@@ -77,8 +79,9 @@ Example using mcPlot
        def set_extra_layout_options(self):
            """
            Set some class variables that can be used for plotting.
-           Some class variables are used to set more defaults
-           in set_matplotlib_rcparams().
+
+           Some class variables are used in set_matplotlib_rcparams() to
+           set other defaults.
 
            """
            from mcplot.color import get_cmap, get_color
@@ -89,9 +92,9 @@ Example using mcPlot
            self.hspace = 0.09  # x-space between subplots
            self.vspace = 0.06  # y-space between subplots
            if self.usetex:
-               self.textsize = 12  # standard text size
+               self.textsize = 12  # standard text size in LaTeX mode
            else:
-               self.textsize = 10  # standard text size
+               self.textsize = 10  # standard text size w/o LaTeX
 
            # Set come line and marker properties
            self.lw = 1.5   # linewidth
@@ -100,9 +103,11 @@ Example using mcPlot
 
            # Set come colors
            if self.dowhite:
+               # A brighter color map on black background.
                # delete starting white, black, and pink from palette
                self.mcols = get_cmap('ncl_amwg')[3:]
            else:
+               # A darker color map on white background.
                # delete starting white, black, and pink from palette
                self.mcols = get_cmap('mcplot_amwg')[3:]
            self.mcol1 = self.fgcolor       # black or white
@@ -137,13 +142,17 @@ Example using mcPlot
 
            """
            ifiles = self.cargs
-           # Check that only one input file given
-           if len(ifiles) != 1:
+
+           # Check that exactly one input file given
+           if len(ifiles) == 0:
+               raise IOError('One input file must be given')
+           elif len(ifiles) > 1:
                raise IOError('Only one input file should be given')
            ifile = ifiles[0]
+
            # Read DataFrame from mcplot_iris.csv produced in the __main__
            # section, setting self.miss to NaN (from the new command line
-           # option -m also added in the __main__ section)
+           # option -m added in the __main__ section below)
            self.df = pd.read_csv(ifile, na_values=[self.miss])
 
        #
@@ -155,7 +164,7 @@ Example using mcPlot
            from numpy.polynomial import polynomial as P
            # get dimensions of new Axes for Figure.add_axes
            from mcplot import position
-           # convert strings to LaTeX strings
+           # convert strings to strings with LaTeX formatting
            from mcplot import str2tex
            # put text on plot
            from mcplot import text2plot
@@ -186,7 +195,7 @@ Example using mcPlot
            xlim = None
            ylim = None
            # Use raw string for Matplotlib's LaTeX-like notation.
-           # str2tex converts into full LaTeX math notation used by
+           # str2tex converts it into full LaTeX math notation used by
            # matplotlib's usetex keyword. Takes care, for example, that the
            # pdf engine actually uses the full LaTeX notation,
            # e.g. \newline vs. \n in Matplotlib.
@@ -221,7 +230,7 @@ Example using mcPlot
            # add a possible legend entry to list tarr
            tarr += [str2tex('data', usetex=self.usetex)]
 
-           # Put a), b), c), ... on plot
+           # Put a), b), c), ... on plot.
            # The panel counter can be upper- or lower letters,
            # arabic or roman number, or `iabc` can be treated as string.
            # The counter can have parentheses, brackets or braces before and
@@ -242,8 +251,8 @@ Example using mcPlot
                     string=True, bold=False, braces='both', usetex=self.usetex,
                     mathrm=True, italic=True)
 
-           # Final axes layout
-           # Labels set if not empty.
+           # Final axes layout.
+           # Labels are set if not empty.
            # Axes limits are only set if not None.
            if xlab != '':
                plt.setp(ax, xlabel=xlab)
@@ -278,7 +287,8 @@ Example using mcPlot
            # We want to span two figure columns on the same row.
            # Here we do this by hand: get panel coordinates of the next two
            # panels, and combine the distance between the left edges plus the
-           # widths to the `rect` (left, bottom, width, height).
+           # width of the second panel to with of `rect`
+           # (left, bottom, width, height).
            pos1 = position(self.nrow, self.ncol, iplot,
                            hspace=self.hspace, vspace=self.vspace)
            pos2 = position(self.nrow, self.ncol, iplot + 1,
@@ -292,7 +302,7 @@ Example using mcPlot
                     markerfacecolor=self.mcol4,
                     markersize=self.ms, markeredgewidth=self.mew)
 
-           # Put a copyright on the plot '(C) YYYY itext'
+           # Put a copyright on the plot '(C) YYYY itext'.
            # The text right-aligned by default if not given otherwise
            # (horizontalalignment).
            signature2plot(ax, 0.98, 0.05, 'M Cuntz', usetex=self.usetex,
@@ -309,7 +319,7 @@ Example using mcPlot
            iabc += 1
 
            # If you want to have double the figure width (instead of two figure
-           # columns), just change the width in `rect`
+           # columns), just change the width in `rect`.
            pos = position(self.nrow, self.ncol, iplot,
                           hspace=self.hspace, vspace=self.vspace)
            pos[2] = pos[2] * 2.
@@ -338,7 +348,7 @@ Example using mcPlot
                     marker='None', color=self.mcol2)
            tarr += [str2tex('model', usetex=self.usetex)]
 
-           # Write equation on plot
+           # Write equation on plot.
            # to have correct minus symbol
            s0 = r'$-$' if p[0] < 0 else ''
            s1 = r'$-$' if p[1] < 0 else '+'
@@ -350,7 +360,7 @@ Example using mcPlot
            # teq = str2tex(rf'$y={p[0]:.2f}x{s1}{abs(p[1]):.2f}$',
            #               usetex=self.usetex)
            #
-           # Put the equation as text on plot
+           # Put the equation as text on plot.
            # One can set one of the sizes xxsmall, xsmall, small, medium, large,
            # xlarge, xxlarge to True. Also bold and italic can be set to true.
            # All other keywords will be passed to Matplotlib's Axes.text() such
@@ -360,11 +370,11 @@ Example using mcPlot
                      small=True, usetex=self.usetex)
            # or you can transform noteq to a LaTeX string first using str2tex
            teq = str2tex(noteq, usetex=self.usetex)
-           # and then put in on the plot without usetex.
+           # and then put it on the plot without usetex.
            text2plot(ax, self.dxabc, 0.8 * self.dyabc, teq, color=self.mcol2,
                      small=True)
 
-           # Add legend using the two list of lines (larr) and text (tarr)
+           # Add legend using the two list of lines (larr) and text (tarr).
            # loc and bbox_to_anchor behave slightly different for different
            # fontsizes.
            ll = ax.legend(larr, tarr,
@@ -407,7 +417,7 @@ Example using mcPlot
            # https://matplotlib.org/stable/gallery/subplots_axes_and_figures/axes_margins.html
            # For example, half the number of rows will give double the height
            # of a panel. iplot has to be adjusted accordingly.
-           pos = position(self.nrow // 2, self.ncol, iplot - self.ncol + 1,
+           pos = position(self.nrow // 2, self.ncol - 1, iplot - self.ncol,
                           hspace=self.hspace, vspace=self.vspace)
            ax = fig.add_axes(pos, label=str(iplot))
 
@@ -418,7 +428,7 @@ Example using mcPlot
                     markerfacecolor=self.mcol4,
                     markersize=self.ms, markeredgewidth=self.mew)
 
-           # iabc has till the right count
+           # iabc has still the right count
            abc2plot(ax, self.dxabc, self.dyabc, iabc, upper=True, bold=True,
                     parentheses='both', usetex=self.usetex, mathrm=True)
 
@@ -562,7 +572,6 @@ Example using mcPlot
    if __name__ == '__main__':
        import argparse
 
-       #
        # Extra command line argument -m to be called as:
        #     -m '-9999' or --missing=-9999
        # The parser must have `add_help=False`!
@@ -574,7 +583,6 @@ Example using mcPlot
                            help=(f'Data treated as missing value in'
                                  f' input file (default: {miss}).'))
 
-       #
        # New instance of myPlot. This also gets the command line arguments,
        # to be called for example as:
        #     python mcplot_example.py -t pdf -o ex.pdf mcplot_iris.csv
@@ -582,21 +590,17 @@ Example using mcPlot
        argstr = 'input_file'
        iplot = myPlot(desc, argstr, parents=parser)
 
-       #
-       # Reading data
+       # Reading data.
        # read the input file given on the command line
        iplot.read_data()
 
-       #
        # Plot
        iplot.plot_fig_1()
 
-       #
        # Another figure, PNG file, or PDF page
        iplot.plot_fig_2()
 
-       #
-       # Finish
+       # Finish.
        # close any open plot files
        iplot.close()
 
@@ -629,16 +633,23 @@ high resolution:
 The test PNG files with the pretty arbitrary plots are:
 
 .. image:: ../images/mcex_0001.png
-   :width: 860 px
-   :align: left
+   :width: 800 px
+   :align: center
    :alt: Plot with 4 panels of different sizes
 
 and:
 
 .. image:: ../images/mcex_0002.png
-   :width: 860 px
-   :align: left
-   :alt: Plot with 4 panels of different sizes
+   :width: 400 px
+   :align: center
+   :alt: Plot with 1 large panel
+
+And the latter with the `-w` command line option is:
+
+.. image:: ../images/mcex_black_0002.png
+   :width: 400 px
+   :align: center
+   :alt: Plot with 1 large panel on black background
 
 
 .. _pandas: https://pandas.pydata.org/

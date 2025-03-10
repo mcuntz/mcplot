@@ -14,33 +14,33 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=628480d8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="_static/documentation_options.js?v=67977bc4"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/documentation_options.js?v=309c238c"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -55,27 +55,23 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -97,8 +93,13 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -122,6 +123,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="contents.html">
   
@@ -137,7 +140,7 @@
 
  <script>
  document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="search-button__default-text">Search</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -150,15 +153,15 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">mcplot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="userguide.html">Userguide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="full_example.html">Commented Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="argsort.html">argmax/argmin/argsort</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="color.html">Color module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="color.html">Color module</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="color.color.html">Color functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="color.brewer_palettes.html">Brewer palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.freetone_palettes.html">Freetone colors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="color.ipcc_palettes.html">IPCC WG1 palettes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="color.mathematica_palettes.html">Mathematica palettes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="color.ncl_palettes.html">NCL palettes</a></li>
@@ -168,14 +171,14 @@
 <li class="toctree-l3"><a class="reference internal" href="color.sron_palettes.html">SRON palettes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="color.ufz_palettes.html">UFZ colors</a></li>
 </ul>
-</li>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="class_mcplot.html">mcPlot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="position.html">position</a></li>
 <li class="toctree-l2"><a class="reference internal" href="romanliterals.html">Roman literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="str2tex.html">str2tex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="text2plot.html">text2plot</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -191,7 +194,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -200,14 +203,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -349,10 +352,10 @@
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
@@ -360,14 +363,14 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -389,9 +392,9 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-mcplot">About mcplot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-plotting-script-from-the-command-line">Calling a plotting script from the command line</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-plotting-class">using the plotting class</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-plotting-script-from-the-command-line">Calling a plotting script from the command line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-plotting-class">Using the plotting class</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 </ul>
             </nav>
@@ -407,28 +410,47 @@ document.write(`
   <section id="mcplot">
 <span id="quickstart"></span><h1>mcplot<a class="headerlink" href="#mcplot" title="Link to this heading">#</a></h1>
 <p>A Python package with a plotting class and routines for publication-ready graphics.</p>
-<p><a class="reference external" href="https://doi.org/10.5281/zenodo.13893825"><img alt="DOI" src="https://zenodo.org/badge/866240152.svg" /></a> <a class="reference external" href="https://badge.fury.io/py/mcplot"><img alt="PyPI version" src="https://badge.fury.io/py/mcplot.svg" /></a> <a class="reference external" href="https://anaconda.org/conda-forge/mcplot"><img alt="Conda version" src="https://anaconda.org/conda-forge/mcplot/badges/version.svg" /></a> <a class="reference external" href="https://github.com/mcuntz/mcplot/blob/master/LICENSE"><img alt="License" src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" /></a> <a class="reference external" href="https://github.com/mcuntz/mcplot/actions"><img alt="Build Status" src="https://github.com/mcuntz/mcplot/workflows/Continuous%20Integration/badge.svg?branch=master" /></a> <a class="reference external" href="https://coveralls.io/github/mcuntz/mcplot?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/github/mcuntz/mcplot/badge.svg?branch=master" /></a></p>
+<p><a class="reference external" href="https://doi.org/10.5281/zenodo.13893825"><img alt="DOI" src="https://zenodo.org/badge/866240152.svg" /></a> <a class="reference external" href="https://badge.fury.io/py/mcplot"><img alt="PyPI version" src="https://badge.fury.io/py/mcplot.svg" /></a> <a class="reference external" href="https://anaconda.org/conda-forge/mcplot"><img alt="Conda version" src="https://anaconda.org/conda-forge/mcplot/badges/version.svg" /></a> <a class="reference external" href="https://github.com/mcuntz/mcplot/blob/master/LICENSE"><img alt="License" src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" /></a> <a class="reference external" href="https://github.com/mcuntz/mcplot/actions/workflows/main.yml"><img alt="Build Status" src="https://github.com/mcuntz/mcplot/actions/workflows/main.yml/badge.svg" /></a> <a class="reference external" href="https://coveralls.io/github/mcuntz/mcplot?branch=main"><img alt="Coverage Status" src="https://coveralls.io/repos/github/mcuntz/mcplot/badge.svg?branch=main" /></a></p>
 <section id="about-mcplot">
 <h2>About mcplot<a class="headerlink" href="#about-mcplot" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">mcplot</span></code> provides a class that combines methods to easily produce
 publication-ready graphics on light or black background. It includes a
 large number of colormaps collected from different sources. There are
 a number of functions that help to position plots, number plot panels,
-or generally write text on a graph.</p>
+or write text on a graph.</p>
 <p>The complete documentation of <code class="docutils literal notranslate"><span class="pre">mcplot</span></code> is available at:</p>
 <blockquote>
 <div><p><a class="reference external" href="https://mcuntz.github.io/mcplot/">https://mcuntz.github.io/mcplot/</a></p>
 </div></blockquote>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>The easiest way to install is via <cite>pip</cite>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>mcplot
+</pre></div>
+</div>
+<p>or via <cite>conda</cite>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>mcplot
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Requirements</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://numpy.org/">numpy</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/">matplotlib</a></p></li>
+<li><p><a class="reference external" href="https://pandas.pydata.org/">pandas</a></p></li>
+</ul>
+</dd>
+</dl>
 </section>
 <section id="calling-a-plotting-script-from-the-command-line">
 <h2>Calling a plotting script from the command line<a class="headerlink" href="#calling-a-plotting-script-from-the-command-line" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">mcplot</span></code> provides a class that has methods for opening and closing
 different plotting backends, setting layout options, as well as having
 a command line interface. A most basic example is using the method
-<cite>plot_test</cite>, which just plots to sinusoidal curves. A file
+<cite>plot_test</cite>, which just plots two sinusoidal curves. A file
 <cite>mcplot_test.py</cite> could be:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># file: mcplot_test.py</span>
-<span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">mcPlot</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcplot</span><span class="w"> </span><span class="kn">import</span> <span class="n">mcPlot</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">iplot</span> <span class="o">=</span> <span class="n">mcPlot</span><span class="p">(</span><span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Test mcPlot&#39;</span><span class="p">,</span>
@@ -482,7 +504,7 @@ gives a short help:</p>
 <p>writes the plot into the PDF file <cite>test1.pdf</cite> using the sans-serif
 font <cite>DejaVuSans</cite> that comes with Matplotlib. It will use the serif
 font DejaVueSerif with the command line option <cite>-s</cite>. It will use LaTeX
-to render text with the <cite>-u</cite> option. <cite>-u -s</cite> uses LaTeX standard
+to render text with the <cite>-u</cite> option. <cite>-u -s</cite> uses LaTeX’s standard
 Computer Modern font. It uses MyriadPro as sans-serif font in LaTeX,
 which must be installed (see section <a class="reference external" href="https://github.com/mcuntz/setup_mac?tab=readme-ov-file#myriad-pro">Myriad Pro</a>).</p>
 <p>By default, <code class="docutils literal notranslate"><span class="pre">mcPlot</span></code> plots onto a DIN A4 page, which facilitates
@@ -490,43 +512,43 @@ choices of font sizes, etc. The output can easily be cropped with the
 utility <a class="reference external" href="https://github.com/ho-tex/pdfcrop">pdfcrop</a> which can be acquired from <a class="reference external" href="https://www.ctan.org/pkg/pdfcrop">CTAN</a>. The standard
 subplots are on a 2x3 grid. The plot will be tightly cropped if the
 output type is <cite>png</cite>. Plot resolution can be set for <cite>png</cite> as well
-(<cite>–dpi</cite>) with standard 300 dpi. PNG plots can also have transparent
-background (<cite>–transparent</cite>), for example for use in presentations.</p>
-<p>The command line switch <cite>-w</cite> swaps foreground and backgroud colours,
-i.e. plots white lines on black background. This is used if you do
+(<cite>–dpi</cite>) with standard being 300 dpi. PNG plots can have transparent
+background (<cite>–transparent</cite>), for example to use in presentations.</p>
+<p>The command line switch <cite>-w</cite> swaps foreground and backgroud colors,
+i.e. uses white lines on black background. This is used if you do
 presentations with black background.</p>
 <p>In summary, the standard command line options allow to use the same
 script to design a plot using plotting windows on screen, produce the
-publication ready plot writing into s PDF file (<cite>-t</cite>, <cite>-p</cite>, <cite>-u</cite>
-options), and make the same plot with dark background for
-presentations (<cite>-t</cite>, <cite>-p</cite>, <cite>-u</cite>, <cite>-w</cite> options).</p>
+publication ready plots in a PDF file (<cite>-t</cite>, <cite>-p</cite>, <cite>-u</cite> options), and
+make the same plot with dark background for presentations (<cite>-t</cite>, <cite>-p</cite>,
+<cite>-u</cite>, <cite>-w</cite> options).</p>
 </section>
 <section id="using-the-plotting-class">
-<h2>using the plotting class<a class="headerlink" href="#using-the-plotting-class" title="Link to this heading">#</a></h2>
+<h2>Using the plotting class<a class="headerlink" href="#using-the-plotting-class" title="Link to this heading">#</a></h2>
 <p>The class <cite>mcPlot</cite> can be extended. One normally would have at least a
 method to read data from a file and a method that produces a
 plot. This could give a script such as:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># file: mcplot_basic.py</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">mcPlot</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcplot</span><span class="w"> </span><span class="kn">import</span> <span class="n">mcPlot</span>
 
 
-<span class="k">class</span> <span class="nc">myPlot</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">myPlot</span><span class="p">(</span><span class="n">mcPlot</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># reading one file would use self.cargs[0] such as</span>
         <span class="c1"># self.dat = np.loadtxt(self.cargs[0])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">plot_fig_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_fig_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
         <span class="c1"># make axes</span>
         <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
         <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
         <span class="c1"># plot</span>
-        <span class="n">xx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="mf">4.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dat</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">dat</span><span class="o">.</span><span class="n">size</span> <span class="o">*</span> <span class="mf">4.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
         <span class="n">line1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">line1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lw</span><span class="p">,</span>
                  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcol1</span><span class="p">)</span>
@@ -548,34 +570,15 @@ plot. This could give a script such as:</p>
 </div>
 <p>The script could be called giving the name(s) of (an) input file(s) on
 the command line, which is then accessible through <cite>self.cargs</cite>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_basic.py<span class="w"> </span>-t<span class="w"> </span>png<span class="w"> </span>-p<span class="w"> </span>basic_<span class="w"> </span>input.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_basic.py<span class="w"> </span>-t<span class="w"> </span>png<span class="w"> </span>-p<span class="w"> </span>basic.<span class="w"> </span>input.csv
 </pre></div>
 </div>
 <p>Every time <cite>self.plot_save(fig)</cite> is called, a figure is written to the
 output file. A PDF file can have multiple pages. For PNG files, only
-the start of the output files is given and will be extended by
-<cite>f’{start}{self.ifig:04d}.png’</cite>. The example would give the outputfile
-<cite>basic_0001.png</cite>.</p>
+the start of the output files is given (here <em>basic.</em>) and will be
+extended by <cite>f’{start}{self.ifig:04d}.png’</cite>. The example would give
+the outputfile <cite>basic.0001.png</cite>.</p>
 <p>See the complete documentation of <code class="docutils literal notranslate"><span class="pre">mcplot</span></code> at: <a class="reference external" href="https://mcuntz.github.io/mcplot/">https://mcuntz.github.io/mcplot/</a></p>
-</section>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
-<p>The easiest way to install is via <cite>pip</cite>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>mcplot
-</pre></div>
-</div>
-<p>or via <cite>conda</cite>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>mcplot
-</pre></div>
-</div>
-<dl class="simple">
-<dt>Requirements</dt><dd><ul class="simple">
-<li><p><a class="reference external" href="https://numpy.org/">numpy</a></p></li>
-<li><p><a class="reference external" href="https://matplotlib.org/">matplotlib</a></p></li>
-<li><p><a class="reference external" href="https://pandas.pydata.org/">pandas</a></p></li>
-</ul>
-</dd>
-</dl>
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
@@ -593,7 +596,7 @@ for details.</p>
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -631,9 +634,9 @@ for details.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-mcplot">About mcplot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-plotting-script-from-the-command-line">Calling a plotting script from the command line</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-plotting-class">using the plotting class</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-plotting-script-from-the-command-line">Calling a plotting script from the command line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-plotting-class">Using the plotting class</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 </ul>
   </nav></div>
@@ -659,7 +662,7 @@ By Matthias Cuntz
 
   <p class="copyright">
     
-      © Copyright 2021-2024, Matthias Cuntz.
+      © Copyright 2021-2025, Matthias Cuntz.
       <br/>
     
   </p>
@@ -683,8 +686,8 @@ By Matthias Cuntz
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

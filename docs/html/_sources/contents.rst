@@ -9,7 +9,6 @@ Contents
    index
    userguide
    full_example
-   installation
    changelog
    authors
    license

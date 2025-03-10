@@ -13,11 +13,32 @@ About mcplot
 publication-ready graphics on light or black background. It includes a
 large number of colormaps collected from different sources. There are
 a number of functions that help to position plots, number plot panels,
-or generally write text on a graph.
+or write text on a graph.
 
 The complete documentation of ``mcplot`` is available at:
 
    https://mcuntz.github.io/mcplot/
+
+
+Installation
+------------
+
+The easiest way to install is via `pip`:
+
+.. code-block:: bash
+
+   python -m pip install mcplot
+
+or via `conda`:
+
+.. code-block:: bash
+
+   conda install -c conda-forge mcplot
+
+Requirements
+   * numpy_
+   * matplotlib_
+   * pandas_
 
 
 Calling a plotting script from the command line
@@ -26,7 +47,7 @@ Calling a plotting script from the command line
 ``mcplot`` provides a class that has methods for opening and closing
 different plotting backends, setting layout options, as well as having
 a command line interface. A most basic example is using the method
-`plot_test`, which just plots to sinusoidal curves. A file
+`plot_test`, which just plots two sinusoidal curves. A file
 `mcplot_test.py` could be:
 
 .. code-block:: python
@@ -90,7 +111,7 @@ opens a standard Matplotlib plotting window with the test plot.
 writes the plot into the PDF file `test1.pdf` using the sans-serif
 font `DejaVuSans` that comes with Matplotlib. It will use the serif
 font DejaVueSerif with the command line option `-s`. It will use LaTeX
-to render text with the `-u` option. `-u -s` uses LaTeX standard
+to render text with the `-u` option. `-u -s` uses LaTeX's standard
 Computer Modern font. It uses MyriadPro as sans-serif font in LaTeX,
 which must be installed (see section `Myriad Pro`_).
 
@@ -99,18 +120,18 @@ choices of font sizes, etc. The output can easily be cropped with the
 utility pdfcrop_ which can be acquired from CTAN_. The standard
 subplots are on a 2x3 grid. The plot will be tightly cropped if the
 output type is `png`. Plot resolution can be set for `png` as well
-(`--dpi`) with standard 300 dpi. PNG plots can also have transparent
-background (`--transparent`), for example for use in presentations.
+(`--dpi`) with standard being 300 dpi. PNG plots can have transparent
+background (`--transparent`), for example to use in presentations.
 
-The command line switch `-w` swaps foreground and backgroud colours,
-i.e. plots white lines on black background. This is used if you do
+The command line switch `-w` swaps foreground and backgroud colors,
+i.e. uses white lines on black background. This is used if you do
 presentations with black background.
 
 In summary, the standard command line options allow to use the same
 script to design a plot using plotting windows on screen, produce the
-publication ready plot writing into s PDF file (`-t`, `-p`, `-u`
-options), and make the same plot with dark background for
-presentations (`-t`, `-p`, `-u`, `-w` options).
+publication ready plots in a PDF file (`-t`, `-p`, `-u` options), and
+make the same plot with dark background for presentations (`-t`, `-p`,
+`-u`, `-w` options).
 
 
 Using the plotting class
@@ -142,7 +163,7 @@ plot. This could give a script such as:
            ax = fig.add_subplot(3, 2, 1)
 
            # plot
-           xx = self.dat / float(self.dat.size) * 4. * np.pi
+           xx = self.dat / self.dat.size * 4. * np.pi
            line1 = ax.plot(xx, np.sin(xx))
            plt.setp(line1, linestyle='-', linewidth=self.lw,
                     marker='', color=self.lcol1)
@@ -166,37 +187,15 @@ the command line, which is then accessible through `self.cargs`:
 
 .. code-block:: bash
 
-   python mcplot_basic.py -t png -p basic_ input.csv
+   python mcplot_basic.py -t png -p basic. input.csv
 
 Every time `self.plot_save(fig)` is called, a figure is written to the
 output file. A PDF file can have multiple pages. For PNG files, only
-the start of the output files is given and will be extended by
-`f'{start}{self.ifig:04d}.png'`. The example would give the outputfile
-`basic_0001.png`.
+the start of the output files is given (here *basic.*) and will be
+extended by `f'{start}{self.ifig:04d}.png'`. The example would give
+the outputfile `basic.0001.png`.
 
 See the complete documentation of ``mcplot`` at: https://mcuntz.github.io/mcplot/
-
-
-Installation
-------------
-
-The easiest way to install is via `pip`:
-
-.. code-block:: bash
-
-   pip install mcplot
-
-or via `conda`:
-
-.. code-block:: bash
-
-   conda install -c conda-forge mcplot
-
-
-Requirements
-   * numpy_
-   * matplotlib_
-   * pandas_
 
 
 License
@@ -206,6 +205,7 @@ License
 for details.
 
 Copyright (c) 2021- Matthias Cuntz
+
 
 .. |DOI| image:: https://zenodo.org/badge/866240152.svg
    :target: https://doi.org/10.5281/zenodo.13893825

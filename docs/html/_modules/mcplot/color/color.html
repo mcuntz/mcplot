@@ -13,33 +13,33 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=628480d8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../../_static/documentation_options.js?v=67977bc4"></script>
-    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/documentation_options.js?v=309c238c"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/mcplot/color/color';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -52,27 +52,23 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -94,8 +90,13 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -121,6 +122,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="../../../contents.html">
   
@@ -136,7 +139,7 @@
 
  <script>
  document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="search-button__default-text">Search</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -149,15 +152,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../index.html">mcplot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../userguide.html">Userguide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../full_example.html">Commented Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../authors.html">Authors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../argsort.html">argmax/argmin/argsort</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../color.html">Color module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../color.html">Color module</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../color.color.html">Color functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../color.brewer_palettes.html">Brewer palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../color.freetone_palettes.html">Freetone colors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../color.ipcc_palettes.html">IPCC WG1 palettes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../color.mathematica_palettes.html">Mathematica palettes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../color.ncl_palettes.html">NCL palettes</a></li>
@@ -167,14 +170,14 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../color.sron_palettes.html">SRON palettes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../color.ufz_palettes.html">UFZ colors</a></li>
 </ul>
-</li>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../class_mcplot.html">mcPlot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../position.html">position</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../romanliterals.html">Roman literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../str2tex.html">str2tex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../text2plot.html">text2plot</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -190,7 +193,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -199,14 +202,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -283,10 +286,10 @@
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
@@ -294,7 +297,7 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
@@ -391,24 +394,26 @@ document.write(`
 <span class="sd">   * Tighter layout in show_colors, Nov 2024, Matthias Cuntz</span>
 <span class="sd">   * Tight bounding box for non-pdf output of show_colors and show_cmaps,</span>
 <span class="sd">     Nov 2024, Matthias Cuntz</span>
+<span class="sd">   * Add freetone colors, Dec 2024, Matthias Cuntz</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">mcolors</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">.brewer_palettes</span> <span class="kn">import</span> <span class="p">(</span><span class="n">brewer_sequential</span><span class="p">,</span> <span class="n">brewer_diverging</span><span class="p">,</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mcolors</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.brewer_palettes</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">brewer_sequential</span><span class="p">,</span> <span class="n">brewer_diverging</span><span class="p">,</span>
                               <span class="n">brewer_qualitative</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.ipcc_palettes</span> <span class="kn">import</span> <span class="p">(</span><span class="n">ipcc_categorical</span><span class="p">,</span> <span class="n">ipcc_diverging</span><span class="p">,</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.freetone_palettes</span><span class="w"> </span><span class="kn">import</span> <span class="n">freetone_colors</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.ipcc_palettes</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">ipcc_categorical</span><span class="p">,</span> <span class="n">ipcc_diverging</span><span class="p">,</span>
                             <span class="n">ipcc_sequential</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.mathematica_palettes</span> <span class="kn">import</span> <span class="n">mathematica_rainbow</span>
-<span class="kn">from</span> <span class="nn">.mcplot_palettes</span> <span class="kn">import</span> <span class="n">mcplot_cmaps</span>
-<span class="kn">from</span> <span class="nn">.ncl_palettes</span> <span class="kn">import</span> <span class="n">ncl_large</span><span class="p">,</span> <span class="n">ncl_small</span><span class="p">,</span> <span class="n">ncl_meteo_swiss</span>
-<span class="kn">from</span> <span class="nn">.oregon_palettes</span> <span class="kn">import</span> <span class="p">(</span><span class="n">oregon_sequential</span><span class="p">,</span> <span class="n">oregon_diverging</span><span class="p">,</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.mathematica_palettes</span><span class="w"> </span><span class="kn">import</span> <span class="n">mathematica_rainbow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.mcplot_palettes</span><span class="w"> </span><span class="kn">import</span> <span class="n">mcplot_cmaps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.ncl_palettes</span><span class="w"> </span><span class="kn">import</span> <span class="n">ncl_large</span><span class="p">,</span> <span class="n">ncl_small</span><span class="p">,</span> <span class="n">ncl_meteo_swiss</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.oregon_palettes</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">oregon_sequential</span><span class="p">,</span> <span class="n">oregon_diverging</span><span class="p">,</span>
                               <span class="n">oregon_qualitative</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.sron2012_palettes</span> <span class="kn">import</span> <span class="n">sron2012_colors</span><span class="p">,</span> <span class="n">sron2012_functions</span>
-<span class="kn">from</span> <span class="nn">.sron_palettes</span> <span class="kn">import</span> <span class="n">sron_named_colors</span>
-<span class="kn">from</span> <span class="nn">.sron_palettes</span> <span class="kn">import</span> <span class="n">sron_colors</span><span class="p">,</span> <span class="n">sron_colormaps</span><span class="p">,</span> <span class="n">sron_functions</span>
-<span class="kn">from</span> <span class="nn">.ufz_palettes</span> <span class="kn">import</span> <span class="n">ufz_colors</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.sron2012_palettes</span><span class="w"> </span><span class="kn">import</span> <span class="n">sron2012_colors</span><span class="p">,</span> <span class="n">sron2012_functions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.sron_palettes</span><span class="w"> </span><span class="kn">import</span> <span class="n">sron_named_colors</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.sron_palettes</span><span class="w"> </span><span class="kn">import</span> <span class="n">sron_colors</span><span class="p">,</span> <span class="n">sron_colormaps</span><span class="p">,</span> <span class="n">sron_functions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.ufz_palettes</span><span class="w"> </span><span class="kn">import</span> <span class="n">ufz_colors</span>
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;get_color&#39;</span><span class="p">,</span> <span class="s1">&#39;print_colors&#39;</span><span class="p">,</span> <span class="s1">&#39;show_colors&#39;</span><span class="p">,</span>
@@ -417,7 +422,7 @@ document.write(`
            <span class="s1">&#39;color_palette&#39;</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">_all_colors</span><span class="p">(</span><span class="n">collection</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_all_colors</span><span class="p">(</span><span class="n">collection</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get all known named colors</span>
 
@@ -426,7 +431,7 @@ document.write(`
 <span class="sd">    collection : str or list of strings, optional</span>
 <span class="sd">        Name(s) of color collection(s).</span>
 <span class="sd">        Known collections are</span>
-<span class="sd">        &#39;base&#39;, &#39;css&#39;, &#39;tableau&#39;, &#39;sron&#39;, &#39;ufz&#39;, and &#39;xkcd&#39;.</span>
+<span class="sd">        &#39;base&#39;, &#39;css&#39;, &#39;freetone&#39;, &#39;sron&#39;, &#39;tableau&#39;, &#39;ufz&#39;, and &#39;xkcd&#39;.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -447,7 +452,8 @@ document.write(`
         <span class="k">else</span><span class="p">:</span>
             <span class="n">collects</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">collection</span> <span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">collects</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;base&#39;</span><span class="p">,</span> <span class="s1">&#39;tableau&#39;</span><span class="p">,</span> <span class="s1">&#39;sron&#39;</span><span class="p">,</span> <span class="s1">&#39;ufz&#39;</span><span class="p">,</span> <span class="s1">&#39;css&#39;</span><span class="p">,</span> <span class="s1">&#39;xkcd&#39;</span><span class="p">]</span>
+        <span class="n">collects</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;base&#39;</span><span class="p">,</span> <span class="s1">&#39;tableau&#39;</span><span class="p">,</span> <span class="s1">&#39;sron&#39;</span><span class="p">,</span> <span class="s1">&#39;ufz&#39;</span><span class="p">,</span> <span class="s1">&#39;css&#39;</span><span class="p">,</span> <span class="s1">&#39;xkcd&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;freetone&#39;</span><span class="p">]</span>
 
     <span class="n">dall</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">if</span> <span class="s1">&#39;base&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
@@ -462,11 +468,13 @@ document.write(`
         <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;css&#39;</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">CSS4_COLORS</span><span class="p">})</span>
     <span class="k">if</span> <span class="s1">&#39;xkcd&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
         <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;xkcd&#39;</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">XKCD_COLORS</span><span class="p">})</span>
+    <span class="k">if</span> <span class="s1">&#39;freetone&#39;</span> <span class="ow">in</span> <span class="n">collects</span><span class="p">:</span>
+        <span class="n">dall</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;freetone&#39;</span><span class="p">:</span> <span class="n">freetone_colors</span><span class="p">})</span>
 
     <span class="k">return</span> <span class="n">dall</span>
 
 
-<span class="k">def</span> <span class="nf">_mpl_cmaps</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_mpl_cmaps</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get Matplotlib colormaps in categories of perception</span>
 
@@ -525,7 +533,7 @@ document.write(`
     <span class="k">return</span> <span class="n">mpl_cmaps</span>
 
 
-<span class="k">def</span> <span class="nf">_all_cmaps</span><span class="p">(</span><span class="n">collection</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_all_cmaps</span><span class="p">(</span><span class="n">collection</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get all known color palettes and continuous colormaps</span>
 
@@ -597,7 +605,7 @@ document.write(`
     <span class="k">return</span> <span class="n">dall</span>
 
 
-<span class="k">def</span> <span class="nf">_rgb2rgb</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_rgb2rgb</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transform RGB tuple with values 0-255 to tuple with values 0-1</span>
 
@@ -622,7 +630,7 @@ document.write(`
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">([</span> <span class="n">i</span> <span class="o">/</span> <span class="mf">255.</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">col</span> <span class="p">])</span>
 
 
-<span class="k">def</span> <span class="nf">_to_grey</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_to_grey</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transform RGB tuple to grey values</span>
 
@@ -650,7 +658,7 @@ document.write(`
 
 <div class="viewcode-block" id="get_color">
 <a class="viewcode-back" href="../../../color.color.html#mcplot.color.get_color">[docs]</a>
-<span class="k">def</span> <span class="nf">get_color</span><span class="p">(</span><span class="n">cname</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_color</span><span class="p">(</span><span class="n">cname</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return named color(s)</span>
 
@@ -668,7 +676,7 @@ document.write(`
 <span class="sd">       cols = get_color([&#39;blue&#39;, &#39;red&#39;])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span>
 
     <span class="n">call</span> <span class="o">=</span> <span class="n">_all_colors</span><span class="p">()</span>
     <span class="n">dall</span> <span class="o">=</span> <span class="p">{}</span>
@@ -686,7 +694,7 @@ document.write(`
 
 <div class="viewcode-block" id="print_colors">
 <a class="viewcode-back" href="../../../color.color.html#mcplot.color.print_colors">[docs]</a>
-<span class="k">def</span> <span class="nf">print_colors</span><span class="p">(</span><span class="n">collection</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_colors</span><span class="p">(</span><span class="n">collection</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Print the known named colors</span>
 
@@ -695,7 +703,7 @@ document.write(`
 <span class="sd">    collection : str or list of strings, optional</span>
 <span class="sd">        Name(s) of color collection(s).</span>
 <span class="sd">        Known collections are</span>
-<span class="sd">        &#39;base&#39;, &#39;css&#39;, &#39;tableau&#39;, &#39;sron&#39;, &#39;ufz&#39;, and &#39;xkcd&#39;.</span>
+<span class="sd">        &#39;base&#39;, &#39;css&#39;, &#39;freetone&#39;, &#39;sron&#39;, &#39;tableau&#39;, &#39;ufz&#39;, and &#39;xkcd&#39;.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -720,7 +728,7 @@ document.write(`
 
 <div class="viewcode-block" id="get_cmap">
 <a class="viewcode-back" href="../../../color.color.html#mcplot.color.get_cmap">[docs]</a>
-<span class="k">def</span> <span class="nf">get_cmap</span><span class="p">(</span><span class="n">palette</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_cmap</span><span class="p">(</span><span class="n">palette</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
              <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">grey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get colors of defined palettes or continuous colormaps</span>
@@ -780,7 +788,7 @@ document.write(`
 <span class="sd">       cols = get_cmap(&#39;mathematica:dark_rainbow_256&#39;, 15)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">mcplot</span> <span class="kn">import</span> <span class="n">argsort</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">mcplot</span><span class="w"> </span><span class="kn">import</span> <span class="n">argsort</span>
 
     <span class="c1"># backwards compatibility - mcplot_amwg to mcplot:amwg</span>
     <span class="n">palette_</span> <span class="o">=</span> <span class="n">palette</span>
@@ -948,7 +956,7 @@ document.write(`
 
 <div class="viewcode-block" id="color_palette">
 <a class="viewcode-back" href="../../../color.color.html#mcplot.color.color_palette">[docs]</a>
-<span class="k">def</span> <span class="nf">color_palette</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">color_palette</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Alias for get_cmap &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">get_cmap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
@@ -956,7 +964,7 @@ document.write(`
 
 <div class="viewcode-block" id="get_palette">
 <a class="viewcode-back" href="../../../color.color.html#mcplot.color.get_palette">[docs]</a>
-<span class="k">def</span> <span class="nf">get_palette</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_palette</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Alias for get_cmap &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">get_cmap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
@@ -964,7 +972,7 @@ document.write(`
 
 <div class="viewcode-block" id="print_cmaps">
 <a class="viewcode-back" href="../../../color.color.html#mcplot.color.print_cmaps">[docs]</a>
-<span class="k">def</span> <span class="nf">print_cmaps</span><span class="p">(</span><span class="n">collection</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_cmaps</span><span class="p">(</span><span class="n">collection</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Print the known color palettes and continuous colormaps</span>
 
@@ -1002,7 +1010,7 @@ document.write(`
 
 <div class="viewcode-block" id="print_palettes">
 <a class="viewcode-back" href="../../../color.color.html#mcplot.color.print_palettes">[docs]</a>
-<span class="k">def</span> <span class="nf">print_palettes</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_palettes</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Alias for print_cmaps &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">print_cmaps</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
@@ -1012,7 +1020,7 @@ document.write(`
 <span class="c1"># show colors and palettes</span>
 <span class="c1">#</span>
 
-<span class="k">def</span> <span class="nf">_savefig</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ifig</span><span class="p">,</span> <span class="n">outtype</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">pdf_pages</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_savefig</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ifig</span><span class="p">,</span> <span class="n">outtype</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">pdf_pages</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Helper function for show_colors and show_palettes &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">outtype</span> <span class="o">==</span> <span class="s1">&#39;pdf&#39;</span><span class="p">):</span>
         <span class="n">pdf_pages</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
@@ -1026,7 +1034,7 @@ document.write(`
         <span class="k">pass</span>
 
 
-<span class="k">def</span> <span class="nf">_newfig_colors</span><span class="p">(</span><span class="n">ifig</span><span class="p">,</span> <span class="n">ititle</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_newfig_colors</span><span class="p">(</span><span class="n">ifig</span><span class="p">,</span> <span class="n">ititle</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span>
                    <span class="n">cell_width_base</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span>
                    <span class="n">cell_width</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span> <span class="n">cell_height</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span>
                    <span class="n">swatch_width</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">sidemargin</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
@@ -1054,11 +1062,11 @@ document.write(`
 
 
 <span class="c1"># https://matplotlib.org/stable/gallery/color/named_colors.html</span>
-<span class="k">def</span> <span class="nf">_plot_colors</span><span class="p">(</span><span class="n">ifig</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_plot_colors</span><span class="p">(</span><span class="n">ifig</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">textsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">outtype</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">pdf_pages</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Helper function for show_colors &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Rectangle</span>
-    <span class="kn">import</span> <span class="nn">math</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rectangle</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 
     <span class="c1"># n = len(colors)</span>
     <span class="c1"># nrows = math.ceil(n / ncols)</span>
@@ -1071,14 +1079,16 @@ document.write(`
     <span class="n">topmargin</span> <span class="o">=</span> <span class="mi">48</span>
     <span class="n">dpi</span> <span class="o">=</span> <span class="mi">72</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">table</span> <span class="o">==</span> <span class="s1">&#39;base&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">table</span> <span class="o">==</span> <span class="s1">&#39;base&#39;</span><span class="p">:</span>
         <span class="n">cell_width</span> <span class="o">=</span> <span class="mi">89</span>
-    <span class="k">elif</span> <span class="p">(</span><span class="n">table</span> <span class="o">==</span> <span class="s1">&#39;tableau&#39;</span><span class="p">):</span>
+    <span class="k">elif</span> <span class="n">table</span> <span class="o">==</span> <span class="s1">&#39;tableau&#39;</span><span class="p">:</span>
         <span class="n">cell_width</span> <span class="o">=</span> <span class="mi">142</span>
-    <span class="k">elif</span> <span class="p">(</span><span class="n">table</span> <span class="o">==</span> <span class="s1">&#39;sron&#39;</span><span class="p">):</span>
+    <span class="k">elif</span> <span class="n">table</span> <span class="o">==</span> <span class="s1">&#39;sron&#39;</span><span class="p">:</span>
         <span class="n">cell_width</span> <span class="o">=</span> <span class="mi">282</span>
-    <span class="k">elif</span> <span class="p">(</span><span class="n">table</span> <span class="o">==</span> <span class="s1">&#39;ufz&#39;</span><span class="p">):</span>
+    <span class="k">elif</span> <span class="n">table</span> <span class="o">==</span> <span class="s1">&#39;ufz&#39;</span><span class="p">:</span>
         <span class="n">cell_width</span> <span class="o">=</span> <span class="mi">159</span>
+    <span class="k">elif</span> <span class="n">table</span> <span class="o">==</span> <span class="s1">&#39;freetone&#39;</span><span class="p">:</span>
+        <span class="n">cell_width</span> <span class="o">=</span> <span class="mi">282</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">cell_width</span> <span class="o">=</span> <span class="n">cell_width_base</span>
 
@@ -1104,10 +1114,10 @@ document.write(`
             <span class="n">names</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
                 <span class="n">colors</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span>
                 <span class="nb">tuple</span><span class="p">(</span><span class="n">mcolors</span><span class="o">.</span><span class="n">rgb_to_hsv</span><span class="p">(</span><span class="n">colors</span><span class="p">[</span><span class="n">c</span><span class="p">])))</span>
+        <span class="k">elif</span> <span class="n">table</span> <span class="o">==</span> <span class="s1">&#39;freetone&#39;</span><span class="p">:</span>
+            <span class="c1"># freetone has his own sorting</span>
+            <span class="n">names</span> <span class="o">=</span> <span class="n">colors</span>
         <span class="k">elif</span> <span class="n">table</span> <span class="o">==</span> <span class="s1">&#39;sron&#39;</span><span class="p">:</span>
-            <span class="c1"># names = sorted(</span>
-            <span class="c1">#     colors, key=lambda c:</span>
-            <span class="c1">#     tuple(mcolors.rgb_to_hsv(mcolors.to_rgb(colors[c]))))</span>
             <span class="c1"># do not sort but keep in categories,</span>
             <span class="c1"># which are already sorted by hue (or luminance for high-</span>
             <span class="c1"># and medium-contrast)</span>
@@ -1149,7 +1159,7 @@ document.write(`
 
 <div class="viewcode-block" id="show_colors">
 <a class="viewcode-back" href="../../../color.color.html#mcplot.color.show_colors">[docs]</a>
-<span class="k">def</span> <span class="nf">show_colors</span><span class="p">(</span><span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">show_colors</span><span class="p">(</span><span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Show the known named colors</span>
 
@@ -1160,7 +1170,7 @@ document.write(`
 <span class="sd">    collection : str or list of strings, optional</span>
 <span class="sd">        Name(s) of color collection(s).</span>
 <span class="sd">        Known collections are</span>
-<span class="sd">        &#39;base&#39;, &#39;css&#39;, &#39;tableau&#39;, &#39;sron&#39;, &#39;ufz&#39;, and &#39;xkcd&#39;.</span>
+<span class="sd">        &#39;base&#39;, &#39;css&#39;, &#39;freetone&#39;, &#39;sron&#39;, &#39;tableau&#39;, &#39;ufz&#39;, and &#39;xkcd&#39;.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1180,7 +1190,7 @@ document.write(`
         <span class="n">outtype</span> <span class="o">=</span> <span class="n">outfile</span><span class="p">[</span><span class="n">outfile</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
         <span class="k">if</span> <span class="n">outtype</span> <span class="o">==</span> <span class="s1">&#39;pdf&#39;</span><span class="p">:</span>
             <span class="n">mpl</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>  <span class="c1"># set directly after import matplotlib</span>
-            <span class="kn">from</span> <span class="nn">matplotlib.backends.backend_pdf</span> <span class="kn">import</span> <span class="n">PdfPages</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.backends.backend_pdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">PdfPages</span>
             <span class="n">textsize</span> <span class="o">=</span> <span class="mi">12</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">mpl</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;Agg&#39;</span><span class="p">)</span>  <span class="c1"># set directly after import matplotlib</span>
@@ -1221,7 +1231,7 @@ document.write(`
 
 
 
-<span class="k">def</span> <span class="nf">_newfig_cmaps</span><span class="p">(</span><span class="n">ifig</span><span class="p">,</span> <span class="n">ititle</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_newfig_cmaps</span><span class="p">(</span><span class="n">ifig</span><span class="p">,</span> <span class="n">ititle</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Helper function for show_cmaps &quot;&quot;&quot;</span>
     <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">ifig</span><span class="p">)</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">ititle</span><span class="p">)</span>
@@ -1231,10 +1241,10 @@ document.write(`
     <span class="k">return</span> <span class="n">fig</span>
 
 
-<span class="k">def</span> <span class="nf">_newsubplot_cmaps</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">,</span> <span class="n">iplot</span><span class="p">,</span> <span class="n">iname</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_newsubplot_cmaps</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">,</span> <span class="n">iplot</span><span class="p">,</span> <span class="n">iname</span><span class="p">,</span>
                       <span class="n">ncolors</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Helper function for show_cmaps &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
     <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">,</span> <span class="n">iplot</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
@@ -1257,7 +1267,7 @@ document.write(`
 <span class="c1"># https://matplotlib.org/stable/gallery/color/colormap_reference.html</span>
 <div class="viewcode-block" id="show_cmaps">
 <a class="viewcode-back" href="../../../color.color.html#mcplot.color.show_cmaps">[docs]</a>
-<span class="k">def</span> <span class="nf">show_cmaps</span><span class="p">(</span><span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">show_cmaps</span><span class="p">(</span><span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Show the known color palettes and continuous colormaps</span>
 
@@ -1285,14 +1295,14 @@ document.write(`
 <span class="sd">                     collection=[&#39;mathematica&#39;, &#39;matplotlib&#39;])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">mcplot.color</span> <span class="k">as</span> <span class="nn">mc</span>  <span class="c1"># used in eval</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">mcplot.color</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mc</span>  <span class="c1"># used in eval</span>
 
     <span class="c1"># outtype</span>
     <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">outfile</span><span class="p">:</span>
         <span class="n">outtype</span> <span class="o">=</span> <span class="n">outfile</span><span class="p">[</span><span class="n">outfile</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
         <span class="k">if</span> <span class="n">outtype</span> <span class="o">==</span> <span class="s1">&#39;pdf&#39;</span><span class="p">:</span>
             <span class="n">mpl</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>  <span class="c1"># set directly after import matplotlib</span>
-            <span class="kn">from</span> <span class="nn">matplotlib.backends.backend_pdf</span> <span class="kn">import</span> <span class="n">PdfPages</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.backends.backend_pdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">PdfPages</span>
             <span class="n">textsize</span> <span class="o">=</span> <span class="mi">10</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">mpl</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;Agg&#39;</span><span class="p">)</span>  <span class="c1"># set directly after import matplotlib</span>
@@ -1367,14 +1377,14 @@ document.write(`
 
 <div class="viewcode-block" id="show_palettes">
 <a class="viewcode-back" href="../../../color.color.html#mcplot.color.show_palettes">[docs]</a>
-<span class="k">def</span> <span class="nf">show_palettes</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">show_palettes</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Alias for show_cmaps &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">show_cmaps</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">doctest</span>
     <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">optionflags</span><span class="o">=</span><span class="n">doctest</span><span class="o">.</span><span class="n">NORMALIZE_WHITESPACE</span><span class="p">)</span>
 </pre></div>
 
@@ -1385,7 +1395,7 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
 </div>
@@ -1394,8 +1404,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"></div>
               
             
           </div>
@@ -1416,7 +1424,7 @@ By Matthias Cuntz
 
   <p class="copyright">
     
-      © Copyright 2021-2024, Matthias Cuntz.
+      © Copyright 2021-2025, Matthias Cuntz.
       <br/>
     
   </p>
@@ -1440,8 +1448,8 @@ By Matthias Cuntz
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

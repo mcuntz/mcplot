@@ -594,7 +594,6 @@ class mcPlot(object):
         self.handlelength  = 1.5  # length of the legend handles
         self.frameon = False      # if True, draw a frame around the legend.
                                   # If None, use rc
-
         # png
         self.bbox_inches = 'tight'
         self.pad_inches  = 0.035
