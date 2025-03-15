@@ -93,10 +93,14 @@ gives the help message::
      -w, --white           White lines on transparent or black background;
                            default: black lines on transparent or
                            white background.
-     --dpi number          Dots Per inch (DPI) for non-vector output types or
+     --dpi number          Dots Per Inch (DPI) for non-vector output types or
                            rasterized maps in vector output (default: 300).
      --transparent         Transparent figure background
                            (default: black or white).
+     --font name           Font name or LaTeX package name
+                           (default: DejaVuSans or DejaVuSerif (serif) and
+			   MyriadPro or ComputerModern (serif) if --usetex
+
 
 .. code-block:: bash
 

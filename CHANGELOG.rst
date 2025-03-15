@@ -1,7 +1,8 @@
 Changelog
 ---------
 
-v2.x (??? 2025)
+v2.1 (Mar 2025)
+   - Add font option.
    - Add Stuart Semple's Freetone colors.
    - Changed build and coverage status to main branch.
    - Slight amendments to documentation. 

@@ -402,6 +402,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.dowhite"><code class="docutils literal notranslate"><span class="pre">mcPlot.dowhite</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.dpi"><code class="docutils literal notranslate"><span class="pre">mcPlot.dpi</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.transparent"><code class="docutils literal notranslate"><span class="pre">mcPlot.transparent</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.font"><code class="docutils literal notranslate"><span class="pre">mcPlot.font</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.get_command_line_arguments"><code class="docutils literal notranslate"><span class="pre">mcPlot.get_command_line_arguments()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_end"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_end()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_save"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_save()</span></code></a></li>
@@ -516,12 +517,13 @@ Oct 2024, Matthias Cuntz</p></li>
 Oct 2024, Matthias Cuntz</p></li>
 <li><p>Removed trailing &gt; in html output, Oct 2024, Matthias Cuntz</p></li>
 <li><p>Use class variables in test plot, Oct 2024, Matthias Cuntz</p></li>
+<li><p>Add –font option, Mar 2025, Matthias Cuntz</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="mcplot.class_mcplot.mcPlot">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mcPlot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argstr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">serif</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transparent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usetex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dowhite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/class_mcplot.html#mcPlot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.class_mcplot.mcPlot" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mcPlot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argstr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">serif</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transparent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usetex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dowhite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/class_mcplot.html#mcPlot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.class_mcplot.mcPlot" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Standard plotting class of Matthias Cuntz</p>
 <p>Upon initialisation,
@@ -630,7 +632,7 @@ default: black lines on transparent or white background.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mcplot.class_mcplot.mcPlot.dpi">
 <span class="sig-name descname"><span class="pre">dpi</span></span><a class="headerlink" href="#mcplot.class_mcplot.mcPlot.dpi" title="Link to this definition">#</a></dt>
-<dd><p>Dots Per inch (DPI) for non-vector output types or rasterized
+<dd><p>Dots Per Inch (DPI) for non-vector output types or rasterized
 maps in vector output (default: 300).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -646,6 +648,27 @@ maps in vector output (default: 300).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)">bool</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcplot.class_mcplot.mcPlot.font">
+<span class="sig-name descname"><span class="pre">font</span></span><a class="headerlink" href="#mcplot.class_mcplot.mcPlot.font" title="Link to this definition">#</a></dt>
+<dd><p>Font to use. Can be font name or LaTeX package name
+Supported LaTeX sans serif fonts are</p>
+<blockquote>
+<div><p>ComputerModern, FiraSans, Helvetica, Iwona, Kurier, Lato,
+MyriadPro, and OpenSans.</p>
+</div></blockquote>
+<p>The respective LaTeX packages must be installed.
+(default: usetex==False: ‘DejaVuSans’ and ‘DejaVuSerif’ (serif),</p>
+<blockquote>
+<div><p>usetex==True: ‘MyriadPro’ and ‘ComputerModern’ (serif))</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -837,9 +860,13 @@ optional<span class="w"> </span>arguments:
 <span class="w">  </span>-w,<span class="w"> </span>--white<span class="w">           </span>White<span class="w"> </span>lines<span class="w"> </span>on<span class="w"> </span>transparent<span class="w"> </span>or<span class="w"> </span>black
 <span class="w">                        </span>background<span class="p">;</span><span class="w"> </span>default:<span class="w"> </span>black<span class="w"> </span>lines<span class="w"> </span>on
 <span class="w">                        </span>transparent<span class="w"> </span>or<span class="w"> </span>white<span class="w"> </span>background.
-<span class="w">  </span>--dpi<span class="w"> </span>number<span class="w">          </span>Dots<span class="w"> </span>Per<span class="w"> </span>inch<span class="w"> </span><span class="o">(</span>DPI<span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>non-vector<span class="w"> </span>output
+<span class="w">  </span>--dpi<span class="w"> </span>number<span class="w">          </span>Dots<span class="w"> </span>Per<span class="w"> </span>Inch<span class="w"> </span><span class="o">(</span>DPI<span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>non-vector<span class="w"> </span>output
 <span class="w">                        </span>types<span class="w"> </span>or<span class="w"> </span>rasterized<span class="w"> </span>maps<span class="w"> </span><span class="k">in</span><span class="w"> </span>vector<span class="w"> </span>output
 <span class="w">                        </span><span class="o">(</span>default:<span class="w"> </span><span class="m">300</span><span class="o">)</span>.
+<span class="w">  </span>--font<span class="w"> </span>name<span class="w">           </span>Font<span class="w"> </span>name<span class="w"> </span>or<span class="w"> </span>LaTeX<span class="w"> </span>package
+<span class="w">                        </span><span class="o">(</span>default:<span class="w"> </span>DejaVuSans<span class="w"> </span>or<span class="w"> </span>DejaVuSerif<span class="w"> </span><span class="o">(</span>serif<span class="o">)</span>
+<span class="w">                        </span>and<span class="w"> </span>MyriadPro<span class="w"> </span>or<span class="w"> </span>ComputerModern<span class="w"> </span><span class="o">(</span>serif<span class="o">)</span><span class="w"> </span><span class="k">if</span>
+<span class="w">                        </span>--usetex<span class="o">)</span>
 <span class="w">  </span>--transparent<span class="w">         </span>Transparent<span class="w"> </span>figure<span class="w"> </span>background
 <span class="w">                        </span><span class="o">(</span>default:<span class="w"> </span>black<span class="w"> </span>or<span class="w"> </span>white<span class="o">)</span>.
 </pre></div>
@@ -1070,6 +1097,9 @@ bbox of the figure</p></td>
 <tr class="row-even"><td><p>self.transparent</p></td>
 <td><p>True for transparent background in figure</p></td>
 </tr>
+<tr class="row-odd"><td><p>self.font</p></td>
+<td><p>Font name or name of LaTeX package</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1115,7 +1145,7 @@ class.</p>
 <td><p>usetex, latex.preamble, color</p></td>
 </tr>
 <tr class="row-odd"><td><p>font</p></td>
-<td><p>family, sans-serif, size</p></td>
+<td><p>font, family, sans-serif, size</p></td>
 </tr>
 <tr class="row-even"><td><p>savefig</p></td>
 <td><p>dpi, format, edgecolor, facecolor</p></td>
@@ -1228,6 +1258,7 @@ installed.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.dowhite"><code class="docutils literal notranslate"><span class="pre">mcPlot.dowhite</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.dpi"><code class="docutils literal notranslate"><span class="pre">mcPlot.dpi</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.transparent"><code class="docutils literal notranslate"><span class="pre">mcPlot.transparent</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.font"><code class="docutils literal notranslate"><span class="pre">mcPlot.font</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.get_command_line_arguments"><code class="docutils literal notranslate"><span class="pre">mcPlot.get_command_line_arguments()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_end"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_end()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_save"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_save()</span></code></a></li>

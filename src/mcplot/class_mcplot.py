@@ -74,6 +74,7 @@ History
      Oct 2024, Matthias Cuntz
    * Removed trailing > in html output, Oct 2024, Matthias Cuntz
    * Use class variables in test plot, Oct 2024, Matthias Cuntz
+   * Add --font option, Mar 2025, Matthias Cuntz
 
 """
 import numpy as np
@@ -126,10 +127,19 @@ class mcPlot(object):
         If True, plot white lines on transparent or black background;
         default: black lines on transparent or white background.
     dpi : int, optional
-        Dots Per inch (DPI) for non-vector output types or rasterized
+        Dots Per Inch (DPI) for non-vector output types or rasterized
         maps in vector output (default: 300).
     transparent : bool, optional
         Transparent figure background (default: black or white).
+    font : str, optional
+        Font to use. Can be font name or LaTeX package name
+        Supported LaTeX sans serif fonts are
+            ComputerModern, FiraSans, Helvetica, Iwona, Kurier, Lato,
+            MyriadPro, and OpenSans.
+        The respective LaTeX packages must be installed.
+        (default: usetex==False: 'DejaVuSans' and 'DejaVuSerif' (serif),
+                  usetex==True: 'MyriadPro' and 'ComputerModern' (serif))
+
 
     Methods
     -------
@@ -217,7 +227,7 @@ class mcPlot(object):
     #
     def __init__(self, desc=None, argstr=None, parents=[],
                  plotname=None, serif=False, outtype='', transparent=False,
-                 usetex=False, dowhite=False, dpi=300):
+                 usetex=False, dowhite=False, dpi=300, font=''):
         """
         Initialise the class mcPlot.
 
@@ -248,6 +258,7 @@ class mcPlot(object):
         self.usetex = usetex
         self.dowhite = dowhite
         self.dpi = dpi
+        self.font = font
 
         if (self.desc is not None) or (self.argstr is not None):
             # command line options
@@ -303,9 +314,13 @@ class mcPlot(object):
              -w, --white           White lines on transparent or black
                                    background; default: black lines on
                                    transparent or white background.
-             --dpi number          Dots Per inch (DPI) for non-vector output
+             --dpi number          Dots Per Inch (DPI) for non-vector output
                                    types or rasterized maps in vector output
                                    (default: 300).
+             --font name           Font name or LaTeX package
+                                   (default: DejaVuSans or DejaVuSerif (serif)
+                                   and MyriadPro or ComputerModern (serif) if
+                                   --usetex)
              --transparent         Transparent figure background
                                    (default: black or white).
 
@@ -364,7 +379,7 @@ class mcPlot(object):
         parser.add_argument(
             '-w', '--white', action='store_true',
             default=self.dowhite, dest='dowhite', help=hstr)
-        hstr = (f'Dots Per inch (DPI) for non-vector output types or'
+        hstr = (f'Dots Per Inch (DPI) for non-vector output types or'
                 f' rasterized maps in vector output (default: {self.dpi}).')
         parser.add_argument(
             '--dpi', action='store', default=self.dpi, type=int,
@@ -373,6 +388,12 @@ class mcPlot(object):
         parser.add_argument(
             '--transparent', action='store_true',
             default=self.transparent, dest='transparent', help=hstr)
+        hstr = ('Font name or LaTeX package name (default:'
+                ' DejaVuSans or DejaVuSerif (serif) and MyriadPro'
+                ' or ComputerModern (serif) if --usetex')
+        parser.add_argument(
+            '--font', action='store', default=self.font,
+            dest='font', metavar='name', help=hstr)
         parser.add_argument(
             'cargs', nargs='*', default=None, metavar='args', help=self.argstr)
 
@@ -497,6 +518,8 @@ class mcPlot(object):
              - DPI of non-vector figure output
            * - self.transparent
              - True for transparent background in figure
+           * - self.font
+             - Font name or name of LaTeX package
 
         Examples
         --------
@@ -608,6 +631,8 @@ class mcPlot(object):
             self.serif = False
         if not hasattr(self, 'usetex'):
             self.usetex = False
+        if not hasattr(self, 'font'):
+            self.font = ''
 
     # -------------------------------------------------------------------------
     # test figure
@@ -735,7 +760,7 @@ class mcPlot(object):
            * - text
              - usetex, latex.preamble, color
            * - font
-             - family, sans-serif, size
+             - font, family, sans-serif, size
            * - savefig
              - dpi, format, edgecolor, facecolor
            * - axes
@@ -772,6 +797,7 @@ class mcPlot(object):
         """
         import matplotlib as mpl
 
+        # file, fig, size
         if (self.outtype == 'pdf'):
             mpl.use('PDF')  # set directly after import matplotlib
             from matplotlib.backends.backend_pdf import PdfPages
@@ -780,66 +806,87 @@ class mcPlot(object):
             #     http://matplotlib.sourceforge.net/users/customizing.html
             mpl.rc('ps', papersize='a4', usedistiller='xpdf')  # ps2pdf
             mpl.rc('figure', figsize=(8.27, 11.69))  # a4 portrait
-            if self.usetex:
-                mpl.rc('text', usetex=True)
-                if not self.serif:
-                    #   r'\usepackage{helvet}',  # use Helvetica
-                    mpl.rcParams['text.latex.preamble'] = '\n'.join([
-                        # use MyriadPro font
-                        r'\usepackage[math,lf,mathtabular,footnotefigures]'
-                        r'{MyriadPro}',
-                        # normal text font is sans serif
-                        r'\renewcommand{\familydefault}{\sfdefault}',
-                        r'\figureversion{lining,tabular}',
-                        # for permil symbol (load after MyriadPro)
-                        r'\usepackage{wasysym}',
-                        # for degree symbol (load after MyriadPro)
-                        r'\usepackage{gensymb}'])
-                else:
-                    mpl.rcParams['text.latex.preamble'] = '\n'.join([
-                        r'\usepackage{wasysym}',  # for permil symbol
-                        r'\usepackage{gensymb}'])  # for degree symbol
-            else:
-                if self.serif:
-                    mpl.rcParams['font.family']     = 'serif'
-                    mpl.rcParams['font.sans-serif'] = 'DejaVu Serif'
-                else:
-                    mpl.rcParams['font.family']     = 'sans-serif'
-                    mpl.rcParams['font.sans-serif'] = 'DejaVu Sans'
         elif ((self.outtype == 'png') or (self.outtype == 'html') or
               (self.outtype == 'd3') or (self.outtype == 'hvplot')):
             mpl.use('Agg')  # set directly after import matplotlib
             mpl.rc('figure', figsize=(8.27, 11.69))  # a4 portrait
-            if self.usetex:
-                mpl.rc('text', usetex=True)
-                if not self.serif:
-                    #   r'\usepackage{helvet}',  # use Helvetica
-                    mpl.rcParams['text.latex.preamble'] = '\n'.join([
-                        # use MyriadPro font
-                        r'\usepackage[math,lf,mathtabular,footnotefigures]'
-                        r'{MyriadPro}',
-                        # normal text font is sans serif
-                        r'\renewcommand{\familydefault}{\sfdefault}',
-                        r'\figureversion{lining,tabular}',
-                        # for permil symbol (load after MyriadPro)
-                        r'\usepackage{wasysym}',
-                        # for degree symbol (load after MyriadPro)
-                        r'\usepackage{gensymb}'])
-                else:
-                    mpl.rcParams['text.latex.preamble'] = '\n'.join([
-                        r'\usepackage{wasysym}',   # for permil symbol
-                        r'\usepackage{gensymb}'])  # for degree symbol
-            else:
-                if self.serif:
-                    mpl.rcParams['font.family']     = 'serif'
-                    mpl.rcParams['font.sans-serif'] = 'DejaVu Serif'
-                else:
-                    mpl.rcParams['font.family']     = 'sans-serif'
-                    mpl.rcParams['font.sans-serif'] = 'DejaVu Sans'
             mpl.rc('savefig', dpi=self.dpi, format='png')
         else:
             # 80% of a4 portrait
             mpl.rc('figure', figsize=(10. / 12. * 8.27, 10. / 12. * 11.69))
+
+        # font
+        if self.usetex:
+            mpl.rc('text', usetex=True)
+            if self.font:
+                font = self.font
+            else:
+                if self.serif:
+                    font = 'Computer Modern'
+                else:
+                    font = 'MyriadPro'
+            if font.lower() in ['computer modern', 'computermodern']:
+                tlp = ''
+            elif font.lower() in ['firasans', 'fira sans', 'fira']:
+                tlp = '\n'.join([
+                    r'\usepackage[sfdefault,lining]{FiraSans}',
+                    r'\usepackage{newtxsf}'])
+            elif font.lower() in ['helvetica', 'helvet']:
+                tlp = '\n'.join([
+                    r'\usepackage{helvet}',
+                    r'\renewcommand{\familydefault}{\sfdefault}',
+                    r'\usepackage[helvet]{sfmath}',
+                    r'\everymath={\sf}'])
+            elif font.lower() in ['iwona']:
+                tlp = r'\usepackage[math]{iwona}'
+            elif font.lower() in ['kurier']:
+                tlp = r'\usepackage[math]{kurier}'
+            elif font.lower() in ['lato']:
+                tlp = '\n'.join([
+                    r'\usepackage[default]{lato}',
+                    r'\usepackage{mdsymbol}',
+                    r'\usepackage{mathastext}'])
+            elif font.lower() in ['myriadpro', 'myriad pro']:
+                tlp = '\n'.join([
+                    # use MyriadPro font
+                    r'\usepackage[math,lf,mathtabular,footnotefigures]'
+                    r'{MyriadPro}',
+                    r'\renewcommand{\familydefault}{\sfdefault}',
+                    r'\figureversion{lining,tabular}'])
+            elif font.lower() in ['open sans', 'opensans']:
+                tlp = '\n'.join([
+                    r'\usepackage[default,tabular]{opensans}',
+                    r'\usepackage{mdsymbol}',
+                    r'\usepackage{mathastext}'])
+            else:
+                tlp = r'\usepackage{' + font + '}'
+            mpl.rcParams['text.latex.preamble'] = (
+                tlp + '\n' + '\n'.join([
+                    # for permil symbol (load after font)
+                    r'\usepackage{wasysym}',
+                    # for degree symbol (load after font)
+                    r'\usepackage{gensymb}']))
+        else:
+            # print fonts
+            # import matplotlib as mpl
+            # mpl.font_manager.findSystemFonts(fontpaths=None, fontext='ttf')
+            font = self.font
+            if self.serif:
+                if not self.font:
+                    font = 'DejaVu Serif'
+                elif self.font.lower() in ['dejavu serif', 'dejavuserif']:
+                    font = 'DejaVu Serif'
+                mpl.rcParams['font.family']     = 'serif'
+                mpl.rcParams['font.sans-serif'] = font
+            else:
+                if not self.font:
+                    font = 'DejaVu Sans'
+                elif self.font.lower() in ['dejavu sans', 'dejavusans']:
+                    font = 'DejaVu Sans'
+                mpl.rcParams['font.family']     = 'sans-serif'
+                mpl.rcParams['font.sans-serif'] = font
+
+        # colors
         # print(mpl.rcParams)
         mpl.rc('axes', linewidth=self.alw, edgecolor=self.fgcolor,
                facecolor=self.bgcolor, labelcolor=self.fgcolor,

@@ -404,6 +404,7 @@ document.write(`
 <span class="sd">     Oct 2024, Matthias Cuntz</span>
 <span class="sd">   * Removed trailing &gt; in html output, Oct 2024, Matthias Cuntz</span>
 <span class="sd">   * Use class variables in test plot, Oct 2024, Matthias Cuntz</span>
+<span class="sd">   * Add --font option, Mar 2025, Matthias Cuntz</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -458,10 +459,19 @@ document.write(`
 <span class="sd">        If True, plot white lines on transparent or black background;</span>
 <span class="sd">        default: black lines on transparent or white background.</span>
 <span class="sd">    dpi : int, optional</span>
-<span class="sd">        Dots Per inch (DPI) for non-vector output types or rasterized</span>
+<span class="sd">        Dots Per Inch (DPI) for non-vector output types or rasterized</span>
 <span class="sd">        maps in vector output (default: 300).</span>
 <span class="sd">    transparent : bool, optional</span>
 <span class="sd">        Transparent figure background (default: black or white).</span>
+<span class="sd">    font : str, optional</span>
+<span class="sd">        Font to use. Can be font name or LaTeX package name</span>
+<span class="sd">        Supported LaTeX sans serif fonts are</span>
+<span class="sd">            ComputerModern, FiraSans, Helvetica, Iwona, Kurier, Lato,</span>
+<span class="sd">            MyriadPro, and OpenSans.</span>
+<span class="sd">        The respective LaTeX packages must be installed.</span>
+<span class="sd">        (default: usetex==False: &#39;DejaVuSans&#39; and &#39;DejaVuSerif&#39; (serif),</span>
+<span class="sd">                  usetex==True: &#39;MyriadPro&#39; and &#39;ComputerModern&#39; (serif))</span>
+
 
 <span class="sd">    Methods</span>
 <span class="sd">    -------</span>
@@ -549,7 +559,7 @@ document.write(`
     <span class="c1">#</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">argstr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="p">[],</span>
                  <span class="n">plotname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">serif</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">outtype</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">usetex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dowhite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
+                 <span class="n">usetex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dowhite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialise the class mcPlot.</span>
 
@@ -580,6 +590,7 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">usetex</span> <span class="o">=</span> <span class="n">usetex</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dowhite</span> <span class="o">=</span> <span class="n">dowhite</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dpi</span> <span class="o">=</span> <span class="n">dpi</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="n">font</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">desc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argstr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
             <span class="c1"># command line options</span>
@@ -637,9 +648,13 @@ document.write(`
 <span class="sd">             -w, --white           White lines on transparent or black</span>
 <span class="sd">                                   background; default: black lines on</span>
 <span class="sd">                                   transparent or white background.</span>
-<span class="sd">             --dpi number          Dots Per inch (DPI) for non-vector output</span>
+<span class="sd">             --dpi number          Dots Per Inch (DPI) for non-vector output</span>
 <span class="sd">                                   types or rasterized maps in vector output</span>
 <span class="sd">                                   (default: 300).</span>
+<span class="sd">             --font name           Font name or LaTeX package</span>
+<span class="sd">                                   (default: DejaVuSans or DejaVuSerif (serif)</span>
+<span class="sd">                                   and MyriadPro or ComputerModern (serif) if</span>
+<span class="sd">                                   --usetex)</span>
 <span class="sd">             --transparent         Transparent figure background</span>
 <span class="sd">                                   (default: black or white).</span>
 
@@ -698,7 +713,7 @@ document.write(`
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s1">&#39;-w&#39;</span><span class="p">,</span> <span class="s1">&#39;--white&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dowhite</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;dowhite&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
-        <span class="n">hstr</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Dots Per inch (DPI) for non-vector output types or&#39;</span>
+        <span class="n">hstr</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Dots Per Inch (DPI) for non-vector output types or&#39;</span>
                 <span class="sa">f</span><span class="s1">&#39; rasterized maps in vector output (default: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dpi</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s1">&#39;--dpi&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dpi</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
@@ -707,6 +722,12 @@ document.write(`
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s1">&#39;--transparent&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transparent</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;transparent&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
+        <span class="n">hstr</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Font name or LaTeX package name (default:&#39;</span>
+                <span class="s1">&#39; DejaVuSans or DejaVuSerif (serif) and MyriadPro&#39;</span>
+                <span class="s1">&#39; or ComputerModern (serif) if --usetex&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s1">&#39;--font&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">,</span>
+            <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">hstr</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s1">&#39;cargs&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;args&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">argstr</span><span class="p">)</span>
 
@@ -834,6 +855,8 @@ document.write(`
 <span class="sd">             - DPI of non-vector figure output</span>
 <span class="sd">           * - self.transparent</span>
 <span class="sd">             - True for transparent background in figure</span>
+<span class="sd">           * - self.font</span>
+<span class="sd">             - Font name or name of LaTeX package</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
@@ -944,7 +967,9 @@ document.write(`
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;serif&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">serif</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;usetex&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">usetex</span> <span class="o">=</span> <span class="kc">False</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">usetex</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;font&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></div>
 
 
     <span class="c1"># -------------------------------------------------------------------------</span>
@@ -1081,7 +1106,7 @@ document.write(`
 <span class="sd">           * - text</span>
 <span class="sd">             - usetex, latex.preamble, color</span>
 <span class="sd">           * - font</span>
-<span class="sd">             - family, sans-serif, size</span>
+<span class="sd">             - font, family, sans-serif, size</span>
 <span class="sd">           * - savefig</span>
 <span class="sd">             - dpi, format, edgecolor, facecolor</span>
 <span class="sd">           * - axes</span>
@@ -1118,6 +1143,7 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 
+        <span class="c1"># file, fig, size</span>
         <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outtype</span> <span class="o">==</span> <span class="s1">&#39;pdf&#39;</span><span class="p">):</span>
             <span class="n">mpl</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>  <span class="c1"># set directly after import matplotlib</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.backends.backend_pdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">PdfPages</span>
@@ -1126,66 +1152,87 @@ document.write(`
             <span class="c1">#     http://matplotlib.sourceforge.net/users/customizing.html</span>
             <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;ps&#39;</span><span class="p">,</span> <span class="n">papersize</span><span class="o">=</span><span class="s1">&#39;a4&#39;</span><span class="p">,</span> <span class="n">usedistiller</span><span class="o">=</span><span class="s1">&#39;xpdf&#39;</span><span class="p">)</span>  <span class="c1"># ps2pdf</span>
             <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">8.27</span><span class="p">,</span> <span class="mf">11.69</span><span class="p">))</span>  <span class="c1"># a4 portrait</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">:</span>
-                <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">serif</span><span class="p">:</span>
-                    <span class="c1">#   r&#39;\usepackage{helvet}&#39;,  # use Helvetica</span>
-                    <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.latex.preamble&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-                        <span class="c1"># use MyriadPro font</span>
-                        <span class="sa">r</span><span class="s1">&#39;\usepackage[math,lf,mathtabular,footnotefigures]&#39;</span>
-                        <span class="sa">r</span><span class="s1">&#39;</span><span class="si">{MyriadPro}</span><span class="s1">&#39;</span><span class="p">,</span>
-                        <span class="c1"># normal text font is sans serif</span>
-                        <span class="sa">r</span><span class="s1">&#39;\renewcommand{\familydefault}{\sfdefault}&#39;</span><span class="p">,</span>
-                        <span class="sa">r</span><span class="s1">&#39;\figureversion{lining,tabular}&#39;</span><span class="p">,</span>
-                        <span class="c1"># for permil symbol (load after MyriadPro)</span>
-                        <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{wasysym}</span><span class="s1">&#39;</span><span class="p">,</span>
-                        <span class="c1"># for degree symbol (load after MyriadPro)</span>
-                        <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{gensymb}</span><span class="s1">&#39;</span><span class="p">])</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.latex.preamble&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-                        <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{wasysym}</span><span class="s1">&#39;</span><span class="p">,</span>  <span class="c1"># for permil symbol</span>
-                        <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{gensymb}</span><span class="s1">&#39;</span><span class="p">])</span>  <span class="c1"># for degree symbol</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">serif</span><span class="p">:</span>
-                    <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">&#39;serif&#39;</span>
-                    <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;DejaVu Serif&#39;</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">&#39;sans-serif&#39;</span>
-                    <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;DejaVu Sans&#39;</span>
         <span class="k">elif</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">outtype</span> <span class="o">==</span> <span class="s1">&#39;png&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outtype</span> <span class="o">==</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span> <span class="ow">or</span>
               <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outtype</span> <span class="o">==</span> <span class="s1">&#39;d3&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outtype</span> <span class="o">==</span> <span class="s1">&#39;hvplot&#39;</span><span class="p">)):</span>
             <span class="n">mpl</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;Agg&#39;</span><span class="p">)</span>  <span class="c1"># set directly after import matplotlib</span>
             <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">8.27</span><span class="p">,</span> <span class="mf">11.69</span><span class="p">))</span>  <span class="c1"># a4 portrait</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">:</span>
-                <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">serif</span><span class="p">:</span>
-                    <span class="c1">#   r&#39;\usepackage{helvet}&#39;,  # use Helvetica</span>
-                    <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.latex.preamble&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-                        <span class="c1"># use MyriadPro font</span>
-                        <span class="sa">r</span><span class="s1">&#39;\usepackage[math,lf,mathtabular,footnotefigures]&#39;</span>
-                        <span class="sa">r</span><span class="s1">&#39;</span><span class="si">{MyriadPro}</span><span class="s1">&#39;</span><span class="p">,</span>
-                        <span class="c1"># normal text font is sans serif</span>
-                        <span class="sa">r</span><span class="s1">&#39;\renewcommand{\familydefault}{\sfdefault}&#39;</span><span class="p">,</span>
-                        <span class="sa">r</span><span class="s1">&#39;\figureversion{lining,tabular}&#39;</span><span class="p">,</span>
-                        <span class="c1"># for permil symbol (load after MyriadPro)</span>
-                        <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{wasysym}</span><span class="s1">&#39;</span><span class="p">,</span>
-                        <span class="c1"># for degree symbol (load after MyriadPro)</span>
-                        <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{gensymb}</span><span class="s1">&#39;</span><span class="p">])</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.latex.preamble&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-                        <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{wasysym}</span><span class="s1">&#39;</span><span class="p">,</span>   <span class="c1"># for permil symbol</span>
-                        <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{gensymb}</span><span class="s1">&#39;</span><span class="p">])</span>  <span class="c1"># for degree symbol</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">serif</span><span class="p">:</span>
-                    <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">&#39;serif&#39;</span>
-                    <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;DejaVu Serif&#39;</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">&#39;sans-serif&#39;</span>
-                    <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;DejaVu Sans&#39;</span>
             <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;savefig&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dpi</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># 80% of a4 portrait</span>
             <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">10.</span> <span class="o">/</span> <span class="mf">12.</span> <span class="o">*</span> <span class="mf">8.27</span><span class="p">,</span> <span class="mf">10.</span> <span class="o">/</span> <span class="mf">12.</span> <span class="o">*</span> <span class="mf">11.69</span><span class="p">))</span>
+
+        <span class="c1"># font</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">:</span>
+            <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">:</span>
+                <span class="n">font</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">serif</span><span class="p">:</span>
+                    <span class="n">font</span> <span class="o">=</span> <span class="s1">&#39;Computer Modern&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">font</span> <span class="o">=</span> <span class="s1">&#39;MyriadPro&#39;</span>
+            <span class="k">if</span> <span class="n">font</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;computer modern&#39;</span><span class="p">,</span> <span class="s1">&#39;computermodern&#39;</span><span class="p">]:</span>
+                <span class="n">tlp</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">elif</span> <span class="n">font</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;firasans&#39;</span><span class="p">,</span> <span class="s1">&#39;fira sans&#39;</span><span class="p">,</span> <span class="s1">&#39;fira&#39;</span><span class="p">]:</span>
+                <span class="n">tlp</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                    <span class="sa">r</span><span class="s1">&#39;\usepackage[sfdefault,lining]</span><span class="si">{FiraSans}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{newtxsf}</span><span class="s1">&#39;</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">font</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;helvetica&#39;</span><span class="p">,</span> <span class="s1">&#39;helvet&#39;</span><span class="p">]:</span>
+                <span class="n">tlp</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                    <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{helvet}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="sa">r</span><span class="s1">&#39;\renewcommand{\familydefault}{\sfdefault}&#39;</span><span class="p">,</span>
+                    <span class="sa">r</span><span class="s1">&#39;\usepackage[helvet]</span><span class="si">{sfmath}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="sa">r</span><span class="s1">&#39;\everymath={\sf}&#39;</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">font</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;iwona&#39;</span><span class="p">]:</span>
+                <span class="n">tlp</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\usepackage[math]</span><span class="si">{iwona}</span><span class="s1">&#39;</span>
+            <span class="k">elif</span> <span class="n">font</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;kurier&#39;</span><span class="p">]:</span>
+                <span class="n">tlp</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\usepackage[math]</span><span class="si">{kurier}</span><span class="s1">&#39;</span>
+            <span class="k">elif</span> <span class="n">font</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;lato&#39;</span><span class="p">]:</span>
+                <span class="n">tlp</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                    <span class="sa">r</span><span class="s1">&#39;\usepackage[default]</span><span class="si">{lato}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{mdsymbol}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{mathastext}</span><span class="s1">&#39;</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">font</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;myriadpro&#39;</span><span class="p">,</span> <span class="s1">&#39;myriad pro&#39;</span><span class="p">]:</span>
+                <span class="n">tlp</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                    <span class="c1"># use MyriadPro font</span>
+                    <span class="sa">r</span><span class="s1">&#39;\usepackage[math,lf,mathtabular,footnotefigures]&#39;</span>
+                    <span class="sa">r</span><span class="s1">&#39;</span><span class="si">{MyriadPro}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="sa">r</span><span class="s1">&#39;\renewcommand{\familydefault}{\sfdefault}&#39;</span><span class="p">,</span>
+                    <span class="sa">r</span><span class="s1">&#39;\figureversion{lining,tabular}&#39;</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">font</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;open sans&#39;</span><span class="p">,</span> <span class="s1">&#39;opensans&#39;</span><span class="p">]:</span>
+                <span class="n">tlp</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                    <span class="sa">r</span><span class="s1">&#39;\usepackage[default,tabular]</span><span class="si">{opensans}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{mdsymbol}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{mathastext}</span><span class="s1">&#39;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">tlp</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\usepackage{&#39;</span> <span class="o">+</span> <span class="n">font</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span>
+            <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.latex.preamble&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">tlp</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                    <span class="c1"># for permil symbol (load after font)</span>
+                    <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{wasysym}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="c1"># for degree symbol (load after font)</span>
+                    <span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{gensymb}</span><span class="s1">&#39;</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># print fonts</span>
+            <span class="c1"># import matplotlib as mpl</span>
+            <span class="c1"># mpl.font_manager.findSystemFonts(fontpaths=None, fontext=&#39;ttf&#39;)</span>
+            <span class="n">font</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">serif</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">:</span>
+                    <span class="n">font</span> <span class="o">=</span> <span class="s1">&#39;DejaVu Serif&#39;</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;dejavu serif&#39;</span><span class="p">,</span> <span class="s1">&#39;dejavuserif&#39;</span><span class="p">]:</span>
+                    <span class="n">font</span> <span class="o">=</span> <span class="s1">&#39;DejaVu Serif&#39;</span>
+                <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">&#39;serif&#39;</span>
+                <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">font</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">:</span>
+                    <span class="n">font</span> <span class="o">=</span> <span class="s1">&#39;DejaVu Sans&#39;</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;dejavu sans&#39;</span><span class="p">,</span> <span class="s1">&#39;dejavusans&#39;</span><span class="p">]:</span>
+                    <span class="n">font</span> <span class="o">=</span> <span class="s1">&#39;DejaVu Sans&#39;</span>
+                <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">&#39;sans-serif&#39;</span>
+                <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">font</span>
+
+        <span class="c1"># colors</span>
         <span class="c1"># print(mpl.rcParams)</span>
         <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alw</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fgcolor</span><span class="p">,</span>
                <span class="n">facecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bgcolor</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fgcolor</span><span class="p">,</span>
