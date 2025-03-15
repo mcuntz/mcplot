@@ -2,8 +2,9 @@ Commented Example
 =================
 
 Here is a fully commented example that uses most of the class and
-functions of :mod:`mcplot`. It reads a file with `pandas`_ that can be
-written as:
+functions of :mod:`mcplot`. The example focus on class functionality
+and not on esthetics of the plots. The example reads a file with
+`pandas`_ that can be written as:
 
 .. code-block:: python
 		
@@ -630,7 +631,7 @@ high resolution:
 
    python mcplot_example.py -t png -o mcex_ -w --dpi 600 mcplot_iris.csv
 
-The test PNG files with the pretty arbitrary plots are:
+The test PNG files with the arbitrary plots are:
 
 .. image:: ../images/mcex_0001.png
    :width: 800 px

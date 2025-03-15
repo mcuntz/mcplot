@@ -11,5 +11,4 @@ Contents
    full_example
    changelog
    authors
-   license
    api

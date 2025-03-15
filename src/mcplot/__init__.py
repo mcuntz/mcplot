@@ -26,6 +26,9 @@ Subpackages
 History
    * Written Oct 2024 by Matthias Cuntz (mc (at) macu (dot) de)
    * v1.0, first standalone version, Oct 2024, Matthias Cuntz
+   * v2.0 use similar names and defaults as Matplotlib,
+     Nov 2024, Matthias Cuntz
+   * v2.1 adds the font option, Mar 2025, Matthias Cuntz
 
 """
 # version, author
