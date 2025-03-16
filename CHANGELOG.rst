@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+v2.x (??? 2025)
+   - Documentation of font option.
+   - Documentation of colors and color palettes.
+
 v2.1 (Mar 2025)
    - Add font option.
    - Add Stuart Semple's Freetone colors.

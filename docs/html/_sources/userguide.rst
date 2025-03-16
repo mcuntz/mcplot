@@ -75,6 +75,9 @@ gives the help message::
                            rasterized maps in vector output (default: 300).
      --transparent         Transparent figure background
                            (default: black or white).
+     --font name           Font name or LaTeX package name
+                           (default: DejaVuSans or DejaVuSerif (serif) and
+			   MyriadPro or ComputerModern (serif) if --usetex
 
 Thus, the command line option **-t pdf** would write the plot into a
 PDF file. The option **-o test1.pdf** would write it into the file named
@@ -90,7 +93,21 @@ the serif font **DejaVue Serif** with the command line option
 **-s**. It will use LaTeX to render text with the **-u** option (see
 `Text rendering with LaTeX`_). **-u -s** uses LaTeX standard Computer
 Modern font. It uses **MyriadPro** as sans-serif font in LaTeX, which
-must be installed separately (see section `Myriad Pro`_).
+must be installed separately (see section `Myriad Pro`_ here). One can
+chose the font with the **--font** option.
+
+.. code-block:: python
+
+   import matplotlib as mpl
+   mpl.font_manager.findSystemFonts(fontpaths=None, fontext='ttf')
+
+prints all fonts available to Matplotlib. :mod:`mcplot` supports the
+following LaTeX sans serif fonts with **-u**: **FiraSans**,
+**Helvetica**, **Iwona**, **Kurier**, **Lato**, **MyriadPro**, and
+**OpenSans**, or any other font that can be loaded in LaTeX with
+`\usepackage{fontname}`. The respective LaTeX packages must be
+installed. **FiraSans** is a good alternative to **MyriadPro** if the
+latter is too difficult to install.
 
 By default, ``mcPlot`` plots onto a DIN A4 page, which facilitates
 choices of font sizes, etc. The output can be cropped with the utility
@@ -353,6 +370,8 @@ themselves.
            self.hspace = 0.09  # x-space between subplots
            self.vspace = 0.04  # y-space between subplots
            self.textsize = 20  # standard text size
+           if self.usetex:
+               self.font = 'Fira'
 
            # Set come line and marker properties
            self.lw = 3.5   # linewidth

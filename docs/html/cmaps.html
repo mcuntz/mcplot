@@ -1,0 +1,750 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Colormaps &#8212; mcplot</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=628480d8" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=309c238c"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cmaps';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Commented Example" href="full_example.html" />
+    <link rel="prev" title="Named Colors" href="colors.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="contents.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">mcplot</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="index.html">mcplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colors.html">Named Colors</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Colormaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="full_example.html">Commented Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="argsort.html">argmax/argmin/argsort</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="color.html">Color module</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="color.color.html">Color functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.brewer_palettes.html">Brewer palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.freetone_palettes.html">Freetone colors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.ipcc_palettes.html">IPCC WG1 palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.mathematica_palettes.html">Mathematica palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.ncl_palettes.html">NCL palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.oregon_palettes.html">Oregon palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.mcplot_palettes.html">mcplot palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.sron2012_palettes.html">SRON2012 palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.sron_palettes.html">SRON palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.ufz_palettes.html">UFZ colors</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="class_mcplot.html">mcPlot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="position.html">position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="romanliterals.html">Roman literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="str2tex.html">str2tex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text2plot.html">text2plot</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mcuntz/mcplot" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mcuntz/mcplot/edit/main/docs/cmaps.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mcuntz/mcplot/issues/new?title=Issue%20on%20page%20%2Fcmaps.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/cmaps.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Colormaps</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot-colormap">mcplot Colormap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sron-colors">SRON Colors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sron-colormaps">SRON Colormaps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sron-functions">SRON Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sron-2012-colors">SRON 2012 Colors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sron-2012-functions">SRON 2012 Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematica">Mathematica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oregon-sequential">Oregon Sequential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oregon-diverging">Oregon Diverging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oregon-qualitative">Oregon Qualitative</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipcc-categorical">IPCC Categorical</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipcc-diverging">IPCC Diverging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipcc-sequential">IPCC Sequential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ncl-small">NCL Small</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ncl-large">NCL Large</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ncl-meteo-swiss">NCL Meteo Swiss</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-perceptually-uniform-sequential">Matplotlib Perceptually Uniform Sequential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-sequential">Matplotlib Sequential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-diverging">Matplotlib Diverging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-cyclic">Matplotlib Cyclic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-qualitative">Matplotlib Qualitative</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-miscellaneous">Matplotlib Miscellaneous</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brewer-sequential">Brewer Sequential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brewer-diverging">Brewer Diverging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brewer-qualitative">Brewer Qualitative</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="colormaps">
+<h1>Colormaps<a class="headerlink" href="#colormaps" title="Link to this heading">#</a></h1>
+<p><a class="reference internal" href="api.html#module-mcplot" title="mcplot"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mcplot</span></code></a> provides a large number of colormaps (in the jargon of
+<a class="reference external" href="https://matplotlib.org/stable/gallery/color/colormap_reference.html">Matplotlib</a>) or color palettes (in the jargon of <a class="reference external" href="https://seaborn.pydata.org/tutorial/color_palettes.html">Seaborn</a> ) from a
+variety of public sources. They can be chosen with
+<a class="reference internal" href="color.html#mcplot.color.get_cmap" title="mcplot.color.get_cmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">mcplot.color.get_cmap()</span></code></a> (or the aliases
+<a class="reference internal" href="color.html#mcplot.color.get_palette" title="mcplot.color.get_palette"><code class="xref py py-func docutils literal notranslate"><span class="pre">mcplot.color.get_palette()</span></code></a> and
+<a class="reference internal" href="color.html#mcplot.color.color_palette" title="mcplot.color.color_palette"><code class="xref py py-func docutils literal notranslate"><span class="pre">mcplot.color.color_palette()</span></code></a> as in <a class="reference external" href="https://seaborn.pydata.org/tutorial/color_palettes.html">Seaborn</a>).</p>
+<p>Next to <a class="reference external" href="https://matplotlib.org/stable/gallery/color/colormap_reference.html">Matplotlib</a>’s colormaps, there are the colormaps of the
+<a class="reference external" href="https://www.ipcc.ch/site/assets/uploads/2019/04/IPCC-visual-style-guide.pdf">IPCC Visual Style Guide for WG1 Authors</a>, <a class="reference external" href="https://personal.sron.nl/~pault/">Paul Tol</a>’s 2021 as well
+his 2012 colors and colormaps, Mathematica’s <a class="reference external" href="https://reference.wolfram.com/language/guide/ColorSchemes.html">DarkRainbow</a> color
+scheme, color schemes from the <a class="reference external" href="https://pjbartlein.github.io/datagraphics/color_scales.html">Department of Geography, University of
+Oregon</a>, the color tables from the <a class="reference external" href="https://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml">NCAR Command Language</a> (NCL),
+and the color schemes from Cynthia Brewer’s <a class="reference external" href="https://colorbrewer2.org/">Colorbrewer 2.0</a>. Most
+collections come with sequential, diverging, and qualitative or
+categorical colormaps.</p>
+<p>Colormap names can be printed with <a class="reference internal" href="color.html#mcplot.color.print_cmaps" title="mcplot.color.print_cmaps"><code class="xref py py-func docutils literal notranslate"><span class="pre">mcplot.color.print_cmaps()</span></code></a>
+and plotted on screen or into a file with
+<a class="reference internal" href="color.html#mcplot.color.show_cmaps" title="mcplot.color.show_cmaps"><code class="xref py py-func docutils literal notranslate"><span class="pre">mcplot.color.show_cmaps()</span></code></a> with the categories <cite>brewer</cite>,
+<cite>ipcc</cite>, <cite>mathematica</cite>, <cite>matplotlib</cite>, <cite>mcplot</cite>, <cite>ncl</cite>, <cite>oregon</cite>,
+<cite>sron</cite>, and <cite>sron2012</cite>. A PDF file with all colormaps is given here:
+<a class="reference external" href="https://mcuntz.github.io/mcplot/images/mcplot_cmaps.pdf">mcplot_cmaps.pdf</a>.</p>
+<p>All colormaps can be reversed by appending <cite>_r</cite> to the name or using
+the <cite>reverse=True</cite> keyword of <a class="reference internal" href="color.html#mcplot.color.get_cmap" title="mcplot.color.get_cmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">mcplot.color.get_cmap()</span></code></a>.</p>
+<p><a class="reference internal" href="color.html#mcplot.color.get_cmap" title="mcplot.color.get_cmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_cmap()</span></code></a> returns a list of RGB tuples. One can
+use <code class="xref py py-meth docutils literal notranslate"><span class="pre">matplotlib.colors.ListedColormap()</span></code> or
+<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.colors.LinearSegmentedColormap.html#matplotlib.colors.LinearSegmentedColormap.from_list" title="(in Matplotlib v3.10.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">matplotlib.colors.LinearSegmentedColormap.from_list()</span></code></a> to get
+Matplotlib colormaps, for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ncolors</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">mcplot</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;sron2012:buylrd_</span><span class="si">{</span><span class="n">ncolors</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">(</span><span class="n">cmap</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">cmap</span><span class="o">.</span><span class="n">set_under</span><span class="p">(</span><span class="n">cmap</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">cmap</span><span class="o">.</span><span class="n">set_over</span><span class="p">(</span><span class="n">cmap</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>If the keyword <cite>as_cmap</cite> is set, <a class="reference internal" href="color.html#mcplot.color.get_cmap" title="mcplot.color.get_cmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_cmap()</span></code></a> uses
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">ListedColormap()</span></code> to convert the list of RGB
+tuples to a colormap.</p>
+<section id="mcplot-colormap">
+<h2>mcplot Colormap<a class="headerlink" href="#mcplot-colormap" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-mcplot_cmaps.png"><img alt="toned down amwg colormap" class="align-center" src="_images/mcplot_cmaps-mcplot_cmaps.png" style="width: 800px;" />
+</a>
+</section>
+<section id="sron-colors">
+<h2>SRON Colors<a class="headerlink" href="#sron-colors" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-sron_colors.png"><img alt="Paul Tol's colors" class="align-center" src="_images/mcplot_cmaps-sron_colors.png" style="width: 800px;" />
+</a>
+</section>
+<section id="sron-colormaps">
+<h2>SRON Colormaps<a class="headerlink" href="#sron-colormaps" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-sron_colormaps.png"><img alt="Paul Tol's colormaps" class="align-center" src="_images/mcplot_cmaps-sron_colormaps.png" style="width: 800px;" />
+</a>
+</section>
+<section id="sron-functions">
+<h2>SRON Functions<a class="headerlink" href="#sron-functions" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-sron_functions.png"><img alt="Paul Tol's colormap functions" class="align-center" src="_images/mcplot_cmaps-sron_functions.png" style="width: 800px;" />
+</a>
+</section>
+<section id="sron-2012-colors">
+<h2>SRON 2012 Colors<a class="headerlink" href="#sron-2012-colors" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-sron2012_colors_01.png"><img alt="Paul Tol's 2012 colors #1" class="align-center" src="_images/mcplot_cmaps-sron2012_colors_01.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-sron2012_colors_02.png"><img alt="Paul Tol's 2012 colors #2" class="align-center" src="_images/mcplot_cmaps-sron2012_colors_02.png" style="width: 800px;" />
+</a>
+</section>
+<section id="sron-2012-functions">
+<h2>SRON 2012 Functions<a class="headerlink" href="#sron-2012-functions" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-sron2012_functions.png"><img alt="Paul Tol's 2012 colormap functions" class="align-center" src="_images/mcplot_cmaps-sron2012_functions.png" style="width: 800px;" />
+</a>
+</section>
+<section id="mathematica">
+<h2>Mathematica<a class="headerlink" href="#mathematica" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-mathematica_rainbow.png"><img alt="Mathematica's DarkRainbow color scheme" class="align-center" src="_images/mcplot_cmaps-mathematica_rainbow.png" style="width: 800px;" />
+</a>
+</section>
+<section id="oregon-sequential">
+<h2>Oregon Sequential<a class="headerlink" href="#oregon-sequential" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-oregon_sequential.png"><img alt="Department of Geography, University of Oregon sequential color schems" class="align-center" src="_images/mcplot_cmaps-oregon_sequential.png" style="width: 800px;" />
+</a>
+</section>
+<section id="oregon-diverging">
+<h2>Oregon Diverging<a class="headerlink" href="#oregon-diverging" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-oregon_diverging.png"><img alt="Department of Geography, University of Oregon diverging color schemes" class="align-center" src="_images/mcplot_cmaps-oregon_diverging.png" style="width: 800px;" />
+</a>
+</section>
+<section id="oregon-qualitative">
+<h2>Oregon Qualitative<a class="headerlink" href="#oregon-qualitative" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-oregon_qualitative.png"><img alt="Department of Geography, University of Oregon qualitative color schemes" class="align-center" src="_images/mcplot_cmaps-oregon_qualitative.png" style="width: 800px;" />
+</a>
+</section>
+<section id="ipcc-categorical">
+<h2>IPCC Categorical<a class="headerlink" href="#ipcc-categorical" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-ipcc_categorical.png"><img alt="IPCC WG1 categorical colormaps" class="align-center" src="_images/mcplot_cmaps-ipcc_categorical.png" style="width: 800px;" />
+</a>
+</section>
+<section id="ipcc-diverging">
+<h2>IPCC Diverging<a class="headerlink" href="#ipcc-diverging" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-ipcc_diverging_01.png"><img alt="IPCC WG1 diverging colormaps #1" class="align-center" src="_images/mcplot_cmaps-ipcc_diverging_01.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-ipcc_diverging_02.png"><img alt="IPCC WG1 diverging colormaps #2" class="align-center" src="_images/mcplot_cmaps-ipcc_diverging_02.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-ipcc_diverging_03.png"><img alt="IPCC WG1 diverging colormaps #3" class="align-center" src="_images/mcplot_cmaps-ipcc_diverging_03.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-ipcc_diverging_04.png"><img alt="IPCC WG1 diverging colormaps #4" class="align-center" src="_images/mcplot_cmaps-ipcc_diverging_04.png" style="width: 800px;" />
+</a>
+</section>
+<section id="ipcc-sequential">
+<h2>IPCC Sequential<a class="headerlink" href="#ipcc-sequential" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-ipcc_sequential_01.png"><img alt="IPCC WG1 sequential colormaps #1" class="align-center" src="_images/mcplot_cmaps-ipcc_sequential_01.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-ipcc_sequential_02.png"><img alt="IPCC WG1 sequential colormaps #2" class="align-center" src="_images/mcplot_cmaps-ipcc_sequential_02.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-ipcc_sequential_03.png"><img alt="IPCC WG1 sequential colormaps #3" class="align-center" src="_images/mcplot_cmaps-ipcc_sequential_03.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-ipcc_sequential_04.png"><img alt="IPCC WG1 sequential colormaps #4" class="align-center" src="_images/mcplot_cmaps-ipcc_sequential_04.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-ipcc_sequential_05.png"><img alt="IPCC WG1 sequential colormaps #5" class="align-center" src="_images/mcplot_cmaps-ipcc_sequential_05.png" style="width: 800px;" />
+</a>
+</section>
+<section id="ncl-small">
+<h2>NCL Small<a class="headerlink" href="#ncl-small" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-ncl_small.png"><img alt="NCL's small color tables" class="align-center" src="_images/mcplot_cmaps-ncl_small.png" style="width: 800px;" />
+</a>
+</section>
+<section id="ncl-large">
+<h2>NCL Large<a class="headerlink" href="#ncl-large" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-ncl_large_01.png"><img alt="NCL's large color tables #1" class="align-center" src="_images/mcplot_cmaps-ncl_large_01.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-ncl_large_02.png"><img alt="NCL's large color tables #2" class="align-center" src="_images/mcplot_cmaps-ncl_large_02.png" style="width: 800px;" />
+</a>
+</section>
+<section id="ncl-meteo-swiss">
+<h2>NCL Meteo Swiss<a class="headerlink" href="#ncl-meteo-swiss" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-ncl_meteo_swiss.png"><img alt="NCL's Meteo Swiss color tables" class="align-center" src="_images/mcplot_cmaps-ncl_meteo_swiss.png" style="width: 800px;" />
+</a>
+</section>
+<section id="matplotlib-perceptually-uniform-sequential">
+<h2>Matplotlib Perceptually Uniform Sequential<a class="headerlink" href="#matplotlib-perceptually-uniform-sequential" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-matplotlib_perceptually_uniform_sequential.png"><img alt="Matplotlib's perceptually uniform sequential colormaps" class="align-center" src="_images/mcplot_cmaps-matplotlib_perceptually_uniform_sequential.png" style="width: 800px;" />
+</a>
+</section>
+<section id="matplotlib-sequential">
+<h2>Matplotlib Sequential<a class="headerlink" href="#matplotlib-sequential" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-matplotlib_sequential.png"><img alt="Matplotlib's sequential colormaps" class="align-center" src="_images/mcplot_cmaps-matplotlib_sequential.png" style="width: 800px;" />
+</a>
+</section>
+<section id="matplotlib-diverging">
+<h2>Matplotlib Diverging<a class="headerlink" href="#matplotlib-diverging" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-matplotlib_diverging.png"><img alt="Matplotlib's diverging colormaps" class="align-center" src="_images/mcplot_cmaps-matplotlib_diverging.png" style="width: 800px;" />
+</a>
+</section>
+<section id="matplotlib-cyclic">
+<h2>Matplotlib Cyclic<a class="headerlink" href="#matplotlib-cyclic" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-matplotlib_cyclic.png"><img alt="Matplotlib's cyclic colormaps" class="align-center" src="_images/mcplot_cmaps-matplotlib_cyclic.png" style="width: 800px;" />
+</a>
+</section>
+<section id="matplotlib-qualitative">
+<h2>Matplotlib Qualitative<a class="headerlink" href="#matplotlib-qualitative" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-matplotlib_qualitative.png"><img alt="Matplotlib's qualitative colormaps" class="align-center" src="_images/mcplot_cmaps-matplotlib_qualitative.png" style="width: 800px;" />
+</a>
+</section>
+<section id="matplotlib-miscellaneous">
+<h2>Matplotlib Miscellaneous<a class="headerlink" href="#matplotlib-miscellaneous" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-matplotlib_miscellaneous.png"><img alt="Miscellaneous colormaps of Matplotlib" class="align-center" src="_images/mcplot_cmaps-matplotlib_miscellaneous.png" style="width: 800px;" />
+</a>
+</section>
+<section id="brewer-sequential">
+<h2>Brewer Sequential<a class="headerlink" href="#brewer-sequential" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-brewer_sequential_01.png"><img alt="Cynthia Brewer's sequential color schemes #1" class="align-center" src="_images/mcplot_cmaps-brewer_sequential_01.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-brewer_sequential_02.png"><img alt="Cynthia Brewer's sequential color schemes #2" class="align-center" src="_images/mcplot_cmaps-brewer_sequential_02.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-brewer_sequential_03.png"><img alt="Cynthia Brewer's sequential color schemes #3" class="align-center" src="_images/mcplot_cmaps-brewer_sequential_03.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-brewer_sequential_04.png"><img alt="Cynthia Brewer's sequential color schemes #4" class="align-center" src="_images/mcplot_cmaps-brewer_sequential_04.png" style="width: 800px;" />
+</a>
+</section>
+<section id="brewer-diverging">
+<h2>Brewer Diverging<a class="headerlink" href="#brewer-diverging" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-brewer_diverging_01.png"><img alt="Cynthia Brewer's diverging color schemes #1" class="align-center" src="_images/mcplot_cmaps-brewer_diverging_01.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-brewer_diverging_02.png"><img alt="Cynthia Brewer's diverging color schemes #2" class="align-center" src="_images/mcplot_cmaps-brewer_diverging_02.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-brewer_diverging_03.png"><img alt="Cynthia Brewer's diverging color schemes #3" class="align-center" src="_images/mcplot_cmaps-brewer_diverging_03.png" style="width: 800px;" />
+</a>
+</section>
+<section id="brewer-qualitative">
+<h2>Brewer Qualitative<a class="headerlink" href="#brewer-qualitative" title="Link to this heading">#</a></h2>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-brewer_qualitative_01.png"><img alt="Cynthia Brewer's qualitative color schemes #1" class="align-center" src="_images/mcplot_cmaps-brewer_qualitative_01.png" style="width: 800px;" />
+</a>
+<a class="reference internal image-reference" href="_images/mcplot_cmaps-brewer_qualitative_02.png"><img alt="Cynthia Brewer's qualitative color schemes #3" class="align-center" src="_images/mcplot_cmaps-brewer_qualitative_02.png" style="width: 800px;" />
+</a>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="colors.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Named Colors</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="full_example.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Commented Example</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot-colormap">mcplot Colormap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sron-colors">SRON Colors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sron-colormaps">SRON Colormaps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sron-functions">SRON Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sron-2012-colors">SRON 2012 Colors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sron-2012-functions">SRON 2012 Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematica">Mathematica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oregon-sequential">Oregon Sequential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oregon-diverging">Oregon Diverging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oregon-qualitative">Oregon Qualitative</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipcc-categorical">IPCC Categorical</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipcc-diverging">IPCC Diverging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipcc-sequential">IPCC Sequential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ncl-small">NCL Small</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ncl-large">NCL Large</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ncl-meteo-swiss">NCL Meteo Swiss</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-perceptually-uniform-sequential">Matplotlib Perceptually Uniform Sequential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-sequential">Matplotlib Sequential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-diverging">Matplotlib Diverging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-cyclic">Matplotlib Cyclic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-qualitative">Matplotlib Qualitative</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-miscellaneous">Matplotlib Miscellaneous</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brewer-sequential">Brewer Sequential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brewer-diverging">Brewer Diverging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brewer-qualitative">Brewer Qualitative</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Matthias Cuntz
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-2025, Matthias Cuntz.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

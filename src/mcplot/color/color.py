@@ -633,8 +633,8 @@ def print_cmaps(collection=''):
     ----------
     collection : str or list of strings, optional
         Name(s) of color palette collection(s).
-        Known collections are 'mcplot', 'sron', 'sron2012', 'mathematica',
-        'oregon', 'ipcc', 'ncl', 'matplotlib', and 'brewer'.
+        Known collections are 'brewer', 'ipcc', 'mathematica', 'matplotlib',
+        'mcplot', 'ncl', 'oregon', 'sron', and 'sron2012'.
 
     Returns
     -------
@@ -922,8 +922,8 @@ def show_cmaps(outfile='', collection=''):  # pragma: no cover
     collection : str or list of strings, optional
         Name(s) of color palette collection(s).
         All palettes will be shown if collection is empty or 'all'.
-        Known collections are: 'mcplot', 'sron', 'sron2012', 'mathematica',
-        'oregon', 'ipcc', 'ncl', 'matplotlib', and 'brewer'.
+        Known collections are: 'brewer', 'ipcc', 'mathematica', 'matplotlib',
+        'mcplot', 'ncl', 'oregon', 'sron', and 'sron2012'.
 
     Returns
     -------

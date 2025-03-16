@@ -2,9 +2,10 @@ Commented Example
 =================
 
 Here is a fully commented example that uses most of the class and
-functions of :mod:`mcplot`. The example focus on class functionality
-and not on esthetics of the plots. The example reads a file with
-`pandas`_ that can be written as:
+functions of :mod:`mcplot`. The example focuses on class functionality
+and not on esthetics.
+
+The example reads a file with `pandas`_ that can be written as:
 
 .. code-block:: python
 		

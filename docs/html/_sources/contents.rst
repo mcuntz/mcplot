@@ -8,6 +8,8 @@ Contents
 
    index
    userguide
+   colors
+   cmaps
    full_example
    changelog
    authors

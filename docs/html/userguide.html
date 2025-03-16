@@ -44,7 +44,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'userguide';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Commented Example" href="full_example.html" />
+    <link rel="next" title="Named Colors" href="colors.html" />
     <link rel="prev" title="mcplot" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -152,6 +152,8 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="index.html">mcplot</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colors.html">Named Colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmaps.html">Colormaps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="full_example.html">Commented Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
@@ -471,6 +473,9 @@ the test plot.</p>
                         <span class="n">rasterized</span> <span class="n">maps</span> <span class="ow">in</span> <span class="n">vector</span> <span class="n">output</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="mi">300</span><span class="p">)</span><span class="o">.</span>
   <span class="o">--</span><span class="n">transparent</span>         <span class="n">Transparent</span> <span class="n">figure</span> <span class="n">background</span>
                         <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="n">black</span> <span class="ow">or</span> <span class="n">white</span><span class="p">)</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">font</span> <span class="n">name</span>           <span class="n">Font</span> <span class="n">name</span> <span class="ow">or</span> <span class="n">LaTeX</span> <span class="n">package</span> <span class="n">name</span>
+                        <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="n">DejaVuSans</span> <span class="ow">or</span> <span class="n">DejaVuSerif</span> <span class="p">(</span><span class="n">serif</span><span class="p">)</span> <span class="ow">and</span>
+                        <span class="n">MyriadPro</span> <span class="ow">or</span> <span class="n">ComputerModern</span> <span class="p">(</span><span class="n">serif</span><span class="p">)</span> <span class="k">if</span> <span class="o">--</span><span class="n">usetex</span>
 </pre></div>
 </div>
 <p>Thus, the command line option <strong>-t pdf</strong> would write the plot into a
@@ -485,7 +490,19 @@ the serif font <strong>DejaVue Serif</strong> with the command line option
 <strong>-s</strong>. It will use LaTeX to render text with the <strong>-u</strong> option (see
 <a class="reference external" href="https://matplotlib.org/stable/users/explain/text/usetex.html#usetex">Text rendering with LaTeX</a>). <strong>-u -s</strong> uses LaTeX standard Computer
 Modern font. It uses <strong>MyriadPro</strong> as sans-serif font in LaTeX, which
-must be installed separately (see section <a class="reference external" href="https://github.com/mcuntz/setup_mac?tab=readme-ov-file#myriad-pro">Myriad Pro</a>).</p>
+must be installed separately (see section <a class="reference external" href="https://github.com/mcuntz/setup_mac?tab=readme-ov-file#myriad-pro">Myriad Pro</a> here). One can
+chose the font with the <strong>–font</strong> option.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">findSystemFonts</span><span class="p">(</span><span class="n">fontpaths</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fontext</span><span class="o">=</span><span class="s1">&#39;ttf&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>prints all fonts available to Matplotlib. <a class="reference internal" href="api.html#module-mcplot" title="mcplot"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mcplot</span></code></a> supports the
+following LaTeX sans serif fonts with <strong>-u</strong>: <strong>FiraSans</strong>,
+<strong>Helvetica</strong>, <strong>Iwona</strong>, <strong>Kurier</strong>, <strong>Lato</strong>, <strong>MyriadPro</strong>, and
+<strong>OpenSans</strong>, or any other font that can be loaded in LaTeX with
+<cite>usepackage{fontname}</cite>. The respective LaTeX packages must be
+installed. <strong>FiraSans</strong> is a good alternative to <strong>MyriadPro</strong> if the
+latter is too difficult to install.</p>
 <p>By default, <code class="docutils literal notranslate"><span class="pre">mcPlot</span></code> plots onto a DIN A4 page, which facilitates
 choices of font sizes, etc. The output can be cropped with the utility
 <a class="reference external" href="https://github.com/ho-tex/pdfcrop">pdfcrop</a> which can be acquired from <a class="reference external" href="https://www.ctan.org/pkg/pdfcrop">CTAN</a>. The plot will be tightly
@@ -726,6 +743,8 @@ themselves.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">hspace</span> <span class="o">=</span> <span class="mf">0.09</span>  <span class="c1"># x-space between subplots</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vspace</span> <span class="o">=</span> <span class="mf">0.04</span>  <span class="c1"># y-space between subplots</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">textsize</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># standard text size</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">usetex</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="s1">&#39;Fira&#39;</span>
 
         <span class="c1"># Set come line and marker properties</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lw</span> <span class="o">=</span> <span class="mf">3.5</span>   <span class="c1"># linewidth</span>
@@ -832,11 +851,11 @@ and raise an error.</p>
       </div>
     </a>
     <a class="right-next"
-       href="full_example.html"
+       href="colors.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Commented Example</p>
+        <p class="prev-next-title">Named Colors</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
