@@ -1,9 +1,9 @@
 Commented Example
 =================
 
-Here is a fully commented example that uses most of the class and
-functions of :mod:`mcplot`. The example focuses on class functionality
-and not on esthetics.
+Here is a fully commented example that uses most of the class methods
+and functions of :mod:`mcplot`. The example focuses on class
+functionality and not on aesthetics.
 
 The example reads a file with `pandas`_ that can be written as:
 
@@ -28,8 +28,8 @@ The example reads a file with `pandas`_ that can be written as:
    df.to_csv(ifile, index=False)
 
 
-Example using mcPlot
---------------------
+Example script
+--------------
 
 .. code-block:: python
 
@@ -98,31 +98,33 @@ Example using mcPlot
            else:
                self.textsize = 10  # standard text size w/o LaTeX
 
-           # Set come line and marker properties
-           self.lw = 1.5   # linewidth
+           # Set some line and marker properties
+           self.lw = 2.0   # linewidth
            self.ms = 5.0   # marker size
            self.mew = 1.0  # marker edge width
 
            # Set come colors
+           # marker colors
            if self.dowhite:
                # A brighter color map on black background.
-               # delete starting white, black, and pink from palette
+               # delete 1st 3 colors white, black, and pink from palette
                self.mcols = get_cmap('ncl_amwg')[3:]
            else:
                # A darker color map on white background.
-               # delete starting white, black, and pink from palette
+               # delete 1st 3 colors white, black, and pink from palette
                self.mcols = get_cmap('mcplot_amwg')[3:]
            self.mcol1 = self.fgcolor       # black or white
            self.mcol2 = self.mcols[-1]     # red
-           self.mcol3 = get_color('grey')  # grey
-           self.mcol4 = self.mcols[2]      # light blue
-           self.mcol5 = self.mcols[-3]     # orange
+           self.mcol3 = get_color('tab:blue')  # tableau blue
+           self.mcol4 = self.mcols[1]      # blue
+           self.mcol5 = self.mcols[-2]     # ligth red
+           # line colors
+           self.lcols = self.mcols
            self.lcol1 = self.mcol1
            self.lcol2 = self.mcol2
            self.lcol3 = self.mcol3
            self.lcol4 = self.mcol4
            self.lcol5 = self.mcol5
-           self.lcols = self.mcols
 
            # Set legend properties
            self.loc = 'lower right'
@@ -177,10 +179,11 @@ Example using mcPlot
 
            # open new figure, increasing figure counter
            self.ifig += 1
-           # iplot is the number of plot within the (nrow, ncol) subplots
+           # iplot is the number of the plot within the (nrow, ncol) subplots
            iplot = 0
-           # iplot is the panel number used in putting a), b), c), ... on the plot
+           # iabc is the panel number used in putting a), b), c), ... on the plot
            iabc = 0
+
            print(f'  Open figure {self.ifig}')
            fig = plt.figure(self.ifig)
 
@@ -191,8 +194,9 @@ Example using mcPlot
            # petal_length vs. sepal_length
            iplot += 1
            iabc += 1
-           x = self.df['sepal_length']
-           y = self.df['petal_length']
+
+           x = self.df['sepal_width']
+           y = self.df['sepal_length']
            # None = free scaling
            xlim = None
            ylim = None
@@ -202,13 +206,13 @@ Example using mcPlot
            # pdf engine actually uses the full LaTeX notation,
            # e.g. \newline vs. \n in Matplotlib.
            # \textnormal{} is LaTeX and not in Matplotlib so only used
-           # if user sets -u, which sets self.usetex = True.
+           # if the user sets -u, which makes self.usetex=True.
            if self.usetex:
-               xlab = str2tex(r'L$_\textnormal{sepal}$ (cm)', usetex=self.usetex)
-               ylab = str2tex(r'L$_\textnormal{petal}$ (cm)', usetex=self.usetex)
+               xlab = str2tex(r'W$_\textnormal{sepal}$ (cm)', usetex=self.usetex)
+               ylab = str2tex(r'L$_\textnormal{sepal}$ (cm)', usetex=self.usetex)
            else:
-               xlab = str2tex(r'L$_{sepal}$ (cm)', usetex=self.usetex)
-               ylab = str2tex(r'L$_{petal}$ (cm)', usetex=self.usetex)
+               xlab = str2tex(r'W$_{sepal}$ (cm)', usetex=self.usetex)
+               ylab = str2tex(r'L$_{sepal}$ (cm)', usetex=self.usetex)
 
            # Make subplots using add_axes.
            # This is equivalent to using subplot with Gridspec.
@@ -220,8 +224,10 @@ Example using mcPlot
                           hspace=self.hspace, vspace=self.vspace)
            ax = fig.add_axes(pos, label=str(iplot))
 
-           # Plot markers. Plot returns list of line2D objects, which is added to
-           # larr to collect all line objects for a possible legend.
+           # Plot markers.
+           # Plot returns list of line2D objects, which is added here to
+           # larr to collect all line objects, to be used in a possible
+           # legend.
            larr = []
            tarr = []
            larr += ax.plot(x, y)
@@ -234,24 +240,12 @@ Example using mcPlot
 
            # Put a), b), c), ... on plot.
            # The panel counter can be upper- or lower letters,
-           # arabic or roman number, or `iabc` can be treated as string.
+           # arabic or roman number, or `iabc` can be treated as string,
+           # which is then pretty equivalent to text2plot.
            # The counter can have parentheses, brackets or braces before and
            # after. It can be italic or boldface.
            abc2plot(ax, self.dxabc, self.dyabc, iabc, lower=True, bold=False,
                     parentheses='close', usetex=self.usetex, mathrm=True)
-           abc2plot(ax, 3. * self.dxabc, 0.8 * self.dyabc, iabc, upper=True,
-                    bold=False, parentheses='open', usetex=self.usetex,
-                    mathrm=True)
-           abc2plot(ax, 5. * self.dxabc, 0.6 * self.dyabc, iabc, lower=True,
-                    bold=True, roman=True, parentheses='both', usetex=self.usetex)
-           abc2plot(ax, 7. * self.dxabc, 0.4 * self.dyabc, iabc, upper=True,
-                    roman=True, brackets='close', usetex=self.usetex, mathrm=True,
-                    italic=True)
-           abc2plot(ax, 9. * self.dxabc, 0.2 * self.dyabc, iabc, lower=True,
-                    bold=False, braces='both', usetex=self.usetex, mathrm=False)
-           abc2plot(ax, 11. * self.dxabc, 0.05 * self.dyabc, f'I am panel {iabc}',
-                    string=True, bold=False, braces='both', usetex=self.usetex,
-                    mathrm=True, italic=True)
 
            # Final axes layout.
            # Labels are set if not empty.
@@ -269,22 +263,84 @@ Example using mcPlot
                plt.setp(ax, ylim=ylim)
 
            #
-           # Large Panel 2
+           # Regular panel 2
            #
 
-           # petal_length vs. petal_width
            iplot += 1
            iabc += 1
-           x = self.df['petal_width']
+
+           # Same for petal_length vs. sepal_width
+           x = self.df['sepal_width']
+           y = self.df['petal_length']
+           xlim = None
+           ylim = None
+           if self.usetex:
+               xlab = str2tex(r'W$_\textnormal{sepal}$ (cm)', usetex=self.usetex)
+               ylab = str2tex(r'L$_\textnormal{petal}$ (cm)', usetex=self.usetex)
+           else:
+               xlab = str2tex(r'W$_{sepal}$ (cm)', usetex=self.usetex)
+               ylab = str2tex(r'L$_{petal}$ (cm)', usetex=self.usetex)
+
+           pos = position(self.nrow, self.ncol, iplot,
+                          hspace=self.hspace, vspace=self.vspace)
+           ax = fig.add_axes(pos, label=str(iplot))
+
+           larr = []
+           tarr = []
+           larr += ax.plot(x, y)
+           plt.setp(larr[-1], linestyle='None',
+                    marker='o', markeredgecolor=self.mcol5,
+                    markerfacecolor=self.mcol4,
+                    markersize=self.ms, markeredgewidth=self.mew)
+           tarr += [str2tex('data', usetex=self.usetex)]
+
+           abc2plot(ax, self.dxabc, self.dyabc, iabc, lower=True, bold=False,
+                    parentheses='close', usetex=self.usetex, mathrm=True)
+
+           # Put a copyright on the plot '(C) YYYY itext'.
+           # The text right-aligned by default if not given otherwise
+           # (horizontalalignment).
+           signature2plot(ax, 1.05, 0.05, 'M Cuntz', usetex=self.usetex,
+                          small=True, italic=False, mathrm=False,
+                          ha='left')
+
+           if xlab != '':
+               plt.setp(ax, xlabel=xlab)
+           if ylab != '':
+               plt.setp(ax, ylabel=ylab)
+           ax.grid(False)
+           ax.spines['right'].set_color('none')
+           ax.spines['top'].set_color('none')
+           if xlim is not None:
+               plt.setp(ax, xlim=xlim)
+           if ylim is not None:
+               plt.setp(ax, ylim=ylim)
+
+           #
+           # Skip third panel in row
+           #
+
+           # increase iplot but not iabc to skip the next plot
+           iplot += 1
+
+           #
+           # Large panel 3
+           #
+
+           iplot += 1
+           iabc += 1
+
+           # petal_length vs. sepal_width
+           x = self.df['sepal_length']
            y = self.df['petal_length']
            xlim = None
            ylim = None
            if self.usetex:
                xlab = str2tex(r'L$_\textnormal{sepal}$ (cm)', usetex=self.usetex)
-               ylab = str2tex(r'W$_\textnormal{sepal}$ (cm)', usetex=self.usetex)
+               ylab = str2tex(r'L$_\textnormal{petal}$ (cm)', usetex=self.usetex)
            else:
                xlab = str2tex(r'L$_{sepal}$ (cm)', usetex=self.usetex)
-               ylab = str2tex(r'W$_{sepal}$ (cm)', usetex=self.usetex)
+               ylab = str2tex(r'L$_{petal}$ (cm)', usetex=self.usetex)
 
            # We want to span two figure columns on the same row.
            # Here we do this by hand: get panel coordinates of the next two
@@ -295,39 +351,9 @@ Example using mcPlot
                            hspace=self.hspace, vspace=self.vspace)
            pos2 = position(self.nrow, self.ncol, iplot + 1,
                            hspace=self.hspace, vspace=self.vspace)
-           pos = [pos1[0], pos1[1], pos2[0] - pos1[0] + pos2[2], pos1[3]]
-           ax = fig.add_axes(pos, label=str(iplot))
+           pos1[2] = pos2[0] - pos1[0] + pos2[2]
+           ax = fig.add_axes(pos1, label=str(iplot))
 
-           mark1 = ax.plot(x, y)
-           plt.setp(mark1, linestyle='None',
-                    marker='o', markeredgecolor=self.mcol5,
-                    markerfacecolor=self.mcol4,
-                    markersize=self.ms, markeredgewidth=self.mew)
-
-           # Put a copyright on the plot '(C) YYYY itext'.
-           # The text right-aligned by default if not given otherwise
-           # (horizontalalignment).
-           signature2plot(ax, 0.98, 0.05, 'M Cuntz', usetex=self.usetex,
-                          small=True, italic=False, mathrm=False)
-
-           # increase number in (nrow, ncol) subplots because we used two subplots
-           iplot += 1
-
-           #
-           # Large Panel 3
-           #
-
-           iplot += 1
-           iabc += 1
-
-           # If you want to have double the figure width (instead of two figure
-           # columns), just change the width in `rect`.
-           pos = position(self.nrow, self.ncol, iplot,
-                          hspace=self.hspace, vspace=self.vspace)
-           pos[2] = pos[2] * 2.
-           ax = fig.add_axes(pos, label=str(iplot))
-
-           # Plot markers
            larr = []
            tarr = []
            larr += ax.plot(x, y)
@@ -340,15 +366,20 @@ Example using mcPlot
            # Add trend line
            xx = x.to_numpy()
            yy = y.to_numpy()
-           ii = ~np.isnan(xx)
+           ii = (~np.isnan(xx)) & (yy > 2.5)
            xx = xx[ii]
            yy = yy[ii]
            p = P.polyfit(xx, yy, 1)
-           pyy = P.polyval(xx, p)
-           larr += ax.plot(xx, pyy)
-           plt.setp(larr[-1], linestyle='-', linewidth=self.lw / 2.,
-                    marker='None', color=self.mcol2)
-           tarr += [str2tex('model', usetex=self.usetex)]
+           pxx = np.linspace(xx.min(), xx.max())
+           pyy = P.polyval(pxx, p)
+
+           larr += ax.plot(pxx, pyy)
+           plt.setp(larr[-1], linestyle='-', linewidth=self.lw,
+                    marker='None', color=self.lcol3)
+           tarr += [str2tex(r'model > 2.5', usetex=self.usetex)]
+
+           abc2plot(ax, self.dxabc, self.dyabc, iabc, lower=True, bold=False,
+                    parentheses='close', usetex=self.usetex, mathrm=True)
 
            # Write equation on plot.
            # to have correct minus symbol
@@ -363,18 +394,18 @@ Example using mcPlot
            #               usetex=self.usetex)
            #
            # Put the equation as text on plot.
-           # One can set one of the sizes xxsmall, xsmall, small, medium, large,
-           # xlarge, xxlarge to True. Also bold and italic can be set to true.
+           # One can set the size xxsmall, xsmall, small, medium, large,
+           # xlarge, or xxlarge to True. Also bold and italic can be set to true.
            # All other keywords will be passed to Matplotlib's Axes.text() such
            # as `color` here.
            # You can either use a string such as noteq and set usetex=True
-           text2plot(ax, self.dxabc, self.dyabc, noteq, color=self.mcol2,
+           text2plot(ax, 2.5 * self.dxabc, self.dyabc, noteq, color=self.lcol3,
                      small=True, usetex=self.usetex)
-           # or you can transform noteq to a LaTeX string first using str2tex
-           teq = str2tex(noteq, usetex=self.usetex)
-           # and then put it on the plot without usetex.
-           text2plot(ax, self.dxabc, 0.8 * self.dyabc, teq, color=self.mcol2,
-                     small=True)
+           # # or you can transform noteq to a LaTeX string first using str2tex
+           # teq = str2tex(noteq, usetex=self.usetex)
+           # # and then put it on the plot without usetex.
+           # text2plot(ax, self.dxabc, self.dyabc, teq, color=self.mcol2,
+           #           small=True)
 
            # Add legend using the two list of lines (larr) and text (tarr).
            # loc and bbox_to_anchor behave slightly different for different
@@ -390,7 +421,6 @@ Example using mcPlot
                           scatterpoints=1, numpoints=1,
                           fontsize='small')
 
-           # Final axes layout
            if xlab != '':
                plt.setp(ax, xlabel=xlab)
            if ylab != '':
@@ -403,15 +433,34 @@ Example using mcPlot
            if ylim is not None:
                plt.setp(ax, ylim=ylim)
 
-           # increase subplot number
+           # increase iplot because we used two plot spaces
            iplot += 1
 
            #
-           # Large Panel 4
+           # Skip third panel in row
+           #
+
+           iplot += 1
+
+
+           #
+           # Large panel 4
            #
 
            iplot += 1
            iabc += 1
+
+           # same again: petal_length vs. sepal_width
+           x = self.df['sepal_length']
+           y = self.df['petal_length']
+           xlim = None
+           ylim = None
+           if self.usetex:
+               xlab = str2tex(r'L$_\textnormal{sepal}$ (cm)', usetex=self.usetex)
+               ylab = str2tex(r'L$_\textnormal{petal}$ (cm)', usetex=self.usetex)
+           else:
+               xlab = str2tex(r'L$_{sepal}$ (cm)', usetex=self.usetex)
+               ylab = str2tex(r'L$_{petal}$ (cm)', usetex=self.usetex)
 
            # One can also imagine different numbers of rows and columns,
            # so that the panel will have a different size.
@@ -419,22 +468,58 @@ Example using mcPlot
            # https://matplotlib.org/stable/gallery/subplots_axes_and_figures/axes_margins.html
            # For example, half the number of rows will give double the height
            # of a panel. iplot has to be adjusted accordingly.
-           pos = position(self.nrow // 2, self.ncol - 1, iplot - self.ncol,
+           pos = position(self.nrow // 2, self.ncol - 1, iplot - self.ncol - 1,
                           hspace=self.hspace, vspace=self.vspace)
            ax = fig.add_axes(pos, label=str(iplot))
 
-           # Plot markers
-           mark1 = ax.plot(x, y)
-           plt.setp(mark1, linestyle='None',
+           larr = []
+           tarr = []
+           larr += ax.plot(x, y)
+           plt.setp(larr[-1], linestyle='None',
                     marker='o', markeredgecolor=self.mcol5,
                     markerfacecolor=self.mcol4,
                     markersize=self.ms, markeredgewidth=self.mew)
+           tarr += [str2tex('data', usetex=self.usetex)]
+
+           # trend line
+           xx = x.to_numpy()
+           yy = y.to_numpy()
+           ii = (~np.isnan(xx)) & (yy > 2.5)
+           xx = xx[ii]
+           yy = yy[ii]
+           p = P.polyfit(xx, yy, 1)
+           pxx = np.linspace(xx.min(), xx.max())
+           pyy = P.polyval(pxx, p)
+
+           larr += ax.plot(pxx, pyy)
+           plt.setp(larr[-1], linestyle='-', linewidth=self.lw,
+                    marker='None', color=self.lcol3)
+           tarr += [str2tex(r'model > 2.5', usetex=self.usetex)]
 
            # iabc has still the right count
-           abc2plot(ax, self.dxabc, self.dyabc, iabc, upper=True, bold=True,
-                    parentheses='both', usetex=self.usetex, mathrm=True)
+           abc2plot(ax, self.dxabc, self.dyabc, iabc, lower=True, bold=False,
+                    parentheses='close', usetex=self.usetex, mathrm=True)
 
-           # Final axes layout
+           # Write equation on plot.
+           s0 = r'$-$' if p[0] < 0 else ''
+           s1 = r'$-$' if p[1] < 0 else '+'
+           noteq = rf'y={s0}{abs(p[0]):.2f}{s1}{abs(p[1]):.2f}x'
+           teq = str2tex(noteq, usetex=self.usetex)
+           text2plot(ax, 3. * self.dxabc, self.dyabc, teq, color=self.lcol3,
+                     small=True)
+
+           # Add legend
+           ll = ax.legend(larr, tarr,
+                          frameon=self.frameon, ncol=1,
+                          labelspacing=self.labelspacing,
+                          handletextpad=self.handletextpad,
+                          handlelength=self.handlelength,
+                          columnspacing=self.columnspacing,
+                          loc=self.loc,
+                          bbox_to_anchor=(self.xbbox, self.ybbox),
+                          scatterpoints=1, numpoints=1,
+                          fontsize='small')
+
            if xlab != '':
                plt.setp(ax, xlabel=xlab)
            if ylab != '':
@@ -446,6 +531,7 @@ Example using mcPlot
                plt.setp(ax, xlim=xlim)
            if ylim is not None:
                plt.setp(ax, ylim=ylim)
+
 
            # Show plot or write it into file, adding a link to the image file into
            # a possible html file.
@@ -520,15 +606,15 @@ Example using mcPlot
            p = P.polyfit(xx, yy, 1)
            pyy = P.polyval(xx, p)
            larr += ax.plot(xx, pyy)
-           plt.setp(larr[-1], linestyle='-', linewidth=self.lw / 2.,
-                    marker='None', color=self.mcol2)
+           plt.setp(larr[-1], linestyle='-', linewidth=self.lw,
+                    marker='None', color=self.lcol3)
            tarr += [str2tex('model', usetex=self.usetex)]
 
            # Equation on plot
            s0 = r'$-$' if p[0] < 0 else ''
            s1 = r'$-$' if p[1] < 0 else '+'
            noteq = rf'y={s0}{abs(p[0]):.2f}{s1}{abs(p[1]):.2f}x'
-           text2plot(ax, 3. * self.dxabc, self.dyabc, noteq, color=self.mcol2,
+           text2plot(ax, 3. * self.dxabc, self.dyabc, noteq, color=self.lcol3,
                      medium=True, usetex=self.usetex)
 
            # a), b), c), ...
@@ -606,33 +692,37 @@ Example using mcPlot
        # close any open plot files
        iplot.close()
 
+
+Command line
+------------
+
 This script can be called from the command line given
-**mcplot_iris.csv** as the argument, opening on screen windows:
+**mcplot_iris.csv** as the argument, opening windows on screen:
 
 .. code-block:: bash
 
    python mcplot_example.py mcplot_iris.csv
 
-plot into a PDF file **mcex.pdf**:
+plotting into a PDF file **mcex.pdf**:
 
 .. code-block:: bash
 
    python mcplot_example.py -t pdf -o mcex.pdf mcplot_iris.csv
 
-save PNG files **mcex_0001.png** and **mcex_0002.png**:
+saving PNG files **mcex_0001.png** and **mcex_0002.png**:
 
 .. code-block:: bash
 
    python mcplot_example.py -t png -o mcex_ mcplot_iris.csv
 
-save the PNG files with a black background (and white foreground) in
+saving the PNG files with a black background (and white foreground) in
 high resolution:
 
 .. code-block:: bash
 
    python mcplot_example.py -t png -o mcex_ -w --dpi 600 mcplot_iris.csv
 
-The test PNG files with the arbitrary plots are:
+The test PNG files with the quite arbitrary plots are:
 
 .. image:: ../images/mcex_0001.png
    :width: 800 px
@@ -646,7 +736,7 @@ and:
    :align: center
    :alt: Plot with 1 large panel
 
-And the latter with the `-w` command line option is:
+And the latter image with with the `-w` command line option is:
 
 .. image:: ../images/mcex_black_0002.png
    :width: 400 px

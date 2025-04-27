@@ -2,6 +2,7 @@ Changelog
 ---------
 
 v2.x (??? 2025)
+   - Cleaner commented example in documentation.
    - Documentation of font option.
    - Documentation of colors and color palettes.
 
