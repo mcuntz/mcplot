@@ -29,6 +29,7 @@ History
    * v2.0 use similar names and defaults as Matplotlib,
      Nov 2024, Matthias Cuntz
    * v2.1 adds the font option, Mar 2025, Matthias Cuntz
+   * v2.2 cli option and color documentation, May 2025, Matthias Cuntz
 
 """
 # version, author

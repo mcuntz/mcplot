@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-v2.x (??? 2025)
+v2.2 (May 2025)
    - Added option `cli` to bypass command line if False, e.g. if class
      initiated from within Python. Supersedes old logic that bypassed
      the command line if no desc or argstr was given.
