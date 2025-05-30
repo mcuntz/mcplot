@@ -98,8 +98,8 @@ chose the font with the **--font** option.
 
 .. code-block:: python
 
-   import matplotlib as mpl
-   mpl.font_manager.findSystemFonts(fontpaths=None, fontext='ttf')
+   import matplotlib.font_manager
+   matplotlib.font_manager.findSystemFonts(fontpaths=None, fontext='ttf')
 
 prints all fonts available to Matplotlib. :mod:`mcplot` supports the
 following LaTeX sans serif fonts with **-u**: **FiraSans**,
@@ -212,7 +212,7 @@ backend such as a Matplotlib window or a PDF file. The data is read
 with the method :meth:`read_data`, which could also be called directly
 in :meth:`__init__`. Two figures are created in the methods
 :meth:`plot_fig_1` and :meth:`plot_fig_2`, which write the figures to
-the backend with the method `plot_save(fig)`. Any open backend
+the backend with the method :meth:`plot_save(fig)`. Any open backend
 such as a PDF file will be closed with the method :meth:`close`.
 
 The script could be called giving the name of an input file
@@ -223,12 +223,12 @@ The script could be called giving the name of an input file
 
    python mcplot_basic.py -t png -o basic_ input.csv
 
-Everytime **self.plot_save(fig)** is called, a figure is written to
-the output file. A PDF file can have multiple pages. PNG files are
-individual plots. Only the start of the output files is
-hence given for PNG files and this start will be extended as
-**f'{start}{self.ifig:04d}.png'**. The example would give the output
-files **basic_0001.png** and **basic_0002.png**.
+Everytime :meth:`plot_save(fig)` is called, a figure is written to the
+output file. A PDF file can have multiple pages. PNG files are
+individual plots. Only the start of the output files (**basic_** in
+this case) is hence given for PNG files and the start will be extended
+as **f'{start}{self.ifig:04d}.png'**. The example would give the
+output files **basic_0001.png** and **basic_0002.png**.
 
 
 Class variables

@@ -110,7 +110,7 @@ opens a standard Matplotlib plotting window with the test plot.
    
 .. code-block:: bash
 
-   python mcplot_test.py -t pdf -p test1.pdf
+   python mcplot_test.py -t pdf -o test1.pdf
 
 writes the plot into the PDF file `test1.pdf` using the sans-serif
 font `DejaVuSans` that comes with Matplotlib. It will use the serif
@@ -133,8 +133,8 @@ presentations with black background.
 
 In summary, the standard command line options allow to use the same
 script to design a plot using plotting windows on screen, produce the
-publication ready plots in a PDF file (`-t`, `-p`, `-u` options), and
-make the same plot with dark background for presentations (`-t`, `-p`,
+publication ready plots in a PDF file (`-t`, `-o`, `-u` options), and
+make the same plot with dark background for presentations (`-t`, `-o`,
 `-u`, `-w` options).
 
 
@@ -191,7 +191,7 @@ the command line, which is then accessible through `self.cargs`:
 
 .. code-block:: bash
 
-   python mcplot_basic.py -t png -p basic. input.csv
+   python mcplot_basic.py -t png -o basic. input.csv
 
 Every time `self.plot_save(fig)` is called, a figure is written to the
 output file. A PDF file can have multiple pages. For PNG files, only

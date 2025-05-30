@@ -406,6 +406,9 @@ document.write(`
 <span class="sd">   * Removed trailing &gt; in html output, Oct 2024, Matthias Cuntz</span>
 <span class="sd">   * Use class variables in test plot, Oct 2024, Matthias Cuntz</span>
 <span class="sd">   * Add --font option, Mar 2025, Matthias Cuntz</span>
+<span class="sd">   * cli option: the command line will be bypassed if False;</span>
+<span class="sd">     supersedes old logic to bypass command line if no desc or argstr given,</span>
+<span class="sd">     May 2025, Matthias Cuntz</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -472,6 +475,9 @@ document.write(`
 <span class="sd">        The respective LaTeX packages must be installed.</span>
 <span class="sd">        (default: usetex==False: &#39;DejaVuSans&#39; and &#39;DejaVuSerif&#39; (serif),</span>
 <span class="sd">                  usetex==True: &#39;MyriadPro&#39; and &#39;ComputerModern&#39; (serif))</span>
+<span class="sd">    cli : bool, optional</span>
+<span class="sd">        If True, call get_command_line_arguments; bypass command line if False</span>
+<span class="sd">        (default: True).</span>
 
 
 <span class="sd">    Methods</span>
@@ -501,9 +507,8 @@ document.write(`
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    If neither `desc` nor `argstr` is given upon initialisation,</span>
-<span class="sd">    `get_command_line_arguments()` will not be called, i.e. it is assumed that</span>
-<span class="sd">    the class is initiated from within Python.</span>
+<span class="sd">    If the class is initiated from within Python, the command line can be</span>
+<span class="sd">    bypassed setting `cli=False`.</span>
 
 <span class="sd">    Several more methods are defined and used under the hood:</span>
 
@@ -548,7 +553,7 @@ document.write(`
 <span class="sd">       if __name__ == &#39;__main__&#39;:</span>
 <span class="sd">           iplot = PlotIt(desc=&#39;Test mcPlot&#39;)</span>
 <span class="sd">           iplot.read_data()</span>
-<span class="sd">           iplot.plot_fig_2()</span>
+<span class="sd">           iplot.plot_fig_1()</span>
 <span class="sd">           iplot.close()</span>
 
 <span class="sd">    Then call the script with -h to see the command line options.</span>
@@ -560,7 +565,7 @@ document.write(`
     <span class="c1">#</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">argstr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="p">[],</span>
                  <span class="n">plotname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">serif</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">outtype</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">usetex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dowhite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+                 <span class="n">usetex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dowhite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">cli</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialise the class mcPlot.</span>
 
@@ -592,8 +597,9 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">dowhite</span> <span class="o">=</span> <span class="n">dowhite</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dpi</span> <span class="o">=</span> <span class="n">dpi</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="n">font</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cli</span> <span class="o">=</span> <span class="n">cli</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">desc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argstr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cli</span><span class="p">:</span>
             <span class="c1"># command line options</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">get_command_line_arguments</span><span class="p">()</span>
 

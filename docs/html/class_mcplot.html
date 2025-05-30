@@ -404,6 +404,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.dpi"><code class="docutils literal notranslate"><span class="pre">mcPlot.dpi</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.transparent"><code class="docutils literal notranslate"><span class="pre">mcPlot.transparent</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.font"><code class="docutils literal notranslate"><span class="pre">mcPlot.font</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.cli"><code class="docutils literal notranslate"><span class="pre">mcPlot.cli</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.get_command_line_arguments"><code class="docutils literal notranslate"><span class="pre">mcPlot.get_command_line_arguments()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_end"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_end()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_save"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_save()</span></code></a></li>
@@ -519,12 +520,15 @@ Oct 2024, Matthias Cuntz</p></li>
 <li><p>Removed trailing &gt; in html output, Oct 2024, Matthias Cuntz</p></li>
 <li><p>Use class variables in test plot, Oct 2024, Matthias Cuntz</p></li>
 <li><p>Add –font option, Mar 2025, Matthias Cuntz</p></li>
+<li><p>cli option: the command line will be bypassed if False;
+supersedes old logic to bypass command line if no desc or argstr given,
+May 2025, Matthias Cuntz</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="mcplot.class_mcplot.mcPlot">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mcPlot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argstr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">serif</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transparent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usetex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dowhite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/class_mcplot.html#mcPlot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.class_mcplot.mcPlot" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mcPlot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argstr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">serif</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transparent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usetex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dowhite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/class_mcplot.html#mcPlot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.class_mcplot.mcPlot" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Standard plotting class of Matthias Cuntz</p>
 <p>Upon initialisation,
@@ -674,6 +678,18 @@ MyriadPro, and OpenSans.</p>
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcplot.class_mcplot.mcPlot.cli">
+<span class="sig-name descname"><span class="pre">cli</span></span><a class="headerlink" href="#mcplot.class_mcplot.mcPlot.cli" title="Link to this definition">#</a></dt>
+<dd><p>If True, call get_command_line_arguments; bypass command line if False
+(default: True).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)">bool</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="mcplot.class_mcplot.mcPlot.get_command_line_arguments">
 <span class="sig-name descname"><span class="pre">get_command_line_arguments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argstr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mcplot/class_mcplot.html#mcPlot.get_command_line_arguments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mcplot.class_mcplot.mcPlot.get_command_line_arguments" title="Link to this definition">#</a></dt>
@@ -722,9 +738,8 @@ class.</p>
 
 <div class="admonition-notes admonition">
 <p class="admonition-title">Notes</p>
-<p>If neither <cite>desc</cite> nor <cite>argstr</cite> is given upon initialisation,
-<cite>get_command_line_arguments()</cite> will not be called, i.e. it is assumed that
-the class is initiated from within Python.</p>
+<p>If the class is initiated from within Python, the command line can be
+bypassed setting <cite>cli=False</cite>.</p>
 <p>Several more methods are defined and used under the hood:</p>
 <blockquote>
 <div><dl class="simple">
@@ -765,7 +780,7 @@ the class is initiated from within Python.</p>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">iplot</span> <span class="o">=</span> <span class="n">PlotIt</span><span class="p">(</span><span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Test mcPlot&#39;</span><span class="p">)</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
-    <span class="n">iplot</span><span class="o">.</span><span class="n">plot_fig_2</span><span class="p">()</span>
+    <span class="n">iplot</span><span class="o">.</span><span class="n">plot_fig_1</span><span class="p">()</span>
     <span class="n">iplot</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -905,7 +920,7 @@ optional<span class="w"> </span>arguments:
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fig</strong> (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.10.1)"><em>matplotlib.figure.Figure</em></a>) – Matplotlib figure object.    argstr : string, optional</p></li>
+<li><p><strong>fig</strong> (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.10.3)"><em>matplotlib.figure.Figure</em></a>) – Matplotlib figure object.    argstr : string, optional</p></li>
 <li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>, </em><em>optional</em>) – Additional keywords will be passed to <em>savefig</em> for ‘pdf’,
 ‘png’, and ‘html’; to <em>fig_to_html</em> for ‘d3’, and to
 <em>save</em> for ‘hvplot’. This overwrites <em>self.transparent</em>,
@@ -1260,6 +1275,7 @@ installed.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.dpi"><code class="docutils literal notranslate"><span class="pre">mcPlot.dpi</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.transparent"><code class="docutils literal notranslate"><span class="pre">mcPlot.transparent</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.font"><code class="docutils literal notranslate"><span class="pre">mcPlot.font</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.cli"><code class="docutils literal notranslate"><span class="pre">mcPlot.cli</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.get_command_line_arguments"><code class="docutils literal notranslate"><span class="pre">mcPlot.get_command_line_arguments()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_end"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_end()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcplot.class_mcplot.mcPlot.plot_save"><code class="docutils literal notranslate"><span class="pre">mcPlot.plot_save()</span></code></a></li>

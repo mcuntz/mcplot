@@ -75,6 +75,9 @@ History
    * Removed trailing > in html output, Oct 2024, Matthias Cuntz
    * Use class variables in test plot, Oct 2024, Matthias Cuntz
    * Add --font option, Mar 2025, Matthias Cuntz
+   * cli option: the command line will be bypassed if False;
+     supersedes old logic to bypass command line if no desc or argstr given,
+     May 2025, Matthias Cuntz
 
 """
 import numpy as np
@@ -139,6 +142,9 @@ class mcPlot(object):
         The respective LaTeX packages must be installed.
         (default: usetex==False: 'DejaVuSans' and 'DejaVuSerif' (serif),
                   usetex==True: 'MyriadPro' and 'ComputerModern' (serif))
+    cli : bool, optional
+        If True, call get_command_line_arguments; bypass command line if False
+        (default: True).
 
 
     Methods
@@ -168,9 +174,8 @@ class mcPlot(object):
 
     Notes
     -----
-    If neither `desc` nor `argstr` is given upon initialisation,
-    `get_command_line_arguments()` will not be called, i.e. it is assumed that
-    the class is initiated from within Python.
+    If the class is initiated from within Python, the command line can be
+    bypassed setting `cli=False`.
 
     Several more methods are defined and used under the hood:
 
@@ -215,7 +220,7 @@ class mcPlot(object):
        if __name__ == '__main__':
            iplot = PlotIt(desc='Test mcPlot')
            iplot.read_data()
-           iplot.plot_fig_2()
+           iplot.plot_fig_1()
            iplot.close()
 
     Then call the script with -h to see the command line options.
@@ -227,7 +232,7 @@ class mcPlot(object):
     #
     def __init__(self, desc=None, argstr=None, parents=[],
                  plotname=None, serif=False, outtype='', transparent=False,
-                 usetex=False, dowhite=False, dpi=300, font=''):
+                 usetex=False, dowhite=False, dpi=300, font='', cli=True):
         """
         Initialise the class mcPlot.
 
@@ -259,8 +264,9 @@ class mcPlot(object):
         self.dowhite = dowhite
         self.dpi = dpi
         self.font = font
+        self.cli = cli
 
-        if (self.desc is not None) or (self.argstr is not None):
+        if self.cli:
             # command line options
             self.get_command_line_arguments()
 

@@ -10,7 +10,7 @@ variety of public sources. They can be chosen with
 
 Next to `Matplotlib`_'s colormaps, there are the colormaps of the
 `IPCC Visual Style Guide for WG1 Authors`_, `Paul Tol`_'s 2021 as well
-his 2012 colors and colormaps, Mathematica's `DarkRainbow`_ color
+as his 2012 colors and colormaps, Mathematica's `DarkRainbow`_ color
 scheme, color schemes from the `Department of Geography, University of
 Oregon`_, the color tables from the `NCAR Command Language`_ (NCL),
 and the color schemes from Cynthia Brewer's `Colorbrewer 2.0`_. Most
@@ -28,9 +28,9 @@ All colormaps can be reversed by appending `_r` to the name or using
 the `reverse=True` keyword of :func:`mcplot.color.get_cmap()`.
 
 :func:`~mcplot.color.get_cmap()` returns a list of RGB tuples. One can
-use :meth:`matplotlib.colors.ListedColormap()` or
-:meth:`matplotlib.colors.LinearSegmentedColormap.from_list` to get
-Matplotlib colormaps, for example:
+use :meth:`matplotlib.colors.LinearSegmentedColormap.from_list` or
+:meth:`matplotlib.colors.ListedColormap()` to get Matplotlib
+colormaps, for example:
 
 .. code-block:: python
 

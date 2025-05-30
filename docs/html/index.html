@@ -502,7 +502,7 @@ gives a short help:</p>
 </pre></div>
 </div>
 <p>opens a standard Matplotlib plotting window with the test plot.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_test.py<span class="w"> </span>-t<span class="w"> </span>pdf<span class="w"> </span>-p<span class="w"> </span>test1.pdf
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_test.py<span class="w"> </span>-t<span class="w"> </span>pdf<span class="w"> </span>-o<span class="w"> </span>test1.pdf
 </pre></div>
 </div>
 <p>writes the plot into the PDF file <cite>test1.pdf</cite> using the sans-serif
@@ -523,8 +523,8 @@ i.e. uses white lines on black background. This is used if you do
 presentations with black background.</p>
 <p>In summary, the standard command line options allow to use the same
 script to design a plot using plotting windows on screen, produce the
-publication ready plots in a PDF file (<cite>-t</cite>, <cite>-p</cite>, <cite>-u</cite> options), and
-make the same plot with dark background for presentations (<cite>-t</cite>, <cite>-p</cite>,
+publication ready plots in a PDF file (<cite>-t</cite>, <cite>-o</cite>, <cite>-u</cite> options), and
+make the same plot with dark background for presentations (<cite>-t</cite>, <cite>-o</cite>,
 <cite>-u</cite>, <cite>-w</cite> options).</p>
 </section>
 <section id="using-the-plotting-class">
@@ -574,7 +574,7 @@ plot. This could give a script such as:</p>
 </div>
 <p>The script could be called giving the name(s) of (an) input file(s) on
 the command line, which is then accessible through <cite>self.cargs</cite>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_basic.py<span class="w"> </span>-t<span class="w"> </span>png<span class="w"> </span>-p<span class="w"> </span>basic.<span class="w"> </span>input.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>mcplot_basic.py<span class="w"> </span>-t<span class="w"> </span>png<span class="w"> </span>-o<span class="w"> </span>basic.<span class="w"> </span>input.csv
 </pre></div>
 </div>
 <p>Every time <cite>self.plot_save(fig)</cite> is called, a figure is written to the
