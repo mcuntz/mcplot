@@ -437,7 +437,7 @@ def get_cmap(palette, ncol=0, offset=0, upper=1,
 
        cols = get_cmap('sron:ylorbr')
 
-       cmap = matplotlib.colors.LinearSegmentedColormap.from_list(cols)
+       cmap = matplotlib.colors.LinearSegmentedColormap.from_list('smooth_cmap', cols)
 
     You can get the color tuples from a LinearSegmentedColormap like this
 
