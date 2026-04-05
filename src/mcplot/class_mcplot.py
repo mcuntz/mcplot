@@ -78,6 +78,8 @@ History
    * cli option: the command line will be bypassed if False;
      supersedes old logic to bypass command line if no desc or argstr given,
      May 2025, Matthias Cuntz
+   * Change default color cycle to tab10 of Matplotlib,
+     Apr 2026, Matthias Cuntz
 
 """
 import numpy as np
@@ -896,11 +898,10 @@ class mcPlot(object):
         # print(mpl.rcParams)
         mpl.rc('axes', linewidth=self.alw, edgecolor=self.fgcolor,
                facecolor=self.bgcolor, labelcolor=self.fgcolor,
-               prop_cycle=mpl.rcsetup.cycler('color',
-                                             ['8dd3c7', 'feffb3', 'bfbbd9',
-                                              'fa8174', '81b1d2', 'fdb462',
-                                              'b3de69', 'bc82bd', 'ccebc4',
-                                              'ffed6f']))
+               prop_cycle=mpl.rcsetup.cycler(
+                   'color',
+                   ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd',
+                    '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']))
         mpl.rcParams['boxplot.boxprops.color'] = self.fgcolor
         mpl.rcParams['boxplot.capprops.color'] = self.fgcolor
         mpl.rcParams['boxplot.flierprops.color'] = self.fgcolor

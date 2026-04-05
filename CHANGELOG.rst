@@ -2,6 +2,7 @@ Changelog
 ---------
 
 v2.3 (??? 2026)
+   - Change default color cycle to tab10 of Matplotlib.
    - Updated Github actions.
 
 v2.2 (May 2025)
